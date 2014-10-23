@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7439FC19F87E4E0075690A /* AppDelegate.swift */; };
+		7B743A0219F87E4E0075690A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0019F87E4E0075690A /* Main.storyboard */; };
+		7B743A0419F87E4E0075690A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0319F87E4E0075690A /* Images.xcassets */; };
+		7B743A0719F87E4E0075690A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0519F87E4E0075690A /* LaunchScreen.xib */; };
+		7B743A1319F87E4E0075690A /* BadgerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A1219F87E4E0075690A /* BadgerTests.swift */; };
+		7B743A1E19F880110075690A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A1D19F880110075690A /* HomeViewController.swift */; };
+		7B743A2019F883AD0075690A /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A1F19F883AD0075690A /* Firebase.framework */; };
+		7B743A2219F884070075690A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2119F884070075690A /* libicucore.dylib */; };
+		7B743A2419F884120075690A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2319F884120075690A /* libc++.dylib */; };
+		7B743A2619F8841B0075690A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2519F8841B0075690A /* CFNetwork.framework */; };
+		7B743A2819F884240075690A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2719F884240075690A /* Security.framework */; };
+		7B743A2A19F8842E0075690A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2919F8842E0075690A /* SystemConfiguration.framework */; };
+		7B743A2E19F884AC0075690A /* Temp.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A2D19F884AC0075690A /* Temp.m */; };
+		7B743A3619F88B690075690A /* ProfileTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A3519F88B690075690A /* ProfileTableCell.swift */; };
+		7B743A3819F88B800075690A /* ProfileTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A3719F88B800075690A /* ProfileTableCell.xib */; };
+		7B743A3A19F895520075690A /* UserTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A3919F895520075690A /* UserTableCell.xib */; };
+		7B743A3C19F895700075690A /* UserTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A3B19F895700075690A /* UserTableCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7B743A0D19F87E4E0075690A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7B7439EF19F87E4E0075690A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B7439F619F87E4E0075690A;
+			remoteInfo = Badger;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7B7439F719F87E4E0075690A /* Badger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B7439FB19F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B7439FC19F87E4E0075690A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7B743A0119F87E4E0075690A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7B743A0319F87E4E0075690A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7B743A0619F87E4E0075690A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		7B743A0C19F87E4E0075690A /* BadgerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BadgerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B743A1119F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B743A1219F87E4E0075690A /* BadgerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgerTests.swift; sourceTree = "<group>"; };
+		7B743A1D19F880110075690A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		7B743A1F19F883AD0075690A /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
+		7B743A2119F884070075690A /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		7B743A2319F884120075690A /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		7B743A2519F8841B0075690A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		7B743A2719F884240075690A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		7B743A2919F8842E0075690A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7B743A2C19F884AB0075690A /* Badger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Badger-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		7B743A2D19F884AC0075690A /* Temp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Temp.m; path = ../Temp.m; sourceTree = "<group>"; };
+		7B743A3519F88B690075690A /* ProfileTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableCell.swift; sourceTree = "<group>"; };
+		7B743A3719F88B800075690A /* ProfileTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileTableCell.xib; sourceTree = "<group>"; };
+		7B743A3919F895520075690A /* UserTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTableCell.xib; sourceTree = "<group>"; };
+		7B743A3B19F895700075690A /* UserTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7B7439F419F87E4E0075690A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B743A2A19F8842E0075690A /* SystemConfiguration.framework in Frameworks */,
+				7B743A2819F884240075690A /* Security.framework in Frameworks */,
+				7B743A2619F8841B0075690A /* CFNetwork.framework in Frameworks */,
+				7B743A2419F884120075690A /* libc++.dylib in Frameworks */,
+				7B743A2219F884070075690A /* libicucore.dylib in Frameworks */,
+				7B743A2019F883AD0075690A /* Firebase.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B743A0919F87E4E0075690A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7B7439EE19F87E4E0075690A = {
+			isa = PBXGroup;
+			children = (
+				7B7439F919F87E4E0075690A /* Badger */,
+				7B743A0F19F87E4E0075690A /* BadgerTests */,
+				7B743A2B19F884840075690A /* Lib */,
+				7B7439F819F87E4E0075690A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7B7439F819F87E4E0075690A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7B7439F719F87E4E0075690A /* Badger.app */,
+				7B743A0C19F87E4E0075690A /* BadgerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7B7439F919F87E4E0075690A /* Badger */ = {
+			isa = PBXGroup;
+			children = (
+				7B743A2F19F8862C0075690A /* Views */,
+				7B7439FC19F87E4E0075690A /* AppDelegate.swift */,
+				7B743A0019F87E4E0075690A /* Main.storyboard */,
+				7B743A0319F87E4E0075690A /* Images.xcassets */,
+				7B743A0519F87E4E0075690A /* LaunchScreen.xib */,
+				7B7439FA19F87E4E0075690A /* Supporting Files */,
+			);
+			path = Badger;
+			sourceTree = "<group>";
+		};
+		7B7439FA19F87E4E0075690A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7B743A2C19F884AB0075690A /* Badger-Bridging-Header.h */,
+				7B743A2D19F884AC0075690A /* Temp.m */,
+				7B7439FB19F87E4E0075690A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7B743A0F19F87E4E0075690A /* BadgerTests */ = {
+			isa = PBXGroup;
+			children = (
+				7B743A1219F87E4E0075690A /* BadgerTests.swift */,
+				7B743A1019F87E4E0075690A /* Supporting Files */,
+			);
+			path = BadgerTests;
+			sourceTree = "<group>";
+		};
+		7B743A1019F87E4E0075690A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7B743A1119F87E4E0075690A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7B743A2B19F884840075690A /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				7B743A2919F8842E0075690A /* SystemConfiguration.framework */,
+				7B743A2719F884240075690A /* Security.framework */,
+				7B743A2519F8841B0075690A /* CFNetwork.framework */,
+				7B743A2319F884120075690A /* libc++.dylib */,
+				7B743A2119F884070075690A /* libicucore.dylib */,
+				7B743A1F19F883AD0075690A /* Firebase.framework */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
+		7B743A2F19F8862C0075690A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7B743A3019F8863C0075690A /* Home */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		7B743A3019F8863C0075690A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7B743A1D19F880110075690A /* HomeViewController.swift */,
+				7B743A3519F88B690075690A /* ProfileTableCell.swift */,
+				7B743A3719F88B800075690A /* ProfileTableCell.xib */,
+				7B743A3B19F895700075690A /* UserTableCell.swift */,
+				7B743A3919F895520075690A /* UserTableCell.xib */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7B7439F619F87E4E0075690A /* Badger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B743A1619F87E4E0075690A /* Build configuration list for PBXNativeTarget "Badger" */;
+			buildPhases = (
+				7B7439F319F87E4E0075690A /* Sources */,
+				7B7439F419F87E4E0075690A /* Frameworks */,
+				7B7439F519F87E4E0075690A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Badger;
+			productName = Badger;
+			productReference = 7B7439F719F87E4E0075690A /* Badger.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7B743A0B19F87E4E0075690A /* BadgerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B743A1919F87E4E0075690A /* Build configuration list for PBXNativeTarget "BadgerTests" */;
+			buildPhases = (
+				7B743A0819F87E4E0075690A /* Sources */,
+				7B743A0919F87E4E0075690A /* Frameworks */,
+				7B743A0A19F87E4E0075690A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7B743A0E19F87E4E0075690A /* PBXTargetDependency */,
+			);
+			name = BadgerTests;
+			productName = BadgerTests;
+			productReference = 7B743A0C19F87E4E0075690A /* BadgerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7B7439EF19F87E4E0075690A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Blake VanLandingham";
+				TargetAttributes = {
+					7B7439F619F87E4E0075690A = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+					7B743A0B19F87E4E0075690A = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = 7B7439F619F87E4E0075690A;
+					};
+				};
+			};
+			buildConfigurationList = 7B7439F219F87E4E0075690A /* Build configuration list for PBXProject "Badger" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7B7439EE19F87E4E0075690A;
+			productRefGroup = 7B7439F819F87E4E0075690A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7B7439F619F87E4E0075690A /* Badger */,
+				7B743A0B19F87E4E0075690A /* BadgerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7B7439F519F87E4E0075690A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B743A3A19F895520075690A /* UserTableCell.xib in Resources */,
+				7B743A0219F87E4E0075690A /* Main.storyboard in Resources */,
+				7B743A0719F87E4E0075690A /* LaunchScreen.xib in Resources */,
+				7B743A3819F88B800075690A /* ProfileTableCell.xib in Resources */,
+				7B743A0419F87E4E0075690A /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B743A0A19F87E4E0075690A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7B7439F319F87E4E0075690A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
+				7B743A1E19F880110075690A /* HomeViewController.swift in Sources */,
+				7B743A3C19F895700075690A /* UserTableCell.swift in Sources */,
+				7B743A3619F88B690075690A /* ProfileTableCell.swift in Sources */,
+				7B743A2E19F884AC0075690A /* Temp.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B743A0819F87E4E0075690A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B743A1319F87E4E0075690A /* BadgerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7B743A0E19F87E4E0075690A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B7439F619F87E4E0075690A /* Badger */;
+			targetProxy = 7B743A0D19F87E4E0075690A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7B743A0019F87E4E0075690A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B743A0119F87E4E0075690A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7B743A0519F87E4E0075690A /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B743A0619F87E4E0075690A /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7B743A1419F87E4E0075690A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7B743A1519F87E4E0075690A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7B743A1719F87E4E0075690A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = Badger/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Badger-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7B743A1819F87E4E0075690A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = Badger/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Badger-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		7B743A1A19F87E4E0075690A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BadgerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Badger.app/Badger";
+			};
+			name = Debug;
+		};
+		7B743A1B19F87E4E0075690A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BadgerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Badger.app/Badger";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7B7439F219F87E4E0075690A /* Build configuration list for PBXProject "Badger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B743A1419F87E4E0075690A /* Debug */,
+				7B743A1519F87E4E0075690A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7B743A1619F87E4E0075690A /* Build configuration list for PBXNativeTarget "Badger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B743A1719F87E4E0075690A /* Debug */,
+				7B743A1819F87E4E0075690A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7B743A1919F87E4E0075690A /* Build configuration list for PBXNativeTarget "BadgerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B743A1A19F87E4E0075690A /* Debug */,
+				7B743A1B19F87E4E0075690A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7B7439EF19F87E4E0075690A /* Project object */;
+}
