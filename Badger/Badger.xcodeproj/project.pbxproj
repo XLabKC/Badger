@@ -24,6 +24,20 @@
 		7B743A3819F88B800075690A /* ProfileTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A3719F88B800075690A /* ProfileTableCell.xib */; };
 		7B743A3A19F895520075690A /* UserTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A3919F895520075690A /* UserTableCell.xib */; };
 		7B743A3C19F895700075690A /* UserTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A3B19F895700075690A /* UserTableCell.swift */; };
+		7B743A3E19F943D30075690A /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A3D19F943D30075690A /* Global.swift */; };
+		7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A3F19F946CD0075690A /* LoginViewController.swift */; };
+		7B743A4219F949B40075690A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A4119F949B40075690A /* AddressBook.framework */; };
+		7B743A4419F949BE0075690A /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A4319F949BE0075690A /* AssetsLibrary.framework */; };
+		7B743A4619F949C90075690A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A4519F949C90075690A /* Foundation.framework */; };
+		7B743A4819F949D20075690A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A4719F949D20075690A /* CoreLocation.framework */; };
+		7B743A4A19F949D90075690A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A4919F949D90075690A /* CoreMotion.framework */; };
+		7B743A4C19F949E20075690A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A4B19F949E20075690A /* CoreGraphics.framework */; };
+		7B743A4E19F949EB0075690A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A4D19F949EB0075690A /* CoreText.framework */; };
+		7B743A5019F949F30075690A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A4F19F949F30075690A /* MediaPlayer.framework */; };
+		7B743A5219F94A0A0075690A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A5119F94A0A0075690A /* UIKit.framework */; };
+		7B743A5619F94A3D0075690A /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A5319F94A3D0075690A /* GoogleOpenSource.framework */; };
+		7B743A5719F94A3D0075690A /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A5419F94A3D0075690A /* GooglePlus.bundle */; };
+		7B743A5819F94A3D0075690A /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A5519F94A3D0075690A /* GooglePlus.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +73,20 @@
 		7B743A3719F88B800075690A /* ProfileTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileTableCell.xib; sourceTree = "<group>"; };
 		7B743A3919F895520075690A /* UserTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTableCell.xib; sourceTree = "<group>"; };
 		7B743A3B19F895700075690A /* UserTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableCell.swift; sourceTree = "<group>"; };
+		7B743A3D19F943D30075690A /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		7B743A3F19F946CD0075690A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7B743A4119F949B40075690A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		7B743A4319F949BE0075690A /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		7B743A4519F949C90075690A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7B743A4719F949D20075690A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7B743A4919F949D90075690A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		7B743A4B19F949E20075690A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7B743A4D19F949EB0075690A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		7B743A4F19F949F30075690A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		7B743A5119F94A0A0075690A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7B743A5319F94A3D0075690A /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
+		7B743A5419F94A3D0075690A /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
+		7B743A5519F94A3D0075690A /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +94,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B743A5819F94A3D0075690A /* GooglePlus.framework in Frameworks */,
+				7B743A5219F94A0A0075690A /* UIKit.framework in Frameworks */,
 				7B743A2A19F8842E0075690A /* SystemConfiguration.framework in Frameworks */,
 				7B743A2819F884240075690A /* Security.framework in Frameworks */,
+				7B743A5019F949F30075690A /* MediaPlayer.framework in Frameworks */,
+				7B743A4E19F949EB0075690A /* CoreText.framework in Frameworks */,
+				7B743A4C19F949E20075690A /* CoreGraphics.framework in Frameworks */,
+				7B743A5619F94A3D0075690A /* GoogleOpenSource.framework in Frameworks */,
+				7B743A4A19F949D90075690A /* CoreMotion.framework in Frameworks */,
+				7B743A4819F949D20075690A /* CoreLocation.framework in Frameworks */,
+				7B743A4619F949C90075690A /* Foundation.framework in Frameworks */,
+				7B743A4419F949BE0075690A /* AssetsLibrary.framework in Frameworks */,
+				7B743A4219F949B40075690A /* AddressBook.framework in Frameworks */,
 				7B743A2619F8841B0075690A /* CFNetwork.framework in Frameworks */,
 				7B743A2419F884120075690A /* libc++.dylib in Frameworks */,
 				7B743A2219F884070075690A /* libicucore.dylib in Frameworks */,
@@ -113,6 +152,7 @@
 				7B743A0319F87E4E0075690A /* Images.xcassets */,
 				7B743A0519F87E4E0075690A /* LaunchScreen.xib */,
 				7B7439FA19F87E4E0075690A /* Supporting Files */,
+				7B743A3D19F943D30075690A /* Global.swift */,
 			);
 			path = Badger;
 			sourceTree = "<group>";
@@ -147,6 +187,18 @@
 		7B743A2B19F884840075690A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				7B743A5319F94A3D0075690A /* GoogleOpenSource.framework */,
+				7B743A5419F94A3D0075690A /* GooglePlus.bundle */,
+				7B743A5519F94A3D0075690A /* GooglePlus.framework */,
+				7B743A5119F94A0A0075690A /* UIKit.framework */,
+				7B743A4F19F949F30075690A /* MediaPlayer.framework */,
+				7B743A4D19F949EB0075690A /* CoreText.framework */,
+				7B743A4B19F949E20075690A /* CoreGraphics.framework */,
+				7B743A4919F949D90075690A /* CoreMotion.framework */,
+				7B743A4719F949D20075690A /* CoreLocation.framework */,
+				7B743A4519F949C90075690A /* Foundation.framework */,
+				7B743A4319F949BE0075690A /* AssetsLibrary.framework */,
+				7B743A4119F949B40075690A /* AddressBook.framework */,
 				7B743A2919F8842E0075690A /* SystemConfiguration.framework */,
 				7B743A2719F884240075690A /* Security.framework */,
 				7B743A2519F8841B0075690A /* CFNetwork.framework */,
@@ -161,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				7B743A3019F8863C0075690A /* Home */,
+				7B743A3F19F946CD0075690A /* LoginViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -261,6 +314,7 @@
 				7B743A0219F87E4E0075690A /* Main.storyboard in Resources */,
 				7B743A0719F87E4E0075690A /* LaunchScreen.xib in Resources */,
 				7B743A3819F88B800075690A /* ProfileTableCell.xib in Resources */,
+				7B743A5719F94A3D0075690A /* GooglePlus.bundle in Resources */,
 				7B743A0419F87E4E0075690A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,8 +333,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */,
 				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
 				7B743A1E19F880110075690A /* HomeViewController.swift in Sources */,
+				7B743A3E19F943D30075690A /* Global.swift in Sources */,
 				7B743A3C19F895700075690A /* UserTableCell.swift in Sources */,
 				7B743A3619F88B690075690A /* ProfileTableCell.swift in Sources */,
 				7B743A2E19F884AC0075690A /* Temp.m in Sources */,

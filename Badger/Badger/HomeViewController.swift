@@ -28,9 +28,7 @@ class HomeViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if (indexPath.row == 0) {
-            if let window = self.view.window? {
-                return window.frame.height
-            }
+            return UIScreen.mainScreen().bounds.size.height
         }
         return 44
     }

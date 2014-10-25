@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lxJ-ye-3j0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KeH-ed-zgR">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
@@ -9,7 +9,7 @@
             <objects>
                 <tableViewController id="lxJ-ye-3j0" customClass="HomeViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="QPs-b2-1vV">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -25,10 +25,74 @@
                             <outlet property="delegate" destination="lxJ-ye-3j0" id="lo2-Bd-yiV"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Dhb-9r-dTT"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yrH-zd-24Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301" y="340"/>
+            <point key="canvasLocation" x="836" y="410"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="dBU-bU-Jq2">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="KeH-ed-zgR" customClass="LoginViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Nxb-ce-Vd3"/>
+                        <viewControllerLayoutGuide type="bottom" id="I0B-yc-jkT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ytD-ob-giN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5e-sq-FZN" customClass="GPPSignInButton">
+                                <rect key="frame" x="44" y="260" width="233" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="233" id="63p-Cl-XBb"/>
+                                </constraints>
+                                <state key="normal" title="Login with Google">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="colorScheme">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="x5e-sq-FZN" secondAttribute="centerY" id="7IR-dE-ktt"/>
+                            <constraint firstAttribute="centerX" secondItem="x5e-sq-FZN" secondAttribute="centerX" id="wPb-6B-Hbv"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="signInButton" destination="x5e-sq-FZN" id="bsN-WF-jzH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iwr-bD-Rep" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-42" y="410"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="e0t-Pp-vhc">
+            <objects>
+                <navigationController storyboardIdentifier="PrimaryNavigation" navigationBarHidden="YES" id="PV4-3y-2XN" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BZC-C9-IJD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="lxJ-ye-3j0" kind="relationship" relationship="rootViewController" id="QdX-CM-bP2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bgw-xv-rVR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="371" y="410"/>
         </scene>
     </scenes>
 </document>
