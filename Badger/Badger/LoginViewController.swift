@@ -41,15 +41,20 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                                     "red_profile_image": authData.providerData["cachedUserProfile"]?["picture"] as? NSString as? String
                                 ]
                                 uidRef.setValue(newUser)
-
                             }
+                            Global.AuthData = authData
+
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let vc = storyboard.instantiateViewControllerWithIdentifier("PrimaryNavigation") as UIViewController
+                            let vc = storyboard.instantiateViewControllerWithIdentifier("PrimaryNavigation") as UIViewController as UINavigationController
                             self.presentViewController(vc, animated: true, completion: nil)
                         })
                     }
             })
         }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        println("HIT")
     }
     
 }

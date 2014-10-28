@@ -1,16 +1,17 @@
 import UIKit
 
-class HomeViewController: UITableViewController {
+class HomeViewController: UITableViewController, UIGestureRecognizerDelegate {
 
     let profileTableCell: ProfileTableCell
+    let uidRef: Firebase
 
     required init(coder aDecoder: NSCoder) {
+        uidRef = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(Global.AuthData!.uid)
         let nib = UINib(nibName: "ProfileTableCell", bundle: nil)
         profileTableCell = nib.instantiateWithOwner(nil, options: nil)[0] as ProfileTableCell
-        profileTableCell.setup()
+        profileTableCell.setup(Global.AuthData!.uid)
         super.init(coder: aDecoder)
     }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,16 +20,12 @@ class HomeViewController: UITableViewController {
         self.tableView.registerNib(nib, forCellReuseIdentifier: "UserTableCell")
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // Table View Delegates
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if (indexPath.row == 0) {
-            return UIScreen.mainScreen().bounds.size.height
+            // Screen height minus the header height
+            return UIScreen.mainScreen().bounds.size.height - 20
         }
         return 44
     }
@@ -45,4 +42,13 @@ class HomeViewController: UITableViewController {
         return 10
     }
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (indexPath.row != 0) {
+            // Handle navigating to other people's pages
+        }
+    }
+
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
