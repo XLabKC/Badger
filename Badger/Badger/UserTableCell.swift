@@ -8,4 +8,7 @@ class UserTableCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
+    func setUser(user: User) {
+        self.label.text = user.full_name
+    }
 }

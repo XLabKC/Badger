@@ -38,6 +38,7 @@
 		7B743A5619F94A3D0075690A /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A5319F94A3D0075690A /* GoogleOpenSource.framework */; };
 		7B743A5719F94A3D0075690A /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A5419F94A3D0075690A /* GooglePlus.bundle */; };
 		7B743A5819F94A3D0075690A /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A5519F94A3D0075690A /* GooglePlus.framework */; };
+		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		7B743A5319F94A3D0075690A /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
 		7B743A5419F94A3D0075690A /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		7B743A5519F94A3D0075690A /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
+		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 		7B7439F919F87E4E0075690A /* Badger */ = {
 			isa = PBXGroup;
 			children = (
+				7BCAA5EB1A00A443003B55C7 /* Data */,
 				7B743A2F19F8862C0075690A /* Views */,
 				7B7439FC19F87E4E0075690A /* AppDelegate.swift */,
 				7B743A0019F87E4E0075690A /* Main.storyboard */,
@@ -228,6 +231,14 @@
 				7B743A3919F895520075690A /* UserTableCell.xib */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		7BCAA5EB1A00A443003B55C7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7BCAA5EE1A00A7D4003B55C7 /* User.swift */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,6 +348,7 @@
 				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
 				7B743A1E19F880110075690A /* HomeViewController.swift in Sources */,
 				7B743A3E19F943D30075690A /* Global.swift in Sources */,
+				7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */,
 				7B743A3C19F895700075690A /* UserTableCell.swift in Sources */,
 				7B743A3619F88B690075690A /* ProfileTableCell.swift in Sources */,
 				7B743A2E19F884AC0075690A /* Temp.m in Sources */,
@@ -546,6 +558,7 @@
 				7B743A1819F87E4E0075690A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7B743A1919F87E4E0075690A /* Build configuration list for PBXNativeTarget "BadgerTests" */ = {
 			isa = XCConfigurationList;
@@ -554,6 +567,7 @@
 				7B743A1B19F87E4E0075690A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

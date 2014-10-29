@@ -1,23 +1,27 @@
 import UIKit
 
-class HomeViewController: UITableViewController, UIGestureRecognizerDelegate {
+class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, ProfileTableCellDelegate {
 
     let profileTableCell: ProfileTableCell
     let uidRef: Firebase
+    var user: User?
 
     required init(coder aDecoder: NSCoder) {
-        uidRef = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(Global.AuthData!.uid)
-        let nib = UINib(nibName: "ProfileTableCell", bundle: nil)
-        profileTableCell = nib.instantiateWithOwner(nil, options: nil)[0] as ProfileTableCell
-        profileTableCell.setup(Global.AuthData!.uid)
+        self.uidRef = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(Global.AuthData!.uid)
+        let profileNib = UINib(nibName: "ProfileTableCell", bundle: nil)
+        self.profileTableCell = profileNib.instantiateWithOwner(nil, options: nil)[0] as ProfileTableCell
+        self.profileTableCell.setup(true)
         super.init(coder: aDecoder)
+
+        self.profileTableCell.delegate = self
+        self.loadUser()
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        let userTableNib = UINib(nibName: "UserTableCell", bundle: nil)
+        self.tableView.registerNib(userTableNib, forCellReuseIdentifier: "UserTableCell")
 
-        let nib = UINib(nibName: "UserTableCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "UserTableCell")
+        super.viewDidLoad()
     }
 
     // Table View Delegates
@@ -34,12 +38,21 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate {
         if (indexPath.row == 0) {
             return profileTableCell
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("UserTableCell", forIndexPath: indexPath) as UITableViewCell
+
+        let cell = tableView.dequeueReusableCellWithIdentifier("UserTableCell", forIndexPath: indexPath) as UserTableCell
+
+        if let user = self.user? {
+            self.loadUserForCell(user.following[indexPath.row - 1], cell: cell)
+        }
+
         return cell
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if let user = self.user? {
+            return user.following.count + 1
+        }
+        return 1
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -50,5 +63,26 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate {
 
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+
+    // ProfileTableCellDelegate
+
+    func updateUserStatus(user:User, status: String) {
+        user.uidRef!.updateChildValues(["status": status])
+    }
+
+    private func loadUser() {
+        self.uidRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            self.user = User.createUserFromSnapshot(snapshot)
+            self.profileTableCell.setUser(self.user!)
+            self.tableView.reloadData()
+        })
+    }
+
+    private func loadUserForCell(uid:String, cell:UserTableCell) {
+        let uidRef = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(uid)
+        uidRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            cell.setUser(User.createUserFromSnapshot(snapshot))
+        })
     }
 }
