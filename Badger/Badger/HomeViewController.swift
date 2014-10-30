@@ -5,8 +5,10 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
     let profileTableCell: ProfileTableCell
     let uidRef: Firebase
     var user: User?
+    var otherUsers: [String: User]
 
     required init(coder aDecoder: NSCoder) {
+        self.otherUsers = [:]
         self.uidRef = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(Global.AuthData!.uid)
         let profileNib = UINib(nibName: "ProfileTableCell", bundle: nil)
         self.profileTableCell = profileNib.instantiateWithOwner(nil, options: nil)[0] as ProfileTableCell
@@ -58,6 +60,9 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.row != 0) {
             // Handle navigating to other people's pages
+            if let user = self.user {
+                self.performSegueWithIdentifier("SHOW_PROFILE", sender: user.following[indexPath.row - 1])
+            }
         }
     }
 
@@ -67,8 +72,20 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
 
     // ProfileTableCellDelegate
 
-    func updateUserStatus(user:User, status: String) {
+    func updateUserStatus(user: User, status: String) {
         user.uidRef!.updateChildValues(["status": status])
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if segue.destinationViewController is ProfileViewController && sender is String {
+            let vc = segue.destinationViewController as ProfileViewController
+            let uid = sender as String
+            if let user = self.otherUsers[uid] {
+                vc.setUser(user)
+            } else {
+                vc.setUid(uid)
+            }
+        }
     }
 
     private func loadUser() {
@@ -80,9 +97,16 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
     }
 
     private func loadUserForCell(uid:String, cell:UserTableCell) {
+        if let user = self.otherUsers[uid] {
+            cell.setUser(user)
+            return
+        }
+
         let uidRef = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(uid)
         uidRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-            cell.setUser(User.createUserFromSnapshot(snapshot))
+            let user = User.createUserFromSnapshot(snapshot)
+            cell.setUser(user)
+            self.otherUsers[uid] = user
         })
     }
 }

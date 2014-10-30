@@ -53,8 +53,4 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("HIT")
-    }
-    
 }
