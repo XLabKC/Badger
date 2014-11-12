@@ -2,6 +2,7 @@ import UIKit
 
 protocol ProfileTableCellDelegate {
     func updateUserStatus(user: User, status: String)
+    func showMessagesForUser(user: User)
 }
 
 class ProfileTableCell: UITableViewCell, UIScrollViewDelegate {
@@ -139,6 +140,12 @@ class ProfileTableCell: UITableViewCell, UIScrollViewDelegate {
             }
         })
     }
+
+//    @IBAction func showMessages(sender: AnyObject) {
+//        if self.delegate != nil && self.user != nil {
+//            self.delegate!.showMessagesForUser(self.user!)
+//        }
+//    }
 
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         self.activeTimeout = arc4random()

@@ -1,5 +1,5 @@
 class User {
-    var uid: String
+    let uid: String
     var first_name: String
     var last_name: String
     var full_name: String {
@@ -10,7 +10,9 @@ class User {
     var status: String
     var followers: [String]
     var following: [String]
+    var messages: [String]
     var uidRef: Firebase?
+    var timestamp: NSDate
 
     init(uid: String, first_name: String, last_name: String, email: String, status: String)
     {
@@ -22,6 +24,8 @@ class User {
         self.profile_images = []
         self.followers  = []
         self.following = []
+        self.messages = []
+        self.timestamp = NSDate()
     }
 
     class func createUserFromSnapshot(userSnapshot: FDataSnapshot) -> User {
@@ -53,6 +57,15 @@ class User {
                 }
             }
         }
+
+        if let messageData = userSnapshot.value.objectForKey("messages") as? NSDictionary {
+            for (id, value) in messageData {
+                if let idString = id as? String {
+                    user.messages.append(idString)
+                }
+            }
+        }
+
         user.uidRef = userSnapshot.ref
         return user
     }

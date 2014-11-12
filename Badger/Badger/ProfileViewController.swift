@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.updateView()
     }
 
     func setUid(uid: String) {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */; };
+		7B070FCB1A11AA8400997D50 /* AddMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B070FCA1A11AA8400997D50 /* AddMessageViewController.swift */; };
 		7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */; };
 		7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7439FC19F87E4E0075690A /* AppDelegate.swift */; };
 		7B743A0219F87E4E0075690A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0019F87E4E0075690A /* Main.storyboard */; };
@@ -39,6 +41,10 @@
 		7B743A5619F94A3D0075690A /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A5319F94A3D0075690A /* GoogleOpenSource.framework */; };
 		7B743A5719F94A3D0075690A /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A5419F94A3D0075690A /* GooglePlus.bundle */; };
 		7B743A5819F94A3D0075690A /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A5519F94A3D0075690A /* GooglePlus.framework */; };
+		7B7CAAD01A03E33C0028E523 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7CAACF1A03E33C0028E523 /* MessagesView.swift */; };
+		7B7CAAD21A03E3A20028E523 /* MessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B7CAAD11A03E3A20028E523 /* MessagesView.xib */; };
+		7B85DE401A0A92C00074A127 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85DE3F1A0A92C00074A127 /* Message.swift */; };
+		7BB805C21A07E5F400232E87 /* ListMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB805C11A07E5F400232E87 /* ListMessagesViewController.swift */; };
 		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAsync.swift; sourceTree = "<group>"; };
+		7B070FCA1A11AA8400997D50 /* AddMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMessageViewController.swift; sourceTree = "<group>"; };
 		7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7B7439F719F87E4E0075690A /* Badger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7439FB19F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,6 +98,10 @@
 		7B743A5319F94A3D0075690A /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
 		7B743A5419F94A3D0075690A /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		7B743A5519F94A3D0075690A /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
+		7B7CAACF1A03E33C0028E523 /* MessagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
+		7B7CAAD11A03E3A20028E523 /* MessagesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesView.xib; sourceTree = "<group>"; };
+		7B85DE3F1A0A92C00074A127 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		7BB805C11A07E5F400232E87 /* ListMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListMessagesViewController.swift; sourceTree = "<group>"; };
 		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +140,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B070FC71A112CA200997D50 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
 		7B39D28B1A01F6C00033D4FE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +178,8 @@
 		7B7439F919F87E4E0075690A /* Badger */ = {
 			isa = PBXGroup;
 			children = (
+				7B070FC71A112CA200997D50 /* Lib */,
+				7B7CAACE1A03E3020028E523 /* Elements */,
 				7BCAA5EB1A00A443003B55C7 /* Data */,
 				7B743A2F19F8862C0075690A /* Views */,
 				7B7439FC19F87E4E0075690A /* AppDelegate.swift */,
@@ -225,6 +247,7 @@
 		7B743A2F19F8862C0075690A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7B85DE411A0BE2590074A127 /* Messages */,
 				7B39D28B1A01F6C00033D4FE /* Profile */,
 				7B743A3019F8863C0075690A /* Home */,
 				7B743A3F19F946CD0075690A /* LoginViewController.swift */,
@@ -244,10 +267,37 @@
 			name = Home;
 			sourceTree = "<group>";
 		};
+		7B7CAACE1A03E3020028E523 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				7B7CAAD31A03F0690028E523 /* Messages */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
+		7B7CAAD31A03F0690028E523 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				7B7CAACF1A03E33C0028E523 /* MessagesView.swift */,
+				7B7CAAD11A03E3A20028E523 /* MessagesView.xib */,
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
+		7B85DE411A0BE2590074A127 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				7BB805C11A07E5F400232E87 /* ListMessagesViewController.swift */,
+				7B070FCA1A11AA8400997D50 /* AddMessageViewController.swift */,
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
 		7BCAA5EB1A00A443003B55C7 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				7BCAA5EE1A00A7D4003B55C7 /* User.swift */,
+				7B85DE3F1A0A92C00074A127 /* Message.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -338,6 +388,7 @@
 				7B743A3819F88B800075690A /* ProfileTableCell.xib in Resources */,
 				7B743A5719F94A3D0075690A /* GooglePlus.bundle in Resources */,
 				7B743A0419F87E4E0075690A /* Images.xcassets in Resources */,
+				7B7CAAD21A03E3A20028E523 /* MessagesView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +406,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */,
+				7B7CAAD01A03E33C0028E523 /* MessagesView.swift in Sources */,
 				7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */,
 				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
 				7B743A1E19F880110075690A /* HomeViewController.swift in Sources */,
@@ -363,6 +416,9 @@
 				7B743A3C19F895700075690A /* UserTableCell.swift in Sources */,
 				7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */,
 				7B743A3619F88B690075690A /* ProfileTableCell.swift in Sources */,
+				7B070FCB1A11AA8400997D50 /* AddMessageViewController.swift in Sources */,
+				7B85DE401A0A92C00074A127 /* Message.swift in Sources */,
+				7BB805C21A07E5F400232E87 /* ListMessagesViewController.swift in Sources */,
 				7B743A2E19F884AC0075690A /* Temp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

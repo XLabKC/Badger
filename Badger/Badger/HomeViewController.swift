@@ -76,6 +76,10 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
         user.uidRef!.updateChildValues(["status": status])
     }
 
+    func showMessagesForUser(user: User) {
+        self.performSegueWithIdentifier("HOME_SHOW_MESSAGES", sender: user)
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.destinationViewController is ProfileViewController && sender is String {
             let vc = segue.destinationViewController as ProfileViewController
@@ -84,6 +88,11 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
                 vc.setUser(user)
             } else {
                 vc.setUid(uid)
+            }
+        } else if segue.destinationViewController is ListMessagesViewController {
+            let vc = segue.destinationViewController as ListMessagesViewController
+            if let user = self.user? {
+                vc.setUser(user)
             }
         }
     }
