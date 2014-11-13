@@ -3,25 +3,25 @@ import UIKit
 class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, ProfileTableCellDelegate {
 
     let profileTableCell: ProfileTableCell
-    let uidRef: Firebase
+    var uidRef: Firebase?
     var user: User?
     var otherUsers: [String: User]
 
     required init(coder aDecoder: NSCoder) {
         self.otherUsers = [:]
-        self.uidRef = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(Global.AuthData!.uid)
         let profileNib = UINib(nibName: "ProfileTableCell", bundle: nil)
         self.profileTableCell = profileNib.instantiateWithOwner(nil, options: nil)[0] as ProfileTableCell
         self.profileTableCell.setup(true)
         super.init(coder: aDecoder)
 
         self.profileTableCell.delegate = self
-        self.loadUser()
     }
 
     override func viewDidLoad() {
         let userTableNib = UINib(nibName: "UserTableCell", bundle: nil)
         self.tableView.registerNib(userTableNib, forCellReuseIdentifier: "UserTableCell")
+        self.uidRef = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(Global.AuthData!.uid)
+        self.loadUser()
 
         super.viewDidLoad()
     }
@@ -98,7 +98,7 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
     }
 
     private func loadUser() {
-        self.uidRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+        self.uidRef!.observeSingleEventOfType(.Value, withBlock: { snapshot in
             self.user = User.createUserFromSnapshot(snapshot)
             self.profileTableCell.setUser(self.user!)
             self.tableView.reloadData()

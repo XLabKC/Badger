@@ -46,6 +46,7 @@
 		7B85DE401A0A92C00074A127 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85DE3F1A0A92C00074A127 /* Message.swift */; };
 		7BB805C21A07E5F400232E87 /* ListMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB805C11A07E5F400232E87 /* ListMessagesViewController.swift */; };
 		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
+		7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		7B85DE3F1A0A92C00074A127 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7BB805C11A07E5F400232E87 /* ListMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListMessagesViewController.swift; sourceTree = "<group>"; };
 		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,10 +249,11 @@
 		7B743A2F19F8862C0075690A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7BF066151A1437A500F3E6A1 /* Splashscreen */,
+				7BF066141A1434DF00F3E6A1 /* Login */,
+				7B743A3019F8863C0075690A /* Home */,
 				7B85DE411A0BE2590074A127 /* Messages */,
 				7B39D28B1A01F6C00033D4FE /* Profile */,
-				7B743A3019F8863C0075690A /* Home */,
-				7B743A3F19F946CD0075690A /* LoginViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -300,6 +303,22 @@
 				7B85DE3F1A0A92C00074A127 /* Message.swift */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		7BF066141A1434DF00F3E6A1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7B743A3F19F946CD0075690A /* LoginViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		7BF066151A1437A500F3E6A1 /* Splashscreen */ = {
+			isa = PBXGroup;
+			children = (
+				7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */,
+			);
+			name = Splashscreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,6 +433,7 @@
 				7B743A3E19F943D30075690A /* Global.swift in Sources */,
 				7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */,
 				7B743A3C19F895700075690A /* UserTableCell.swift in Sources */,
+				7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */,
 				7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */,
 				7B743A3619F88B690075690A /* ProfileTableCell.swift in Sources */,
 				7B070FCB1A11AA8400997D50 /* AddMessageViewController.swift in Sources */,

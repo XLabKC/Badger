@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KeH-ed-zgR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fuU-LW-MkP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -52,7 +52,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TsF-N7-QYe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="836" y="-221"/>
+            <point key="canvasLocation" x="836" y="-281"/>
         </scene>
         <!--Add Message View Controller-->
         <scene sceneID="KJn-es-WD2">
@@ -83,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDQ-ct-htp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1365" y="-221"/>
+            <point key="canvasLocation" x="1365" y="-281"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="otr-eJ-a5c">
@@ -159,6 +159,25 @@
             </objects>
             <point key="canvasLocation" x="1365" y="410"/>
         </scene>
+        <!--Splash Screen View Controller-->
+        <scene sceneID="wYI-BD-nsm">
+            <objects>
+                <viewController id="fuU-LW-MkP" customClass="SplashScreenViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ohg-U3-LDZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="gXd-Cs-eX3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OFc-Rh-m3a">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Lb-By-r0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-177" y="54"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="dBU-bU-Jq2">
             <objects>
@@ -198,11 +217,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="signInButton" destination="x5e-sq-FZN" id="bsN-WF-jzH"/>
+                        <segue destination="PV4-3y-2XN" kind="show" identifier="SHOW_HOME" id="MXO-oQ-0W6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iwr-bD-Rep" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-42" y="410"/>
+            <point key="canvasLocation" x="371" y="-281"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="e0t-Pp-vhc">
@@ -226,6 +246,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="IZs-Bg-wol"/>
+        <segue reference="rOP-FH-Cur"/>
     </inferredMetricsTieBreakers>
 </document>

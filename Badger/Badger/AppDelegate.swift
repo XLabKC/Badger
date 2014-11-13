@@ -1,15 +1,50 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
 
     var window: UIWindow?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+
+        // Set up options for signing in.
+        var signIn = GPPSignIn.sharedInstance()
+        signIn.shouldFetchGooglePlusUser = true
+        signIn.shouldFetchGoogleUserEmail = true
+        signIn.clientID = Global.GoogleClientId
+        signIn.scopes = [kGTLAuthScopePlusLogin]
+        signIn.delegate = self
+        signIn.attemptSSO = true
+
+        // Try and silently authenticate the user.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if (!signIn.trySilentAuthentication()) {
+            let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
+            self.window?.rootViewController = vc
+        }
+
         return true
     }
+
+    func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
+        if error != nil {
+            println("Google auth error \(error) and auth object \(auth)")
+        } else {
+            let ref = Firebase(url: Global.FirebaseUrl)
+            ref.authWithOAuthProvider("google", token: auth.accessToken, withCompletionBlock: { error, authData in
+                if error != nil {
+                    println("Firebase auth error \(error) and auth object \(authData)")
+                } else {
+                    Global.AuthData = authData
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewControllerWithIdentifier("PrimaryNavigation") as UINavigationController
+                    self.window?.rootViewController?.presentViewController(vc, animated: true, completion: nil)
+                }
+            })
+        }
+    }
+
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
         return GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation);

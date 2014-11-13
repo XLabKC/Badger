@@ -4,31 +4,22 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
 
     @IBOutlet weak var signInButton: GPPSignInButton!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        var signIn = GPPSignIn.sharedInstance()
-        signIn.shouldFetchGooglePlusUser = true
-        signIn.shouldFetchGoogleUserEmail = true
-        signIn.clientID = Global.GoogleClientId
-        signIn.scopes = [kGTLAuthScopePlusLogin];
-        signIn.delegate = self;
-
-        signIn.trySilentAuthentication()
-    }
-
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         if error != nil {
             println("Google auth error \(error) and auth object \(auth)")
         } else {
+            // Take access token and auth with Firebase.
             let ref = Firebase(url: Global.FirebaseUrl)
             ref.authWithOAuthProvider("google", token: auth.accessToken,
                 withCompletionBlock: { error, authData in
                     if error != nil {
                         println("Firebase auth error \(error) and auth object \(authData)")
                     } else {
+                        // Check if the user already exists.
                         let uidRef = ref.childByAppendingPath("users").childByAppendingPath(authData.uid)
                         uidRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+
+                            // Add the user if they don't exist.
                             if snapshot.childrenCount == 0 {
                                 let newUser = [
                                     "provider": authData.provider,
@@ -42,15 +33,13 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                                 ]
                                 uidRef.setValue(newUser)
                             }
-                            Global.AuthData = authData
 
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let vc = storyboard.instantiateViewControllerWithIdentifier("PrimaryNavigation") as UIViewController as UINavigationController
-                            self.presentViewController(vc, animated: true, completion: nil)
+                            // Transition to the home screen.
+                            self.performSegueWithIdentifier("SHOW_HOME", sender: self)
                         })
+                        Global.AuthData = authData
                     }
             })
         }
     }
-
 }
