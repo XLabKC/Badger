@@ -15,6 +15,8 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                     if error != nil {
                         println("Firebase auth error \(error) and auth object \(authData)")
                     } else {
+                        Global.AuthData = authData
+
                         // Check if the user already exists.
                         let uidRef = ref.childByAppendingPath("users").childByAppendingPath(authData.uid)
                         uidRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
@@ -32,12 +34,14 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                                     "red_profile_image": authData.providerData["cachedUserProfile"]?["picture"] as? NSString as? String
                                 ]
                                 uidRef.setValue(newUser)
+
+                                // Let device know we want to receive push notifications.
+                                UIApplication.sharedApplication().registerForRemoteNotifications()
                             }
 
                             // Transition to the home screen.
                             self.performSegueWithIdentifier("SHOW_HOME", sender: self)
                         })
-                        Global.AuthData = authData
                     }
             })
         }

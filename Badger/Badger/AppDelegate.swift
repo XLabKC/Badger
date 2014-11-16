@@ -45,6 +45,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         }
     }
 
+    func application(application: UIApplication,
+        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+
+            // Convert NSData into a hex string.
+            var bytes = [UInt8](count: deviceToken.length, repeatedValue: 0x0)
+            deviceToken.getBytes(&bytes, length:deviceToken.length)
+            var hexBits = "" as String
+            for value in bytes {
+                hexBits += NSString(format: "%2X", value) as String
+            }
+            let hexDeviceToken = hexBits.stringByReplacingOccurrencesOfString("\u{0020}", withString: "0", options: NSStringCompareOptions.CaseInsensitiveSearch)
+
+            // Save device token.
+            let device = [
+                "platform": "ios",
+                "token": hexDeviceToken
+            ]
+            let ref = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(Global.AuthData!.uid)
+            ref.childByAppendingPath("device").setValue(device)
+    }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
         return GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation);

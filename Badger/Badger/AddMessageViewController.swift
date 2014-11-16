@@ -20,7 +20,10 @@ class AddMessageViewController: UIViewController {
                 "priority": 3
             ]
             let messageRef = Firebase(url: Global.FirebaseMessagesUrl).childByAppendingPath(user.uid)
-            messageRef.childByAutoId().setValue(message)
+            let messageIdRef = messageRef.childByAutoId()
+            let newMessageRef = Firebase(url: Global.FirebaseNewMessagesUrl).childByAppendingPath(messageIdRef.name)
+            messageIdRef.setValue(message)
+            newMessageRef.setValue(user.uid)
         }
         self.navigationController?.popViewControllerAnimated(true)
     }
