@@ -33,9 +33,9 @@ class ProfileTableCell: UITableViewCell, UIScrollViewDelegate {
 
     required init(coder aDecoder: NSCoder) {
         panels = [UIView(), UIView(), UIView()]
-        panels[0].backgroundColor = UIColor.redColor()
-        panels[1].backgroundColor = UIColor.yellowColor()
-        panels[2].backgroundColor = UIColor.greenColor()
+//        panels[0].backgroundColor = UIColor.redColor()
+//        panels[1].backgroundColor = UIColor.yellowColor()
+//        panels[2].backgroundColor = UIColor.greenColor()
 
         super.init(coder: aDecoder)
 
@@ -48,7 +48,7 @@ class ProfileTableCell: UITableViewCell, UIScrollViewDelegate {
         self.addLabel(panels[1], text: "Occupied")
         self.addLabel(panels[2], text: "Free")
 
-        self.backgroundColor = UIColor.grayColor()
+//        self.backgroundColor = UIColor.grayColor()
         self.selectionStyle = .None
     }
 

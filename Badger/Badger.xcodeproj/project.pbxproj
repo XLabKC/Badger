@@ -10,6 +10,13 @@
 		7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */; };
 		7B070FCB1A11AA8400997D50 /* AddMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B070FCA1A11AA8400997D50 /* AddMessageViewController.swift */; };
 		7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */; };
+		7B47339F1A1A9B4500D88C00 /* StatusSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47339E1A1A9B4500D88C00 /* StatusSlider.swift */; };
+		7B4733A71A1ACBDD00D88C00 /* FreeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733A11A1ACBDD00D88C00 /* FreeIcon.png */; };
+		7B4733A81A1ACBDD00D88C00 /* FreeIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733A21A1ACBDD00D88C00 /* FreeIcon@2x.png */; };
+		7B4733A91A1ACBDD00D88C00 /* OccupiedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733A31A1ACBDD00D88C00 /* OccupiedIcon.png */; };
+		7B4733AA1A1ACBDD00D88C00 /* OccupiedIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733A41A1ACBDD00D88C00 /* OccupiedIcon@2x.png */; };
+		7B4733AB1A1ACBDD00D88C00 /* UnavailableIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733A51A1ACBDD00D88C00 /* UnavailableIcon@2x.png */; };
+		7B4733AC1A1ACBDD00D88C00 /* UnavailableIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733A61A1ACBDD00D88C00 /* UnavailableIcon.png */; };
 		7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7439FC19F87E4E0075690A /* AppDelegate.swift */; };
 		7B743A0219F87E4E0075690A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0019F87E4E0075690A /* Main.storyboard */; };
 		7B743A0419F87E4E0075690A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0319F87E4E0075690A /* Images.xcassets */; };
@@ -63,6 +70,13 @@
 		7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAsync.swift; sourceTree = "<group>"; };
 		7B070FCA1A11AA8400997D50 /* AddMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMessageViewController.swift; sourceTree = "<group>"; };
 		7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7B47339E1A1A9B4500D88C00 /* StatusSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusSlider.swift; sourceTree = "<group>"; };
+		7B4733A11A1ACBDD00D88C00 /* FreeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FreeIcon.png; sourceTree = "<group>"; };
+		7B4733A21A1ACBDD00D88C00 /* FreeIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FreeIcon@2x.png"; sourceTree = "<group>"; };
+		7B4733A31A1ACBDD00D88C00 /* OccupiedIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OccupiedIcon.png; sourceTree = "<group>"; };
+		7B4733A41A1ACBDD00D88C00 /* OccupiedIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OccupiedIcon@2x.png"; sourceTree = "<group>"; };
+		7B4733A51A1ACBDD00D88C00 /* UnavailableIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UnavailableIcon@2x.png"; sourceTree = "<group>"; };
+		7B4733A61A1ACBDD00D88C00 /* UnavailableIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnavailableIcon.png; sourceTree = "<group>"; };
 		7B7439F719F87E4E0075690A /* Badger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7439FB19F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B7439FC19F87E4E0075690A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +172,19 @@
 			name = Profile;
 			sourceTree = "<group>";
 		};
+		7B4733A01A1ACBC400D88C00 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7B4733A11A1ACBDD00D88C00 /* FreeIcon.png */,
+				7B4733A21A1ACBDD00D88C00 /* FreeIcon@2x.png */,
+				7B4733A31A1ACBDD00D88C00 /* OccupiedIcon.png */,
+				7B4733A41A1ACBDD00D88C00 /* OccupiedIcon@2x.png */,
+				7B4733A51A1ACBDD00D88C00 /* UnavailableIcon@2x.png */,
+				7B4733A61A1ACBDD00D88C00 /* UnavailableIcon.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		7B7439EE19F87E4E0075690A = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +217,7 @@
 				7B743A0519F87E4E0075690A /* LaunchScreen.xib */,
 				7B7439FA19F87E4E0075690A /* Supporting Files */,
 				7B743A3D19F943D30075690A /* Global.swift */,
+				7B4733A01A1ACBC400D88C00 /* Images */,
 			);
 			path = Badger;
 			sourceTree = "<group>";
@@ -274,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				7B7CAAD31A03F0690028E523 /* Messages */,
+				7B47339E1A1A9B4500D88C00 /* StatusSlider.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -403,8 +432,14 @@
 			files = (
 				7B743A3A19F895520075690A /* UserTableCell.xib in Resources */,
 				7B743A0219F87E4E0075690A /* Main.storyboard in Resources */,
+				7B4733A91A1ACBDD00D88C00 /* OccupiedIcon.png in Resources */,
+				7B4733A71A1ACBDD00D88C00 /* FreeIcon.png in Resources */,
+				7B4733AB1A1ACBDD00D88C00 /* UnavailableIcon@2x.png in Resources */,
 				7B743A0719F87E4E0075690A /* LaunchScreen.xib in Resources */,
+				7B4733AC1A1ACBDD00D88C00 /* UnavailableIcon.png in Resources */,
 				7B743A3819F88B800075690A /* ProfileTableCell.xib in Resources */,
+				7B4733A81A1ACBDD00D88C00 /* FreeIcon@2x.png in Resources */,
+				7B4733AA1A1ACBDD00D88C00 /* OccupiedIcon@2x.png in Resources */,
 				7B743A5719F94A3D0075690A /* GooglePlus.bundle in Resources */,
 				7B743A0419F87E4E0075690A /* Images.xcassets in Resources */,
 				7B7CAAD21A03E3A20028E523 /* MessagesView.xib in Resources */,
@@ -429,6 +464,7 @@
 				7B7CAAD01A03E33C0028E523 /* MessagesView.swift in Sources */,
 				7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */,
 				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
+				7B47339F1A1A9B4500D88C00 /* StatusSlider.swift in Sources */,
 				7B743A1E19F880110075690A /* HomeViewController.swift in Sources */,
 				7B743A3E19F943D30075690A /* Global.swift in Sources */,
 				7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */,

@@ -21,6 +21,10 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F1p-1A-pYZ" customClass="StatusSlider" customModule="Badger" customModuleProvider="target">
+                        <rect key="frame" x="20" y="50" width="280" height="70"/>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="DOR-eo-Cnz" secondAttribute="bottom" constant="-0.5" id="8rz-WL-lVY"/>
