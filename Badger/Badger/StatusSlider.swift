@@ -1,11 +1,7 @@
 import UIKit
 
-public enum StatusSliderState: Int {
-    case Unavailable = 0, Free, Occupied
-}
-
 protocol StatusSliderDelegate {
-    func sliderChangedState(slider: StatusSlider, newState: StatusSliderState)
+    func sliderChangedState(slider: StatusSlider, newState: UserStatus)
 }
 
 class StatusSlider: UIView, UIGestureRecognizerDelegate {
@@ -19,16 +15,16 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
 
     // View constants.
     let backgroundColors = [
-        Helpers.colorize(0xFF5C78, alpha: 1),
-        Helpers.colorize(0x50E3C2, alpha: 1),
-        Helpers.colorize(0xFFDB7B, alpha: 1)
+        Color.colorize(0xFF5C78, alpha: 1),
+        Color.colorize(0x50E3C2, alpha: 1),
+        Color.colorize(0xFFDB7B, alpha: 1)
     ]
-    let inactiveIconColor = Helpers.colorize(0xE0E0E0, alpha: 1)
+    let inactiveIconColor = Color.colorize(0xE0E0E0, alpha: 1)
     let stickyDistance = CGFloat(5.0)
 
     private var touchStartPosition: CGFloat
     private var touchIsDown = false
-    private var state: StatusSliderState
+    private var state: UserStatus
 
     var delegate: StatusSliderDelegate?
 
@@ -50,11 +46,11 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         self.freeIconView.frame = CGRect(x: (w - h) / 2.0, y: 0, width: h, height: h)
         self.occupiedIconView.frame = CGRect(x: (w - h), y: 0, width: h, height: h)
         self.setupIconPair(self.unavailableIconView, image: "UnavailableIcon.png",
-            color: Helpers.colorize(0xCB2F49, alpha: 1))
+            color: Color.colorize(0xCB2F49, alpha: 1))
         self.setupIconPair(self.freeIconView, image: "FreeIcon.png",
-            color: Helpers.colorize(0x1BBA96, alpha: 1))
+            color: Color.colorize(0x1BBA96, alpha: 1))
         self.setupIconPair(self.occupiedIconView, image: "OccupiedIcon.png",
-            color: Helpers.colorize(0xE5B943, alpha: 1))
+            color: Color.colorize(0xE5B943, alpha: 1))
 
         // Set up recognizers.
         self.userInteractionEnabled = true
@@ -128,7 +124,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
     }
 
     // Set the state.
-    func setState(state: StatusSliderState, animated animate: Bool) {
+    func setState(state: UserStatus, animated animate: Bool) {
         if self.state != state {
             self.state = state
             if let delegate = self.delegate? {
@@ -151,7 +147,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         }
     }
 
-    func getState() -> StatusSliderState {
+    func getState() -> UserStatus {
         return self.state
     }
 
@@ -187,7 +183,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
     }
 
     // Calculate the position for a state.
-    private func calcPositionForState(state: StatusSliderState) -> CGFloat {
+    private func calcPositionForState(state: UserStatus) -> CGFloat {
         switch state {
         case .Unavailable:
             return 0
@@ -199,7 +195,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
     }
 
     // Returns the color for a given state.
-    private func colorForState(state: StatusSliderState) -> UIColor {
+    private func colorForState(state: UserStatus) -> UIColor {
         switch state {
         case .Unavailable:
             return self.backgroundColors[0]
