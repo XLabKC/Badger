@@ -20,7 +20,8 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
     override func viewDidLoad() {
         let userTableNib = UINib(nibName: "UserTableCell", bundle: nil)
         self.tableView.registerNib(userTableNib, forCellReuseIdentifier: "UserTableCell")
-        self.uidRef = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(Global.AuthData!.uid)
+        let ref = Firebase(url: Global.FirebaseUsersUrl)
+        self.uidRef = ref.childByAppendingPath(ref.authData.uid)
         self.loadUser()
 
         super.viewDidLoad()

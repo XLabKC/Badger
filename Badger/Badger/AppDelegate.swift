@@ -36,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
                 if error != nil {
                     println("Firebase auth error \(error) and auth object \(authData)")
                 } else {
-                    Global.AuthData = authData
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewControllerWithIdentifier("PrimaryNavigation") as UINavigationController
                     self.window?.rootViewController?.presentViewController(vc, animated: true, completion: nil)
@@ -62,8 +61,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
                 "platform": "ios",
                 "token": hexDeviceToken
             ]
-            let ref = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(Global.AuthData!.uid)
-            ref.childByAppendingPath("device").setValue(device)
+            let ref = Firebase(url: Global.FirebaseUsersUrl)
+            ref.childByAppendingPath(ref.authData.uid).childByAppendingPath("device").setValue(device)
+    }
+
+    func application(application: UIApplication,
+        didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+            println("Failed to register for remote notifications")
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
