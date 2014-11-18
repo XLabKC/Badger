@@ -4,6 +4,10 @@ public enum StatusSliderState: Int {
     case Unavailable = 0, Free, Occupied
 }
 
+protocol StatusSliderDelegate {
+    func sliderChangedState(slider: StatusSlider, newState: StatusSliderState)
+}
+
 class StatusSlider: UIView, UIGestureRecognizerDelegate {
     let panRecognizer = UIPanGestureRecognizer()
     let tapRecognizer = UITapGestureRecognizer()
@@ -20,21 +24,13 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         Helpers.colorize(0xFFDB7B, alpha: 1)
     ]
     let inactiveIconColor = Helpers.colorize(0xE0E0E0, alpha: 1)
-//    let iconColors = [
-//        Helpers.colorize(0xE0E0E0, alpha: 1),
-//        Helpers.colorize(0xE0E0E0, alpha: 1),
-//        Helpers.colorize(0xE0E0E0, alpha: 1)
-//    ]
-    let iconColors = [
-        Helpers.colorize(0xCB2F49, alpha: 1),
-        Helpers.colorize(0x1BBA96, alpha: 1),
-        Helpers.colorize(0xE5B943, alpha: 1)
-    ]
     let stickyDistance = CGFloat(5.0)
 
-    var touchStartPosition: CGFloat
-    var touchIsDown = false
-    var state: StatusSliderState
+    private var touchStartPosition: CGFloat
+    private var touchIsDown = false
+    private var state: StatusSliderState
+
+    var delegate: StatusSliderDelegate?
 
     required init(coder aDecoder: NSCoder) {
         self.state = .Free
@@ -53,9 +49,12 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         self.unavailableIconView.frame = CGRect(x: 0, y: 0, width: h, height: h)
         self.freeIconView.frame = CGRect(x: (w - h) / 2.0, y: 0, width: h, height: h)
         self.occupiedIconView.frame = CGRect(x: (w - h), y: 0, width: h, height: h)
-        self.setupIcon(self.unavailableIconView, image: "UnavailableIcon.png")
-        self.setupIcon(self.freeIconView, image: "FreeIcon.png")
-        self.setupIcon(self.occupiedIconView, image: "OccupiedIcon.png")
+        self.setupIconPair(self.unavailableIconView, image: "UnavailableIcon.png",
+            color: Helpers.colorize(0xCB2F49, alpha: 1))
+        self.setupIconPair(self.freeIconView, image: "FreeIcon.png",
+            color: Helpers.colorize(0x1BBA96, alpha: 1))
+        self.setupIconPair(self.occupiedIconView, image: "OccupiedIcon.png",
+            color: Helpers.colorize(0xE5B943, alpha: 1))
 
         // Set up recognizers.
         self.userInteractionEnabled = true
@@ -67,7 +66,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         self.addGestureRecognizer(self.tapRecognizer)
 
         // Make sure everything is properly rendered.
-        self.setStateInternal(.Free, animated: false)
+        self.setState(.Free, animated: false)
     }
 
     func panning(recognizer: UIPanGestureRecognizer) {
@@ -92,7 +91,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
             // Update the position of the slider.
             self.slider.frame.origin.x = newPosition
             self.slider.backgroundColor = calcColorForPosition(newPosition)
-            self.setIconColorsForPosition(newPosition)
+            self.setIconAlphaForPosition(newPosition)
             return
         }
 
@@ -102,9 +101,9 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         // Determine what the closes state is.
         let result = self.calcOffsetAndProgress(newPosition)
         if result.progress < 0.5 {
-            self.setStateInternal((result.offset == 0) ? .Unavailable : .Free, animated: true)
+            self.setState((result.offset == 0) ? .Unavailable : .Free, animated: true)
         } else {
-            self.setStateInternal((result.offset == 0) ? .Free : .Occupied, animated: true)
+            self.setState((result.offset == 0) ? .Free : .Occupied, animated: true)
         }
     }
 
@@ -114,12 +113,12 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         let midpoint = end / 2.0
 
         if position < self.frame.height {
-            self.setStateInternal(.Unavailable, animated: true)
+            self.setState(.Unavailable, animated: true)
         } else if (position > midpoint - self.stickyDistance &&
                 position < midpoint + self.frame.height + stickyDistance) {
-            self.setStateInternal(.Free, animated: true)
+            self.setState(.Free, animated: true)
         } else if (position > end - self.stickyDistance) {
-            self.setStateInternal(.Occupied, animated: true)
+            self.setState(.Occupied, animated: true)
         }
     }
 
@@ -129,17 +128,20 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
     }
 
     // Set the state.
-    private func setStateInternal(state: StatusSliderState, animated animate: Bool) {
-        self.state = state
+    func setState(state: StatusSliderState, animated animate: Bool) {
+        if self.state != state {
+            self.state = state
+            if let delegate = self.delegate? {
+                delegate.sliderChangedState(self, newState: state)
+            }
+        }
+
         let action = { () -> Void in
             self.slider.frame.origin.x = self.calcPositionForState(self.state)
             self.slider.backgroundColor = self.colorForState(self.state)
-            self.setImageColor(self.unavailableIconView,
-                color: (state == .Unavailable) ? self.iconColors[0] : self.inactiveIconColor)
-            self.setImageColor(self.freeIconView,
-                color: (state == .Free) ? self.iconColors[1] : self.inactiveIconColor)
-            self.setImageColor(self.occupiedIconView,
-                color: (state == .Occupied) ? self.iconColors[2] : self.inactiveIconColor)
+            self.unavailableIconView.alpha = (state == .Unavailable) ? 1 : 0
+            self.freeIconView.alpha = (state == .Free) ? 1 : 0
+            self.occupiedIconView.alpha = (state == .Occupied) ? 1 : 0
         }
 
         if animate {
@@ -149,23 +151,25 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         }
     }
 
-    private func setIconColorsForPosition(position: CGFloat) {
-        let result = self.calcOffsetAndProgress(position)
-        var activeIcons: [UIImageView]
+    func getState() -> StatusSliderState {
+        return self.state
+    }
 
-        if (result.offset == 0) {
-            activeIcons = [self.unavailableIconView, self.freeIconView]
-            self.setImageColor(self.occupiedIconView, color: self.inactiveIconColor)
+    private func setIconAlphaForPosition(position: CGFloat) {
+        self.setImageAlphaForPosition(self.unavailableIconView, position: position)
+        self.setImageAlphaForPosition(self.freeIconView, position: position)
+        self.setImageAlphaForPosition(self.occupiedIconView, position: position)
+    }
+
+    private func setImageAlphaForPosition(imageView: UIImageView, position: CGFloat) {
+        let diff = abs(position - imageView.frame.origin.x)
+        let range = self.frame.height * 0.25
+        if (diff > range) {
+            // Not enough overlapping, find icon completely.
+            imageView.alpha = 0
         } else {
-            activeIcons = [self.freeIconView, self.occupiedIconView]
-            self.setImageColor(self.unavailableIconView, color: self.inactiveIconColor)
-        }
-
-        for index in 0...1 {
-            let startColor = self.iconColors[result.offset + index]
-            let progress = (index == 0) ? result.progress : 1.0 - result.progress
-            let color = Helpers.interpolateColors(startColor, end: self.inactiveIconColor, progress: progress)
-            self.setImageColor(activeIcons[index], color: color)
+            // Linear curve to fade in icon.
+            imageView.alpha = 1 - (diff / range)
         }
     }
 
@@ -176,26 +180,10 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
 
         if position < 0 {
             return 0
-        }
-        else if position > end {
+        } else if position > end {
             return end
         }
         return position
-
-
-        // Check for close to 0.
-//        if position <= stickyDistance {
-//            return CGFloat(0)
-//        }
-        // Check for close to the midpoint.
-//        if abs(position - midpoint) <= stickyDistance {
-//            return midpoint
-//        }
-        // Check for close to end.
-//        if position >= end - stickyDistance {
-//            return end
-//        }
-//        return position
     }
 
     // Calculate the position for a state.
@@ -246,16 +234,21 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
     }
 
     // Sets the color of the image on an image view.
-    private func setImageColor(imageView: UIImageView, color: UIColor) {
+    private func setIconTransparency(imageView: UIImageView, color: UIColor) {
         if let image = imageView.image? {
             imageView.image = Helpers.imageWithColor(image, color: color)
         }
     }
 
-    private func setupIcon(imageView: UIImageView, image: String) {
-        imageView.image = Helpers.imageWithColor(UIImage(named: image)!,
-            color: self.inactiveIconColor)
+    // Sets up the icon pairs; one in front, one behind the slider.
+    private func setupIconPair(imageView: UIImageView, image: String, color: UIColor) {
+        imageView.image = Helpers.imageWithColor(UIImage(named: image)!, color: color)
         imageView.contentMode = .Center
         self.addSubview(imageView)
+
+        let backgroundView = UIImageView(frame: imageView.frame)
+        backgroundView.image = Helpers.imageWithColor(imageView.image!, color: self.inactiveIconColor)
+        backgroundView.contentMode = .Center
+        self.insertSubview(backgroundView, belowSubview: self.slider)
     }
 }
