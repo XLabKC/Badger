@@ -22,6 +22,9 @@
 		7B4733B61A1BE31C00D88C00 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733B51A1BE31C00D88C00 /* ProfileHeaderCell.swift */; };
 		7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733B71A1BE35800D88C00 /* StatusSliderCell.swift */; };
 		7B4733BA1A1BE38700D88C00 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733B91A1BE38700D88C00 /* TaskCell.swift */; };
+		7B4733BD1A1BE90300D88C00 /* DefaultBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733BB1A1BE90300D88C00 /* DefaultBackground@2x.png */; };
+		7B4733BE1A1BE90300D88C00 /* DefaultBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733BC1A1BE90300D88C00 /* DefaultBackground.png */; };
+		7B4733C01A1BECBB00D88C00 /* StatusListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */; };
 		7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7439FC19F87E4E0075690A /* AppDelegate.swift */; };
 		7B743A0219F87E4E0075690A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0019F87E4E0075690A /* Main.storyboard */; };
 		7B743A0419F87E4E0075690A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0319F87E4E0075690A /* Images.xcassets */; };
@@ -90,6 +93,9 @@
 		7B4733B51A1BE31C00D88C00 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
 		7B4733B71A1BE35800D88C00 /* StatusSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusSliderCell.swift; sourceTree = "<group>"; };
 		7B4733B91A1BE38700D88C00 /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		7B4733BB1A1BE90300D88C00 /* DefaultBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBackground@2x.png"; sourceTree = "<group>"; };
+		7B4733BC1A1BE90300D88C00 /* DefaultBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBackground.png; sourceTree = "<group>"; };
+		7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusListener.swift; sourceTree = "<group>"; };
 		7B7439F719F87E4E0075690A /* Badger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7439FB19F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B7439FC19F87E4E0075690A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +198,8 @@
 		7B4733A01A1ACBC400D88C00 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7B4733BB1A1BE90300D88C00 /* DefaultBackground@2x.png */,
+				7B4733BC1A1BE90300D88C00 /* DefaultBackground.png */,
 				7B4733A11A1ACBDD00D88C00 /* FreeIcon.png */,
 				7B4733A21A1ACBDD00D88C00 /* FreeIcon@2x.png */,
 				7B4733A31A1ACBDD00D88C00 /* OccupiedIcon.png */,
@@ -359,6 +367,7 @@
 			children = (
 				7BCAA5EE1A00A7D4003B55C7 /* User.swift */,
 				7B85DE3F1A0A92C00074A127 /* Task.swift */,
+				7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -459,6 +468,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B4733BD1A1BE90300D88C00 /* DefaultBackground@2x.png in Resources */,
+				7B4733BE1A1BE90300D88C00 /* DefaultBackground.png in Resources */,
 				7B743A3A19F895520075690A /* UserTableCell.xib in Resources */,
 				7B743A0219F87E4E0075690A /* Main.storyboard in Resources */,
 				7B4733A91A1ACBDD00D88C00 /* OccupiedIcon.png in Resources */,
@@ -500,6 +511,7 @@
 				7B743A1E19F880110075690A /* HomeViewController.swift in Sources */,
 				7B743A3E19F943D30075690A /* Global.swift in Sources */,
 				7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */,
+				7B4733C01A1BECBB00D88C00 /* StatusListener.swift in Sources */,
 				7B743A3C19F895700075690A /* UserTableCell.swift in Sources */,
 				7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */,
 				7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */,

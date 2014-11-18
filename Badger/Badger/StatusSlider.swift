@@ -1,6 +1,6 @@
 import UIKit
 
-protocol StatusSliderDelegate {
+protocol StatusSliderDelegate: class {
     func sliderChangedState(slider: StatusSlider, newState: UserStatus)
 }
 
@@ -26,7 +26,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
     private var touchIsDown = false
     private var state: UserStatus
 
-    var delegate: StatusSliderDelegate?
+    weak var delegate: StatusSliderDelegate?
 
     required init(coder aDecoder: NSCoder) {
         self.state = .Free

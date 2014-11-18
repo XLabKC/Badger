@@ -115,7 +115,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n1g-Xu-mf1" id="fgU-OC-txI">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5V-sF-zLH">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="C5V-sF-zLH">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="225"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWF-0D-aJC">
@@ -444,6 +444,9 @@
             <point key="canvasLocation" x="371" y="410"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="DefaultBackground.png" width="375" height="290"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rOP-FH-Cur"/>
     </inferredMetricsTieBreakers>
