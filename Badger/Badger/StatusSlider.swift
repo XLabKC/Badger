@@ -215,7 +215,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         let result = self.calcOffsetAndProgress(position)
         let start = self.backgroundColors[result.offset]
         let end = self.backgroundColors[result.offset + 1]
-        return Helpers.interpolateColors(start, end: end, progress: result.progress);
+        return Color.interpolateRGBBetween(start, end: end, progress: result.progress);
     }
 
     // Calculates the offset and progress to be used for interpolating between states.
