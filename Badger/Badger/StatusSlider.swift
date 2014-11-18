@@ -15,9 +15,9 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
 
     // View constants.
     let backgroundColors = [
-        Color.colorize(0xFF5C78, alpha: 1),
-        Color.colorize(0x50E3C2, alpha: 1),
-        Color.colorize(0xFFDB7B, alpha: 1)
+        Colors.UnavailableStatus,
+        Colors.FreeStatus,
+        Colors.OccupiedStatus
     ]
     let inactiveIconColor = Color.colorize(0xE0E0E0, alpha: 1)
     let stickyDistance = CGFloat(5.0)
@@ -134,7 +134,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
 
         let action = { () -> Void in
             self.slider.frame.origin.x = self.calcPositionForState(self.state)
-            self.slider.backgroundColor = self.colorForState(self.state)
+            self.slider.backgroundColor = Helpers.statusToColor(self.state)
             self.unavailableIconView.alpha = (state == .Unavailable) ? 1 : 0
             self.freeIconView.alpha = (state == .Free) ? 1 : 0
             self.occupiedIconView.alpha = (state == .Occupied) ? 1 : 0
@@ -191,18 +191,8 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
             return (self.frame.width - self.frame.height) / 2.0
         case .Occupied:
             return self.frame.width - self.frame.height
-        }
-    }
-
-    // Returns the color for a given state.
-    private func colorForState(state: UserStatus) -> UIColor {
-        switch state {
-        case .Unavailable:
-            return self.backgroundColors[0]
-        case .Free:
-            return self.backgroundColors[1]
-        case .Occupied:
-            return self.backgroundColors[2]
+        case .Unknown:
+            return (self.frame.width - self.frame.height) / 2.0
         }
     }
 

@@ -5,10 +5,9 @@ class ListMessagesViewController: UITableViewController {
     var async: FirebaseAsync?
     var messageRef: Firebase?
     var user: User?
-    var messages: [Message]
+    var tasks: [Task] = []
 
     required init(coder aDecoder: NSCoder) {
-        self.messages = []
         super.init(coder: aDecoder)
     }
 
@@ -29,7 +28,7 @@ class ListMessagesViewController: UITableViewController {
         // Load all messages.
         self.async = FirebaseAsync.observeEventType(self.messageRef!, eventType: .ChildAdded,
             forEach: { (snapshot, isNew) -> () in
-                self.messages.append(Message.createMessageFromSnapshot(snapshot))
+                self.tasks.append(Task.createTaskFromSnapshot(snapshot))
                 if (isNew) {
                     self.tableView.reloadData()
                 }
@@ -39,10 +38,10 @@ class ListMessagesViewController: UITableViewController {
 
         // Listen for updates.
         self.messageRef?.observeEventType(.ChildChanged, withBlock: { snapshot in
-            let updated = Message.createMessageFromSnapshot(snapshot)
-            for (index, message) in enumerate(self.messages) {
+            let updated = Task.createTaskFromSnapshot(snapshot)
+            for (index, message) in enumerate(self.tasks) {
                 if message.id == updated.id {
-                    self.messages[index] = updated
+                    self.tasks[index] = updated
                     self.tableView.reloadData()
                     break
                 }
@@ -51,10 +50,10 @@ class ListMessagesViewController: UITableViewController {
 
         // Listen for removals.
         self.messageRef?.observeEventType(.ChildRemoved, withBlock: { snapshot in
-            let removed = Message.createMessageFromSnapshot(snapshot)
-            for (index, message) in enumerate(self.messages) {
+            let removed = Task.createTaskFromSnapshot(snapshot)
+            for (index, message) in enumerate(self.tasks) {
                 if message.id == removed.id {
-                    self.messages.removeAtIndex(index)
+                    self.tasks.removeAtIndex(index)
                     self.tableView.reloadData()
                     break
                 }
@@ -76,12 +75,12 @@ class ListMessagesViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.messages.count
+        return self.tasks.count
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let calculationView = UITextView()
-        calculationView.text = self.messages[indexPath.row].content
+        calculationView.text = self.tasks[indexPath.row].content
         let size = calculationView.sizeThatFits(CGSizeMake(self.view.frame.width, CGFloat(FLT_MAX)))
         return size.height + 4
     }
@@ -89,7 +88,7 @@ class ListMessagesViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as UITableViewCell
         let textView = cell.viewWithTag(100) as UITextView
-        textView.text = self.messages[indexPath.row].content
+        textView.text = self.tasks[indexPath.row].content
         return cell
     }
 

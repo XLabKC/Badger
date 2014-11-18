@@ -6,28 +6,35 @@ struct Global {
     static let GoogleClientId = "23462386449-gplp919jh4jhu9tj6185mg7koc2eej7n.apps.googleusercontent.com"
 }
 
+struct Colors {
+    static let UnavailableStatus = Color.colorize(0xFF5C78, alpha: 1)
+    static let UnknownStatus = Color.colorize(0x8A9693, alpha: 1)
+    static let FreeStatus = Color.colorize(0x50E3C2, alpha: 1)
+    static let OccupiedStatus = Color.colorize(0xFFDB7B, alpha: 1)
+}
+
 
 public enum UserStatus: String {
     case Unavailable = "unavailable"
     case Free = "free"
     case Occupied = "occupied"
+    case Unknown = "unknown"
 }
 
 
 class Helpers {
-    class func statusToColor(status:String) -> UIColor {
+    class func statusToColor(status: UserStatus) -> UIColor {
         switch status {
-        case "red":
-            return UIColor.redColor()
-        case "yellow":
-            return UIColor.yellowColor()
-        default:
-            return UIColor.greenColor()
+        case .Unknown:
+            return Colors.UnknownStatus
+        case .Unavailable:
+            return Colors.UnavailableStatus
+        case .Free:
+            return Colors.FreeStatus
+        case .Occupied:
+            return Colors.OccupiedStatus
         }
     }
-
-
-
 
     class func imageWithColor(image: UIImage, color: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale);

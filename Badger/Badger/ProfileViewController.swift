@@ -1,10 +1,14 @@
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UITableViewController {
 
+    let cellHeights: [CGFloat] = [225.0, 100.0, 72.0]
+    var statusSliderCell: StatusSliderCell?
+    var profileHeaderCell: ProfileHeaderCell?
     var statusHandle: UInt
     var statusRef: Firebase?
     var user: User?
+    var tasks: [Task] = []
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
@@ -15,11 +19,8 @@ class ProfileViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        tasks.append(Task(id: "i", author: "A", content: "A", priority: 1, open: true))
         super.viewDidLoad()
-        let rightButton = UIBarButtonItem(title: "Messages", style: .Plain, target: self, action: "showMessages:")
-        self.navigationItem.rightBarButtonItem = rightButton
-
-        self.updateView()
     }
 
     func setUid(uid: String) {
@@ -30,48 +31,40 @@ class ProfileViewController: UIViewController {
     }
 
     func setUser(user: User) {
-        if let statusRef = self.statusRef? {
-            statusRef.removeObserverWithHandle(statusHandle)
-        }
-        self.user = user
-        self.updateView()
 
-        if let uidRef = user.uidRef {
-            self.statusRef = uidRef.childByAppendingPath("status")
-            self.statusHandle = statusRef!.observeEventType(.Value, withBlock: { (snapshot) in
-                self.setStatus(snapshot.value as String)
-            })
-        }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.destinationViewController is ListMessagesViewController && self.user != nil {
-            let vc = segue.destinationViewController as ListMessagesViewController
-            vc.setUser(self.user!)
-        }
+    // TableViewController Overrides
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
 
-    private func updateView() {
-        if let user = self.user {
-            if self.nameLabel != nil {
-                self.nameLabel.text = user.full_name
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2 + self.tasks.count
+    }
+
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if (indexPath.row >= self.cellHeights.count - 1) {
+            return self.cellHeights.last!
+        }
+        return self.cellHeights[indexPath.row]
+    }
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            if self.profileHeaderCell == nil {
+                self.profileHeaderCell = (tableView.dequeueReusableCellWithIdentifier("ProfileHeaderCell") as ProfileHeaderCell)
             }
-            self.setStatus(user.status)
+            return self.profileHeaderCell!
+        } else if indexPath.row == 1 {
+            if self.statusSliderCell == nil {
+                self.statusSliderCell = (tableView.dequeueReusableCellWithIdentifier("StatusSliderCell") as StatusSliderCell)
+            }
+            return self.statusSliderCell!
         }
-    }
 
-    @IBAction func goBack(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-
-    func showMessages(sender: UIButton!) {
-        self.performSegueWithIdentifier("USER_SHOW_MESSAGES", sender: self)
-    }
-
-    private func setStatus(status:String) {
-        self.view.backgroundColor = Helpers.statusToColor(status)
-        if self.statusLabel != nil {
-            self.statusLabel.text = status
-        }
+        let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
+        return cell
     }
 }
