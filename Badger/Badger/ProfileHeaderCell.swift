@@ -11,8 +11,6 @@ class ProfileHeaderCell: UITableViewCell, StatusRecipient {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.nameLabel.font = UIFont(name: "OpenSans-Light", size: 24.0)
-        self.statusLabel.font = UIFont(name: "OpenSans-Light", size: 18.0)
     }
 
     func setUser(user: User) {

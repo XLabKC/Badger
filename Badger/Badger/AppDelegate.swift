@@ -13,12 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
             if let expiration = NSUserDefaults.standardUserDefaults().objectForKey("access_token_expiration")
                 as? NSDate {
                     if expiration.compare(NSDate()) == .OrderedDescending {
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewControllerWithIdentifier("PrimaryNavigation") as UINavigationController
-                        if let profileVC = vc.topViewController as? ProfileViewController {
-                            profileVC.setUid(Firebase(url: Global.FirebaseUrl).authData.uid)
-                        }
-                        self.window?.rootViewController = vc
+                        self.window?.rootViewController = self.createRevealViewController(Firebase(url: Global.FirebaseUrl).authData.uid)
                         return true
                     }
             }
@@ -53,19 +48,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
                     println("Firebase auth error \(error) and auth object \(authData)")
                 } else {
                     Helpers.saveAccessToken(auth)
-                    self.presentFirstViewController()
+                    self.window?.rootViewController?.presentViewController(self.createRevealViewController(authData.uid), animated: true, completion: nil)
                 }
             })
         }
     }
 
-    private func presentFirstViewController() {
+    private func createRevealViewController(uid: String) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("PrimaryNavigation") as UINavigationController
-        if let profileVC = vc.topViewController as? ProfileViewController {
-            profileVC.setUid(Firebase(url: Global.FirebaseUrl).authData.uid)
+        let menuVC = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as UITableViewController
+        let frontVC = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as UINavigationController
+        let revealVC = SWRevealViewController(rearViewController: menuVC, frontViewController: frontVC)
+
+        // Set uid for profile.
+        if let profileVC = frontVC.topViewController as? ProfileViewController {
+            profileVC.setUid(uid)
         }
-        self.window?.rootViewController?.presentViewController(vc, animated: true, completion: nil)
+        return revealVC
     }
 
     func application(application: UIApplication,

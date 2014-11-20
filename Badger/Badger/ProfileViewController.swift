@@ -11,17 +11,25 @@ class ProfileViewController: UITableViewController {
     var user: User?
     var tasks: [Task] = []
 
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+
     required init(coder aDecoder: NSCoder) {
         self.statusHandle = 0
         super.init(coder: aDecoder)
     }
 
     override func viewDidLoad() {
-        tasks.append(Task(id: "i", author: "A", title: "Fake Task", content: "A", priority: .Medium, open: true))
-        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
-        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
-        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
-        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
+        if let revealVC = self.revealViewController()? {
+            self.menuButton.target = revealVC
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(revealVC.panGestureRecognizer())
+        }
+
+//        tasks.append(Task(id: "i", author: "A", title: "Fake Task", content: "A", priority: .Medium, open: true))
+//        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
+//        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
+//        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
+//        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
 
         super.viewDidLoad()
     }

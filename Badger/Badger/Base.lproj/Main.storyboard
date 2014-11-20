@@ -341,9 +341,14 @@
                             <outlet property="delegate" destination="lxJ-ye-3j0" id="lo2-Bd-yiV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Dhb-9r-dTT"/>
+                    <navigationItem key="navigationItem" id="Dhb-9r-dTT">
+                        <barButtonItem key="leftBarButtonItem" image="MenuIcon.png" style="plain" id="XTq-tM-skU">
+                            <color key="tintColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="menuButton" destination="XTq-tM-skU" id="a1u-5J-nEu"/>
                         <segue destination="PBh-Z2-Iif" kind="show" identifier="SHOW_PROFILE" id="15g-a7-3cg"/>
                     </connections>
                 </tableViewController>
@@ -463,10 +468,38 @@
             </objects>
             <point key="canvasLocation" x="371" y="-281"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="ZFD-1S-ysA">
+            <objects>
+                <tableViewController storyboardIdentifier="MenuViewController" id="CDL-Dy-EL3" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vbh-RU-z7v">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.21176470588235294" green="0.2196078431372549" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lYf-8f-aVD">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lYf-8f-aVD" id="tpp-gH-6tC">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="CDL-Dy-EL3" id="LFn-5m-Tvy"/>
+                            <outlet property="delegate" destination="CDL-Dy-EL3" id="fFK-OZ-0eJ"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DuK-PI-oCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="371" y="1078"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="e0t-Pp-vhc">
             <objects>
-                <navigationController storyboardIdentifier="PrimaryNavigation" id="PV4-3y-2XN" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProfileNavigationViewController" id="PV4-3y-2XN" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BZC-C9-IJD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -486,5 +519,6 @@
     </scenes>
     <resources>
         <image name="DefaultBackground.png" width="375" height="290"/>
+        <image name="MenuIcon.png" width="22" height="21"/>
     </resources>
 </document>

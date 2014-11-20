@@ -55,17 +55,17 @@ class UserStore {
         }
 
         if needToMakeRequest {
-            self.ref.observeSingleEventOfType(.Value, withBlock: self.userFetched)
+            self.ref.childByAppendingPath(uid).observeSingleEventOfType(.Value, withBlock: self.userFetched)
         }
 
         return nil
     }
 
     private func userFetched(snapshot: FDataSnapshot!) {
-        let uid = snapshot.ref.parent.key
+        let uid = snapshot.key
 
         // Make sure that the snapshot is valid.
-        if !(snapshot.value is String) {
+        if !(snapshot.value is NSDictionary) {
             return
         }
         dispatch_sync(self.waitersLock) {
