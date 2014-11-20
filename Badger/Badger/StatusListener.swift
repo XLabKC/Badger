@@ -17,7 +17,6 @@ class StatusListener {
         return Static.instance!
     }
 
-    private var recipientCount: [String: Int] = [:]
     private var recipientsByUid: [String: [WeakRecipient]] = [:]
     private var handlesByUid: [String: UInt] = [:]
     private var ref = Firebase(url: Global.FirebaseUsersUrl)
@@ -29,21 +28,25 @@ class StatusListener {
 
     func addRecipient(recipient: StatusRecipient, uid: String) {
         var recipients = recipientsByUid[uid]
+        if recipients == nil {
+            recipients = [WeakRecipient]()
+        }
 
-        if recipients == nil || recipients!.count == 0 {
-            recipientsByUid[uid] = [WeakRecipient(recipient: recipient)]
+        if recipients!.isEmpty {
+            recipients!.append(WeakRecipient(recipient: recipient))
 
             // Start listening for this status.
-            let statusRef = ref.childByAppendingPath(uid).childByAppendingPath("status")
-            let closure = self.statusUpdated
-            handlesByUid[uid] = statusRef.observeEventType(.Value, withBlock: self.statusUpdated)
+            let statusRef = self.ref.childByAppendingPath(uid).childByAppendingPath("status")
+            self.handlesByUid[uid] = statusRef.observeEventType(.Value, withBlock: self.statusUpdated)
         } else {
             recipients!.append(WeakRecipient(recipient: recipient))
         }
+
+        self.recipientsByUid[uid] = recipients!
     }
 
     func removeRecipient(recipient: StatusRecipient, uid: String) {
-        if var recipients = recipientsByUid[uid]? {
+        if var recipients = self.recipientsByUid[uid]? {
             for (index, weakRecipient) in enumerate(recipients) {
                 if weakRecipient.recipient === recipient {
                     recipients.removeAtIndex(index)
@@ -57,23 +60,28 @@ class StatusListener {
     }
 
     private func statusUpdated(snapshot: FDataSnapshot!) {
-        let uid = snapshot.ref.parent.name
+        let uid = snapshot.ref.parent.key
+
+        // Make sure that the snapshot is valid.
+        if !(snapshot.value is String) {
+            return
+        }
 
         var status = UserStatus(rawValue: snapshot.value as String!)
         if status == nil {
             status = .Unknown
         }
 
-        if let recipients = recipientsByUid[uid]? {
+        if let recipients = self.recipientsByUid[uid]? {
             if recipients.count > 0 {
-                var valid: [WeakRecipient] = []
+                var valid = [WeakRecipient]()
                 for weakRecipient in recipients {
                     if let recipient = weakRecipient.recipient? {
                         recipient.statusUpdated(uid, newStatus: status!)
                         valid.append(weakRecipient)
                     }
                 }
-                recipientsByUid[uid] = valid
+                self.recipientsByUid[uid] = valid
 
                 // Check to make sure that there were at least one valid
                 // listener. Otherwise, stop listening.
@@ -95,7 +103,7 @@ class StatusListener {
 }
 
 
-struct WeakRecipient {
+class WeakRecipient {
     weak var recipient: StatusRecipient?
     init(recipient: StatusRecipient) {
         self.recipient = recipient

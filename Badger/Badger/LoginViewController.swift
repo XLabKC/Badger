@@ -21,6 +21,8 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                     if error != nil {
                         println("Firebase auth error \(error) and auth object \(authData)")
                     } else {
+                        Helpers.saveAccessToken(auth)
+
                         // Check if the user already exists.
                         let uidRef = ref.childByAppendingPath("users").childByAppendingPath(authData.uid)
                         uidRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
@@ -33,9 +35,9 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                                     "status": "green",
                                     "first_name": authData.providerData["cachedUserProfile"]?["given_name"] as? NSString as? String,
                                     "last_name": authData.providerData["cachedUserProfile"]?["family_name"] as? NSString as? String,
-                                    "green_profile_image": authData.providerData["cachedUserProfile"]?["picture"] as? NSString as? String,
-                                    "yellow_profile_image": authData.providerData["cachedUserProfile"]?["picture"] as? NSString as? String,
-                                    "red_profile_image": authData.providerData["cachedUserProfile"]?["picture"] as? NSString as? String
+                                    "unavailable_profile_image": authData.providerData["cachedUserProfile"]?["picture"] as? NSString as? String,
+                                    "free_profile_image": authData.providerData["cachedUserProfile"]?["picture"] as? NSString as? String,
+                                    "occupied_profile_image": authData.providerData["cachedUserProfile"]?["picture"] as? NSString as? String
                                 ]
                                 // Let device know we want to receive push notifications.
                                 UIApplication.sharedApplication().registerForRemoteNotifications()
@@ -50,6 +52,14 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                         })
                     }
             })
+        }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let vc = segue.destinationViewController as? UINavigationController {
+            if let profileVC = vc.topViewController as? ProfileViewController {
+                profileVC.setUid(Firebase(url: Global.FirebaseUrl).authData.uid)
+            }
         }
     }
 }

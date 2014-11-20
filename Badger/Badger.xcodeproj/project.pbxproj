@@ -25,13 +25,17 @@
 		7B4733BD1A1BE90300D88C00 /* DefaultBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733BB1A1BE90300D88C00 /* DefaultBackground@2x.png */; };
 		7B4733BE1A1BE90300D88C00 /* DefaultBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733BC1A1BE90300D88C00 /* DefaultBackground.png */; };
 		7B4733C01A1BECBB00D88C00 /* StatusListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */; };
+		7B4733C11A1C593B00D88C00 /* Brandon_med.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733B41A1BD65000D88C00 /* Brandon_med.otf */; };
+		7B4733C21A1C593B00D88C00 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733B21A1BCEC300D88C00 /* OpenSans-Light.ttf */; };
+		7B4733C31A1C593B00D88C00 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733B31A1BCEC300D88C00 /* OpenSans-Regular.ttf */; };
+		7B4733C51A1D51BB00D88C00 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733C41A1D51BB00D88C00 /* UserStore.swift */; };
+		7B4733C71A1D6C2600D88C00 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4733C61A1D6C2600D88C00 /* Firebase.framework */; };
 		7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7439FC19F87E4E0075690A /* AppDelegate.swift */; };
 		7B743A0219F87E4E0075690A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0019F87E4E0075690A /* Main.storyboard */; };
 		7B743A0419F87E4E0075690A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0319F87E4E0075690A /* Images.xcassets */; };
 		7B743A0719F87E4E0075690A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0519F87E4E0075690A /* LaunchScreen.xib */; };
 		7B743A1319F87E4E0075690A /* BadgerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A1219F87E4E0075690A /* BadgerTests.swift */; };
 		7B743A1E19F880110075690A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A1D19F880110075690A /* HomeViewController.swift */; };
-		7B743A2019F883AD0075690A /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A1F19F883AD0075690A /* Firebase.framework */; };
 		7B743A2219F884070075690A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2119F884070075690A /* libicucore.dylib */; };
 		7B743A2419F884120075690A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2319F884120075690A /* libc++.dylib */; };
 		7B743A2619F8841B0075690A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2519F8841B0075690A /* CFNetwork.framework */; };
@@ -96,6 +100,8 @@
 		7B4733BB1A1BE90300D88C00 /* DefaultBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBackground@2x.png"; sourceTree = "<group>"; };
 		7B4733BC1A1BE90300D88C00 /* DefaultBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBackground.png; sourceTree = "<group>"; };
 		7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusListener.swift; sourceTree = "<group>"; };
+		7B4733C41A1D51BB00D88C00 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
+		7B4733C61A1D6C2600D88C00 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7B7439F719F87E4E0075690A /* Badger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7439FB19F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B7439FC19F87E4E0075690A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,7 +112,6 @@
 		7B743A1119F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B743A1219F87E4E0075690A /* BadgerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgerTests.swift; sourceTree = "<group>"; };
 		7B743A1D19F880110075690A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		7B743A1F19F883AD0075690A /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7B743A2119F884070075690A /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		7B743A2319F884120075690A /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		7B743A2519F8841B0075690A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -158,10 +163,10 @@
 				7B743A4619F949C90075690A /* Foundation.framework in Frameworks */,
 				7B743A4419F949BE0075690A /* AssetsLibrary.framework in Frameworks */,
 				7B743A4219F949B40075690A /* AddressBook.framework in Frameworks */,
+				7B4733C71A1D6C2600D88C00 /* Firebase.framework in Frameworks */,
 				7B743A2619F8841B0075690A /* CFNetwork.framework in Frameworks */,
 				7B743A2419F884120075690A /* libc++.dylib in Frameworks */,
 				7B743A2219F884070075690A /* libicucore.dylib in Frameworks */,
-				7B743A2019F883AD0075690A /* Firebase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +293,7 @@
 		7B743A2B19F884840075690A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				7B4733C61A1D6C2600D88C00 /* Firebase.framework */,
 				7B743A5319F94A3D0075690A /* GoogleOpenSource.framework */,
 				7B743A5419F94A3D0075690A /* GooglePlus.bundle */,
 				7B743A5519F94A3D0075690A /* GooglePlus.framework */,
@@ -305,7 +311,6 @@
 				7B743A2519F8841B0075690A /* CFNetwork.framework */,
 				7B743A2319F884120075690A /* libc++.dylib */,
 				7B743A2119F884070075690A /* libicucore.dylib */,
-				7B743A1F19F883AD0075690A /* Firebase.framework */,
 			);
 			name = Lib;
 			sourceTree = "<group>";
@@ -368,6 +373,7 @@
 				7BCAA5EE1A00A7D4003B55C7 /* User.swift */,
 				7B85DE3F1A0A92C00074A127 /* Task.swift */,
 				7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */,
+				7B4733C41A1D51BB00D88C00 /* UserStore.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -468,6 +474,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B4733C11A1C593B00D88C00 /* Brandon_med.otf in Resources */,
+				7B4733C21A1C593B00D88C00 /* OpenSans-Light.ttf in Resources */,
+				7B4733C31A1C593B00D88C00 /* OpenSans-Regular.ttf in Resources */,
 				7B4733BD1A1BE90300D88C00 /* DefaultBackground@2x.png in Resources */,
 				7B4733BE1A1BE90300D88C00 /* DefaultBackground.png in Resources */,
 				7B743A3A19F895520075690A /* UserTableCell.xib in Resources */,
@@ -506,6 +515,7 @@
 				7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */,
 				7B7CAAD01A03E33C0028E523 /* MessagesView.swift in Sources */,
 				7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */,
+				7B4733C51A1D51BB00D88C00 /* UserStore.swift in Sources */,
 				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
 				7B47339F1A1A9B4500D88C00 /* StatusSlider.swift in Sources */,
 				7B743A1E19F880110075690A /* HomeViewController.swift in Sources */,

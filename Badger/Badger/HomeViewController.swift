@@ -45,7 +45,7 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
         let cell = tableView.dequeueReusableCellWithIdentifier("UserTableCell", forIndexPath: indexPath) as UserTableCell
 
         if let user = self.user? {
-            self.loadUserForCell(user.following[indexPath.row - 1], cell: cell)
+            self.loadUserForCell(user.followingIds[indexPath.row - 1], cell: cell)
         }
 
         return cell
@@ -53,7 +53,7 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let user = self.user? {
-            return user.following.count + 1
+            return user.followingIds.count + 1
         }
         return 1
     }
@@ -62,7 +62,7 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
         if (indexPath.row != 0) {
             // Handle navigating to other people's pages
             if let user = self.user {
-                self.performSegueWithIdentifier("SHOW_PROFILE", sender: user.following[indexPath.row - 1])
+                self.performSegueWithIdentifier("SHOW_PROFILE", sender: user.followingIds[indexPath.row - 1])
             }
         }
     }
@@ -74,7 +74,7 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
     // ProfileTableCellDelegate
 
     func updateUserStatus(user: User, status: String) {
-        user.uidRef!.updateChildValues(["status": status])
+        user.ref!.updateChildValues(["status": status])
     }
 
     func showMessagesForUser(user: User) {

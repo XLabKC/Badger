@@ -1,7 +1,7 @@
 import UIKit
 
 protocol StatusSliderDelegate: class {
-    func sliderChangedState(slider: StatusSlider, newState: UserStatus)
+    func sliderChangedStatus(slider: StatusSlider, newStatus: UserStatus)
 }
 
 class StatusSlider: UIView, UIGestureRecognizerDelegate {
@@ -24,12 +24,12 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
 
     private var touchStartPosition: CGFloat
     private var touchIsDown = false
-    private var state: UserStatus
+    private var status: UserStatus
 
     weak var delegate: StatusSliderDelegate?
 
     required init(coder aDecoder: NSCoder) {
-        self.state = .Free
+        self.status = .Free
         self.touchStartPosition = 0
         super.init(coder: aDecoder)
 
@@ -62,7 +62,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         self.addGestureRecognizer(self.tapRecognizer)
 
         // Make sure everything is properly rendered.
-        self.setState(.Free, animated: false)
+        self.setStatus(.Free, animated: false)
     }
 
     func panning(recognizer: UIPanGestureRecognizer) {
@@ -80,7 +80,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         }
 
         let position = recognizer.locationInView(self).x
-        let statePosition = calcPositionForState(self.state)
+        let statePosition = calcPositionForState(self.status)
         let newPosition = self.adjustSlidePosition(statePosition + (position - touchStartPosition))
 
         if (recognizer.state == .Changed) {
@@ -97,9 +97,9 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         // Determine what the closes state is.
         let result = self.calcOffsetAndProgress(newPosition)
         if result.progress < 0.5 {
-            self.setState((result.offset == 0) ? .Unavailable : .Free, animated: true)
+            self.setStatusInternal((result.offset == 0) ? .Unavailable : .Free, animated: true)
         } else {
-            self.setState((result.offset == 0) ? .Free : .Occupied, animated: true)
+            self.setStatusInternal((result.offset == 0) ? .Free : .Occupied, animated: true)
         }
     }
 
@@ -109,12 +109,12 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         let midpoint = end / 2.0
 
         if position < self.frame.height {
-            self.setState(.Unavailable, animated: true)
+            self.setStatusInternal(.Unavailable, animated: true)
         } else if (position > midpoint - self.stickyDistance &&
                 position < midpoint + self.frame.height + stickyDistance) {
-            self.setState(.Free, animated: true)
+            self.setStatusInternal(.Free, animated: true)
         } else if (position > end - self.stickyDistance) {
-            self.setState(.Occupied, animated: true)
+            self.setStatusInternal(.Occupied, animated: true)
         }
     }
 
@@ -124,20 +124,14 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
     }
 
     // Set the state.
-    func setState(state: UserStatus, animated animate: Bool) {
-        if self.state != state {
-            self.state = state
-            if let delegate = self.delegate? {
-                delegate.sliderChangedState(self, newState: state)
-            }
-        }
-
+    func setStatus(status: UserStatus, animated animate: Bool) {
+        self.status = status
         let action = { () -> Void in
-            self.slider.frame.origin.x = self.calcPositionForState(self.state)
-            self.slider.backgroundColor = Helpers.statusToColor(self.state)
-            self.unavailableIconView.alpha = (state == .Unavailable) ? 1 : 0
-            self.freeIconView.alpha = (state == .Free) ? 1 : 0
-            self.occupiedIconView.alpha = (state == .Occupied) ? 1 : 0
+            self.slider.frame.origin.x = self.calcPositionForState(status)
+            self.slider.backgroundColor = Helpers.statusToColor(status)
+            self.unavailableIconView.alpha = (status == .Unavailable) ? 1 : 0
+            self.freeIconView.alpha = (status == .Free) ? 1 : 0
+            self.occupiedIconView.alpha = (status == .Occupied) ? 1 : 0
         }
 
         if animate {
@@ -147,8 +141,18 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         }
     }
 
-    func getState() -> UserStatus {
-        return self.state
+    func getStatus() -> UserStatus {
+        return self.status
+    }
+
+    // Sets the status and notifies the delegate.
+    private func setStatusInternal(status: UserStatus, animated animate: Bool) {
+        if self.status != status {
+            if let delegate = self.delegate? {
+                delegate.sliderChangedStatus(self, newStatus: status)
+            }
+        }
+        self.setStatus(status, animated: animate)
     }
 
     private func setIconAlphaForPosition(position: CGFloat) {

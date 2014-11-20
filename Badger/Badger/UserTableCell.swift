@@ -18,9 +18,9 @@ class UserTableCell: UITableViewCell {
             statusRef.removeObserverWithHandle(statusHandle)
         }
 
-        self.label.text = user.full_name
-        self.setStatus(user.status)
-        if let uidRef = user.uidRef {
+        self.label.text = user.fullName
+        self.setStatus("Unknown")
+        if let uidRef = user.ref {
             self.statusRef = uidRef.childByAppendingPath("status")
             self.statusHandle = statusRef!.observeEventType(.Value, withBlock: { (snapshot) in
                 self.setStatus(snapshot.value as String)

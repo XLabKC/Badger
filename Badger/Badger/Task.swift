@@ -2,11 +2,11 @@ class Task {
     let id: String
     let author: String
     let content: String
-    let priority: Int
+    let priority: TaskPriority
     var open: Bool
     var ref: Firebase?
 
-    init(id: String, author: String, content: String, priority: Int, open: Bool)
+    init(id: String, author: String, content: String, priority: TaskPriority, open: Bool)
     {
         self.id = id
         self.author = author
@@ -16,12 +16,17 @@ class Task {
     }
 
     class func createTaskFromSnapshot(snapshot: FDataSnapshot) -> Task {
-        let id = snapshot.name
-        let author = snapshot.value.objectForKey("author") as String!
-        let content = snapshot.value.objectForKey("content") as String!
-        let priority = snapshot.value.objectForKey("priority") as Int!
-        let open = snapshot.value.objectForKey("open") as Bool!
-        let task = Task(id: id, author: author, content: content, priority: priority, open: open)
+        let id = snapshot.key
+        let author = Helpers.getString(snapshot.value, key: "author", backup: "Unknown")
+        let title = Helpers.getString(snapshot.value, key: "title", backup: "No Title")
+        let content = Helpers.getString(snapshot.value, key: "content", backup: "No content")
+        let priority = Helpers.getString(snapshot.value, key: "priority", backup: "unknown")
+        var taskPriority = TaskPriority(rawValue: priority)
+        if taskPriority == nil {
+            taskPriority = .Unknown
+        }
+        let open = Helpers.getBool(snapshot.value, key: "open", backup: true)
+        let task = Task(id: id, author: author, content: content, priority: taskPriority!, open: open)
         task.ref = snapshot.ref
         return task
     }

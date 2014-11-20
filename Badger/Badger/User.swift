@@ -1,72 +1,64 @@
 class User {
     let uid: String
-    var first_name: String
-    var last_name: String
-    var full_name: String {
-        return "\(first_name) \(last_name)"
+    var firstName: String
+    var lastName: String
+    var fullName: String {
+        return "\(firstName) \(lastName)"
     }
-    var profile_images: [String]
+    var profileImages: [UserStatus: String] = [:]
     var email: String
-    var status: String
-    var followers: [String]
-    var following: [String]
-    var messages: [String]
-    var uidRef: Firebase?
+    var status: UserStatus
+    var followerIds: [String] = []
+    var followingIds: [String] = []
+    var ref: Firebase?
     var timestamp: NSDate
 
-    init(uid: String, first_name: String, last_name: String, email: String, status: String)
+    init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus)
     {
         self.uid = uid
-        self.first_name = first_name
-        self.last_name = last_name
+        self.firstName = firstName
+        self.lastName = lastName
         self.email = email
         self.status = status
-        self.profile_images = []
-        self.followers  = []
-        self.following = []
-        self.messages = []
         self.timestamp = NSDate()
     }
 
     class func createUserFromSnapshot(userSnapshot: FDataSnapshot) -> User {
-        let uid = userSnapshot.name
-        let first = userSnapshot.value.objectForKey("first_name") as String!
-        let last = userSnapshot.value.objectForKey("last_name") as String!
-        let status = userSnapshot.value.objectForKey("status") as String!
-        let email = userSnapshot.value.objectForKey("email") as String!
-        let user = User(uid: uid, first_name: first, last_name: last, email: email, status: status)
+        let uid = userSnapshot.key
+        let first = Helpers.getString(userSnapshot.value, key: "first_name", backup: "John")
+        var last = Helpers.getString(userSnapshot.value, key: "last_name", backup: "Doe")
+        let status = Helpers.getString(userSnapshot.value, key: "status", backup: "unknown")
+        let email = Helpers.getString(userSnapshot.value, key: "email", backup: "Unknown")
+        var userStatus = UserStatus(rawValue: status)
+        if userStatus == nil {
+            userStatus = .Unknown
+        }
+        let user = User(uid: uid, firstName: first, lastName: last, email: email, status: userStatus!)
 
-        user.profile_images = [
-            userSnapshot.value.objectForKey("red_profile_image") as String!,
-            userSnapshot.value.objectForKey("yellow_profile_image") as String!,
-            userSnapshot.value.objectForKey("green_profile_image") as String!
+        user.profileImages = [
+            .Unavailable: Helpers.getString(userSnapshot.value, key: "unavailable_profile_image", backup: "Unknown"),
+            .Free: Helpers.getString(userSnapshot.value, key: "free_profile_image", backup: "Unknown"),
+            .Occupied: Helpers.getString(userSnapshot.value, key: "occupied_profile_image", backup: "Unknown"),
+            .Unknown: "Unknown"
         ]
 
-        if let followerData = userSnapshot.value.objectForKey("followers") as? NSDictionary {
+        if let followerData = Helpers.getDictionary(userSnapshot.value, key: "followers")? {
             for (uid, value) in followerData {
                 if let uidString = uid as? String {
-                    user.followers.append(uidString)
+                    user.followerIds.append(uidString)
                 }
             }
         }
 
-        if let followingData = userSnapshot.value.objectForKey("following") as? NSDictionary {
+        if let followingData = Helpers.getDictionary(userSnapshot.value, key: "following")? {
             for (uid, value) in followingData {
                 if let uidString = uid as? String {
-                    user.following.append(uidString)
+                    user.followingIds.append(uidString)
                 }
             }
         }
 
-        if let messageData = userSnapshot.value.objectForKey("messages") as? NSDictionary {
-            for (id, value) in messageData {
-                if let idString = id as? String {
-                    user.messages.append(idString)
-                }
-            }
-        }
-
-        user.uidRef = userSnapshot.ref
+        user.ref = userSnapshot.ref
         return user
     }
 }

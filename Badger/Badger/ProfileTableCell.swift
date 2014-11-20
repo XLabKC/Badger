@@ -72,9 +72,9 @@ class ProfileTableCell: UITableViewCell, UIScrollViewDelegate {
 
     func setUser(user: User) {
         self.user = user
-        self.nameLabel.text = "\(user.first_name) \(user.last_name)"
-        self.currentStatus = user.status
-        self.updateScrollviewForStatus(user.status)
+        self.nameLabel.text = self.user?.fullName
+        self.currentStatus = "Unknown"
+        self.updateScrollviewForStatus("Unknown")
     }
 
     func updateScrollviewForStatus(status:String) {

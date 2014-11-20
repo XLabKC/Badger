@@ -21,7 +21,7 @@ class AddMessageViewController: UIViewController {
                 "priority": 3
             ]
             let messageIdRef = messageRef.childByAutoId()
-            let newMessageRef = Firebase(url: Global.FirebaseNewMessagesUrl).childByAppendingPath(messageIdRef.name)
+            let newMessageRef = Firebase(url: Global.FirebaseNewMessagesUrl).childByAppendingPath(messageIdRef.key)
             messageIdRef.setValue(message)
             newMessageRef.setValue(user.uid)
         }

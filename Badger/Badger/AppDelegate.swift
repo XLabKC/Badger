@@ -8,6 +8,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        // Try and use last sessions access token if it's still valid.
+        if let token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as? String {
+            if let expiration = NSUserDefaults.standardUserDefaults().objectForKey("access_token_expiration")
+                as? NSDate {
+                    if expiration.compare(NSDate()) == .OrderedDescending {
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewControllerWithIdentifier("PrimaryNavigation") as UINavigationController
+                        if let profileVC = vc.topViewController as? ProfileViewController {
+                            profileVC.setUid(Firebase(url: Global.FirebaseUrl).authData.uid)
+                        }
+                        self.window?.rootViewController = vc
+                        return true
+                    }
+            }
+        }
+
         // Set up options for signing in.
         var signIn = GPPSignIn.sharedInstance()
         signIn.shouldFetchGooglePlusUser = true
@@ -36,12 +52,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
                 if error != nil {
                     println("Firebase auth error \(error) and auth object \(authData)")
                 } else {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewControllerWithIdentifier("PrimaryNavigation") as UINavigationController
-                    self.window?.rootViewController?.presentViewController(vc, animated: true, completion: nil)
+                    Helpers.saveAccessToken(auth)
+                    self.presentFirstViewController()
                 }
             })
         }
+    }
+
+    private func presentFirstViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("PrimaryNavigation") as UINavigationController
+        if let profileVC = vc.topViewController as? ProfileViewController {
+            profileVC.setUid(Firebase(url: Global.FirebaseUrl).authData.uid)
+        }
+        self.window?.rootViewController?.presentViewController(vc, animated: true, completion: nil)
     }
 
     func application(application: UIApplication,

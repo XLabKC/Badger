@@ -21,6 +21,13 @@ public enum UserStatus: String {
     case Unknown = "unknown"
 }
 
+public enum TaskPriority: String {
+    case High = "high"
+    case Medium = "medium"
+    case Low = "low"
+    case Unknown = "unknown"
+}
+
 
 class Helpers {
     class func statusToColor(status: UserStatus) -> UIColor {
@@ -51,4 +58,37 @@ class Helpers {
         return newImage;
     }
 
+
+
+    class func getString(root: AnyObject, key: String, backup: String) -> String {
+        if let dictionary = root as? NSDictionary {
+            if let value = dictionary.objectForKey(key) as? String {
+                return value
+            }
+        }
+        return backup
+    }
+
+    class func getBool(root: AnyObject, key: String, backup: Bool) -> Bool {
+        if let dictionary = root as? NSDictionary {
+            if let value = dictionary.objectForKey(key) as? Bool {
+                return value
+            }
+        }
+        return backup
+    }
+
+    class func getDictionary(root: AnyObject, key: String) -> NSDictionary? {
+        if let dictionary = root as? NSDictionary {
+            if let value = dictionary.objectForKey(key) as? NSDictionary {
+                return value
+            }
+        }
+        return nil
+    }
+
+    class func saveAccessToken(auth: GTMOAuth2Authentication) {
+        NSUserDefaults.standardUserDefaults().setObject(auth.accessToken, forKey: "access_token")
+        NSUserDefaults.standardUserDefaults().setObject(auth.expirationDate, forKey: "access_token_expiration")
+    }
 }
