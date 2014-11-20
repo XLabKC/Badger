@@ -1,15 +1,17 @@
 class Task {
     let id: String
     let author: String
+    let title: String
     let content: String
     let priority: TaskPriority
     var open: Bool
     var ref: Firebase?
 
-    init(id: String, author: String, content: String, priority: TaskPriority, open: Bool)
+    init(id: String, author: String, title: String, content: String, priority: TaskPriority, open: Bool)
     {
         self.id = id
         self.author = author
+        self.title = title
         self.content = content
         self.priority = priority
         self.open = open
@@ -26,7 +28,7 @@ class Task {
             taskPriority = .Unknown
         }
         let open = Helpers.getBool(snapshot.value, key: "open", backup: true)
-        let task = Task(id: id, author: author, content: content, priority: taskPriority!, open: open)
+        let task = Task(id: id, author: author, title: title, content: content, priority: taskPriority!, open: open)
         task.ref = snapshot.ref
         return task
     }

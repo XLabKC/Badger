@@ -172,7 +172,7 @@
                                     <outlet property="statusLabel" destination="Zlz-FM-j2I" id="Ly6-bE-0EG"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StatusSliderCell" rowHeight="100" id="2a3-tM-vnj" customClass="StatusSliderCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StatusSliderCell" rowHeight="100" id="2a3-tM-vnj" customClass="StatusSliderCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2a3-tM-vnj" id="Ihv-xZ-KLc">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -186,7 +186,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g39-zB-BXD">
-                                            <rect key="frame" x="0.0" y="98" width="320" height="1"/>
+                                            <rect key="frame" x="0.0" y="99" width="320" height="1"/>
                                             <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="Saa-yN-D32"/>
@@ -196,7 +196,7 @@
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="g39-zB-BXD" secondAttribute="trailing" constant="-8" id="2U4-Mc-Ydb"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="g39-zB-BXD" secondAttribute="bottom" constant="-7" id="BeA-NS-hqQ"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="g39-zB-BXD" secondAttribute="bottom" constant="-7" id="Obf-ho-Qow"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="g39-zB-BXD" secondAttribute="bottom" constant="-8" id="Obf-ho-Qow"/>
                                         <constraint firstAttribute="centerX" secondItem="RRu-Hh-SlV" secondAttribute="centerX" id="PuJ-iN-RN5"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="g39-zB-BXD" secondAttribute="trailing" constant="-8" id="X4G-hK-Qca"/>
                                         <constraint firstAttribute="centerY" secondItem="RRu-Hh-SlV" secondAttribute="centerY" id="pxE-mR-N4a"/>
@@ -294,6 +294,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
+                                    <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="Mdr-Io-gxr" firstAttribute="trailing" secondItem="Qhr-TF-O3y" secondAttribute="trailingMargin" constant="-5" id="2yf-XV-YfB"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="SQB-8W-4db" secondAttribute="trailing" constant="-8" id="5cc-fu-Vmv"/>
@@ -325,7 +326,7 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="detailLabel" destination="79v-P1-4gJ" id="5Qb-1T-Hyo"/>
+                                    <outlet property="contentLabel" destination="n5E-hs-Nol" id="EHz-au-9bK"/>
                                     <outlet property="metaLabel" destination="NrB-se-HJV" id="Apr-jO-JWm"/>
                                     <outlet property="priorityHighLabel" destination="zto-4E-n7Z" id="R4U-Ub-JcY"/>
                                     <outlet property="priorityLowLabel" destination="Mdr-Io-gxr" id="XLU-dq-ekx"/>

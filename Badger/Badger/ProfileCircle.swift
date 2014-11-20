@@ -12,6 +12,10 @@ class ProfileCircle: UIImageView, StatusRecipient {
         self.layoutView()
     }
 
+    func setUid(uid: String) {
+        UserStore.sharedInstance().getUser(uid, withBlock: self.setUser)
+    }
+
     func setUser(user: User) {
         if let uid = self.uid? {
             StatusListener.sharedInstance().removeRecipient(self, uid: uid)

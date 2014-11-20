@@ -6,7 +6,8 @@ class ProfileViewController: UITableViewController {
     var statusSliderCell: StatusSliderCell?
     var profileHeaderCell: ProfileHeaderCell?
     var statusHandle: UInt
-    var statusRef: Firebase?
+    var ref: Firebase?
+    var handle: UInt = 0
     var user: User?
     var tasks: [Task] = []
 
@@ -16,7 +17,12 @@ class ProfileViewController: UITableViewController {
     }
 
     override func viewDidLoad() {
-        tasks.append(Task(id: "i", author: "A", content: "A", priority: .Medium, open: true))
+        tasks.append(Task(id: "i", author: "A", title: "Fake Task", content: "A", priority: .Medium, open: true))
+        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
+        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
+        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
+        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
+
         super.viewDidLoad()
     }
 
@@ -73,6 +79,7 @@ class ProfileViewController: UITableViewController {
         }
 
         let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
+        cell.setTask(self.tasks[self.tasks.count - 1 - (indexPath.row - 2)])
         return cell
     }
 }
