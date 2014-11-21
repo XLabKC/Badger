@@ -18,6 +18,7 @@
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -468,20 +469,65 @@
             </objects>
             <point key="canvasLocation" x="371" y="-281"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="ZFD-1S-ysA">
             <objects>
-                <tableViewController storyboardIdentifier="MenuViewController" id="CDL-Dy-EL3" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MenuViewController" id="CDL-Dy-EL3" customClass="MenuViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vbh-RU-z7v">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.21176470588235294" green="0.2196078431372549" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lYf-8f-aVD">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LogoCell" rowHeight="46" id="lYf-8f-aVD">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lYf-8f-aVD" id="tpp-gH-6tC">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Badger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwO-Kv-d9g">
+                                            <rect key="frame" x="0.0" y="0.0" width="266" height="49"/>
+                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="36"/>
+                                            <color key="textColor" red="0.15686274509803921" green="0.16078431372549021" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <color key="shadowColor" red="1" green="1" blue="1" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <size key="shadowOffset" width="0.0" height="1"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="rwO-Kv-d9g" firstAttribute="top" secondItem="tpp-gH-6tC" secondAttribute="topMargin" constant="-8" id="GMj-AT-fDg"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="rwO-Kv-d9g" secondAttribute="trailing" constant="46" id="Nij-cc-OuY"/>
+                                        <constraint firstItem="rwO-Kv-d9g" firstAttribute="leading" secondItem="tpp-gH-6tC" secondAttribute="leadingMargin" constant="-8" id="bgb-fK-ZbW"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyProfileCell" rowHeight="72" id="aTG-GE-T3O">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aTG-GE-T3O" id="QY3-6j-bFx">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightArrowIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="hVd-Ap-bVr">
+                                            <rect key="frame" x="230" y="5" width="20" height="62"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="QWB-s6-pVO"/>
+                                                <constraint firstAttribute="height" constant="62" id="gYg-w3-v0W"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u3E-KR-KDE" customClass="ProfileCircle" customModule="Badger" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="11" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="rHK-M2-qh9"/>
+                                                <constraint firstAttribute="width" constant="50" id="tpn-Ag-wqF"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="u3E-KR-KDE" secondAttribute="centerY" id="TbL-Y9-VI6"/>
+                                        <constraint firstAttribute="centerY" secondItem="hVd-Ap-bVr" secondAttribute="centerY" id="UjM-Ru-KnL"/>
+                                        <constraint firstItem="u3E-KR-KDE" firstAttribute="leading" secondItem="QY3-6j-bFx" secondAttribute="leadingMargin" id="YdM-rC-dBV"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="hVd-Ap-bVr" secondAttribute="trailing" constant="62" id="lvC-Ph-QoG"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.26274509800000001" green="0.27058823529999998" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -520,5 +566,6 @@
     <resources>
         <image name="DefaultBackground.png" width="375" height="290"/>
         <image name="MenuIcon.png" width="22" height="21"/>
+        <image name="RightArrowIcon.png" width="8" height="13"/>
     </resources>
 </document>

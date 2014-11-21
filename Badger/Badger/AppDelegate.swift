@@ -59,6 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         let menuVC = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as UITableViewController
         let frontVC = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as UINavigationController
         let revealVC = SWRevealViewController(rearViewController: menuVC, frontViewController: frontVC)
+        revealVC.draggableBorderWidth = 20
+        revealVC.rearViewRevealWidth = -54
 
         // Set uid for profile.
         if let profileVC = frontVC.topViewController as? ProfileViewController {

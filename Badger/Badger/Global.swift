@@ -87,6 +87,15 @@ class Helpers {
         return nil
     }
 
+    class func getDate(root: AnyObject, key: String) -> NSDate {
+        if let dictionary = root as? NSDictionary {
+            if let value = dictionary.objectForKey(key) as? NSNumber {
+                return NSDate(fromJavascriptTimestamp: value)
+            }
+        }
+        return NSDate()
+    }
+
     class func saveAccessToken(auth: GTMOAuth2Authentication) {
         NSUserDefaults.standardUserDefaults().setObject(auth.accessToken, forKey: "access_token")
         NSUserDefaults.standardUserDefaults().setObject(auth.expirationDate, forKey: "access_token_expiration")

@@ -21,9 +21,9 @@ class UserStore {
         
     }
 
-//    func isAuthUser(uid: String) {
-//        return uid == self.ref.authData.uid as String
-//    }
+    func isAuthUser(uid: String) -> Bool {
+        return uid == ref.authData.uid
+    }
 
     func getAuthUser(withBlock: (User -> ())) -> User? {
         return self.getUser(self.ref.authData.uid, withBlock: withBlock)

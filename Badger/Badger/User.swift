@@ -6,10 +6,12 @@ class User {
         return "\(firstName) \(lastName)"
     }
     var profileImages: [UserStatus: String] = [:]
+    var headerImage: String
     var email: String
     var status: UserStatus
     var followerIds: [String] = []
     var followingIds: [String] = []
+    var teamIds: [String] = []
     var ref: Firebase?
     var timestamp: NSDate
 
@@ -21,6 +23,7 @@ class User {
         self.email = email
         self.status = status
         self.timestamp = NSDate()
+        self.headerImage = "DefaultBackground.png"
     }
 
     class func createUserFromSnapshot(userSnapshot: FDataSnapshot) -> User {
@@ -41,6 +44,7 @@ class User {
             .Occupied: Helpers.getString(userSnapshot.value, key: "occupied_profile_image", backup: "Unknown"),
             .Unknown: "Unknown"
         ]
+        user.headerImage = Helpers.getString(userSnapshot.value, key: "headerImage", backup: "DefaultBackground.png")
 
         if let followerData = Helpers.getDictionary(userSnapshot.value, key: "followers")? {
             for (uid, value) in followerData {
@@ -54,6 +58,14 @@ class User {
             for (uid, value) in followingData {
                 if let uidString = uid as? String {
                     user.followingIds.append(uidString)
+                }
+            }
+        }
+
+        if let teamData = Helpers.getDictionary(userSnapshot.value, key: "teams")? {
+            for (id, value) in teamData {
+                if let idString = id as? String {
+                    user.teamIds.append(idString)
                 }
             }
         }

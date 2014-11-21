@@ -4,17 +4,19 @@ class Task {
     let title: String
     let content: String
     let priority: TaskPriority
-    var open: Bool
+    let timestamp: NSDate
+    var active: Bool
     var ref: Firebase?
 
-    init(id: String, author: String, title: String, content: String, priority: TaskPriority, open: Bool)
+    init(id: String, author: String, title: String, content: String, priority: TaskPriority, active: Bool, timestamp: NSDate)
     {
         self.id = id
         self.author = author
         self.title = title
         self.content = content
         self.priority = priority
-        self.open = open
+        self.active = active
+        self.timestamp = timestamp
     }
 
     class func createTaskFromSnapshot(snapshot: FDataSnapshot) -> Task {
@@ -27,8 +29,9 @@ class Task {
         if taskPriority == nil {
             taskPriority = .Unknown
         }
-        let open = Helpers.getBool(snapshot.value, key: "open", backup: true)
-        let task = Task(id: id, author: author, title: title, content: content, priority: taskPriority!, open: open)
+        let active = Helpers.getBool(snapshot.value, key: "active", backup: true)
+        let timestamp = Helpers.getDate(snapshot.value, key: "timestamp")
+        let task = Task(id: id, author: author, title: title, content: content, priority: taskPriority!, active: active, timestamp: timestamp)
         task.ref = snapshot.ref
         return task
     }
