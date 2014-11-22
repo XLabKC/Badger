@@ -43,11 +43,11 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                                 UIApplication.sharedApplication().registerForRemoteNotifications()
 
                                 uidRef.setValue(newUser, withCompletionBlock: { (error, ref) in
-                                    self.performSegueWithIdentifier("SHOW_HOME", sender: self)
+                                    self.presentViewController(Helpers.createRevealViewController(authData.uid), animated: true, completion: nil)
                                 });
                             } else {
                                 // Transition to the home screen.
-                                self.performSegueWithIdentifier("SHOW_HOME", sender: self)
+                                self.presentViewController(Helpers.createRevealViewController(authData.uid), animated: true, completion: nil)
                             }
                         })
                     }

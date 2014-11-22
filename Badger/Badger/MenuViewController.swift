@@ -41,7 +41,11 @@ class MenuViewController: UITableViewController {
             }
             return cell
         } else if (indexPath.row == 2) {
-            return tableView.dequeueReusableCellWithIdentifier("MyProfileCell") as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("MyProfileCell") as MyProfileCell
+            UserStore.sharedInstance().getAuthUser({ user in
+                cell.setUser(user)
+            })
+            return cell
         }
         return tableView.dequeueReusableCellWithIdentifier("MyProfileCell") as UITableViewCell
     }

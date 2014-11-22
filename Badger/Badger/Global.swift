@@ -43,6 +43,19 @@ class Helpers {
         }
     }
 
+    class func statusToText(user: User?, status: UserStatus) -> String {
+        switch status {
+        case .Unavailable:
+            return "Unavailable"
+        case .Free:
+            return "Free"
+        case .Occupied:
+            return "Occupied"
+        default:
+            return "Unknown"
+        }
+    }
+
     class func imageWithColor(image: UIImage, color: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale);
         var context = UIGraphicsGetCurrentContext();
@@ -57,8 +70,6 @@ class Helpers {
         UIGraphicsEndImageContext();
         return newImage;
     }
-
-
 
     class func getString(root: AnyObject, key: String, backup: String) -> String {
         if let dictionary = root as? NSDictionary {
@@ -94,6 +105,21 @@ class Helpers {
             }
         }
         return NSDate()
+    }
+
+    class func createRevealViewController(uid: String) -> UIViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let menuVC = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as UITableViewController
+        let frontVC = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as UINavigationController
+        let revealVC = SWRevealViewController(rearViewController: menuVC, frontViewController: frontVC)
+        revealVC.draggableBorderWidth = 20
+        revealVC.rearViewRevealWidth = -54
+
+        // Set uid for profile.
+        if let profileVC = frontVC.topViewController as? ProfileViewController {
+            profileVC.setUid(uid)
+        }
+        return revealVC
     }
 
     class func saveAccessToken(auth: GTMOAuth2Authentication) {

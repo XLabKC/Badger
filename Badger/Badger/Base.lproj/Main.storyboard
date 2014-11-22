@@ -15,6 +15,8 @@
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
@@ -483,8 +485,8 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lYf-8f-aVD" id="tpp-gH-6tC">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Badger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwO-Kv-d9g">
-                                            <rect key="frame" x="0.0" y="0.0" width="266" height="49"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Badger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwO-Kv-d9g">
+                                            <rect key="frame" x="0.0" y="0.0" width="266" height="50.5"/>
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="36"/>
                                             <color key="textColor" red="0.15686274509803921" green="0.16078431372549021" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -500,34 +502,57 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyProfileCell" rowHeight="72" id="aTG-GE-T3O">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyProfileCell" rowHeight="72" id="aTG-GE-T3O" customClass="MyProfileCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aTG-GE-T3O" id="QY3-6j-bFx">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightArrowIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="hVd-Ap-bVr">
-                                            <rect key="frame" x="230" y="5" width="20" height="62"/>
+                                            <rect key="frame" x="231" y="5" width="20" height="62"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="QWB-s6-pVO"/>
                                                 <constraint firstAttribute="height" constant="62" id="gYg-w3-v0W"/>
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u3E-KR-KDE" customClass="ProfileCircle" customModule="Badger" customModuleProvider="target">
-                                            <rect key="frame" x="8" y="11" width="50" height="50"/>
+                                            <rect key="frame" x="13" y="11" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="rHK-M2-qh9"/>
                                                 <constraint firstAttribute="width" constant="50" id="tpn-Ag-wqF"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="evj-UV-Vhi">
+                                            <rect key="frame" x="76" y="13" width="155" height="25"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
+                                            <color key="textColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Gu2-cv-JSv">
+                                            <rect key="frame" x="76" y="35" width="155" height="25"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
+                                            <color key="textColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="evj-UV-Vhi" firstAttribute="top" secondItem="QY3-6j-bFx" secondAttribute="topMargin" constant="5" id="CCq-Vm-eXR"/>
+                                        <constraint firstItem="Gu2-cv-JSv" firstAttribute="top" secondItem="evj-UV-Vhi" secondAttribute="bottom" constant="-3" id="Ruy-31-oaU"/>
                                         <constraint firstAttribute="centerY" secondItem="u3E-KR-KDE" secondAttribute="centerY" id="TbL-Y9-VI6"/>
                                         <constraint firstAttribute="centerY" secondItem="hVd-Ap-bVr" secondAttribute="centerY" id="UjM-Ru-KnL"/>
-                                        <constraint firstItem="u3E-KR-KDE" firstAttribute="leading" secondItem="QY3-6j-bFx" secondAttribute="leadingMargin" id="YdM-rC-dBV"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="hVd-Ap-bVr" secondAttribute="trailing" constant="62" id="lvC-Ph-QoG"/>
+                                        <constraint firstItem="u3E-KR-KDE" firstAttribute="leading" secondItem="QY3-6j-bFx" secondAttribute="leadingMargin" constant="5" id="YdM-rC-dBV"/>
+                                        <constraint firstItem="hVd-Ap-bVr" firstAttribute="leading" secondItem="Gu2-cv-JSv" secondAttribute="trailing" id="gZr-dS-Uct"/>
+                                        <constraint firstItem="evj-UV-Vhi" firstAttribute="leading" secondItem="u3E-KR-KDE" secondAttribute="trailing" constant="13" id="jrS-su-qRo"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="hVd-Ap-bVr" secondAttribute="trailing" constant="61" id="lvC-Ph-QoG"/>
+                                        <constraint firstItem="Gu2-cv-JSv" firstAttribute="leading" secondItem="u3E-KR-KDE" secondAttribute="trailing" constant="13" id="qH2-dr-6oQ"/>
+                                        <constraint firstItem="hVd-Ap-bVr" firstAttribute="leading" secondItem="evj-UV-Vhi" secondAttribute="trailing" id="wwZ-ab-awo"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.26274509800000001" green="0.27058823529999998" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="nameLabel" destination="evj-UV-Vhi" id="0cO-UL-5B1"/>
+                                    <outlet property="profileCircle" destination="u3E-KR-KDE" id="dKV-8M-T02"/>
+                                    <outlet property="statusLabel" destination="Gu2-cv-JSv" id="kIC-Tn-8Gz"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>

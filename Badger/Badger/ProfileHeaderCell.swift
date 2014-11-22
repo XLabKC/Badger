@@ -36,7 +36,7 @@ class ProfileHeaderCell: UITableViewCell, StatusRecipient {
 
     private func setStatusLabel(status: UserStatus) {
         if let label = self.statusLabel? {
-            label.text = status.rawValue as String?
+            label.text = Helpers.statusToText(nil, status: status)
             label.textColor = Helpers.statusToColor(status)
         }
     }

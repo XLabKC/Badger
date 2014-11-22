@@ -18,6 +18,7 @@ class StatusListener {
     }
 
     private var recipientsByUid: [String: [WeakRecipient]] = [:]
+    private var statusByUid: [String: UserStatus] = [:]
     private var handlesByUid: [String: UInt] = [:]
     private var ref = Firebase(url: Global.FirebaseUsersUrl)
 
@@ -40,6 +41,9 @@ class StatusListener {
             self.handlesByUid[uid] = statusRef.observeEventType(.Value, withBlock: self.statusUpdated)
         } else {
             recipients!.append(WeakRecipient(recipient: recipient))
+            if let status = self.statusByUid[uid] {
+                recipient.statusUpdated(uid, newStatus: status)
+            }
         }
 
         self.recipientsByUid[uid] = recipients!
@@ -71,6 +75,8 @@ class StatusListener {
         if status == nil {
             status = .Unknown
         }
+
+        self.statusByUid[uid] = status
 
         if let recipients = self.recipientsByUid[uid]? {
             if recipients.count > 0 {

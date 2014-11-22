@@ -23,6 +23,8 @@ class ProfileCircle: UIImageView, StatusRecipient {
         self.uid = user.uid
         StatusListener.sharedInstance().addRecipient(self, uid: user.uid)
         self.statusUpdated(user.uid, newStatus: user.status)
+
+        // TODO: set the profile image here.
     }
 
     override func layoutSubviews() {

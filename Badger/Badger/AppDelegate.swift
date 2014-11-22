@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
             if let expiration = NSUserDefaults.standardUserDefaults().objectForKey("access_token_expiration")
                 as? NSDate {
                     if expiration.compare(NSDate()) == .OrderedDescending {
-                        self.window?.rootViewController = self.createRevealViewController(Firebase(url: Global.FirebaseUrl).authData.uid)
+                        self.window?.rootViewController = Helpers.createRevealViewController(Firebase(url: Global.FirebaseUrl).authData.uid)
                         return true
                     }
             }
@@ -48,25 +48,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
                     println("Firebase auth error \(error) and auth object \(authData)")
                 } else {
                     Helpers.saveAccessToken(auth)
-                    self.window?.rootViewController?.presentViewController(self.createRevealViewController(authData.uid), animated: true, completion: nil)
+                    self.window?.rootViewController?.presentViewController(
+                        Helpers.createRevealViewController(authData.uid), animated: true, completion: nil)
                 }
             })
         }
-    }
-
-    private func createRevealViewController(uid: String) -> UIViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let menuVC = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as UITableViewController
-        let frontVC = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as UINavigationController
-        let revealVC = SWRevealViewController(rearViewController: menuVC, frontViewController: frontVC)
-        revealVC.draggableBorderWidth = 20
-        revealVC.rearViewRevealWidth = -54
-
-        // Set uid for profile.
-        if let profileVC = frontVC.topViewController as? ProfileViewController {
-            profileVC.setUid(uid)
-        }
-        return revealVC
     }
 
     func application(application: UIApplication,
