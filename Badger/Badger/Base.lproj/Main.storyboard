@@ -562,7 +562,7 @@
                                     <outlet property="emailLabel" destination="zZ0-Ba-7PQ" id="zvb-E4-cbb"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuFooterCell" rowHeight="144" id="Ec7-qt-zhh">
+                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuFooterCell" rowHeight="144" id="Ec7-qt-zhh">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ec7-qt-zhh" id="r42-Pe-zjg">
                                     <autoresizingMask key="autoresizingMask"/>

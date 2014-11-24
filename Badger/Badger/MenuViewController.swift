@@ -1,6 +1,6 @@
 import UIKit
 
-class MenuViewController: UITableViewController {
+class MenuViewController: UITableViewController, AuthUserListener {
 
     let logoCellHeight: CGFloat = 46.0
     let contentCellHeight: CGFloat = 72.0
@@ -8,11 +8,32 @@ class MenuViewController: UITableViewController {
     let settingCellHeight: CGFloat = 144.0
     let minFooterCellHeight: CGFloat = 72.0
 
+    var authUser: AuthUser?
     var teams = [Team]()
+
+    deinit {
+        if let user = self.authUser? {
+            user.removeListener(self)
+        }
+    }
 
     override func viewDidLoad() {
         let userTableNib = UINib(nibName: "HeaderCell", bundle: nil)
         self.tableView.registerNib(userTableNib, forCellReuseIdentifier: "HeaderCell")
+
+        UserStore.sharedInstance().getAuthUser({ authUser in
+            self.authUser = authUser
+            authUser.addListener(self)
+            self.authUserUpdated(authUser)
+        })
+    }
+
+    func authUserUpdated(user: AuthUser) {
+        self.teams = [Team](user.teamsById.values)
+        self.teams.sort { (a, b) -> Bool in
+            return a.name < b.name
+        }
+        self.tableView.reloadData()
     }
 
     // TableViewController Overrides
@@ -36,7 +57,6 @@ class MenuViewController: UITableViewController {
             let headerCellsHeight = self.headerCellHeight * 3
             let contentHeight = self.logoCellHeight + contentCellsHeight + headerCellsHeight + self.settingCellHeight
             var height = tableView.frame.height - contentHeight - 20
-            println(height)
             return height < self.minFooterCellHeight ? self.minFooterCellHeight : height
         }
         return self.contentCellHeight

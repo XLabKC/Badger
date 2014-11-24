@@ -40,8 +40,6 @@ class ProfileViewController: UITableViewController {
         label.text = "My Profile"
         self.navigationItem.titleView = label
 
-        UIFont.familyNames()
-
 //        tasks.append(Task(id: "i", author: "A", title: "Fake Task", content: "Some content goes here", priority: .Medium, active: true, timestamp: NSDate()))
 
         super.viewDidLoad()

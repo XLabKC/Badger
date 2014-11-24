@@ -16,22 +16,37 @@ class UserStore {
     private var waitersByUid: [String: [(User -> ())]] = [:]
     private let ref = Firebase(url: Global.FirebaseUsersUrl)
     private let waitersLock = dispatch_queue_create("waitersLockQueue", nil)
+    private var authUser: AuthUser?
 
     init() {
         
     }
 
     func isAuthUser(uid: String) -> Bool {
-        return uid == ref.authData.uid
+        return uid == self.ref.authData.uid
     }
 
-    func getAuthUser(withBlock: (User -> ())) -> User? {
-        return self.getUser(self.ref.authData.uid, withBlock: withBlock)
+    func getAuthUser(withBlock: (AuthUser -> ())) -> AuthUser? {
+        if let user = self.authUser? {
+            withBlock(user)
+            return user
+        }
+        self.getUser(self.ref.authData.uid, withBlock: { user in
+            withBlock(self.authUser!)
+        })
+
+        return nil
     }
 
     // Returns the user immediately if available and passes it to the block, otherwise
     // makes the request and passes the user to the block.
     func getUser(uid: String, withBlock: User -> ()) -> User? {
+        // Return the auth user.
+        if self.authUser != nil && self.isAuthUser(uid) {
+            withBlock(self.authUser!)
+            return self.authUser
+        }
+
         if let userEntry = self.usersByUid[uid] {
             if userEntry.expiration.compare(NSDate()) == .OrderedDescending {
                 // Valid user entry. Just return.
@@ -84,8 +99,12 @@ class UserStore {
         dispatch_sync(self.waitersLock) {
             var user = User.createUserFromSnapshot(snapshot)
 
-
-            self.usersByUid[uid] = UserStoreEntry(user: user)
+            if self.isAuthUser(uid) {
+                self.authUser = AuthUser.createFromUser(user)
+                user = self.authUser!
+            } else {
+                self.usersByUid[uid] = UserStoreEntry(user: user)
+            }
             if let waiters = self.waitersByUid[uid]? {
                 for block in waiters {
                     block(user)

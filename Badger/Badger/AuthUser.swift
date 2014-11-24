@@ -10,6 +10,10 @@ class AuthUser: User {
 
     var teamsById = [String: Team]()
 
+    class func createFromUser(user: User) -> AuthUser {
+        return AuthUser(uid: user.uid, firstName: user.firstName, lastName: user.lastName, email: user.email, status: user.status, profileImages: user.profileImages, headerImage: user.headerImage, followerIds: user.followerIds, followingIds: user.followingIds, teamIds: user.teamIds, ref: user.ref)
+    }
+
     override init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus : String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], ref: Firebase?) {
         super.init(uid: uid, firstName: firstName, lastName: lastName, email: email, status: status, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, ref: ref)
 
@@ -88,7 +92,7 @@ class AuthUser: User {
         for teamId in self.teamIds {
             // Check if the team isn't already cached.
             if self.teamsById[teamId] == nil {
-                validHandles[teamId] = ref.observeEventType(.Value, withBlock: self.teamUpdated)
+                validHandles[teamId] = ref.childByAppendingPath(teamId).observeEventType(.Value, withBlock: self.teamUpdated)
             }
         }
         self.teamHandlesById = validHandles
