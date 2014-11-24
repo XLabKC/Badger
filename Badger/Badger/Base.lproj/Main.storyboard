@@ -481,6 +481,9 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.28627450980392155" green="0.29803921568627451" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
+                                    <outlet property="metaLabel" destination="ecc-mQ-Xet" id="EiL-ie-x0E"/>
+                                    <outlet property="nameLabel" destination="cqk-6p-ZF7" id="Qdq-tf-NWq"/>
+                                    <outlet property="teamCircle" destination="jsH-gR-2fF" id="ebY-nJ-gl4"/>
                                     <segue destination="FD4-5x-luk" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="NNJ-vK-RA7"/>
                                 </connections>
                             </tableViewCell>

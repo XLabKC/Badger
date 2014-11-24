@@ -2,6 +2,11 @@ import UIKit
 
 class MenuTeamCell: UITableViewCell {
     private var hasAwakened = false
+    private var team: Team?
+
+    @IBOutlet weak var teamCircle: TeamCircle!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var metaLabel: UILabel!
 
     override func awakeFromNib() {
         self.hasAwakened = true
@@ -9,9 +14,14 @@ class MenuTeamCell: UITableViewCell {
     }
 
     func setTeam(team: Team) {
-
+        self.team = team
+        self.updateView()
     }
 
     private func updateView() {
+        if self.team != nil && self.hasAwakened {
+            self.nameLabel.text = self.team!.name
+            self.metaLabel.text
+        }
     }
 }

@@ -90,6 +90,15 @@ class Helpers {
         return backup
     }
 
+    class func getInt(root: AnyObject, key: String, backup: Int) -> Int {
+        if let dictionary = root as? NSDictionary {
+            if let value = dictionary.objectForKey(key) as? Int {
+                return value
+            }
+        }
+        return backup
+    }
+
     class func getDictionary(root: AnyObject, key: String) -> NSDictionary? {
         if let dictionary = root as? NSDictionary {
             if let value = dictionary.objectForKey(key) as? NSDictionary {
