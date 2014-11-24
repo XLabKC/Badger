@@ -90,12 +90,7 @@ class HomeViewController: UITableViewController, UIGestureRecognizerDelegate, Pr
             } else {
                 vc.setUid(uid)
             }
-        } else if segue.destinationViewController is ListMessagesViewController {
-            let vc = segue.destinationViewController as ListMessagesViewController
-            if let user = self.user? {
-                vc.setUser(user)
-            }
-        }
+        } 
     }
 
     private func loadUser() {

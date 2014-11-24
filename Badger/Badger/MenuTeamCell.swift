@@ -21,7 +21,6 @@ class MenuTeamCell: UITableViewCell {
     private func updateView() {
         if self.team != nil && self.hasAwakened {
             self.nameLabel.text = self.team!.name
-            self.metaLabel.text
         }
     }
 }

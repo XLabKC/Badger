@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */; };
+		7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1921A22FC9D003920AD /* AuthUser.swift */; };
 		7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */; };
 		7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B469C4B1A21B4AC0054019D /* MenuSettingsCell.swift */; };
 		7B469C4E1A2237EC0054019D /* Barrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B469C4D1A2237EC0054019D /* Barrier.swift */; };
@@ -98,6 +99,7 @@
 
 /* Begin PBXFileReference section */
 		7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAsync.swift; sourceTree = "<group>"; };
+		7B29F1921A22FC9D003920AD /* AuthUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7B469C4B1A21B4AC0054019D /* MenuSettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSettingsCell.swift; sourceTree = "<group>"; };
 		7B469C4D1A2237EC0054019D /* Barrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Barrier.swift; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 		7BCAA5EB1A00A443003B55C7 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				7B29F1921A22FC9D003920AD /* AuthUser.swift */,
 				7BCAA5EE1A00A7D4003B55C7 /* User.swift */,
 				7B85DE3F1A0A92C00074A127 /* Task.swift */,
 				7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */,
@@ -585,6 +588,7 @@
 				7B4733AE1A1BC11100D88C00 /* ProfileCircle.swift in Sources */,
 				7B4733BA1A1BE38700D88C00 /* TaskCell.swift in Sources */,
 				7B4733B61A1BE31C00D88C00 /* ProfileHeaderCell.swift in Sources */,
+				7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */,
 				7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */,
 				7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */,
 				7B4733C51A1D51BB00D88C00 /* UserStore.swift in Sources */,

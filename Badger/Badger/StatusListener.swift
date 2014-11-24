@@ -109,7 +109,7 @@ class StatusListener {
 }
 
 
-class WeakRecipient {
+private class WeakRecipient {
     weak var recipient: StatusRecipient?
     init(recipient: StatusRecipient) {
         self.recipient = recipient

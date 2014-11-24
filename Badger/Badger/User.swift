@@ -15,7 +15,7 @@ class User {
     var ref: Firebase?
     var timestamp: NSDate
 
-    init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus)
+    init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus: String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], ref: Firebase?)
     {
         self.uid = uid
         self.firstName = firstName
@@ -23,7 +23,12 @@ class User {
         self.email = email
         self.status = status
         self.timestamp = NSDate()
-        self.headerImage = "DefaultBackground.png"
+        self.profileImages = profileImages
+        self.headerImage = headerImage
+        self.followerIds = followerIds
+        self.followingIds = followingIds
+        self.teamIds = teamIds
+        self.ref = ref
     }
 
     class func createUserFromSnapshot(userSnapshot: FDataSnapshot) -> User {
@@ -36,41 +41,38 @@ class User {
         if userStatus == nil {
             userStatus = .Unknown
         }
-        let user = User(uid: uid, firstName: first, lastName: last, email: email, status: userStatus!)
-
-        user.profileImages = [
+        let profileImages: [UserStatus: String] = [
             .Unavailable: Helpers.getString(userSnapshot.value, key: "unavailable_profile_image", backup: "Unknown"),
             .Free: Helpers.getString(userSnapshot.value, key: "free_profile_image", backup: "Unknown"),
             .Occupied: Helpers.getString(userSnapshot.value, key: "occupied_profile_image", backup: "Unknown"),
             .Unknown: "Unknown"
         ]
-        user.headerImage = Helpers.getString(userSnapshot.value, key: "headerImage", backup: "DefaultBackground.png")
-
+        let headerImage = Helpers.getString(userSnapshot.value, key: "headerImage", backup: "DefaultBackground.png")
+        var followerIds = [String]()
         if let followerData = Helpers.getDictionary(userSnapshot.value, key: "followers")? {
             for (uid, value) in followerData {
                 if let uidString = uid as? String {
-                    user.followerIds.append(uidString)
+                    followerIds.append(uidString)
                 }
             }
         }
-
+        var followingIds = [String]()
         if let followingData = Helpers.getDictionary(userSnapshot.value, key: "following")? {
             for (uid, value) in followingData {
                 if let uidString = uid as? String {
-                    user.followingIds.append(uidString)
+                    followingIds.append(uidString)
                 }
             }
         }
-
+        var teamIds = [String]()
         if let teamData = Helpers.getDictionary(userSnapshot.value, key: "teams")? {
             for (id, value) in teamData {
                 if let idString = id as? String {
-                    user.teamIds.append(idString)
+                    teamIds.append(idString)
                 }
             }
         }
-
-        user.ref = userSnapshot.ref
+        let user = User(uid: uid, firstName: first, lastName: last, email: email, status: userStatus!, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, ref: userSnapshot.ref)
         return user
     }
 }

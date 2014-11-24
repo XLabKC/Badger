@@ -2,6 +2,7 @@ struct Global {
     static let FirebaseUrl = "https://fiery-inferno-4698.firebaseio.com"
     static let FirebaseUsersUrl = Global.FirebaseUrl + "/users"
     static let FirebaseTasksUrl = Global.FirebaseUrl + "/tasks"
+    static let FirebaseTeamsUrl = Global.FirebaseUrl + "/teams"
     static let FirebaseNewTasksUrl = Global.FirebaseUrl + "/new_tasks"
     static let GoogleClientId = "23462386449-gplp919jh4jhu9tj6185mg7koc2eej7n.apps.googleusercontent.com"
 }

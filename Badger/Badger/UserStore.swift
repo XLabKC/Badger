@@ -82,7 +82,9 @@ class UserStore {
             return
         }
         dispatch_sync(self.waitersLock) {
-            let user = User.createUserFromSnapshot(snapshot)
+            var user = User.createUserFromSnapshot(snapshot)
+
+
             self.usersByUid[uid] = UserStoreEntry(user: user)
             if let waiters = self.waitersByUid[uid]? {
                 for block in waiters {
