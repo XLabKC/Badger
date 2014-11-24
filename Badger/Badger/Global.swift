@@ -1,8 +1,8 @@
 struct Global {
     static let FirebaseUrl = "https://fiery-inferno-4698.firebaseio.com"
     static let FirebaseUsersUrl = Global.FirebaseUrl + "/users"
-    static let FirebaseMessagesUrl = Global.FirebaseUrl + "/messages"
-    static let FirebaseNewMessagesUrl = Global.FirebaseUrl + "/new_messages"
+    static let FirebaseTasksUrl = Global.FirebaseUrl + "/tasks"
+    static let FirebaseNewTasksUrl = Global.FirebaseUrl + "/new_tasks"
     static let GoogleClientId = "23462386449-gplp919jh4jhu9tj6185mg7koc2eej7n.apps.googleusercontent.com"
 }
 
@@ -11,6 +11,7 @@ struct Colors {
     static let UnknownStatus = Color.colorize(0x8A9693, alpha: 1)
     static let FreeStatus = Color.colorize(0x50E3C2, alpha: 1)
     static let OccupiedStatus = Color.colorize(0xFFDB7B, alpha: 1)
+    static let NavHeaderTitle = Color.colorize(0x4C4E54, alpha: 1)
 }
 
 

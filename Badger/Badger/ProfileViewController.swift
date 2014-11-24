@@ -3,18 +3,20 @@ import UIKit
 class ProfileViewController: UITableViewController {
 
     let cellHeights: [CGFloat] = [225.0, 100.0, 72.0]
+
+    var handle: UInt = 0
+    var tasks = [Task]()
+    var isLoadingTasks = true
+
     var statusSliderCell: StatusSliderCell?
     var profileHeaderCell: ProfileHeaderCell?
-    var statusHandle: UInt
     var ref: Firebase?
-    var handle: UInt = 0
     var user: User?
-    var tasks: [Task] = []
+    var taskBarrier: Barrier?
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
 
     required init(coder aDecoder: NSCoder) {
-        self.statusHandle = 0
         super.init(coder: aDecoder)
     }
 
@@ -25,11 +27,22 @@ class ProfileViewController: UITableViewController {
             self.view.addGestureRecognizer(revealVC.panGestureRecognizer())
         }
 
-//        tasks.append(Task(id: "i", author: "A", title: "Fake Task", content: "A", priority: .Medium, open: true))
-//        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
-//        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
-//        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
-//        tasks.append(Task(id: "i", author: "A", title: "Fake Task 2", content: "A", priority: .Low, open: true))
+        // Register loading cell.
+        let loadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)
+        self.tableView.registerNib(loadingCellNib, forCellReuseIdentifier: "LoadingCell")
+
+        // Set up navigation bar.
+        let label = UILabel(frame: CGRectMake(0, 0, 100, 30))
+        label.backgroundColor = UIColor.clearColor()
+        label.font = UIFont(name: "OpenSans", size: 17.0)
+        label.textAlignment = .Center
+        label.textColor = Colors.NavHeaderTitle
+        label.text = "My Profile"
+        self.navigationItem.titleView = label
+
+        UIFont.familyNames()
+
+//        tasks.append(Task(id: "i", author: "A", title: "Fake Task", content: "Some content goes here", priority: .Medium, active: true, timestamp: NSDate()))
 
         super.viewDidLoad()
     }
@@ -40,6 +53,7 @@ class ProfileViewController: UITableViewController {
 
     func setUser(user: User) {
         self.user = user
+        self.isLoadingTasks = true
 
         // Update table cells if they have already initialized.
         if let profileHeader = self.profileHeaderCell? {
@@ -48,16 +62,40 @@ class ProfileViewController: UITableViewController {
         if let statusSlider = self.statusSliderCell? {
             statusSlider.setUser(user)
         }
+
+        // Load the users tasks.
+        let ref = Firebase(url: Global.FirebaseTasksUrl).childByAppendingPath(user.uid)
+        FirebaseAsync.observeEventType(ref, eventType: .ChildAdded, forEach: { (snapshot, isNew) -> () in
+            if !isNew {
+                self.tasks.append(Task.createTaskFromSnapshot(snapshot))
+            }
+        }) { () -> () in
+            // On completion, prefetch users before loading table cells.
+            var uids = [String]() // Figure out how to set capacity
+            for task in self.tasks {
+                uids.append(task.author)
+            }
+            UserStore.sharedInstance().prefetchUsers(uids, withBlock: { () -> () in
+                self.isLoadingTasks = false
+                self.tableView.reloadData()
+            })
+        }
+
+//        for family in UIFont.familyNames() as [String] {
+//            for font in UIFont.fontNamesForFamilyName(family) {
+//                println(font)
+//            }
+//        }
     }
 
     // TableViewController Overrides
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
+//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        return 1
+//    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2 + self.tasks.count
+        return 2 + (self.tasks.isEmpty ? 1 : self.tasks.count)
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -84,10 +122,16 @@ class ProfileViewController: UITableViewController {
                 }
             }
             return self.statusSliderCell!
+        } else if self.isLoadingTasks {
+            return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
+        } else if self.tasks.count == 0 {
+            return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as UITableViewCell
         }
 
+        // Reverse the tasks to be in decending chronological order.
+        let index = self.tasks.count - 1 - (indexPath.row - 2)
         let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
-        cell.setTask(self.tasks[self.tasks.count - 1 - (indexPath.row - 2)])
+        cell.setTask(self.tasks[index])
         return cell
     }
 }

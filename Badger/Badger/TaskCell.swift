@@ -1,6 +1,6 @@
 import UIKit
 
-class TaskCell: UITableViewCell {
+class TaskCell: BorderedCell {
     private let inactiveColor = Color.colorize(0xCFCFCF, alpha: 1)
     private var task: Task?
     private var hasAwakened = false
@@ -15,6 +15,8 @@ class TaskCell: UITableViewCell {
 
     override func awakeFromNib() {
         self.hasAwakened = true
+        self.setBottomBorder(.Full)
+        self.setBorderColor(Color.colorize(0xE0E0E0, alpha: 1))
         self.updateView()
     }
 

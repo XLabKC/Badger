@@ -15,7 +15,7 @@ class UserStore {
     private var usersByUid: [String: UserStoreEntry] = [:]
     private var waitersByUid: [String: [(User -> ())]] = [:]
     private let ref = Firebase(url: Global.FirebaseUsersUrl)
-    private let waitersLock = dispatch_queue_create( "waitersLockQueue", nil)
+    private let waitersLock = dispatch_queue_create("waitersLockQueue", nil)
 
     init() {
         
@@ -31,7 +31,7 @@ class UserStore {
 
     // Returns the user immediately if available and passes it to the block, otherwise
     // makes the request and passes the user to the block.
-    func getUser(uid: String, withBlock: (User -> ())) -> User? {
+    func getUser(uid: String, withBlock: User -> ()) -> User? {
         if let userEntry = self.usersByUid[uid] {
             if userEntry.expiration.compare(NSDate()) == .OrderedDescending {
                 // Valid user entry. Just return.
@@ -59,6 +59,19 @@ class UserStore {
         }
 
         return nil
+    }
+
+    func prefetchUsers(uids: [String], withBlock: () -> ()) {
+        if uids.isEmpty {
+            withBlock()
+        }
+
+        let barrier = Barrier(count: uids.count, done: withBlock)
+        for uid in uids {
+            self.getUser(uid, withBlock: { _ in
+                barrier.decrement()
+            })
+        }
     }
 
     private func userFetched(snapshot: FDataSnapshot!) {

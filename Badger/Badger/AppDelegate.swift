@@ -8,6 +8,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        UINavigationBar.appearance().backgroundColor = UIColor.whiteColor()
+        UINavigationBar.appearance().barStyle = UIBarStyle.Default
+        UINavigationBar.appearance().translucent = false
+
         // Try and use last sessions access token if it's still valid.
         if let token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as? String {
             if let expiration = NSUserDefaults.standardUserDefaults().objectForKey("access_token_expiration")
