@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */; };
 		7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1921A22FC9D003920AD /* AuthUser.swift */; };
+		7B29F1961A263F9D003920AD /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1951A263F9D003920AD /* ToggleButton.swift */; };
+		7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1971A264346003920AD /* TeamProfileViewController.swift */; };
+		7B29F19A1A2643FC003920AD /* TeamHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1991A2643FC003920AD /* TeamHeaderCell.swift */; };
+		7B29F19C1A26443E003920AD /* TeamProfileControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */; };
+		7B29F19E1A264465003920AD /* TeamMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F19D1A264465003920AD /* TeamMemberCell.swift */; };
 		7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */; };
 		7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B469C4B1A21B4AC0054019D /* MenuSettingsCell.swift */; };
 		7B469C4E1A2237EC0054019D /* Barrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B469C4D1A2237EC0054019D /* Barrier.swift */; };
@@ -100,6 +105,11 @@
 /* Begin PBXFileReference section */
 		7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAsync.swift; sourceTree = "<group>"; };
 		7B29F1921A22FC9D003920AD /* AuthUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
+		7B29F1951A263F9D003920AD /* ToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
+		7B29F1971A264346003920AD /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
+		7B29F1991A2643FC003920AD /* TeamHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamHeaderCell.swift; sourceTree = "<group>"; };
+		7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileControlCell.swift; sourceTree = "<group>"; };
+		7B29F19D1A264465003920AD /* TeamMemberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberCell.swift; sourceTree = "<group>"; };
 		7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7B469C4B1A21B4AC0054019D /* MenuSettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSettingsCell.swift; sourceTree = "<group>"; };
 		7B469C4D1A2237EC0054019D /* Barrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Barrier.swift; sourceTree = "<group>"; };
@@ -232,6 +242,17 @@
 				7B469C4D1A2237EC0054019D /* Barrier.swift */,
 			);
 			name = Lib;
+			sourceTree = "<group>";
+		};
+		7B29F1941A263A90003920AD /* Team Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7B29F1971A264346003920AD /* TeamProfileViewController.swift */,
+				7B29F1991A2643FC003920AD /* TeamHeaderCell.swift */,
+				7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */,
+				7B29F19D1A264465003920AD /* TeamMemberCell.swift */,
+			);
+			name = "Team Profile";
 			sourceTree = "<group>";
 		};
 		7B39D28B1A01F6C00033D4FE /* Profile */ = {
@@ -396,6 +417,7 @@
 				7BF066141A1434DF00F3E6A1 /* Login */,
 				7B743A3019F8863C0075690A /* Home */,
 				7B39D28B1A01F6C00033D4FE /* Profile */,
+				7B29F1941A263A90003920AD /* Team Profile */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -419,6 +441,7 @@
 				7B4733AD1A1BC11100D88C00 /* ProfileCircle.swift */,
 				7B90E0C31A214137005EC421 /* TeamCircle.swift */,
 				7B90E0C71A21427F005EC421 /* BorderedCell.swift */,
+				7B29F1951A263F9D003920AD /* ToggleButton.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -588,6 +611,8 @@
 				7B4733AE1A1BC11100D88C00 /* ProfileCircle.swift in Sources */,
 				7B4733BA1A1BE38700D88C00 /* TaskCell.swift in Sources */,
 				7B4733B61A1BE31C00D88C00 /* ProfileHeaderCell.swift in Sources */,
+				7B29F19C1A26443E003920AD /* TeamProfileControlCell.swift in Sources */,
+				7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */,
 				7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */,
 				7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */,
 				7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */,
@@ -597,6 +622,7 @@
 				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
 				7B4733D91A1E8AB600D88C00 /* BaseTableViewController.swift in Sources */,
 				7B4733D61A1E84C900D88C00 /* MenuViewController.swift in Sources */,
+				7B29F19E1A264465003920AD /* TeamMemberCell.swift in Sources */,
 				7B47339F1A1A9B4500D88C00 /* StatusSlider.swift in Sources */,
 				7B743A1E19F880110075690A /* HomeViewController.swift in Sources */,
 				7B90E0C21A206A89005EC421 /* MyProfileCell.swift in Sources */,
@@ -607,6 +633,7 @@
 				7B90E0CA1A21AA68005EC421 /* MenuNoTeamsCell.swift in Sources */,
 				7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */,
 				7B90E0C41A214137005EC421 /* TeamCircle.swift in Sources */,
+				7B29F19A1A2643FC003920AD /* TeamHeaderCell.swift in Sources */,
 				7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */,
 				7B4733D01A1E551600D88C00 /* Team.swift in Sources */,
 				7B4733C01A1BECBB00D88C00 /* StatusListener.swift in Sources */,
@@ -616,6 +643,7 @@
 				7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */,
 				7B90E0C01A1F9F6E005EC421 /* HeaderCell.swift in Sources */,
 				7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */,
+				7B29F1961A263F9D003920AD /* ToggleButton.swift in Sources */,
 				7B743A3619F88B690075690A /* ProfileTableCell.swift in Sources */,
 				7B85DE401A0A92C00074A127 /* Task.swift in Sources */,
 				7B743A2E19F884AC0075690A /* Temp.m in Sources */,

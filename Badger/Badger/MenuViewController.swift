@@ -101,4 +101,20 @@ class MenuViewController: UITableViewController, AuthUserListener {
         }
         return tableView.dequeueReusableCellWithIdentifier("MenuFooterCell") as UITableViewCell
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.destinationViewController is TeamProfileViewController {
+
+        }
+//
+//        if segue.destinationViewController is ProfileViewController && sender is String {
+//            let vc = segue.destinationViewController as ProfileViewController
+//            let uid = sender as String
+//            if let user = self.otherUsers[uid] {
+//                vc.setUser(user)
+//            } else {
+//                vc.setUid(uid)
+//            }
+//        }
+    }
 }

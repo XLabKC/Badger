@@ -2,17 +2,13 @@ import UIKit
 
 class ProfileViewController: UITableViewController {
 
-    let cellHeights: [CGFloat] = [225.0, 100.0, 72.0]
+    private let cellHeights: [CGFloat] = [225.0, 100.0, 72.0]
 
-    var handle: UInt = 0
-    var tasks = [Task]()
-    var isLoadingTasks = true
-
-    var statusSliderCell: StatusSliderCell?
-    var profileHeaderCell: ProfileHeaderCell?
-    var ref: Firebase?
-    var user: User?
-    var taskBarrier: Barrier?
+    private var tasks = [Task]()
+    private var isLoadingTasks = true
+    private var statusSliderCell: StatusSliderCell?
+    private var profileHeaderCell: ProfileHeaderCell?
+    private var user: User?
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
 
@@ -73,7 +69,7 @@ class ProfileViewController: UITableViewController {
             for task in self.tasks {
                 uids.append(task.author)
             }
-            UserStore.sharedInstance().prefetchUsers(uids, withBlock: { () -> () in
+            UserStore.sharedInstance().getUsers(uids, withBlock: { _ in
                 self.isLoadingTasks = false
                 self.tableView.reloadData()
             })
@@ -87,10 +83,6 @@ class ProfileViewController: UITableViewController {
     }
 
     // TableViewController Overrides
-
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return 1
-//    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2 + (self.tasks.isEmpty ? 1 : self.tasks.count)

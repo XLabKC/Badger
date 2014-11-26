@@ -25,8 +25,16 @@
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+            <string>OpenSans</string>
+            <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
@@ -622,19 +630,180 @@
             </objects>
             <point key="canvasLocation" x="371" y="410"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Team Profile View Controller-->
         <scene sceneID="cjE-Gk-K8n">
             <objects>
-                <tableViewController id="2ML-XM-yjA" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KPH-dv-1zy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <tableViewController id="2ML-XM-yjA" customClass="TeamProfileViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KPH-dv-1zy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="n4g-Fc-Poz">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TeamHeaderCell" rowHeight="225" id="ae0-Qa-m5c" customClass="TeamHeaderCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n4g-Fc-Poz" id="ppQ-Fc-Iwm">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ae0-Qa-m5c" id="IHe-zc-VOw">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="DYl-Gz-v6N">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="225"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="gMr-Cr-ypj">
+                                            <rect key="frame" x="8" y="158" width="304" height="33"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
+                                            <color key="textColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="9MC-HP-Uds">
+                                            <rect key="frame" x="8" y="191" width="304" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="f8q-MD-lYY"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rf0-fm-Fd9" customClass="TeamCircle" customModule="Badger" customModuleProvider="target">
+                                            <rect key="frame" x="95" y="20" width="130" height="130"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="130" id="6T7-BE-wbN"/>
+                                                <constraint firstAttribute="width" constant="130" id="Fn3-Lu-q2B"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="gMr-Cr-ypj" firstAttribute="bottom" secondItem="9MC-HP-Uds" secondAttribute="bottom" constant="-21" id="24x-aU-KSv"/>
+                                        <constraint firstItem="DYl-Gz-v6N" firstAttribute="leading" secondItem="IHe-zc-VOw" secondAttribute="leading" id="Gfo-z4-JF5"/>
+                                        <constraint firstItem="gMr-Cr-ypj" firstAttribute="top" secondItem="rf0-fm-Fd9" secondAttribute="bottom" constant="8" symbolic="YES" id="GiH-hv-7eg"/>
+                                        <constraint firstItem="rf0-fm-Fd9" firstAttribute="top" secondItem="IHe-zc-VOw" secondAttribute="topMargin" constant="12" id="HKf-CX-X5M"/>
+                                        <constraint firstItem="gMr-Cr-ypj" firstAttribute="trailing" secondItem="IHe-zc-VOw" secondAttribute="trailingMargin" id="JYL-Ih-cBm"/>
+                                        <constraint firstItem="DYl-Gz-v6N" firstAttribute="centerX" secondItem="gMr-Cr-ypj" secondAttribute="centerX" id="OEi-QZ-yjv"/>
+                                        <constraint firstItem="DYl-Gz-v6N" firstAttribute="top" secondItem="IHe-zc-VOw" secondAttribute="top" id="OH3-8V-EOp"/>
+                                        <constraint firstItem="9MC-HP-Uds" firstAttribute="leading" secondItem="gMr-Cr-ypj" secondAttribute="leading" id="RjR-nS-Uwy"/>
+                                        <constraint firstItem="gMr-Cr-ypj" firstAttribute="leading" secondItem="IHe-zc-VOw" secondAttribute="leadingMargin" id="SrW-Lf-JdK"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="9MC-HP-Uds" secondAttribute="bottom" constant="5" id="U5G-dA-Nb3"/>
+                                        <constraint firstItem="rf0-fm-Fd9" firstAttribute="centerX" secondItem="9MC-HP-Uds" secondAttribute="centerX" id="YWq-qi-8At"/>
+                                        <constraint firstItem="rf0-fm-Fd9" firstAttribute="centerX" secondItem="gMr-Cr-ypj" secondAttribute="centerX" id="YgU-T6-Hvj"/>
+                                        <constraint firstItem="9MC-HP-Uds" firstAttribute="top" secondItem="gMr-Cr-ypj" secondAttribute="bottom" id="eog-GT-Uja"/>
+                                        <constraint firstAttribute="bottom" secondItem="DYl-Gz-v6N" secondAttribute="bottom" id="l8o-n0-ZLA"/>
+                                        <constraint firstItem="9MC-HP-Uds" firstAttribute="leading" secondItem="IHe-zc-VOw" secondAttribute="leadingMargin" id="rOo-Ka-X0G"/>
+                                        <constraint firstItem="rf0-fm-Fd9" firstAttribute="centerX" secondItem="IHe-zc-VOw" secondAttribute="centerX" id="uuu-NG-3Cl"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="RjR-nS-Uwy"/>
+                                            <exclude reference="U5G-dA-Nb3"/>
+                                            <exclude reference="eog-GT-Uja"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="backgroundImage" destination="DYl-Gz-v6N" id="ZAJ-pe-yrz"/>
+                                    <outlet property="metaLabel" destination="9MC-HP-Uds" id="v5S-A6-4Ws"/>
+                                    <outlet property="nameLabel" destination="gMr-Cr-ypj" id="qAh-yv-5GF"/>
+                                    <outlet property="teamCircle" destination="rf0-fm-Fd9" id="YZM-i1-l7p"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TeamProfileControlCell" rowHeight="100" id="IHQ-ne-D7h" customClass="TeamProfileControlCell" customModule="Badger" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IHQ-ne-D7h" id="9Ik-fC-hdb">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbW-2I-wny" customClass="ToggleButton" customModule="Badger" customModuleProvider="target">
+                                            <rect key="frame" x="188" y="24" width="124" height="51"/>
+                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="24"/>
+                                            <state key="normal" title="Send Invite">
+                                                <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IO5-Fi-rM8" customClass="ToggleButton" customModule="Badger" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="24" width="114" height="51"/>
+                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="24"/>
+                                            <state key="normal" title="New Task">
+                                                <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TeamMemberCell" rowHeight="112" id="VJT-tJ-aKb" customClass="TeamMemberCell" customModule="Badger" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VJT-tJ-aKb" id="szS-4E-VAz">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="btm-gL-asc" customClass="ProfileCircle" customModule="Badger" customModuleProvider="target">
+                                            <rect key="frame" x="15" y="20" width="72" height="72"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="72" id="0JR-WC-58v"/>
+                                                <constraint firstAttribute="height" constant="72" id="Plm-BN-PTw"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifG-RO-etM">
+                                            <rect key="frame" x="102" y="8" width="210" height="33"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
+                                            <color key="textColor" red="0.29803921568627451" green="0.30588235294117649" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yng-w5-qNq">
+                                            <rect key="frame" x="102" y="36" width="210" height="29"/>
+                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="21"/>
+                                            <color key="textColor" red="0.31372549019607843" green="0.8901960784313725" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVQ-0d-kgS">
+                                            <rect key="frame" x="102" y="74" width="210" height="25"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
+                                            <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ZVQ-0d-kgS" firstAttribute="trailing" secondItem="szS-4E-VAz" secondAttribute="trailingMargin" id="0dj-DB-cyX"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="ZVQ-0d-kgS" secondAttribute="bottom" constant="5" id="2n8-b7-vhJ"/>
+                                        <constraint firstItem="ifG-RO-etM" firstAttribute="leading" secondItem="btm-gL-asc" secondAttribute="trailing" constant="15" id="9Ti-IK-wRa"/>
+                                        <constraint firstItem="ZVQ-0d-kgS" firstAttribute="leading" secondItem="btm-gL-asc" secondAttribute="trailing" constant="15" id="EWH-U1-uqk"/>
+                                        <constraint firstItem="ifG-RO-etM" firstAttribute="top" secondItem="szS-4E-VAz" secondAttribute="topMargin" id="SlJ-EF-hFL"/>
+                                        <constraint firstItem="ifG-RO-etM" firstAttribute="trailing" secondItem="szS-4E-VAz" secondAttribute="trailingMargin" id="Ycz-LE-nuM"/>
+                                        <constraint firstItem="btm-gL-asc" firstAttribute="leading" secondItem="szS-4E-VAz" secondAttribute="leadingMargin" constant="7" id="bEE-nq-hPw"/>
+                                        <constraint firstItem="Yng-w5-qNq" firstAttribute="trailing" secondItem="szS-4E-VAz" secondAttribute="trailingMargin" id="f86-BA-LOn"/>
+                                        <constraint firstItem="Yng-w5-qNq" firstAttribute="leading" secondItem="btm-gL-asc" secondAttribute="trailing" constant="15" id="gVn-wR-7KR"/>
+                                        <constraint firstItem="Yng-w5-qNq" firstAttribute="top" secondItem="ifG-RO-etM" secondAttribute="bottom" constant="-5" id="kWa-Jw-I7E"/>
+                                        <constraint firstAttribute="centerY" secondItem="btm-gL-asc" secondAttribute="centerY" id="u4o-PR-vh8"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="metaLabel" destination="ZVQ-0d-kgS" id="MMh-r9-Fn1"/>
+                                    <outlet property="nameLabel" destination="ifG-RO-etM" id="T6g-6E-Nqb"/>
+                                    <outlet property="profileCircle" destination="btm-gL-asc" id="EIq-IW-SZ8"/>
+                                    <outlet property="statusLabel" destination="Yng-w5-qNq" id="KGO-Ns-Vq8"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoMembersCell" rowHeight="112" id="oom-hk-IuD">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oom-hk-IuD" id="bfo-dR-QXw">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="This team inexplicably has no members..." translatesAutoresizingMaskIntoConstraints="NO" id="4su-r5-1it">
+                                            <rect key="frame" x="15" y="8" width="290" height="96"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.29803921570000003" green="0.30588235289999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="20"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="4su-r5-1it" firstAttribute="trailing" secondItem="bfo-dR-QXw" secondAttribute="trailingMargin" constant="-7" id="EGK-dL-mvG"/>
+                                        <constraint firstItem="4su-r5-1it" firstAttribute="leading" secondItem="bfo-dR-QXw" secondAttribute="leadingMargin" constant="7" id="IRa-o0-RTL"/>
+                                        <constraint firstItem="4su-r5-1it" firstAttribute="top" secondItem="bfo-dR-QXw" secondAttribute="topMargin" id="aX2-Zm-PzZ"/>
+                                        <constraint firstItem="4su-r5-1it" firstAttribute="bottom" secondItem="bfo-dR-QXw" secondAttribute="bottomMargin" id="gfg-Pl-0AX"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -643,7 +812,15 @@
                             <outlet property="delegate" destination="2ML-XM-yjA" id="qh7-ad-ufH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="e6W-pd-twv"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="e6W-pd-twv">
+                        <barButtonItem key="leftBarButtonItem" image="MenuIcon.png" style="plain" id="06g-2Y-abb">
+                            <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="06g-2Y-abb" id="T4P-rw-lWh"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQS-A3-FvT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -38,6 +38,13 @@ class UserStore {
         return nil
     }
 
+    func getCachedUser(uid: String) -> User? {
+        if let userEntry = self.usersByUid[uid] {
+            return userEntry.user
+        }
+        return nil
+    }
+
     // Returns the user immediately if available and passes it to the block, otherwise
     // makes the request and passes the user to the block.
     func getUser(uid: String, withBlock: User -> ()) -> User? {
@@ -76,14 +83,18 @@ class UserStore {
         return nil
     }
 
-    func prefetchUsers(uids: [String], withBlock: () -> ()) {
+    func getUsers(uids: [String], withBlock: ([User]) -> ()) {
         if uids.isEmpty {
-            withBlock()
+            withBlock([])
+            return
         }
-
-        let barrier = Barrier(count: uids.count, done: withBlock)
+        var users = [User]()
+        let barrier = Barrier(count: uids.count, done: { _ in
+            withBlock(users)
+        })
         for uid in uids {
-            self.getUser(uid, withBlock: { _ in
+            self.getUser(uid, withBlock: { user in
+                users.append(user)
                 barrier.decrement()
             })
         }
