@@ -39,6 +39,9 @@ class ProfileViewController: UITableViewController {
 //        tasks.append(Task(id: "i", author: "A", title: "Fake Task", content: "Some content goes here", priority: .Medium, active: true, timestamp: NSDate()))
 
         super.viewDidLoad()
+        if self.user != nil {
+            self.loadUserProfile()
+        }
     }
 
     func setUid(uid: String) {
@@ -56,23 +59,8 @@ class ProfileViewController: UITableViewController {
         if let statusSlider = self.statusSliderCell? {
             statusSlider.setUser(user)
         }
-
-        // Load the users tasks.
-        let ref = Firebase(url: Global.FirebaseTasksUrl).childByAppendingPath(user.uid)
-        FirebaseAsync.observeEventType(ref, eventType: .ChildAdded, forEach: { (snapshot, isNew) -> () in
-            if !isNew {
-                self.tasks.append(Task.createTaskFromSnapshot(snapshot))
-            }
-        }) { () -> () in
-            // On completion, prefetch users before loading table cells.
-            var uids = [String]() // Figure out how to set capacity
-            for task in self.tasks {
-                uids.append(task.author)
-            }
-            UserStore.sharedInstance().getUsers(uids, withBlock: { _ in
-                self.isLoadingTasks = false
-                self.tableView.reloadData()
-            })
+        if self.isViewLoaded() {
+            loadUserProfile()
         }
 
 //        for family in UIFont.familyNames() as [String] {
@@ -80,6 +68,28 @@ class ProfileViewController: UITableViewController {
 //                println(font)
 //            }
 //        }
+    }
+
+    private func loadUserProfile() {
+        // Load the users tasks.
+        if let user = self.user? {
+            let ref = Firebase(url: Global.FirebaseTasksUrl).childByAppendingPath(user.uid)
+            FirebaseAsync.observeEventType(ref, eventType: .ChildAdded, forEach: { (snapshot, isNew) -> () in
+                if !isNew {
+                    self.tasks.append(Task.createTaskFromSnapshot(snapshot))
+                }
+                }) { () -> () in
+                    // On completion, prefetch users before loading table cells.
+                    var uids = [String]() // Figure out how to set capacity
+                    for task in self.tasks {
+                        uids.append(task.author)
+                    }
+                    UserStore.sharedInstance().getUsers(uids, withBlock: { _ in
+                        self.isLoadingTasks = false
+                        self.tableView.reloadData()
+                    })
+            }
+        }
     }
 
     // TableViewController Overrides

@@ -103,18 +103,18 @@ class MenuViewController: UITableViewController, AuthUserListener {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.destinationViewController is TeamProfileViewController {
-
+        if segue.identifier == "MenuMyProfile" {
+            let nav = segue.destinationViewController as UINavigationController
+            let vc = nav.childViewControllers.first as ProfileViewController
+            UserStore.sharedInstance().getAuthUser({ user in
+                vc.setUser(user)
+            })
+        } else if segue.identifier == "MenuTeamProfile" {
+            let teamCell = sender as MenuTeamCell
+            let team = teamCell.getTeam()!
+            let nav = segue.destinationViewController as UINavigationController
+            let vc = nav.topViewController as TeamProfileViewController
+            vc.setTeam(team)
         }
-//
-//        if segue.destinationViewController is ProfileViewController && sender is String {
-//            let vc = segue.destinationViewController as ProfileViewController
-//            let uid = sender as String
-//            if let user = self.otherUsers[uid] {
-//                vc.setUser(user)
-//            } else {
-//                vc.setUid(uid)
-//            }
-//        }
     }
 }

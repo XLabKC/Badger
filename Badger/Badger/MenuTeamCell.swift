@@ -18,6 +18,10 @@ class MenuTeamCell: UITableViewCell {
         self.updateView()
     }
 
+    func getTeam() -> Team? {
+        return self.team
+    }
+
     private func updateView() {
         if self.team != nil && self.hasAwakened {
             self.nameLabel.text = self.team!.name

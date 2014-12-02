@@ -22,11 +22,15 @@ class UserStore {
         
     }
 
+    func getAuthUid() -> String {
+        return self.ref.authData.uid
+    }
+
     func isAuthUser(uid: String) -> Bool {
         return uid == self.ref.authData.uid
     }
 
-    func getAuthUser(withBlock: (AuthUser -> ())) -> AuthUser? {
+    func getAuthUser(withBlock: AuthUser -> ()) -> AuthUser? {
         if let user = self.authUser? {
             withBlock(user)
             return user

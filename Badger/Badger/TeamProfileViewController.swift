@@ -34,9 +34,6 @@ class TeamProfileViewController: UITableViewController {
         super.viewDidLoad()
     }
 
-//    func setTeamId(id: String) {
-//        UserStore.sharedInstance().getUser(uid, withBlock: self.setUser)
-//    }
 
     func setTeam(team: Team) {
         self.team = team
@@ -46,13 +43,20 @@ class TeamProfileViewController: UITableViewController {
         if let headerCell = self.headerCell? {
             headerCell.setTeam(team)
         }
+        if (self.isViewLoaded()) {
+            self.loadTeamProfile()
+        }
+    }
 
-        // Prefetch members.
-        UserStore.sharedInstance().getUsers(team.memberIds, withBlock: { users in
-            self.members = users
-            self.isLoadingMembers = false
-            self.tableView.reloadData()
-        })
+    private func loadTeamProfile() {
+        if let team = self.team? {
+            // Prefetch members.
+            UserStore.sharedInstance().getUsers(team.memberIds, withBlock: { users in
+                self.members = users
+                self.isLoadingMembers = false
+                self.tableView.reloadData()
+            })
+        }
     }
 
     // TableViewController Overrides

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */; };
+		7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */; };
+		7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */; };
 		7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1921A22FC9D003920AD /* AuthUser.swift */; };
 		7B29F1961A263F9D003920AD /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1951A263F9D003920AD /* ToggleButton.swift */; };
 		7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1971A264346003920AD /* TeamProfileViewController.swift */; };
@@ -88,6 +90,8 @@
 		7B90E0C61A2141CD005EC421 /* MenuTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90E0C51A2141CD005EC421 /* MenuTeamCell.swift */; };
 		7B90E0C81A21427F005EC421 /* BorderedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90E0C71A21427F005EC421 /* BorderedCell.swift */; };
 		7B90E0CA1A21AA68005EC421 /* MenuNoTeamsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90E0C91A21AA68005EC421 /* MenuNoTeamsCell.swift */; };
+		7B9A63281A2D641D00DF1143 /* TaskDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63271A2D641D00DF1143 /* TaskDetailTitleCell.swift */; };
+		7B9A632A1A2D642800DF1143 /* TaskDetailContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63291A2D642800DF1143 /* TaskDetailContentCell.swift */; };
 		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
 		7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */; };
 /* End PBXBuildFile section */
@@ -104,6 +108,8 @@
 
 /* Begin PBXFileReference section */
 		7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAsync.swift; sourceTree = "<group>"; };
+		7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
+		7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailAuthorCell.swift; sourceTree = "<group>"; };
 		7B29F1921A22FC9D003920AD /* AuthUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		7B29F1951A263F9D003920AD /* ToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
 		7B29F1971A264346003920AD /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +197,8 @@
 		7B90E0C51A2141CD005EC421 /* MenuTeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTeamCell.swift; sourceTree = "<group>"; };
 		7B90E0C71A21427F005EC421 /* BorderedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedCell.swift; sourceTree = "<group>"; };
 		7B90E0C91A21AA68005EC421 /* MenuNoTeamsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuNoTeamsCell.swift; sourceTree = "<group>"; };
+		7B9A63271A2D641D00DF1143 /* TaskDetailTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailTitleCell.swift; sourceTree = "<group>"; };
+		7B9A63291A2D642800DF1143 /* TaskDetailContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailContentCell.swift; sourceTree = "<group>"; };
 		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,6 +252,17 @@
 			name = Lib;
 			sourceTree = "<group>";
 		};
+		7B24278D1A2D3E5400A3144E /* Task Detail */ = {
+			isa = PBXGroup;
+			children = (
+				7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */,
+				7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */,
+				7B9A63271A2D641D00DF1143 /* TaskDetailTitleCell.swift */,
+				7B9A63291A2D642800DF1143 /* TaskDetailContentCell.swift */,
+			);
+			name = "Task Detail";
+			sourceTree = "<group>";
+		};
 		7B29F1941A263A90003920AD /* Team Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,7 +274,7 @@
 			name = "Team Profile";
 			sourceTree = "<group>";
 		};
-		7B39D28B1A01F6C00033D4FE /* Profile */ = {
+		7B39D28B1A01F6C00033D4FE /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
 				7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */,
@@ -263,7 +282,7 @@
 				7B4733B71A1BE35800D88C00 /* StatusSliderCell.swift */,
 				7B4733B91A1BE38700D88C00 /* TaskCell.swift */,
 			);
-			name = Profile;
+			name = "User Profile";
 			sourceTree = "<group>";
 		};
 		7B4733A01A1ACBC400D88C00 /* Images */ = {
@@ -412,12 +431,13 @@
 			isa = PBXGroup;
 			children = (
 				7B4733D71A1E8A7E00D88C00 /* Bases */,
-				7B4733D41A1E84B100D88C00 /* Menu */,
 				7BF066151A1437A500F3E6A1 /* Splashscreen */,
+				7B4733D41A1E84B100D88C00 /* Menu */,
 				7BF066141A1434DF00F3E6A1 /* Login */,
 				7B743A3019F8863C0075690A /* Home */,
-				7B39D28B1A01F6C00033D4FE /* Profile */,
+				7B39D28B1A01F6C00033D4FE /* User Profile */,
 				7B29F1941A263A90003920AD /* Team Profile */,
+				7B24278D1A2D3E5400A3144E /* Task Detail */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -621,6 +641,9 @@
 				7B90E0C61A2141CD005EC421 /* MenuTeamCell.swift in Sources */,
 				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
 				7B4733D91A1E8AB600D88C00 /* BaseTableViewController.swift in Sources */,
+				7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */,
+				7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */,
+				7B9A632A1A2D642800DF1143 /* TaskDetailContentCell.swift in Sources */,
 				7B4733D61A1E84C900D88C00 /* MenuViewController.swift in Sources */,
 				7B29F19E1A264465003920AD /* TeamMemberCell.swift in Sources */,
 				7B47339F1A1A9B4500D88C00 /* StatusSlider.swift in Sources */,
@@ -645,6 +668,7 @@
 				7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */,
 				7B29F1961A263F9D003920AD /* ToggleButton.swift in Sources */,
 				7B743A3619F88B690075690A /* ProfileTableCell.swift in Sources */,
+				7B9A63281A2D641D00DF1143 /* TaskDetailTitleCell.swift in Sources */,
 				7B85DE401A0A92C00074A127 /* Task.swift in Sources */,
 				7B743A2E19F884AC0075690A /* Temp.m in Sources */,
 				7B4733B01A1BC20000D88C00 /* Color.swift in Sources */,
