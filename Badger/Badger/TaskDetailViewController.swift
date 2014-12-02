@@ -43,6 +43,9 @@ class TaskDetailViewController: UITableViewController {
         case 1:
             return self.authorCellHeight
         case 3:
+            let textView = UITextView()
+            textView.
+
             // TODO: calculate the required height.
             return self.authorCellHeight
         case 4:

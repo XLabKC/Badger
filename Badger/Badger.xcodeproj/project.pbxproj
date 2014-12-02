@@ -11,7 +11,6 @@
 		7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */; };
 		7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */; };
 		7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1921A22FC9D003920AD /* AuthUser.swift */; };
-		7B29F1961A263F9D003920AD /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1951A263F9D003920AD /* ToggleButton.swift */; };
 		7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1971A264346003920AD /* TeamProfileViewController.swift */; };
 		7B29F19A1A2643FC003920AD /* TeamHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1991A2643FC003920AD /* TeamHeaderCell.swift */; };
 		7B29F19C1A26443E003920AD /* TeamProfileControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */; };
@@ -97,7 +96,6 @@
 		7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailAuthorCell.swift; sourceTree = "<group>"; };
 		7B29F1921A22FC9D003920AD /* AuthUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
-		7B29F1951A263F9D003920AD /* ToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
 		7B29F1971A264346003920AD /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
 		7B29F1991A2643FC003920AD /* TeamHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamHeaderCell.swift; sourceTree = "<group>"; };
 		7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileControlCell.swift; sourceTree = "<group>"; };
@@ -419,7 +417,6 @@
 				7B4733AD1A1BC11100D88C00 /* ProfileCircle.swift */,
 				7B90E0C31A214137005EC421 /* TeamCircle.swift */,
 				7B90E0C71A21427F005EC421 /* BorderedCell.swift */,
-				7B29F1951A263F9D003920AD /* ToggleButton.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -610,7 +607,6 @@
 				7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */,
 				7B90E0C01A1F9F6E005EC421 /* HeaderCell.swift in Sources */,
 				7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */,
-				7B29F1961A263F9D003920AD /* ToggleButton.swift in Sources */,
 				7B743A3619F88B690075690A /* ProfileTableCell.swift in Sources */,
 				7B9A63281A2D641D00DF1143 /* TaskDetailTitleCell.swift in Sources */,
 				7B85DE401A0A92C00074A127 /* Task.swift in Sources */,

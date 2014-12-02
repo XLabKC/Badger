@@ -39,10 +39,12 @@
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
-            <string>OpenSans</string>
-            <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
@@ -150,13 +152,56 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lNH-ls-uGL" id="FKS-1I-PJ4">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seu-yZ-JdM">
-                                            <rect key="frame" x="102" y="35" width="116" height="30"/>
-                                            <state key="normal" title="Create New Task">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seu-yZ-JdM">
+                                            <rect key="frame" x="16" y="15" width="136.5" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="GtX-LP-kMI"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
+                                            <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="New Task" image="PlusIcon" backgroundImage="GrayButton">
+                                                <color key="titleColor" red="0.55686274509803924" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEq-gs-YtP">
+                                            <rect key="frame" x="152" y="15" width="15" height="70"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="45G-hh-iaa"/>
+                                                <constraint firstAttribute="width" constant="15" id="dvc-B6-gPT"/>
+                                                <constraint firstAttribute="height" constant="70" id="vq7-yX-nFm"/>
+                                            </constraints>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xzP-la-AL6">
+                                            <rect key="frame" x="167" y="15" width="137.5" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="rcu-OI-MKg"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="21"/>
+                                            <state key="normal" title="Subscribe">
+                                                <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="seu-yZ-JdM" firstAttribute="leading" secondItem="FKS-1I-PJ4" secondAttribute="leadingMargin" constant="8" id="IPe-Rf-eNw"/>
+                                        <constraint firstItem="NEq-gs-YtP" firstAttribute="leading" secondItem="xzP-la-AL6" secondAttribute="trailing" constant="-75" id="N3W-Pu-mkM"/>
+                                        <constraint firstItem="xzP-la-AL6" firstAttribute="leading" secondItem="NEq-gs-YtP" secondAttribute="trailing" id="O6z-aI-LRf"/>
+                                        <constraint firstItem="NEq-gs-YtP" firstAttribute="leading" secondItem="seu-yZ-JdM" secondAttribute="trailing" id="fOg-xX-EFN"/>
+                                        <constraint firstAttribute="centerX" secondItem="NEq-gs-YtP" secondAttribute="centerX" id="hOb-A2-qaK"/>
+                                        <constraint firstAttribute="centerY" secondItem="seu-yZ-JdM" secondAttribute="centerY" id="mdQ-mH-RJl"/>
+                                        <constraint firstAttribute="centerY" secondItem="NEq-gs-YtP" secondAttribute="centerY" id="qJ5-5F-q7U"/>
+                                        <constraint firstAttribute="centerY" secondItem="xzP-la-AL6" secondAttribute="centerY" id="vbF-kT-hJg"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="xzP-la-AL6" secondAttribute="trailing" constant="7" id="xRK-Rt-B5O"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="N3W-Pu-mkM"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskCell" rowHeight="72" id="7Ps-nG-vfV" customClass="TaskCell" customModule="Badger" customModuleProvider="target">
@@ -425,7 +470,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xpk-Mu-yqK" id="wM9-RU-02N">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7n-Tb-nW0">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7n-Tb-nW0">
                                             <rect key="frame" x="15" y="20" width="290" height="32"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -456,9 +501,12 @@
                                                 <constraint firstAttribute="height" constant="60" id="ecc-wT-qfg"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
-                                            <state key="normal" title="Mark As Complete!">
+                                            <state key="normal" title="Mark As Complete!" backgroundImage="PurpleButton">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected" title="Completed" backgroundImage="GrayButton">
+                                                <color key="titleColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                         </button>
                                     </subviews>
@@ -928,7 +976,7 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbW-2I-wny" customClass="ToggleButton" customModule="Badger" customModuleProvider="target">
                                             <rect key="frame" x="188" y="24" width="124" height="51"/>
-                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="24"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
                                             <state key="normal" title="Send Invite">
                                                 <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -939,7 +987,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IO5-Fi-rM8" customClass="ToggleButton" customModule="Badger" customModuleProvider="target">
                                             <rect key="frame" x="8" y="24" width="114" height="51"/>
-                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="24"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
                                             <state key="normal" title="New Task">
                                                 <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1064,9 +1112,12 @@
     </scenes>
     <resources>
         <image name="DefaultBackground" width="375" height="290"/>
+        <image name="GrayButton" width="166" height="70"/>
         <image name="LogoBlackSmall" width="57" height="51"/>
         <image name="LogoPurpleHuge" width="407" height="362"/>
         <image name="MenuIcon" width="22" height="21"/>
+        <image name="PlusIcon" width="25" height="25"/>
+        <image name="PurpleButton" width="166" height="70"/>
         <image name="RightArrowIcon" width="8" height="13"/>
     </resources>
 </document>

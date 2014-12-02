@@ -33,7 +33,6 @@ class ProfileCircle: UIImageView, StatusRecipient {
     }
 
     func statusUpdated(uid: String, newStatus: UserStatus) {
-        self.layer
         CATransaction.begin()
         CATransaction.setAnimationDuration(0.3)
         self.layer.borderColor = Helpers.statusToColor(newStatus).CGColor
