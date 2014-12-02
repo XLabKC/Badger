@@ -47,7 +47,7 @@ class User {
             .Occupied: Helpers.getString(userSnapshot.value, key: "occupied_profile_image", backup: "Unknown"),
             .Unknown: "Unknown"
         ]
-        let headerImage = Helpers.getString(userSnapshot.value, key: "headerImage", backup: "DefaultBackground.png")
+        let headerImage = Helpers.getString(userSnapshot.value, key: "headerImage", backup: "DefaultBackground")
         var followerIds = [String]()
         if let followerData = Helpers.getDictionary(userSnapshot.value, key: "followers")? {
             for (uid, value) in followerData {

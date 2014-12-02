@@ -283,7 +283,7 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="Dhb-9r-dTT">
-                        <barButtonItem key="leftBarButtonItem" image="MenuIcon.png" style="plain" id="XTq-tM-skU">
+                        <barButtonItem key="leftBarButtonItem" image="MenuIcon" style="plain" id="XTq-tM-skU">
                             <color key="tintColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
@@ -1032,7 +1032,7 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="e6W-pd-twv">
-                        <barButtonItem key="leftBarButtonItem" image="MenuIcon.png" style="plain" id="06g-2Y-abb">
+                        <barButtonItem key="leftBarButtonItem" image="MenuIcon" style="plain" id="06g-2Y-abb">
                             <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
@@ -1066,7 +1066,7 @@
         <image name="DefaultBackground" width="375" height="290"/>
         <image name="LogoBlackSmall" width="57" height="51"/>
         <image name="LogoPurpleHuge" width="407" height="362"/>
-        <image name="MenuIcon.png" width="22" height="21"/>
+        <image name="MenuIcon" width="22" height="21"/>
         <image name="RightArrowIcon" width="8" height="13"/>
     </resources>
 </document>

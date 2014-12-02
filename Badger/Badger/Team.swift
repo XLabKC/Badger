@@ -14,7 +14,7 @@ class Team {
         self.id = id
         self.name = name
         self.activeTasks = activeTasks
-        self.headerImage = "DefaultBackground.png"
+        self.headerImage = "DefaultBackground"
         self.logo = ""
     }
 

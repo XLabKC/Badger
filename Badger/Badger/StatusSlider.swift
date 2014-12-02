@@ -45,11 +45,11 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
         self.unavailableIconView.frame = CGRect(x: 0, y: 0, width: h, height: h)
         self.freeIconView.frame = CGRect(x: (w - h) / 2.0, y: 0, width: h, height: h)
         self.occupiedIconView.frame = CGRect(x: (w - h), y: 0, width: h, height: h)
-        self.setupIconPair(self.unavailableIconView, image: "UnavailableIcon.png",
+        self.setupIconPair(self.unavailableIconView, image: "UnavailableIcon",
             color: Color.colorize(0xCB2F49, alpha: 1))
-        self.setupIconPair(self.freeIconView, image: "FreeIcon.png",
+        self.setupIconPair(self.freeIconView, image: "FreeIcon",
             color: Color.colorize(0x1BBA96, alpha: 1))
-        self.setupIconPair(self.occupiedIconView, image: "OccupiedIcon.png",
+        self.setupIconPair(self.occupiedIconView, image: "OccupiedIcon",
             color: Color.colorize(0xE5B943, alpha: 1))
 
         // Set up recognizers.
