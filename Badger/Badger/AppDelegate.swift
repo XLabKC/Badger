@@ -5,7 +5,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         UINavigationBar.appearance().backgroundColor = UIColor.whiteColor()
@@ -45,6 +44,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         if error != nil {
             println("Google auth error \(error) and auth object \(auth)")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
+            if let root = self.window?.rootViewController? {
+                if root.isViewLoaded() {
+                    root.presentViewController(vc, animated: true, completion: nil)
+                    return
+                }
+            }
+            self.window?.rootViewController = vc
         } else {
             let ref = Firebase(url: Global.FirebaseUrl)
             ref.authWithOAuthProvider("google", token: auth.accessToken, withCompletionBlock: { error, authData in

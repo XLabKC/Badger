@@ -38,6 +38,7 @@
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
@@ -64,7 +65,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n1g-Xu-mf1" id="fgU-OC-txI">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="C5V-sF-zLH">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultBackground" translatesAutoresizingMaskIntoConstraints="NO" id="C5V-sF-zLH">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="225"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWF-0D-aJC">
@@ -500,14 +501,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Splashscreen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sow-kU-WbS">
-                                <rect key="frame" x="108" y="273" width="104" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPurpleHuge" translatesAutoresizingMaskIntoConstraints="NO" id="DgK-OK-ZA3">
+                                <rect key="frame" x="60" y="95" width="200" height="179"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="179" id="gRW-69-OQy"/>
+                                    <constraint firstAttribute="width" constant="200" id="vvp-lM-0eD"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authenticating..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sow-kU-WbS">
+                                <rect key="frame" x="16" y="289" width="288" height="27.5"/>
+                                <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="20"/>
+                                <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DgK-OK-ZA3" firstAttribute="top" secondItem="ohg-U3-LDZ" secondAttribute="bottom" constant="75" id="4Ka-wj-tk5"/>
+                            <constraint firstItem="Sow-kU-WbS" firstAttribute="leading" secondItem="OFc-Rh-m3a" secondAttribute="leadingMargin" id="TRq-EQ-i7t"/>
+                            <constraint firstItem="Sow-kU-WbS" firstAttribute="trailing" secondItem="OFc-Rh-m3a" secondAttribute="trailingMargin" id="ZTJ-jn-B3c"/>
+                            <constraint firstItem="Sow-kU-WbS" firstAttribute="top" secondItem="DgK-OK-ZA3" secondAttribute="bottom" constant="15" id="s1T-Ud-a2Y"/>
+                            <constraint firstAttribute="centerX" secondItem="DgK-OK-ZA3" secondAttribute="centerX" id="tQ5-lL-3WT"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
@@ -597,7 +612,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aTG-GE-T3O" id="QY3-6j-bFx">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightArrowIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="hVd-Ap-bVr">
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightArrowIcon" translatesAutoresizingMaskIntoConstraints="NO" id="hVd-Ap-bVr">
                                             <rect key="frame" x="231" y="5" width="20" height="62"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="QWB-s6-pVO"/>
@@ -650,7 +665,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dg1-hh-pkN" id="ikC-Gh-FGH">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightArrowIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="ctp-3P-hZt">
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightArrowIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ctp-3P-hZt">
                                             <rect key="frame" x="231" y="5" width="20" height="62"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="XON-fO-gcW"/>
@@ -703,7 +718,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9F4-Om-NbR" id="95m-ce-09X">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightArrowIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="7go-Io-SmZ">
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightArrowIcon" translatesAutoresizingMaskIntoConstraints="NO" id="7go-Io-SmZ">
                                             <rect key="frame" x="231" y="5" width="20" height="62"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="62" id="iVS-6a-ywn"/>
@@ -778,7 +793,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ec7-qt-zhh" id="r42-Pe-zjg">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoBlackSmall.png" translatesAutoresizingMaskIntoConstraints="NO" id="HAb-3U-KvQ">
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoBlackSmall" translatesAutoresizingMaskIntoConstraints="NO" id="HAb-3U-KvQ">
                                             <rect key="frame" x="0.0" y="49" width="266" height="51"/>
                                         </imageView>
                                     </subviews>
@@ -847,7 +862,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ae0-Qa-m5c" id="IHe-zc-VOw">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="DYl-Gz-v6N">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultBackground" translatesAutoresizingMaskIntoConstraints="NO" id="DYl-Gz-v6N">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="225"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="gMr-Cr-ypj">
@@ -1048,9 +1063,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DefaultBackground.png" width="375" height="290"/>
-        <image name="LogoBlackSmall.png" width="57" height="51"/>
+        <image name="DefaultBackground" width="375" height="290"/>
+        <image name="LogoBlackSmall" width="57" height="51"/>
+        <image name="LogoPurpleHuge" width="407" height="362"/>
         <image name="MenuIcon.png" width="22" height="21"/>
-        <image name="RightArrowIcon.png" width="8" height="13"/>
+        <image name="RightArrowIcon" width="8" height="13"/>
     </resources>
 </document>

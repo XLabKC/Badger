@@ -91,9 +91,9 @@ class TeamProfileViewController: UITableViewController {
         } else if self.members.count == 0 {
             return tableView.dequeueReusableCellWithIdentifier("NoMembersCell") as UITableViewCell
         }
-        let index = self.members.count - 1 - (indexPath.row - 2)
+        let index = indexPath.row - 2
         let cell = (tableView.dequeueReusableCellWithIdentifier("TeamMemberCell") as TeamMemberCell)
-//        cell.setTask(self.tasks[index])
+        cell.setUser(self.members[index])
         return cell
     }
 }
