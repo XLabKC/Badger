@@ -5,6 +5,7 @@ class TaskDetailViewController: UITableViewController {
     private let headerCellHeight = CGFloat(40.0)
     private let titleCellHeight = CGFloat(72.0)
     private let completeButtonHeight = CGFloat(80.0)
+    private let minContentHeight = CGFloat(72.0)
 
     private var task: Task?
 
@@ -43,11 +44,13 @@ class TaskDetailViewController: UITableViewController {
         case 1:
             return self.authorCellHeight
         case 3:
-            let textView = UITextView()
-            textView.
-
-            // TODO: calculate the required height.
-            return self.authorCellHeight
+            if let task = self.task? {
+                let calculationView = UITextView()
+                calculationView.text = task.content
+                let size = calculationView.sizeThatFits(CGSizeMake(self.view.frame.width, CGFloat(FLT_MAX)))
+                return size.height + 40
+            }
+            return self.minContentHeight
         case 4:
             return self.completeButtonHeight
         default:
