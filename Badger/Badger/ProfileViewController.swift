@@ -134,4 +134,12 @@ class ProfileViewController: UITableViewController {
         cell.setTask(self.tasks[index])
         return cell
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "UserProfileTaskDetail" {
+            let taskCell = sender as TaskCell
+            let vc = segue.destinationViewController as TaskDetailViewController
+            vc.setTask(taskCell.getTask()!)
+        }
+    }
 }

@@ -25,6 +25,10 @@ class TaskCell: BorderedCell {
         self.updateView()
     }
 
+    func getTask() -> Task? {
+        return self.task
+    }
+
     func updateView() {
         if self.hasAwakened && self.task != nil {
             self.priorityHighLabel.textColor = inactiveColor

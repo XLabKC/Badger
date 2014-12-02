@@ -1,5 +1,6 @@
 class Task {
     let id: String
+    let owner: String
     let author: String
     let title: String
     let content: String
@@ -8,7 +9,7 @@ class Task {
     var active: Bool
     var ref: Firebase?
 
-    init(id: String, author: String, title: String, content: String, priority: TaskPriority, active: Bool, timestamp: NSDate)
+    init(id: String, owner: String, author: String, title: String, content: String, priority: TaskPriority, active: Bool, timestamp: NSDate)
     {
         self.id = id
         self.author = author
@@ -21,6 +22,7 @@ class Task {
 
     class func createTaskFromSnapshot(snapshot: FDataSnapshot) -> Task {
         let id = snapshot.key
+        let owner = snapshot.ref.parent.key
         let author = Helpers.getString(snapshot.value, key: "author", backup: "Unknown")
         let title = Helpers.getString(snapshot.value, key: "title", backup: "No Title")
         let content = Helpers.getString(snapshot.value, key: "content", backup: "No content")
@@ -31,7 +33,7 @@ class Task {
         }
         let active = Helpers.getBool(snapshot.value, key: "active", backup: true)
         let timestamp = Helpers.getDate(snapshot.value, key: "timestamp")
-        let task = Task(id: id, author: author, title: title, content: content, priority: taskPriority!, active: active, timestamp: timestamp)
+        let task = Task(id: id, owner: owner, author: author, title: title, content: content, priority: taskPriority!, active: active, timestamp: timestamp)
         task.ref = snapshot.ref
         return task
     }

@@ -288,7 +288,7 @@
                                     <outlet property="priorityMediumLabel" destination="w6v-0q-JCf" id="S4e-jM-LXS"/>
                                     <outlet property="profileCircle" destination="yRP-by-whW" id="q9R-fZ-URW"/>
                                     <outlet property="titleLabel" destination="5SM-Z1-Qbd" id="zfw-4J-huZ"/>
-                                    <segue destination="E19-a5-I5g" kind="show" id="0ap-Ou-JXo"/>
+                                    <segue destination="E19-a5-I5g" kind="show" identifier="UserProfileTaskDetail" id="0ap-Ou-JXo"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoTasksCell" rowHeight="72" id="3th-e7-dUw">

@@ -33,8 +33,14 @@ class TaskDetailViewController: UITableViewController {
     // TableViewController Overrides
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Header + User + Header + Title + Content + Complete Button
-        return 6
+        if let task = self.task? {
+            if UserStore.sharedInstance().isAuthUser(task.owner) {
+                // Header + User + Header + Title + Content + Complete Button
+                return 6
+            }
+        }
+        // Header + User + Header + Title + Content
+        return 5
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
