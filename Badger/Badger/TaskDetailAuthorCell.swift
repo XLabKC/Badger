@@ -14,7 +14,7 @@ class TaskDetailAuthorCell: BorderedCell {
         self.updateView()
         self.setTopBorder(.Full)
         self.setBottomBorder(.Full)
-        self.setBorderColor(Color.colorize(0xE0E0E0, alpha: 1))
+        self.setBorderColor(Color.colorize(0xE1E1E1, alpha: 1))
     }
 
 
