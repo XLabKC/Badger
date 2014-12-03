@@ -10,15 +10,7 @@ class TaskDetailViewController: UITableViewController {
     private var task: Task?
 
     override func viewDidLoad() {
-        // Set up navigation bar.
-        let label = UILabel(frame: CGRectMake(0, 0, 100, 30))
-        label.backgroundColor = UIColor.clearColor()
-        label.font = UIFont(name: "OpenSans", size: 17.0)
-        label.textAlignment = .Center
-        label.textColor = Colors.NavHeaderTitle
-        label.text = "Task"
-        self.navigationItem.titleView = label
-
+        self.navigationItem.titleView = Helpers.createTitleLabel("Task")
         super.viewDidLoad()
     }
 
@@ -54,7 +46,8 @@ class TaskDetailViewController: UITableViewController {
                 let calculationView = UITextView()
                 calculationView.text = task.content
                 let size = calculationView.sizeThatFits(CGSizeMake(self.view.frame.width, CGFloat(FLT_MAX)))
-                return size.height + 40
+                let height = size.height + 40
+                return height < self.minContentHeight ? self.minContentHeight : height
             }
             return self.minContentHeight
         case 4:

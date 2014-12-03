@@ -133,6 +133,16 @@ class Helpers {
         return revealVC
     }
 
+    class func createTitleLabel(title: String) -> UILabel {
+        let label = UILabel(frame: CGRectMake(0, 0, 100, 30))
+        label.backgroundColor = UIColor.clearColor()
+        label.font = UIFont(name: "OpenSans", size: 17.0)
+        label.textAlignment = .Center
+        label.textColor = Colors.NavHeaderTitle
+        label.text = title
+        return label
+    }
+
     class func saveAccessToken(auth: GTMOAuth2Authentication) {
         NSUserDefaults.standardUserDefaults().setObject(auth.accessToken, forKey: "access_token")
         NSUserDefaults.standardUserDefaults().setObject(auth.expirationDate, forKey: "access_token_expiration")

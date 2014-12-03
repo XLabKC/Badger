@@ -77,6 +77,7 @@
 		7B90E0CA1A21AA68005EC421 /* MenuNoTeamsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90E0C91A21AA68005EC421 /* MenuNoTeamsCell.swift */; };
 		7B9A63281A2D641D00DF1143 /* TaskDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63271A2D641D00DF1143 /* TaskDetailTitleCell.swift */; };
 		7B9A632A1A2D642800DF1143 /* TaskDetailContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63291A2D642800DF1143 /* TaskDetailContentCell.swift */; };
+		7B9A63521A2E8A2F00DF1143 /* ProfileControlsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63511A2E8A2F00DF1143 /* ProfileControlsCell.swift */; };
 		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
 		7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */; };
 /* End PBXBuildFile section */
@@ -169,6 +170,7 @@
 		7B90E0C91A21AA68005EC421 /* MenuNoTeamsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuNoTeamsCell.swift; sourceTree = "<group>"; };
 		7B9A63271A2D641D00DF1143 /* TaskDetailTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailTitleCell.swift; sourceTree = "<group>"; };
 		7B9A63291A2D642800DF1143 /* TaskDetailContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailContentCell.swift; sourceTree = "<group>"; };
+		7B9A63511A2E8A2F00DF1143 /* ProfileControlsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileControlsCell.swift; sourceTree = "<group>"; };
 		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -249,6 +251,7 @@
 			children = (
 				7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */,
 				7B4733B51A1BE31C00D88C00 /* ProfileHeaderCell.swift */,
+				7B9A63511A2E8A2F00DF1143 /* ProfileControlsCell.swift */,
 				7B4733B71A1BE35800D88C00 /* StatusSliderCell.swift */,
 				7B4733B91A1BE38700D88C00 /* TaskCell.swift */,
 			);
@@ -586,6 +589,7 @@
 				7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */,
 				7B9A632A1A2D642800DF1143 /* TaskDetailContentCell.swift in Sources */,
 				7B4733D61A1E84C900D88C00 /* MenuViewController.swift in Sources */,
+				7B9A63521A2E8A2F00DF1143 /* ProfileControlsCell.swift in Sources */,
 				7B29F19E1A264465003920AD /* TeamMemberCell.swift in Sources */,
 				7B47339F1A1A9B4500D88C00 /* StatusSlider.swift in Sources */,
 				7B743A1E19F880110075690A /* HomeViewController.swift in Sources */,

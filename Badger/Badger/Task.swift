@@ -12,6 +12,7 @@ class Task {
     init(id: String, owner: String, author: String, title: String, content: String, priority: TaskPriority, active: Bool, timestamp: NSDate)
     {
         self.id = id
+        self.owner = owner
         self.author = author
         self.title = title
         self.content = content

@@ -3,12 +3,15 @@ import UIKit
 class ProfileViewController: UITableViewController {
 
     private let cellHeights: [CGFloat] = [225.0, 100.0, 72.0]
+    private let titleLabel = Helpers.createTitleLabel("My Profile")
 
     private var tasks = [Task]()
     private var isLoadingTasks = true
     private var statusSliderCell: StatusSliderCell?
     private var profileHeaderCell: ProfileHeaderCell?
+    private var profileControlsCell: ProfileControlsCell?
     private var user: User?
+
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
 
@@ -28,13 +31,7 @@ class ProfileViewController: UITableViewController {
         self.tableView.registerNib(loadingCellNib, forCellReuseIdentifier: "LoadingCell")
 
         // Set up navigation bar.
-        let label = UILabel(frame: CGRectMake(0, 0, 100, 30))
-        label.backgroundColor = UIColor.clearColor()
-        label.font = UIFont(name: "OpenSans", size: 17.0)
-        label.textAlignment = .Center
-        label.textColor = Colors.NavHeaderTitle
-        label.text = "My Profile"
-        self.navigationItem.titleView = label
+        self.navigationItem.titleView = self.titleLabel
 
 //        tasks.append(Task(id: "i", author: "A", title: "Fake Task", content: "Some content goes here", priority: .Medium, active: true, timestamp: NSDate()))
 
@@ -89,12 +86,18 @@ class ProfileViewController: UITableViewController {
                         self.tableView.reloadData()
                     })
             }
+            if UserStore.sharedInstance().isAuthUser(user.uid) {
+                self.titleLabel.text = "My Profile"
+            } else {
+                self.titleLabel.text = "Profile"
+            }
         }
     }
 
     // TableViewController Overrides
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Header + Controls + Tasks
         return 2 + (self.tasks.isEmpty ? 1 : self.tasks.count)
     }
 
@@ -115,6 +118,11 @@ class ProfileViewController: UITableViewController {
             }
             return self.profileHeaderCell!
         } else if indexPath.row == 1 {
+            if let user = self.user? {
+                if UserStore.sharedInstance().isAuthUser(user.uid) {
+                    return tableView.dequeueReusableCellWithIdentifier("ProfileControlsCell") as UITableViewCell
+                }
+            }
             if self.statusSliderCell == nil {
                 self.statusSliderCell = (tableView.dequeueReusableCellWithIdentifier("StatusSliderCell") as StatusSliderCell)
                 if let user = self.user? {
@@ -128,8 +136,7 @@ class ProfileViewController: UITableViewController {
             return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as UITableViewCell
         }
 
-        // Reverse the tasks to be in decending chronological order.
-        let index = self.tasks.count - 1 - (indexPath.row - 2)
+        let index = indexPath.row - 2
         let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
         cell.setTask(self.tasks[index])
         return cell

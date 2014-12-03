@@ -23,12 +23,7 @@ class TeamProfileViewController: UITableViewController {
         self.tableView.registerNib(loadingCellNib, forCellReuseIdentifier: "LoadingCell")
 
         // Set up navigation bar.
-        let label = UILabel(frame: CGRectMake(0, 0, 100, 30))
-        label.backgroundColor = UIColor.clearColor()
-        label.font = UIFont(name: "OpenSans", size: 17.0)
-        label.textAlignment = .Center
-        label.textColor = Colors.NavHeaderTitle
-        label.text = "Team Profile"
+        let label = Helpers.createTitleLabel("Team Profile")
         self.navigationItem.titleView = label
 
         super.viewDidLoad()
