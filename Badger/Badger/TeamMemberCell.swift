@@ -34,14 +34,18 @@ class TeamMemberCell: BorderedCell, StatusRecipient {
         }
     }
 
+    func getUser() -> User? {
+        return self.user
+    }
+
     func statusUpdated(uid: String, newStatus: UserStatus) {
-        self.updateView()
+        self.statusLabel.text = Helpers.statusToText(user, status: newStatus)
+        self.statusLabel.textColor = Helpers.statusToColor(newStatus)
     }
 
     private func updateView() {
         if let user = self.user? {
-            self.statusLabel.text = Helpers.statusToText(user, status: user.status)
-            self.statusLabel.textColor = Helpers.statusToColor(user.status)
+            self.statusUpdated(user.uid, newStatus: user.status)
             self.nameLabel.text = user.fullName
             self.metaLabel.text = "Unknown" // TODO: set date
         }

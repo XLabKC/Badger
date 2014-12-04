@@ -12,18 +12,22 @@ class ProfileViewController: UITableViewController {
     private var profileControlsCell: ProfileControlsCell?
     private var user: User?
 
-
-    @IBOutlet weak var menuButton: UIBarButtonItem!
-
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
     override func viewDidLoad() {
-        if let revealVC = self.revealViewController()? {
-            self.menuButton.target = revealVC
-            self.menuButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(revealVC.panGestureRecognizer())
+        if let nav = self.navigationController? {
+            if nav.viewControllers.first as? ProfileViewController == self {
+                if let revealVC = self.revealViewController()? {
+                    var button = UIBarButtonItem(image: UIImage(named: "MenuIcon"), style: .Plain, target: revealVC, action: "revealToggle:")
+                    button.tintColor = Color.colorize(0x929292, alpha: 1.0)
+                    self.navigationItem.leftBarButtonItem = button
+//                    self.menuButton.target = revealVC
+//                    self.menuButton.action = "revealToggle:"
+                    self.view.addGestureRecognizer(revealVC.panGestureRecognizer())
+                }
+            }
         }
 
         // Register loading cell.
@@ -119,7 +123,7 @@ class ProfileViewController: UITableViewController {
             return self.profileHeaderCell!
         } else if indexPath.row == 1 {
             if let user = self.user? {
-                if UserStore.sharedInstance().isAuthUser(user.uid) {
+                if !UserStore.sharedInstance().isAuthUser(user.uid) {
                     return tableView.dequeueReusableCellWithIdentifier("ProfileControlsCell") as UITableViewCell
                 }
             }

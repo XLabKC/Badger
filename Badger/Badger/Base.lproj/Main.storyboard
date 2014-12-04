@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fuU-LW-MkP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fuU-LW-MkP">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -159,7 +159,7 @@
                                     <outlet property="slider" destination="RRu-Hh-SlV" id="krW-Ui-O8t"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewTaskCell" rowHeight="100" id="lNH-ls-uGL">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProfileControlsCell" rowHeight="100" id="lNH-ls-uGL" customClass="ProfileControlsCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lNH-ls-uGL" id="FKS-1I-PJ4">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -303,7 +303,7 @@
                                     <segue destination="E19-a5-I5g" kind="show" identifier="UserProfileTaskDetail" id="0ap-Ou-JXo"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoTasksCell" rowHeight="72" id="3th-e7-dUw">
+                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoTasksCell" rowHeight="72" id="3th-e7-dUw">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3th-e7-dUw" id="l69-iB-8pe">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -339,15 +339,8 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="Dhb-9r-dTT">
-                        <barButtonItem key="leftBarButtonItem" image="MenuIcon" style="plain" id="XTq-tM-skU">
-                            <color key="tintColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Dhb-9r-dTT"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="menuButton" destination="XTq-tM-skU" id="a1u-5J-nEu"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yrH-zd-24Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1245,7 +1238,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IHQ-ne-D7h" id="9Ik-fC-hdb">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbW-2I-wny" customClass="ToggleButton" customModule="Badger" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbW-2I-wny">
                                             <rect key="frame" x="188" y="24" width="124" height="51"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
                                             <state key="normal" title="Send Invite">
@@ -1256,7 +1249,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IO5-Fi-rM8" customClass="ToggleButton" customModule="Badger" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IO5-Fi-rM8">
                                             <rect key="frame" x="8" y="24" width="114" height="51"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
                                             <state key="normal" title="New Task">
@@ -1282,15 +1275,15 @@
                                                 <constraint firstAttribute="height" constant="72" id="Plm-BN-PTw"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifG-RO-etM">
-                                            <rect key="frame" x="102" y="8" width="210" height="33"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="ifG-RO-etM">
+                                            <rect key="frame" x="102" y="12" width="203" height="29"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="21"/>
                                             <color key="textColor" red="0.29803921568627451" green="0.30588235294117649" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yng-w5-qNq">
-                                            <rect key="frame" x="102" y="36" width="210" height="29"/>
-                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="21"/>
+                                            <rect key="frame" x="102" y="36" width="210" height="26"/>
+                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="19"/>
                                             <color key="textColor" red="0.31372549019607843" green="0.8901960784313725" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -1306,8 +1299,8 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="ZVQ-0d-kgS" secondAttribute="bottom" constant="5" id="2n8-b7-vhJ"/>
                                         <constraint firstItem="ifG-RO-etM" firstAttribute="leading" secondItem="btm-gL-asc" secondAttribute="trailing" constant="15" id="9Ti-IK-wRa"/>
                                         <constraint firstItem="ZVQ-0d-kgS" firstAttribute="leading" secondItem="btm-gL-asc" secondAttribute="trailing" constant="15" id="EWH-U1-uqk"/>
-                                        <constraint firstItem="ifG-RO-etM" firstAttribute="top" secondItem="szS-4E-VAz" secondAttribute="topMargin" id="SlJ-EF-hFL"/>
-                                        <constraint firstItem="ifG-RO-etM" firstAttribute="trailing" secondItem="szS-4E-VAz" secondAttribute="trailingMargin" id="Ycz-LE-nuM"/>
+                                        <constraint firstItem="ifG-RO-etM" firstAttribute="top" secondItem="szS-4E-VAz" secondAttribute="topMargin" constant="4" id="SlJ-EF-hFL"/>
+                                        <constraint firstItem="ifG-RO-etM" firstAttribute="trailing" secondItem="szS-4E-VAz" secondAttribute="trailingMargin" constant="-7" id="Ycz-LE-nuM"/>
                                         <constraint firstItem="btm-gL-asc" firstAttribute="leading" secondItem="szS-4E-VAz" secondAttribute="leadingMargin" constant="7" id="bEE-nq-hPw"/>
                                         <constraint firstItem="Yng-w5-qNq" firstAttribute="trailing" secondItem="szS-4E-VAz" secondAttribute="trailingMargin" id="f86-BA-LOn"/>
                                         <constraint firstItem="Yng-w5-qNq" firstAttribute="leading" secondItem="btm-gL-asc" secondAttribute="trailing" constant="15" id="gVn-wR-7KR"/>
@@ -1320,6 +1313,7 @@
                                     <outlet property="nameLabel" destination="ifG-RO-etM" id="T6g-6E-Nqb"/>
                                     <outlet property="profileCircle" destination="btm-gL-asc" id="EIq-IW-SZ8"/>
                                     <outlet property="statusLabel" destination="Yng-w5-qNq" id="KGO-Ns-Vq8"/>
+                                    <segue destination="lxJ-ye-3j0" kind="show" identifier="TeamProfileUser" id="sG0-Gn-9tP"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoMembersCell" rowHeight="112" id="oom-hk-IuD">
@@ -1391,4 +1385,7 @@
         <image name="PurpleButton" width="166" height="70"/>
         <image name="RightArrowIcon" width="8" height="13"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="sG0-Gn-9tP"/>
+    </inferredMetricsTieBreakers>
 </document>

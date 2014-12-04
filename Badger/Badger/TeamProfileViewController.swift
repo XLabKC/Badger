@@ -2,6 +2,7 @@ import UIKit
 
 class TeamProfileViewController: UITableViewController {
     private let cellHeights: [CGFloat] = [225.0, 100.0, 112.0]
+    private let memberAltBackground = Color.colorize(0xF6F6F6, alpha: 1.0)
 
     private var team: Team?
     private var members = [User]()
@@ -27,6 +28,9 @@ class TeamProfileViewController: UITableViewController {
         self.navigationItem.titleView = label
 
         super.viewDidLoad()
+        if self.team != nil {
+            self.loadTeamProfile()
+        }
     }
 
 
@@ -89,6 +93,15 @@ class TeamProfileViewController: UITableViewController {
         let index = indexPath.row - 2
         let cell = (tableView.dequeueReusableCellWithIdentifier("TeamMemberCell") as TeamMemberCell)
         cell.setUser(self.members[index])
+        cell.backgroundColor = index % 2 == 0 ? self.memberAltBackground : UIColor.whiteColor()
         return cell
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "TeamProfileUser" {
+            let memberCell = sender as TeamMemberCell
+            let vc = segue.destinationViewController as ProfileViewController
+            vc.setUser(memberCell.getUser()!)
+        }
     }
 }
