@@ -1,6 +1,6 @@
 import UIKit
 
-class MenuTeamCell: UITableViewCell {
+class MenuTeamCell: BorderedCell {
     private var hasAwakened = false
     private var team: Team?
 
@@ -10,6 +10,8 @@ class MenuTeamCell: UITableViewCell {
 
     override func awakeFromNib() {
         self.hasAwakened = true
+        self.setBottomBorder(.Full)
+        self.setBorderColor(Color.colorize(0x0C0C0C, alpha: 1))
         self.updateView()
     }
 

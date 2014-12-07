@@ -346,10 +346,10 @@
             </objects>
             <point key="canvasLocation" x="817" y="409"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Task Edit View Controller-->
         <scene sceneID="Hej-9D-6KO">
             <objects>
-                <tableViewController id="WaY-Zu-mhH" sceneMemberID="viewController">
+                <tableViewController id="WaY-Zu-mhH" customClass="TaskEditViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="sxx-iK-r7V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -603,7 +603,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hv4-KC-rNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1441" y="-243"/>
+            <point key="canvasLocation" x="1441" y="1063"/>
         </scene>
         <!--Task Detail View Controller-->
         <scene sceneID="9Ug-Qc-OHP">
@@ -1259,6 +1259,9 @@
                                             <state key="selected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <segue destination="WaY-Zu-mhH" kind="show" id="kUo-1a-Owt"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>

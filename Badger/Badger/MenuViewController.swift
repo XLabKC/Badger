@@ -90,7 +90,9 @@ class MenuViewController: UITableViewController, AuthUserListener {
                 return tableView.dequeueReusableCellWithIdentifier("MenuNoTeamsCell") as UITableViewCell
             }
             let cell = tableView.dequeueReusableCellWithIdentifier("MenuTeamCell") as MenuTeamCell
-            cell.setTeam(self.teams[indexPath.row - 4])
+            let index = indexPath.row - 4
+            cell.setTeam(self.teams[index])
+            cell.setTopBorder(index == 0 ? .Full : .None)
             return cell
         } else if (indexPath.row == teamCount + 5) {
             let cell = tableView.dequeueReusableCellWithIdentifier("MenuSettingsCell") as MenuSettingsCell

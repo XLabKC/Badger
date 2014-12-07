@@ -12,7 +12,7 @@ struct Colors {
     static let UnknownStatus = Color.colorize(0x8A9693, alpha: 1)
     static let FreeStatus = Color.colorize(0x50E3C2, alpha: 1)
     static let OccupiedStatus = Color.colorize(0xFFDB7B, alpha: 1)
-    static let NavHeaderTitle = Color.colorize(0x4C4E54, alpha: 1)
+    static let NavHeaderTitle = Color.colorize(0x1B3DA3, alpha: 1)
 }
 
 

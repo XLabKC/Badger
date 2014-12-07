@@ -10,6 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         UINavigationBar.appearance().backgroundColor = UIColor.whiteColor()
         UINavigationBar.appearance().barStyle = UIBarStyle.Default
         UINavigationBar.appearance().translucent = false
+        UINavigationBar.appearance().tintColor = Color.colorize(0x929292, alpha: 1.0)
 
         // Try and use last sessions access token if it's still valid.
         if let token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as? String {

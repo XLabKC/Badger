@@ -1,6 +1,6 @@
 import UIKit
 
-class TasEditViewController: UITableViewController {
+class TaskEditViewController: UITableViewController {
     private let selectTeamCellHeight = CGFloat(72.0)
     private let headerCellHeight = CGFloat(40.0)
     private let titleCellHeight = CGFloat(72.0)
@@ -13,6 +13,10 @@ class TasEditViewController: UITableViewController {
 
     override func viewDidLoad() {
         self.navigationItem.titleView = Helpers.createTitleLabel("Task")
+
+        let headerCellNib = UINib(nibName: "HeaderCell", bundle: nil)
+        self.tableView.registerNib(headerCellNib, forCellReuseIdentifier: "HeaderCell")
+
         super.viewDidLoad()
     }
 
