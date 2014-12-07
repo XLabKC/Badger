@@ -37,6 +37,7 @@
 		7B4733D31A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733D21A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m */; };
 		7B4733D61A1E84C900D88C00 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733D51A1E84C900D88C00 /* MenuViewController.swift */; };
 		7B4733D91A1E8AB600D88C00 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733D81A1E8AB600D88C00 /* BaseTableViewController.swift */; };
+		7B5FE4211A33D79F002F24EA /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B5FE4201A33D79F002F24EA /* ApiKeys.plist */; };
 		7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7439FC19F87E4E0075690A /* AppDelegate.swift */; };
 		7B743A0219F87E4E0075690A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0019F87E4E0075690A /* Main.storyboard */; };
 		7B743A0419F87E4E0075690A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0319F87E4E0075690A /* Images.xcassets */; };
@@ -131,6 +132,7 @@
 		7B4733D21A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JavascriptTimestamp.m"; sourceTree = "<group>"; };
 		7B4733D51A1E84C900D88C00 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7B4733D81A1E8AB600D88C00 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		7B5FE4201A33D79F002F24EA /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		7B7439F719F87E4E0075690A /* Badger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7439FB19F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B7439FC19F87E4E0075690A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				7B7439FA19F87E4E0075690A /* Supporting Files */,
 				7B4733B11A1BCE9800D88C00 /* Fonts */,
 				7B4733A01A1ACBC400D88C00 /* Images */,
+				7B5FE4201A33D79F002F24EA /* ApiKeys.plist */,
 			);
 			path = Badger;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				7B4733C31A1C593B00D88C00 /* OpenSans-Regular.ttf in Resources */,
 				7B743A3A19F895520075690A /* UserTableCell.xib in Resources */,
 				7B743A0219F87E4E0075690A /* Main.storyboard in Resources */,
+				7B5FE4211A33D79F002F24EA /* ApiKeys.plist in Resources */,
 				7B90E0BE1A1F9EA4005EC421 /* HeaderCell.xib in Resources */,
 				7B743A0719F87E4E0075690A /* LaunchScreen.xib in Resources */,
 				7B743A3819F88B800075690A /* ProfileTableCell.xib in Resources */,
