@@ -17,7 +17,6 @@ profile
 DerivedData
 .idea/
 *~nib
-*ApiKeys.plist
 
 # Exclude the Podspecs
 Pods/*
