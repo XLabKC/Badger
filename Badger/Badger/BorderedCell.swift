@@ -1,7 +1,9 @@
 import UIKit
 
-public enum BorderedCellStyle {
-    case Full, Inset, None
+public enum BorderedCellStyle: String {
+    case Full = "full"
+    case Inset = "inset"
+    case None = "none"
 }
 
 class BorderedCell: UITableViewCell {
@@ -12,6 +14,35 @@ class BorderedCell: UITableViewCell {
     private var bottomBorder = BorderedCellStyle.None
     private let topView = UIView()
     private let bottomView = UIView()
+
+    @IBInspectable var borderColor: UIColor {
+        get {
+            return self.lineColor
+        }
+        set(color) {
+            self.setBorderColor(color)
+        }
+    }
+    @IBInspectable var topBorderStyle: String {
+        get {
+            return self.topBorder.rawValue
+        }
+        set(style) {
+            if let newStyle = BorderedCellStyle(rawValue: style)? {
+                self.setTopBorder(newStyle)
+            }
+        }
+    }
+    @IBInspectable var bottomBorderStyle: String {
+        get {
+            return self.bottomBorder.rawValue
+        }
+        set(style) {
+            if let newStyle = BorderedCellStyle(rawValue: style)? {
+                self.setBottomBorder(newStyle)
+            }
+        }
+    }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

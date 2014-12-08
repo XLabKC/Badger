@@ -303,7 +303,7 @@
                                     <segue destination="E19-a5-I5g" kind="show" identifier="UserProfileTaskDetail" id="0ap-Ou-JXo"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoTasksCell" rowHeight="72" id="3th-e7-dUw">
+                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoTasksCell" rowHeight="72" id="3th-e7-dUw" customClass="BorderedCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3th-e7-dUw" id="l69-iB-8pe">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -331,6 +331,12 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="Cdt-tB-371" secondAttribute="trailing" constant="39" id="vSK-Y6-uqy"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                </userDefinedRuntimeAttributes>
                             </tableViewCell>
                         </prototypes>
                         <connections>
