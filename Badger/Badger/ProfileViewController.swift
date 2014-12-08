@@ -23,8 +23,6 @@ class ProfileViewController: UITableViewController {
                     var button = UIBarButtonItem(image: UIImage(named: "MenuIcon"), style: .Plain, target: revealVC, action: "revealToggle:")
                     button.tintColor = Color.colorize(0x929292, alpha: 1.0)
                     self.navigationItem.leftBarButtonItem = button
-//                    self.menuButton.target = revealVC
-//                    self.menuButton.action = "revealToggle:"
                     self.view.addGestureRecognizer(revealVC.panGestureRecognizer())
                 }
             }
@@ -87,7 +85,8 @@ class ProfileViewController: UITableViewController {
                     }
                     UserStore.sharedInstance().getUsers(uids, withBlock: { _ in
                         self.isLoadingTasks = false
-                        self.tableView.reloadData()
+//                        self.tableView.reloadData()
+                        self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Fade)
                     })
             }
             if UserStore.sharedInstance().isAuthUser(user.uid) {
@@ -100,28 +99,43 @@ class ProfileViewController: UITableViewController {
 
     // TableViewController Overrides
 
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Header + Controls + Tasks
-        return 2 + (self.tasks.isEmpty ? 1 : self.tasks.count)
+        switch section {
+        case 0:
+            // Header + Controls
+            return 2
+        default:
+            return self.tasks.isEmpty ? 1 : self.tasks.count
+        }
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if (indexPath.row >= self.cellHeights.count - 1) {
+        switch indexPath.section {
+        case 0:
+            return self.cellHeights[indexPath.row]
+        default:
             return self.cellHeights.last!
         }
-        return self.cellHeights[indexPath.row]
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            if self.profileHeaderCell == nil {
-                self.profileHeaderCell = (tableView.dequeueReusableCellWithIdentifier("ProfileHeaderCell") as ProfileHeaderCell)
-                if let user = self.user? {
-                    self.profileHeaderCell!.setUser(user)
+        switch indexPath.section {
+        case 0:
+            // Header Cell
+            if indexPath.row == 0 {
+                if self.profileHeaderCell == nil {
+                    self.profileHeaderCell = (tableView.dequeueReusableCellWithIdentifier("ProfileHeaderCell") as ProfileHeaderCell)
+                    if let user = self.user? {
+                        self.profileHeaderCell!.setUser(user)
+                    }
                 }
+                return self.profileHeaderCell!
             }
-            return self.profileHeaderCell!
-        } else if indexPath.row == 1 {
+            // Control Cell
             if let user = self.user? {
                 if !UserStore.sharedInstance().isAuthUser(user.uid) {
                     return tableView.dequeueReusableCellWithIdentifier("ProfileControlsCell") as UITableViewCell
@@ -134,16 +148,20 @@ class ProfileViewController: UITableViewController {
                 }
             }
             return self.statusSliderCell!
-        } else if self.isLoadingTasks {
-            return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
-        } else if self.tasks.count == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as UITableViewCell
+        default:
+            if self.isLoadingTasks {
+                return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
+            } else if self.tasks.count == 0 {
+                return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as UITableViewCell
+            }
+            let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
+            cell.setTask(self.tasks[indexPath.row])
+            return cell
         }
+    }
 
-        let index = indexPath.row - 2
-        let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
-        cell.setTask(self.tasks[index])
-        return cell
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
