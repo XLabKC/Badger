@@ -77,7 +77,7 @@ class BorderedCell: UITableViewCell {
             self.topView.frame = CGRectMake(0, 0, self.frame.width, 0.5)
         case .Inset:
             self.topView.backgroundColor = self.lineColor
-            self.topView.frame = CGRectMake(self.inset, 0, self.frame.width - self.inset, 1)
+            self.topView.frame = CGRectMake(self.inset, 0, self.frame.width - self.inset, 0.5)
         case .None:
             self.topView.backgroundColor = UIColor.clearColor()
         }

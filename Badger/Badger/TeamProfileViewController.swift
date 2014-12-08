@@ -53,48 +53,66 @@ class TeamProfileViewController: UITableViewController {
             UserStore.sharedInstance().getUsers(team.memberIds, withBlock: { users in
                 self.members = users
                 self.isLoadingMembers = false
-                self.tableView.reloadData()
+                self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Left)
             })
         }
     }
 
     // TableViewController Overrides
 
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2 + (self.members.isEmpty ? 1 : self.members.count)
+        switch section {
+        case 0:
+            return 2
+        default:
+            return self.members.isEmpty ? 1 : self.members.count
+        }
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if (indexPath.row >= self.cellHeights.count - 1) {
+        switch indexPath.section {
+        case 0:
+            return self.cellHeights[indexPath.row]
+        default:
             return self.cellHeights.last!
         }
-        return self.cellHeights[indexPath.row]
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            if self.headerCell == nil {
-                self.headerCell = (tableView.dequeueReusableCellWithIdentifier("TeamHeaderCell") as TeamHeaderCell)
-                if let team = self.team? {
-                    self.headerCell!.setTeam(team)
+        switch indexPath.section {
+        case 0:
+            if indexPath.row == 0 {
+                if self.headerCell == nil {
+                    self.headerCell = (tableView.dequeueReusableCellWithIdentifier("TeamHeaderCell") as TeamHeaderCell)
+                    if let team = self.team? {
+                        self.headerCell!.setTeam(team)
+                    }
                 }
+                return self.headerCell!
             }
-            return self.headerCell!
-        } else if indexPath.row == 1 {
             if self.controlCell == nil {
                 self.controlCell = (tableView.dequeueReusableCellWithIdentifier("TeamProfileControlCell") as TeamProfileControlCell)
             }
             return self.controlCell!
-        } else if self.isLoadingMembers {
-            return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
-        } else if self.members.count == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("NoMembersCell") as UITableViewCell
+        default:
+            if self.isLoadingMembers {
+                return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
+            } else if self.members.count == 0 {
+                return tableView.dequeueReusableCellWithIdentifier("NoMembersCell") as UITableViewCell
+            }
+            let cell = (tableView.dequeueReusableCellWithIdentifier("TeamMemberCell") as TeamMemberCell)
+            cell.setUser(self.members[indexPath.row])
+            cell.backgroundColor = indexPath.row % 2 == 0 ? self.memberAltBackground : UIColor.whiteColor()
+            return cell
         }
-        let index = indexPath.row - 2
-        let cell = (tableView.dequeueReusableCellWithIdentifier("TeamMemberCell") as TeamMemberCell)
-        cell.setUser(self.members[index])
-        cell.backgroundColor = index % 2 == 0 ? self.memberAltBackground : UIColor.whiteColor()
-        return cell
+    }
+
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

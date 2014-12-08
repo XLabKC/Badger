@@ -4,7 +4,7 @@ class TaskEditViewController: UITableViewController {
     private let selectTeamCellHeight = CGFloat(72.0)
     private let headerCellHeight = CGFloat(40.0)
     private let titleCellHeight = CGFloat(72.0)
-    private let minContentHeight = CGFloat(72.0)
+    private let minContentHeight = CGFloat(80.0)
     private let priorityCellHeight = CGFloat(72.0)
     private let assigneeCellHeight = CGFloat(72.0)
     private let submitButtonHeight = CGFloat(80.0)

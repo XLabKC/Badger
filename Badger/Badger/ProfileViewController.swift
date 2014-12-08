@@ -85,8 +85,7 @@ class ProfileViewController: UITableViewController {
                     }
                     UserStore.sharedInstance().getUsers(uids, withBlock: { _ in
                         self.isLoadingTasks = false
-//                        self.tableView.reloadData()
-                        self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Fade)
+                        self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Left)
                     })
             }
             if UserStore.sharedInstance().isAuthUser(user.uid) {

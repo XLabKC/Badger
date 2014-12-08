@@ -388,6 +388,13 @@
                                         <constraint firstItem="uIh-2M-kb2" firstAttribute="leading" secondItem="yXK-Ih-Dd3" secondAttribute="leadingMargin" constant="7" id="l5W-X9-67v"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                </userDefinedRuntimeAttributes>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditTitleCell" rowHeight="72" id="WIw-Wz-ByA" customClass="TaskEditTitleCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -423,6 +430,13 @@
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="inset"/>
+                                </userDefinedRuntimeAttributes>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditContentCell" rowHeight="72" id="tSa-mI-qNg" customClass="TaskEditContentCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -465,6 +479,13 @@
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="none"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="none"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditPriorityCell" rowHeight="72" id="yKE-dF-RHo" customClass="TaskEditPriorityCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -522,6 +543,13 @@
                                         <constraint firstItem="UPk-R5-Em8" firstAttribute="top" secondItem="Dvh-Id-azR" secondAttribute="bottom" constant="1.5" id="ryD-NZ-RyG"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="inset"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                </userDefinedRuntimeAttributes>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditUserCell" rowHeight="72" id="X2I-PO-vbz" customClass="TaskEditUserCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -563,6 +591,13 @@
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditSubmitCell" rowHeight="80" id="vuM-Kr-0QH">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -925,7 +960,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyProfileCell" rowHeight="72" id="aTG-GE-T3O" customClass="MyProfileCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyProfileCell" rowHeight="72" id="aTG-GE-T3O" customClass="MyProfileCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aTG-GE-T3O" id="QY3-6j-bFx">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -978,7 +1013,7 @@
                                     <segue destination="PV4-3y-2XN" kind="custom" identifier="MenuMyProfile" customClass="SWRevealViewControllerSeguePushController" id="ASy-Id-BnR"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuTeamCell" rowHeight="72" id="Dg1-hh-pkN" customClass="MenuTeamCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuTeamCell" rowHeight="72" id="Dg1-hh-pkN" customClass="MenuTeamCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dg1-hh-pkN" id="ikC-Gh-FGH">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1031,7 +1066,7 @@
                                     <segue destination="FD4-5x-luk" kind="custom" identifier="MenuTeamProfile" customClass="SWRevealViewControllerSeguePushController" id="NNJ-vK-RA7"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuNoTeamsCell" rowHeight="72" id="9F4-Om-NbR" customClass="MenuNoTeamsCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuNoTeamsCell" rowHeight="72" id="9F4-Om-NbR" customClass="MenuNoTeamsCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9F4-Om-NbR" id="95m-ce-09X">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1106,7 +1141,7 @@
                                     <outlet property="emailLabel" destination="zZ0-Ba-7PQ" id="zvb-E4-cbb"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuFooterCell" rowHeight="144" id="Ec7-qt-zhh">
+                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuFooterCell" rowHeight="144" id="Ec7-qt-zhh">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ec7-qt-zhh" id="r42-Pe-zjg">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1244,33 +1279,64 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IHQ-ne-D7h" id="9Ik-fC-hdb">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbW-2I-wny">
-                                            <rect key="frame" x="188" y="24" width="124" height="51"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbW-2I-wny">
+                                            <rect key="frame" x="167" y="14.5" width="138" height="70"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
-                                            <state key="normal" title="Send Invite">
+                                            <state key="normal" title="Send Invite" backgroundImage="GrayButton">
                                                 <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="selected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted" backgroundImage="PurpleButton">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IO5-Fi-rM8">
-                                            <rect key="frame" x="8" y="24" width="114" height="51"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IO5-Fi-rM8">
+                                            <rect key="frame" x="15" y="14" width="137.5" height="70"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
-                                            <state key="normal" title="New Task">
+                                            <state key="normal" title="New Task" backgroundImage="GrayButton">
                                                 <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="selected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted" backgroundImage="PurpleButton">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
                                                 <segue destination="WaY-Zu-mhH" kind="show" id="kUo-1a-Owt"/>
                                             </connections>
                                         </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C3G-Ww-pO7">
+                                            <rect key="frame" x="152" y="8" width="15" height="84"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="15" id="MNO-pd-0mx"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="C3G-Ww-pO7" firstAttribute="top" secondItem="9Ik-fC-hdb" secondAttribute="topMargin" id="1Lh-Jj-cgQ"/>
+                                        <constraint firstItem="tbW-2I-wny" firstAttribute="leading" secondItem="C3G-Ww-pO7" secondAttribute="trailing" id="6xC-L8-Pmb"/>
+                                        <constraint firstAttribute="centerY" secondItem="IO5-Fi-rM8" secondAttribute="centerY" constant="0.5" id="9Aa-jY-JC7"/>
+                                        <constraint firstAttribute="centerY" secondItem="tbW-2I-wny" secondAttribute="centerY" id="PLC-xj-yr9"/>
+                                        <constraint firstItem="C3G-Ww-pO7" firstAttribute="bottom" secondItem="9Ik-fC-hdb" secondAttribute="bottomMargin" id="V6q-7x-0ps"/>
+                                        <constraint firstItem="tbW-2I-wny" firstAttribute="trailing" secondItem="9Ik-fC-hdb" secondAttribute="trailingMargin" constant="-7" id="a5N-Hh-DsW"/>
+                                        <constraint firstItem="C3G-Ww-pO7" firstAttribute="leading" secondItem="IO5-Fi-rM8" secondAttribute="trailing" id="tdW-OM-y5A"/>
+                                        <constraint firstAttribute="centerX" secondItem="C3G-Ww-pO7" secondAttribute="centerX" id="usW-xs-xA5"/>
+                                        <constraint firstItem="IO5-Fi-rM8" firstAttribute="leading" secondItem="9Ik-fC-hdb" secondAttribute="leadingMargin" constant="7" id="whW-xb-tvf"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                </userDefinedRuntimeAttributes>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TeamMemberCell" rowHeight="112" id="VJT-tJ-aKb" customClass="TeamMemberCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1291,13 +1357,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yng-w5-qNq">
-                                            <rect key="frame" x="102" y="36" width="210" height="26"/>
+                                            <rect key="frame" x="102" y="39" width="210" height="26"/>
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="19"/>
                                             <color key="textColor" red="0.31372549019607843" green="0.8901960784313725" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVQ-0d-kgS">
-                                            <rect key="frame" x="102" y="74" width="210" height="25"/>
+                                            <rect key="frame" x="102" y="71" width="210" height="25"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
                                             <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1305,7 +1371,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="ZVQ-0d-kgS" firstAttribute="trailing" secondItem="szS-4E-VAz" secondAttribute="trailingMargin" id="0dj-DB-cyX"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="ZVQ-0d-kgS" secondAttribute="bottom" constant="5" id="2n8-b7-vhJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="ZVQ-0d-kgS" secondAttribute="bottom" constant="8" id="2n8-b7-vhJ"/>
                                         <constraint firstItem="ifG-RO-etM" firstAttribute="leading" secondItem="btm-gL-asc" secondAttribute="trailing" constant="15" id="9Ti-IK-wRa"/>
                                         <constraint firstItem="ZVQ-0d-kgS" firstAttribute="leading" secondItem="btm-gL-asc" secondAttribute="trailing" constant="15" id="EWH-U1-uqk"/>
                                         <constraint firstItem="ifG-RO-etM" firstAttribute="top" secondItem="szS-4E-VAz" secondAttribute="topMargin" constant="4" id="SlJ-EF-hFL"/>
@@ -1313,7 +1379,7 @@
                                         <constraint firstItem="btm-gL-asc" firstAttribute="leading" secondItem="szS-4E-VAz" secondAttribute="leadingMargin" constant="7" id="bEE-nq-hPw"/>
                                         <constraint firstItem="Yng-w5-qNq" firstAttribute="trailing" secondItem="szS-4E-VAz" secondAttribute="trailingMargin" id="f86-BA-LOn"/>
                                         <constraint firstItem="Yng-w5-qNq" firstAttribute="leading" secondItem="btm-gL-asc" secondAttribute="trailing" constant="15" id="gVn-wR-7KR"/>
-                                        <constraint firstItem="Yng-w5-qNq" firstAttribute="top" secondItem="ifG-RO-etM" secondAttribute="bottom" constant="-5" id="kWa-Jw-I7E"/>
+                                        <constraint firstItem="Yng-w5-qNq" firstAttribute="top" secondItem="ifG-RO-etM" secondAttribute="bottom" constant="-2" id="kWa-Jw-I7E"/>
                                         <constraint firstAttribute="centerY" secondItem="btm-gL-asc" secondAttribute="centerY" id="u4o-PR-vh8"/>
                                     </constraints>
                                 </tableViewCellContentView>
