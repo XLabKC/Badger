@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         var signIn = GPPSignIn.sharedInstance()
         signIn.shouldFetchGooglePlusUser = true
         signIn.shouldFetchGoogleUserEmail = true
-        signIn.clientID = Global.GoogleClientId
+        signIn.clientID = ApiKeys.getGoogleClientId()
         signIn.scopes = [kGTLAuthScopePlusLogin]
         signIn.delegate = self
         signIn.attemptSSO = true
