@@ -14,8 +14,9 @@ class User {
     var teamIds: [String] = []
     var ref: Firebase?
     var timestamp: NSDate
+    var activeTasks: Int
 
-    init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus: String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], ref: Firebase?)
+    init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus: String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], activeTasks: Int, ref: Firebase?)
     {
         self.uid = uid
         self.firstName = firstName
@@ -29,6 +30,7 @@ class User {
         self.followingIds = followingIds
         self.teamIds = teamIds
         self.ref = ref
+        self.activeTasks = activeTasks
     }
 
     class func createUserFromSnapshot(userSnapshot: FDataSnapshot) -> User {
@@ -37,6 +39,7 @@ class User {
         var last = Helpers.getString(userSnapshot.value, key: "last_name", backup: "Doe")
         let status = Helpers.getString(userSnapshot.value, key: "status", backup: "unknown")
         let email = Helpers.getString(userSnapshot.value, key: "email", backup: "Unknown")
+        let activeTasks = Helpers.getInt(userSnapshot.value, key: "active_tasks", backup: 0)
         var userStatus = UserStatus(rawValue: status)
         if userStatus == nil {
             userStatus = .Unknown
@@ -72,7 +75,7 @@ class User {
                 }
             }
         }
-        let user = User(uid: uid, firstName: first, lastName: last, email: email, status: userStatus!, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, ref: userSnapshot.ref)
+        let user = User(uid: uid, firstName: first, lastName: last, email: email, status: userStatus!, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, activeTasks: activeTasks, ref: userSnapshot.ref)
         return user
     }
 }

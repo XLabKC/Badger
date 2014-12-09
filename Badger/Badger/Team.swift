@@ -6,7 +6,7 @@ class Team {
     var memberIds: [String] = []
     var logo: String
     var headerImage: String
-    //    var taskIds: [String] = []
+    var combinedTaskIds: [String] = []
     var ref: Firebase?
 
     init(id: String, name: String, activeTasks: Int)
@@ -16,6 +16,19 @@ class Team {
         self.activeTasks = activeTasks
         self.headerImage = "DefaultBackground"
         self.logo = ""
+    }
+
+    func getMeta() -> String {
+        var taskString: String
+        switch self.activeTasks {
+        case 0:
+            taskString = "No Tasks"
+        case 1:
+            taskString = "1 Task"
+        default:
+            taskString = "\(self.activeTasks) Tasks"
+        }
+        return "\(self.memberIds.count) Members | \(taskString)"
     }
 
     class func createTeamFromSnapshot(snapshot: FDataSnapshot) -> Team {
@@ -39,7 +52,21 @@ class Team {
                 }
             }
         }
+
+        if let taskData = Helpers.getDictionary(snapshot.value, key: "tasks")? {
+            for (uid, value) in taskData {
+                if let combinedTaskId = uid as? String {
+                    team.combinedTaskIds.append(combinedTaskId)
+                }
+            }
+        }
+
         team.ref = snapshot.ref
         return team
+    }
+
+    class func separateUidAndTaskId(taskCombinedId: String) -> (uid: String, taskId: String) {
+        let comp = taskCombinedId.componentsSeparatedByString("_")
+        return (uid: comp[0], taskId: comp[1])
     }
 }

@@ -25,6 +25,7 @@ class TeamHeaderCell: UITableViewCell {
     private func updateView() {
         if let team = self.team? {
             self.nameLabel.text = team.name
+            self.metaLabel.text = team.getMeta()
             // TODO: set meta and team circle
         }
     }

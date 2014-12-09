@@ -11,11 +11,11 @@ class AuthUser: User {
     var teamsById = [String: Team]()
 
     class func createFromUser(user: User) -> AuthUser {
-        return AuthUser(uid: user.uid, firstName: user.firstName, lastName: user.lastName, email: user.email, status: user.status, profileImages: user.profileImages, headerImage: user.headerImage, followerIds: user.followerIds, followingIds: user.followingIds, teamIds: user.teamIds, ref: user.ref)
+        return AuthUser(uid: user.uid, firstName: user.firstName, lastName: user.lastName, email: user.email, status: user.status, profileImages: user.profileImages, headerImage: user.headerImage, followerIds: user.followerIds, followingIds: user.followingIds, teamIds: user.teamIds, activeTasks: user.activeTasks, ref: user.ref)
     }
 
-    override init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus : String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], ref: Firebase?) {
-        super.init(uid: uid, firstName: firstName, lastName: lastName, email: email, status: status, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, ref: ref)
+    override init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus : String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], activeTasks: Int, ref: Firebase?) {
+        super.init(uid: uid, firstName: firstName, lastName: lastName, email: email, status: status, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, activeTasks: activeTasks, ref: ref)
 
         if self.ref == nil {
             self.ref = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(uid)

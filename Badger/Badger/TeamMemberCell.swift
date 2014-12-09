@@ -47,7 +47,7 @@ class TeamMemberCell: BorderedCell, StatusRecipient {
         if let user = self.user? {
             self.statusUpdated(user.uid, newStatus: user.status)
             self.nameLabel.text = user.fullName
-            self.metaLabel.text = "Unknown" // TODO: set date
+            self.metaLabel.text = "\(user.activeTasks) Active Tasks"
         }
     }
 }

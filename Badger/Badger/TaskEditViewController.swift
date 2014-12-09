@@ -1,15 +1,19 @@
 import UIKit
 
-class TaskEditViewController: UITableViewController {
+class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate {
     private let selectTeamCellHeight = CGFloat(72.0)
     private let headerCellHeight = CGFloat(40.0)
-    private let titleCellHeight = CGFloat(72.0)
-    private let minContentHeight = CGFloat(80.0)
+    private let titleCellHeight = CGFloat(76.0)
     private let priorityCellHeight = CGFloat(72.0)
     private let assigneeCellHeight = CGFloat(72.0)
     private let submitButtonHeight = CGFloat(80.0)
 
     private var task: Task?
+    private var contentCell: TaskEditContentCell?
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
     override func viewDidLoad() {
         self.navigationItem.titleView = Helpers.createTitleLabel("Task")
@@ -44,14 +48,16 @@ class TaskEditViewController: UITableViewController {
         case 3:
             return self.titleCellHeight
         case 4:
-            if let task = self.task? {
-                let calculationView = UITextView()
-                calculationView.text = task.content
-                let size = calculationView.sizeThatFits(CGSizeMake(self.view.frame.width, CGFloat(FLT_MAX)))
-                let height = size.height + 38
-                return height < self.minContentHeight ? self.minContentHeight : height
-            }
-            return self.minContentHeight
+//            if let task = self.task? {
+//                let calculationView = UITextView()
+//                calculationView.text = task.content
+//                let size = calculationView.sizeThatFits(CGSizeMake(self.view.frame.width, CGFloat(FLT_MAX)))
+//                let height = size.height + 38
+//                return height < self.minContentHeight ? self.minContentHeight : height
+//            }
+
+            let cell = self.getContentCell()
+            return cell.calculateCellHeight()
         case 5:
             return self.priorityCellHeight
         case 7:
@@ -85,8 +91,7 @@ class TaskEditViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditTitleCell") as TaskEditTitleCell
             return cell
         } else if (indexPath.row == 4) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditContentCell") as TaskEditContentCell
-            return cell
+            return self.getContentCell()
         } else if (indexPath.row == 5) {
             let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditPriorityCell") as TaskEditPriorityCell
             return cell
@@ -95,5 +100,21 @@ class TaskEditViewController: UITableViewController {
             return cell
         }
         return tableView.dequeueReusableCellWithIdentifier("TaskEditSubmitCell") as UITableViewCell
+    }
+
+    func editContentCell(cell: TaskEditContentCell, hasChangedHeight: CGFloat) {
+//        self.contentCellHeight = hasChangedHeight + 38
+//        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 4, inSection: 0)], withRowAnimation: .Automatic)
+        self.tableView.beginUpdates()
+        self.tableView.endUpdates()
+    }
+
+    private func getContentCell() -> TaskEditContentCell {
+        if let cell = self.contentCell? {
+            return cell
+        }
+        self.contentCell = (self.tableView.dequeueReusableCellWithIdentifier("TaskEditContentCell") as TaskEditContentCell)
+        self.contentCell!.delegate = self
+        return self.contentCell!
     }
 }
