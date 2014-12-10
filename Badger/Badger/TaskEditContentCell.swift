@@ -9,10 +9,10 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate {
     private let minTextHeight: CGFloat = 24.0
 
     private var hasAwakened = false
+    private var task: Task?
     private var currentHeight: CGFloat = 0
 
     var delegate: TaskEditContentCellDelegate?
-
 
     @IBOutlet weak var textView: UITextView!
 
@@ -62,7 +62,6 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate {
     func textViewDidChange(textView: UITextView) {
         self.textView.scrollRectToVisible(CGRectMake(0, 0, self.textView.frame.width, 24), animated: true)
         let newHeight = self.calculateCellHeight()
-        println(newHeight)
         if self.currentHeight != newHeight {
             self.currentHeight = newHeight
             if let delegate = self.delegate? {
@@ -71,8 +70,21 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate {
         }
     }
 
-    private func updateView() {
+    func setTask(task: Task) {
+        self.task = task
+        if self.hasAwakened {
+            self.updateView()
+        }
+    }
 
+    func getContent() -> String {
+        return self.textView.text
+    }
+
+    private func updateView() {
+        if let task = self.task? {
+            self.textView.text = task.content
+        }
     }
 }
 

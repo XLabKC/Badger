@@ -368,15 +368,15 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U09-fW-C9M" id="yXK-Ih-Dd3">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uIh-2M-kb2">
-                                            <rect key="frame" x="15" y="11" width="50" height="50"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uIh-2M-kb2" customClass="TeamCircle" customModule="Badger" customModuleProvider="target">
+                                            <rect key="frame" x="15" y="9" width="54" height="54"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="GeL-tR-zo2"/>
-                                                <constraint firstAttribute="height" constant="50" id="h0k-xq-LRs"/>
+                                                <constraint firstAttribute="width" constant="54" id="GeL-tR-zo2"/>
+                                                <constraint firstAttribute="height" constant="54" id="h0k-xq-LRs"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="aOU-ia-JXO">
-                                            <rect key="frame" x="80" y="19" width="225" height="33"/>
+                                            <rect key="frame" x="84" y="19" width="221" height="33"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
                                             <color key="textColor" red="0.29803921568627451" green="0.30588235294117649" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -397,8 +397,64 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="nameLabel" destination="aOU-ia-JXO" id="Rhx-B5-GEO"/>
+                                    <outlet property="teamCircle" destination="uIh-2M-kb2" id="1M3-Am-1UW"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditTitleCell" rowHeight="76" id="WIw-Wz-ByA" customClass="TaskEditTitleCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectTeamCell" rowHeight="72" id="wu9-45-YkD" customClass="BorderedCell" customModule="Badger" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wu9-45-YkD" id="JdC-Vv-NQG">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Team" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="r3s-0n-YZS">
+                                            <rect key="frame" x="15" y="19" width="290" height="33"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
+                                            <color key="textColor" red="0.29803921570000003" green="0.30588235289999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="r3s-0n-YZS" firstAttribute="leading" secondItem="JdC-Vv-NQG" secondAttribute="leadingMargin" constant="7" id="2r2-aI-Z2g"/>
+                                        <constraint firstAttribute="centerY" secondItem="r3s-0n-YZS" secondAttribute="centerY" id="tT2-Ys-5r2"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="r3s-0n-YZS" secondAttribute="trailing" constant="7" id="xoM-YR-WaD"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                </userDefinedRuntimeAttributes>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectUserCell" rowHeight="72" id="dLg-95-Gwx" customClass="BorderedCell" customModule="Badger" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dLg-95-Gwx" id="Y1N-G3-I2R">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select User" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="YmP-BT-lJ6">
+                                            <rect key="frame" x="15" y="19" width="290" height="33"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
+                                            <color key="textColor" red="0.29803921570000003" green="0.30588235289999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="YmP-BT-lJ6" secondAttribute="centerY" id="GYD-O2-4bO"/>
+                                        <constraint firstItem="YmP-BT-lJ6" firstAttribute="leading" secondItem="Y1N-G3-I2R" secondAttribute="leadingMargin" constant="7" id="PN8-tL-eAA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="YmP-BT-lJ6" secondAttribute="trailing" constant="7" id="iet-bf-o6W"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                </userDefinedRuntimeAttributes>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskEditTitleCell" rowHeight="76" id="WIw-Wz-ByA" customClass="TaskEditTitleCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WIw-Wz-ByA" id="x41-o0-gH8">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -409,7 +465,7 @@
                                             <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yd9-OY-ccR">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yd9-OY-ccR">
                                             <rect key="frame" x="15" y="34" width="291" height="33"/>
                                             <color key="textColor" red="0.55686274509803924" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
@@ -439,8 +495,11 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="inset"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="titleTextField" destination="Yd9-OY-ccR" id="Jlr-Hc-wzY"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditContentCell" rowHeight="72" id="tSa-mI-qNg" customClass="TaskEditContentCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskEditContentCell" rowHeight="72" id="tSa-mI-qNg" customClass="TaskEditContentCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tSa-mI-qNg" id="5OG-D6-C90">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -492,7 +551,7 @@
                                     <outlet property="textView" destination="1gC-Ks-G4P" id="cMN-ok-kg9"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditPriorityCell" rowHeight="72" id="yKE-dF-RHo" customClass="TaskEditPriorityCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskEditPriorityCell" rowHeight="72" id="yKE-dF-RHo" customClass="TaskEditPriorityCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yKE-dF-RHo" id="9Zm-Qz-79U">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -513,6 +572,9 @@
                                                 <color key="titleColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="mediumSelected:" destination="yKE-dF-RHo" eventType="touchUpInside" id="tIZ-tG-SFO"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="voQ-nv-1wR">
                                             <rect key="frame" x="15" y="34" width="47" height="30"/>
@@ -524,6 +586,9 @@
                                                 <color key="titleColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="lowSelected:" destination="yKE-dF-RHo" eventType="touchUpInside" id="7IX-jm-mxJ"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnI-Fw-J8S">
                                             <rect key="frame" x="209" y="34" width="54" height="30"/>
@@ -535,6 +600,9 @@
                                                 <color key="titleColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="highSelected:" destination="yKE-dF-RHo" eventType="touchUpInside" id="5ui-zl-xkh"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -555,56 +623,13 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="inset"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="highButton" destination="DnI-Fw-J8S" id="peT-uk-SlT"/>
+                                    <outlet property="lowButton" destination="voQ-nv-1wR" id="33j-Mh-14k"/>
+                                    <outlet property="mediumButton" destination="UPk-R5-Em8" id="HcB-Z8-F0Y"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditUserCell" rowHeight="72" id="X2I-PO-vbz" customClass="TaskEditUserCell" customModule="Badger" customModuleProvider="target">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X2I-PO-vbz" id="O3r-8W-0ye">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OdT-kC-pUN" customClass="ProfileCircle" customModule="Badger" customModuleProvider="target">
-                                            <rect key="frame" x="15" y="11" width="50" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="4df-LL-oXD"/>
-                                                <constraint firstAttribute="width" constant="50" id="pQX-Ez-jSh"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7DK-Ec-sA9">
-                                            <rect key="frame" x="78" y="10" width="48.5" height="25"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
-                                            <color key="textColor" red="0.29803921568627451" green="0.30588235294117649" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="TCg-3y-TBb">
-                                            <rect key="frame" x="78" y="35" width="50.5" height="25"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
-                                            <color key="textColor" red="0.29803921568627451" green="0.30588235294117649" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="centerY" secondItem="OdT-kC-pUN" secondAttribute="centerY" id="3PY-IY-uNV"/>
-                                        <constraint firstItem="7DK-Ec-sA9" firstAttribute="leading" secondItem="OdT-kC-pUN" secondAttribute="trailing" constant="13" id="9mg-Zj-tkV"/>
-                                        <constraint firstItem="OdT-kC-pUN" firstAttribute="leading" secondItem="O3r-8W-0ye" secondAttribute="leadingMargin" constant="7" id="T7Y-7n-R9D"/>
-                                        <constraint firstAttribute="centerY" secondItem="TCg-3y-TBb" secondAttribute="centerY" constant="-0.5" id="cSJ-c0-54O"/>
-                                        <constraint firstItem="TCg-3y-TBb" firstAttribute="top" secondItem="7DK-Ec-sA9" secondAttribute="bottom" id="p8R-WV-uVq"/>
-                                        <constraint firstItem="7DK-Ec-sA9" firstAttribute="top" secondItem="O3r-8W-0ye" secondAttribute="topMargin" constant="2" id="qxY-9q-BMu"/>
-                                        <constraint firstItem="TCg-3y-TBb" firstAttribute="leading" secondItem="OdT-kC-pUN" secondAttribute="trailing" constant="13" id="zaq-iZ-XoE"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="cSJ-c0-54O"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditSubmitCell" rowHeight="80" id="vuM-Kr-0QH">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditSubmitCell" rowHeight="80" id="vuM-Kr-0QH" customClass="TaskEditSubmitCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vuM-Kr-0QH" id="MQx-ro-C5o">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -646,10 +671,60 @@
                         </connections>
                     </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="bwA-LZ-YIp" kind="show" identifier="EditTaskSelectUser" id="3eN-Ig-opn"/>
+                        <segue destination="V5q-ck-vid" kind="show" identifier="EditTaskSelectTeam" id="Tp1-fo-eYD"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hv4-KC-rNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1441" y="1063"/>
+        </scene>
+        <!--Select User View Controller-->
+        <scene sceneID="tX2-cU-Lhv">
+            <objects>
+                <tableViewController id="bwA-LZ-YIp" customClass="SelectUserViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="CIR-fk-Qn8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <connections>
+                            <outlet property="dataSource" destination="bwA-LZ-YIp" id="Vjv-AU-xPl"/>
+                            <outlet property="delegate" destination="bwA-LZ-YIp" id="tq5-Jq-CtY"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E5H-MG-ziQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1980" y="1063"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="ySm-7k-Q2S">
+            <objects>
+                <tableViewController id="V5q-ck-vid" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="qmG-ct-3Cv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pzu-yU-Wbq">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pzu-yU-Wbq" id="InJ-mQ-q0Q">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="V5q-ck-vid" id="vSD-gX-Y88"/>
+                            <outlet property="delegate" destination="V5q-ck-vid" id="quS-Hp-0i9"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qXh-D5-thA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1980" y="1734"/>
         </scene>
         <!--Task Detail View Controller-->
         <scene sceneID="9Ug-Qc-OHP">
@@ -1312,7 +1387,7 @@
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
-                                                <segue destination="WaY-Zu-mhH" kind="show" id="kUo-1a-Owt"/>
+                                                <segue destination="WaY-Zu-mhH" kind="show" identifier="TeamProfileNewTask" id="kUo-1a-Owt"/>
                                             </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C3G-Ww-pO7">

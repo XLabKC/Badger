@@ -120,6 +120,11 @@ class TeamProfileViewController: UITableViewController {
             let memberCell = sender as TeamMemberCell
             let vc = segue.destinationViewController as ProfileViewController
             vc.setUser(memberCell.getUser()!)
+        } else if segue.identifier == "TeamProfileNewTask" {
+            let vc = segue.destinationViewController as TaskEditViewController
+            if let team = self.team? {
+                vc.setTeam(team)
+            }
         }
     }
 }

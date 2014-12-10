@@ -19,7 +19,6 @@ class UserStore {
     private var authUser: AuthUser?
 
     init() {
-        
     }
 
     func getAuthUid() -> String {
@@ -87,7 +86,7 @@ class UserStore {
         return nil
     }
 
-    func getUsers(uids: [String], withBlock: ([User]) -> ()) {
+    func getUsers(uids: [String], withBlock: [User] -> ()) {
         if uids.isEmpty {
             withBlock([])
             return
@@ -102,6 +101,27 @@ class UserStore {
                 barrier.decrement()
             })
         }
+    }
+
+    func getUsersByTeams(teams: [Team], withBlock: [User] -> ()) {
+        // Find all uids and remove duplicates.
+        var uids = [String: Bool]()
+        for team in teams {
+            for member in team.memberIds {
+                uids[member] = true
+            }
+        }
+        self.getUsers(uids.keys.array, withBlock: withBlock)
+    }
+
+    func getUsersByTeamIds(ids: [String], withBlock: [User] -> ()) {
+        if ids.isEmpty {
+            withBlock([])
+            return
+        }
+        TeamStore.sharedInstance().getTeams(ids, withBlock: { teams in
+            self.getUsersByTeams(teams, withBlock: withBlock)
+        })
     }
 
     private func userFetched(snapshot: FDataSnapshot!) {

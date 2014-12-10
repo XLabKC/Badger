@@ -31,6 +31,14 @@ class Team {
         return "\(self.memberIds.count) Members | \(taskString)"
     }
 
+    func getRef() -> Firebase {
+        if let ref = self.ref {
+            return ref
+        }
+        self.ref = Firebase(url: Global.FirebaseTeamsUrl).childByAppendingPath(self.id)
+        return self.ref!
+    }
+
     class func createTeamFromSnapshot(snapshot: FDataSnapshot) -> Team {
         let id = snapshot.key
         let name = Helpers.getString(snapshot.value, key: "name", backup: "No Name")

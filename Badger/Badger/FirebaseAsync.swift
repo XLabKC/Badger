@@ -49,4 +49,21 @@ class FirebaseAsync {
         async.observeEventType(eventType)
         return async;
     }
+
+    class func fetchValues(refs: [Firebase], withBlock: [FDataSnapshot] -> ()) {
+        if refs.isEmpty {
+            withBlock([])
+            return
+        }
+        var snapshots = [FDataSnapshot]()
+        let barrier = Barrier(count: refs.count, done: { _ in
+            withBlock(snapshots)
+        })
+        for ref in refs {
+            ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                snapshots.append(snapshot)
+                barrier.decrement()
+            })
+        }
+    }
 }

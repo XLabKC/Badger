@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */; };
+		7B15CCFC1A38D22100519C8E /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CCFB1A38D22100519C8E /* UserCell.swift */; };
+		7B15CCFE1A38D22F00519C8E /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B15CCFD1A38D22F00519C8E /* UserCell.xib */; };
+		7B15CD011A38D73300519C8E /* SelectUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD001A38D73300519C8E /* SelectUserViewController.swift */; };
+		7B15CD041A38EECD00519C8E /* TeamStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD031A38EECD00519C8E /* TeamStore.swift */; };
 		7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */; };
 		7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */; };
 		7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1921A22FC9D003920AD /* AuthUser.swift */; };
@@ -85,8 +89,8 @@
 		7B9A63591A2E9C8D00DF1143 /* TaskEditTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63581A2E9C8D00DF1143 /* TaskEditTitleCell.swift */; };
 		7B9A635B1A2E9CC800DF1143 /* TaskEditContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */; };
 		7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */; };
-		7B9A635F1A2E9CEA00DF1143 /* TaskEditUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635E1A2E9CEA00DF1143 /* TaskEditUserCell.swift */; };
 		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
+		7BEC9AB71A38077E00080DDB /* TaskEditSubmitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */; };
 		7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +106,10 @@
 
 /* Begin PBXFileReference section */
 		7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAsync.swift; sourceTree = "<group>"; };
+		7B15CCFB1A38D22100519C8E /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		7B15CCFD1A38D22F00519C8E /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
+		7B15CD001A38D73300519C8E /* SelectUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectUserViewController.swift; sourceTree = "<group>"; };
+		7B15CD031A38EECD00519C8E /* TeamStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamStore.swift; sourceTree = "<group>"; };
 		7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailAuthorCell.swift; sourceTree = "<group>"; };
 		7B29F1921A22FC9D003920AD /* AuthUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
@@ -186,8 +194,8 @@
 		7B9A63581A2E9C8D00DF1143 /* TaskEditTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditTitleCell.swift; sourceTree = "<group>"; };
 		7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditContentCell.swift; sourceTree = "<group>"; };
 		7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditPriorityCell.swift; sourceTree = "<group>"; };
-		7B9A635E1A2E9CEA00DF1143 /* TaskEditUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditUserCell.swift; sourceTree = "<group>"; };
 		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditSubmitCell.swift; sourceTree = "<group>"; };
 		7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -238,6 +246,25 @@
 				7B469C4D1A2237EC0054019D /* Barrier.swift */,
 			);
 			name = Lib;
+			sourceTree = "<group>";
+		};
+		7B15CCFF1A38D71000519C8E /* Select User */ = {
+			isa = PBXGroup;
+			children = (
+				7B15CD001A38D73300519C8E /* SelectUserViewController.swift */,
+			);
+			name = "Select User";
+			sourceTree = "<group>";
+		};
+		7B15CD021A38DA8900519C8E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7B29F1921A22FC9D003920AD /* AuthUser.swift */,
+				7B85DE3F1A0A92C00074A127 /* Task.swift */,
+				7BCAA5EE1A00A7D4003B55C7 /* User.swift */,
+				7B4733CF1A1E551600D88C00 /* Team.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		7B24278D1A2D3E5400A3144E /* Task Detail */ = {
@@ -416,6 +443,7 @@
 				7B29F1941A263A90003920AD /* Team Profile */,
 				7B9A63551A2E8FA200DF1143 /* Task Edit */,
 				7B24278D1A2D3E5400A3144E /* Task Detail */,
+				7B15CCFF1A38D71000519C8E /* Select User */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -446,10 +474,12 @@
 		7B90E0BC1A1F9E84005EC421 /* Shared Cells */ = {
 			isa = PBXGroup;
 			children = (
-				7B90E0BD1A1F9EA4005EC421 /* HeaderCell.xib */,
 				7B90E0BF1A1F9F6D005EC421 /* HeaderCell.swift */,
+				7B90E0BD1A1F9EA4005EC421 /* HeaderCell.xib */,
 				7B469C4F1A223AB40054019D /* LoadingCell.swift */,
 				7B469C511A225E430054019D /* LoadingCell.xib */,
+				7B15CCFB1A38D22100519C8E /* UserCell.swift */,
+				7B15CCFD1A38D22F00519C8E /* UserCell.xib */,
 			);
 			name = "Shared Cells";
 			sourceTree = "<group>";
@@ -462,7 +492,7 @@
 				7B9A63581A2E9C8D00DF1143 /* TaskEditTitleCell.swift */,
 				7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */,
 				7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */,
-				7B9A635E1A2E9CEA00DF1143 /* TaskEditUserCell.swift */,
+				7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */,
 			);
 			name = "Task Edit";
 			sourceTree = "<group>";
@@ -470,12 +500,10 @@
 		7BCAA5EB1A00A443003B55C7 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				7B29F1921A22FC9D003920AD /* AuthUser.swift */,
-				7BCAA5EE1A00A7D4003B55C7 /* User.swift */,
-				7B85DE3F1A0A92C00074A127 /* Task.swift */,
+				7B15CD021A38DA8900519C8E /* Models */,
 				7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */,
 				7B4733C41A1D51BB00D88C00 /* UserStore.swift */,
-				7B4733CF1A1E551600D88C00 /* Team.swift */,
+				7B15CD031A38EECD00519C8E /* TeamStore.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -588,6 +616,7 @@
 				7B469C521A225E430054019D /* LoadingCell.xib in Resources */,
 				7B743A5719F94A3D0075690A /* GooglePlus.bundle in Resources */,
 				7B743A0419F87E4E0075690A /* Images.xcassets in Resources */,
+				7B15CCFE1A38D22F00519C8E /* UserCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +642,9 @@
 				7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */,
 				7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */,
 				7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */,
+				7BEC9AB71A38077E00080DDB /* TaskEditSubmitCell.swift in Sources */,
+				7B15CD011A38D73300519C8E /* SelectUserViewController.swift in Sources */,
+				7B15CD041A38EECD00519C8E /* TeamStore.swift in Sources */,
 				7B4733C51A1D51BB00D88C00 /* UserStore.swift in Sources */,
 				7B469C501A223AB40054019D /* LoadingCell.swift in Sources */,
 				7B9A63591A2E9C8D00DF1143 /* TaskEditTitleCell.swift in Sources */,
@@ -632,6 +664,7 @@
 				7B90E0C21A206A89005EC421 /* MyProfileCell.swift in Sources */,
 				7B4733D31A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m in Sources */,
 				7B743A3E19F943D30075690A /* Global.swift in Sources */,
+				7B15CCFC1A38D22100519C8E /* UserCell.swift in Sources */,
 				7B4733CA1A1D93DE00D88C00 /* SWRevealViewController.m in Sources */,
 				7B469C4E1A2237EC0054019D /* Barrier.swift in Sources */,
 				7B90E0CA1A21AA68005EC421 /* MenuNoTeamsCell.swift in Sources */,
@@ -643,7 +676,6 @@
 				7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */,
 				7B4733C01A1BECBB00D88C00 /* StatusListener.swift in Sources */,
 				7B90E0C81A21427F005EC421 /* BorderedCell.swift in Sources */,
-				7B9A635F1A2E9CEA00DF1143 /* TaskEditUserCell.swift in Sources */,
 				7B743A3C19F895700075690A /* UserTableCell.swift in Sources */,
 				7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */,
 				7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */,
