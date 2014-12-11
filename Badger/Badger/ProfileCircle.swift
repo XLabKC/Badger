@@ -44,6 +44,12 @@ class ProfileCircle: UIImageView, StatusRecipient {
 
     private func layoutView() {
         self.layer.cornerRadius = self.frame.height / 2.0
-        self.layer.borderWidth = (self.frame.height > 80) ? 4.0 : 2.0
+        if self.frame.height > 80 {
+            self.layer.borderWidth = 4.0
+        } else if self.frame.height > 60 {
+            self.layer.borderWidth = 3.0
+        } else {
+            self.layer.borderWidth = 2.0
+        }
     }
 }

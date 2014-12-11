@@ -12,6 +12,10 @@
 		7B15CCFE1A38D22F00519C8E /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B15CCFD1A38D22F00519C8E /* UserCell.xib */; };
 		7B15CD011A38D73300519C8E /* SelectUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD001A38D73300519C8E /* SelectUserViewController.swift */; };
 		7B15CD041A38EECD00519C8E /* TeamStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD031A38EECD00519C8E /* TeamStore.swift */; };
+		7B15CD071A3906ED00519C8E /* SelectTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD061A3906ED00519C8E /* SelectTeamViewController.swift */; };
+		7B15CD091A39080400519C8E /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD081A39080400519C8E /* TeamCell.swift */; };
+		7B15CD0B1A39081600519C8E /* TeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B15CD0A1A39081600519C8E /* TeamCell.xib */; };
+		7B15CD0D1A3922EA00519C8E /* ResizedImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD0C1A3922EA00519C8E /* ResizedImageButton.swift */; };
 		7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */; };
 		7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */; };
 		7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1921A22FC9D003920AD /* AuthUser.swift */; };
@@ -85,7 +89,6 @@
 		7B9A632A1A2D642800DF1143 /* TaskDetailContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63291A2D642800DF1143 /* TaskDetailContentCell.swift */; };
 		7B9A63521A2E8A2F00DF1143 /* ProfileControlsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63511A2E8A2F00DF1143 /* ProfileControlsCell.swift */; };
 		7B9A63541A2E8F9A00DF1143 /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63531A2E8F9A00DF1143 /* TaskEditViewController.swift */; };
-		7B9A63571A2E9BDF00DF1143 /* TaskEditTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63561A2E9BDF00DF1143 /* TaskEditTeamCell.swift */; };
 		7B9A63591A2E9C8D00DF1143 /* TaskEditTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63581A2E9C8D00DF1143 /* TaskEditTitleCell.swift */; };
 		7B9A635B1A2E9CC800DF1143 /* TaskEditContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */; };
 		7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */; };
@@ -110,6 +113,10 @@
 		7B15CCFD1A38D22F00519C8E /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		7B15CD001A38D73300519C8E /* SelectUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectUserViewController.swift; sourceTree = "<group>"; };
 		7B15CD031A38EECD00519C8E /* TeamStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamStore.swift; sourceTree = "<group>"; };
+		7B15CD061A3906ED00519C8E /* SelectTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTeamViewController.swift; sourceTree = "<group>"; };
+		7B15CD081A39080400519C8E /* TeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
+		7B15CD0A1A39081600519C8E /* TeamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamCell.xib; sourceTree = "<group>"; };
+		7B15CD0C1A3922EA00519C8E /* ResizedImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizedImageButton.swift; sourceTree = "<group>"; };
 		7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailAuthorCell.swift; sourceTree = "<group>"; };
 		7B29F1921A22FC9D003920AD /* AuthUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
@@ -190,7 +197,6 @@
 		7B9A63291A2D642800DF1143 /* TaskDetailContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailContentCell.swift; sourceTree = "<group>"; };
 		7B9A63511A2E8A2F00DF1143 /* ProfileControlsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileControlsCell.swift; sourceTree = "<group>"; };
 		7B9A63531A2E8F9A00DF1143 /* TaskEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditViewController.swift; sourceTree = "<group>"; };
-		7B9A63561A2E9BDF00DF1143 /* TaskEditTeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditTeamCell.swift; sourceTree = "<group>"; };
 		7B9A63581A2E9C8D00DF1143 /* TaskEditTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditTitleCell.swift; sourceTree = "<group>"; };
 		7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditContentCell.swift; sourceTree = "<group>"; };
 		7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditPriorityCell.swift; sourceTree = "<group>"; };
@@ -261,10 +267,18 @@
 			children = (
 				7B29F1921A22FC9D003920AD /* AuthUser.swift */,
 				7B85DE3F1A0A92C00074A127 /* Task.swift */,
-				7BCAA5EE1A00A7D4003B55C7 /* User.swift */,
 				7B4733CF1A1E551600D88C00 /* Team.swift */,
+				7BCAA5EE1A00A7D4003B55C7 /* User.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		7B15CD051A3906D100519C8E /* Select Team */ = {
+			isa = PBXGroup;
+			children = (
+				7B15CD061A3906ED00519C8E /* SelectTeamViewController.swift */,
+			);
+			name = "Select Team";
 			sourceTree = "<group>";
 		};
 		7B24278D1A2D3E5400A3144E /* Task Detail */ = {
@@ -444,6 +458,7 @@
 				7B9A63551A2E8FA200DF1143 /* Task Edit */,
 				7B24278D1A2D3E5400A3144E /* Task Detail */,
 				7B15CCFF1A38D71000519C8E /* Select User */,
+				7B15CD051A3906D100519C8E /* Select Team */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -467,6 +482,7 @@
 				7B4733AD1A1BC11100D88C00 /* ProfileCircle.swift */,
 				7B90E0C31A214137005EC421 /* TeamCircle.swift */,
 				7B90E0C71A21427F005EC421 /* BorderedCell.swift */,
+				7B15CD0C1A3922EA00519C8E /* ResizedImageButton.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -480,6 +496,8 @@
 				7B469C511A225E430054019D /* LoadingCell.xib */,
 				7B15CCFB1A38D22100519C8E /* UserCell.swift */,
 				7B15CCFD1A38D22F00519C8E /* UserCell.xib */,
+				7B15CD081A39080400519C8E /* TeamCell.swift */,
+				7B15CD0A1A39081600519C8E /* TeamCell.xib */,
 			);
 			name = "Shared Cells";
 			sourceTree = "<group>";
@@ -488,7 +506,6 @@
 			isa = PBXGroup;
 			children = (
 				7B9A63531A2E8F9A00DF1143 /* TaskEditViewController.swift */,
-				7B9A63561A2E9BDF00DF1143 /* TaskEditTeamCell.swift */,
 				7B9A63581A2E9C8D00DF1143 /* TaskEditTitleCell.swift */,
 				7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */,
 				7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */,
@@ -606,6 +623,7 @@
 			files = (
 				7B4733C11A1C593B00D88C00 /* Brandon_med.otf in Resources */,
 				7B4733C21A1C593B00D88C00 /* OpenSans-Light.ttf in Resources */,
+				7B15CD0B1A39081600519C8E /* TeamCell.xib in Resources */,
 				7B4733C31A1C593B00D88C00 /* OpenSans-Regular.ttf in Resources */,
 				7B743A3A19F895520075690A /* UserTableCell.xib in Resources */,
 				7B743A0219F87E4E0075690A /* Main.storyboard in Resources */,
@@ -645,12 +663,12 @@
 				7BEC9AB71A38077E00080DDB /* TaskEditSubmitCell.swift in Sources */,
 				7B15CD011A38D73300519C8E /* SelectUserViewController.swift in Sources */,
 				7B15CD041A38EECD00519C8E /* TeamStore.swift in Sources */,
+				7B15CD0D1A3922EA00519C8E /* ResizedImageButton.swift in Sources */,
 				7B4733C51A1D51BB00D88C00 /* UserStore.swift in Sources */,
 				7B469C501A223AB40054019D /* LoadingCell.swift in Sources */,
 				7B9A63591A2E9C8D00DF1143 /* TaskEditTitleCell.swift in Sources */,
 				7B5FE4231A357BD3002F24EA /* ApiKeys.swift in Sources */,
 				7B90E0C61A2141CD005EC421 /* MenuTeamCell.swift in Sources */,
-				7B9A63571A2E9BDF00DF1143 /* TaskEditTeamCell.swift in Sources */,
 				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
 				7B4733D91A1E8AB600D88C00 /* BaseTableViewController.swift in Sources */,
 				7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */,
@@ -658,6 +676,7 @@
 				7B9A632A1A2D642800DF1143 /* TaskDetailContentCell.swift in Sources */,
 				7B4733D61A1E84C900D88C00 /* MenuViewController.swift in Sources */,
 				7B9A63521A2E8A2F00DF1143 /* ProfileControlsCell.swift in Sources */,
+				7B15CD091A39080400519C8E /* TeamCell.swift in Sources */,
 				7B29F19E1A264465003920AD /* TeamMemberCell.swift in Sources */,
 				7B47339F1A1A9B4500D88C00 /* StatusSlider.swift in Sources */,
 				7B743A1E19F880110075690A /* HomeViewController.swift in Sources */,
@@ -674,6 +693,7 @@
 				7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */,
 				7B4733D01A1E551600D88C00 /* Team.swift in Sources */,
 				7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */,
+				7B15CD071A3906ED00519C8E /* SelectTeamViewController.swift in Sources */,
 				7B4733C01A1BECBB00D88C00 /* StatusListener.swift in Sources */,
 				7B90E0C81A21427F005EC421 /* BorderedCell.swift in Sources */,
 				7B743A3C19F895700075690A /* UserTableCell.swift in Sources */,

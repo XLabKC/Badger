@@ -26,6 +26,9 @@ class SelectUserViewController: UITableViewController {
         self.teams = teams
         UserStore.sharedInstance().getUsersByTeams(teams, withBlock: { users in
             self.users = users
+            self.users.sort({ (a, b) -> Bool in
+                return a.fullName < b.fullName
+            })
             self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Left)
         })
     }

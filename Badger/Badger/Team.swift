@@ -74,7 +74,7 @@ class Team {
     }
 
     class func separateUidAndTaskId(taskCombinedId: String) -> (uid: String, taskId: String) {
-        let comp = taskCombinedId.componentsSeparatedByString("_")
+        let comp = taskCombinedId.componentsSeparatedByString("^")
         return (uid: comp[0], taskId: comp[1])
     }
 }

@@ -4,13 +4,17 @@ class TaskDetailViewController: UITableViewController {
     private let authorCellHeight = CGFloat(72.0)
     private let headerCellHeight = CGFloat(40.0)
     private let titleCellHeight = CGFloat(72.0)
-    private let completeButtonHeight = CGFloat(80.0)
+    private let completeButtonHeight = CGFloat(92.0)
     private let minContentHeight = CGFloat(72.0)
 
     private var task: Task?
 
     override func viewDidLoad() {
         self.navigationItem.titleView = Helpers.createTitleLabel("Task")
+
+        let headerCellNib = UINib(nibName: "HeaderCell", bundle: nil)
+        self.tableView.registerNib(headerCellNib, forCellReuseIdentifier: "HeaderCell")
+
         super.viewDidLoad()
     }
 

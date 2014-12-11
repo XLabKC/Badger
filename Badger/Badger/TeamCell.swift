@@ -1,6 +1,6 @@
 import UIKit
 
-class TaskEditTeamCell: BorderedCell {
+class TeamCell: BorderedCell {
     private var hasAwakened = false
     private var team: Team?
 
@@ -19,7 +19,7 @@ class TaskEditTeamCell: BorderedCell {
 
     private func updateView() {
         if self.hasAwakened {
-            if let team = self.team {
+            if let team = self.team? {
                 self.teamCircle.setTeam(team)
                 self.nameLabel.text = team.name
             }

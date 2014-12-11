@@ -38,4 +38,9 @@ class TeamStore {
             })
         }
     }
+
+    func adjustActiveTaskCount(id: String, delta: Int) {
+        let activeRef = self.ref.childByAppendingPath(id).childByAppendingPath("active_tasks")
+        FirebaseAsync.adjustValueForRef(activeRef, delta: delta)
+    }
 }

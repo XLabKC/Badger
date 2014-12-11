@@ -60,7 +60,6 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate {
     }
 
     func textViewDidChange(textView: UITextView) {
-        self.textView.scrollRectToVisible(CGRectMake(0, 0, self.textView.frame.width, 24), animated: true)
         let newHeight = self.calculateCellHeight()
         if self.currentHeight != newHeight {
             self.currentHeight = newHeight
@@ -68,6 +67,7 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate {
                 delegate.editContentCell(self, hasChangedHeight: self.currentHeight)
             }
         }
+        self.textView.scrollRectToVisible(CGRectMake(0, 0, self.textView.frame.width, 1), animated: true)
     }
 
     func setTask(task: Task) {

@@ -168,6 +168,11 @@ class ProfileViewController: UITableViewController {
             let taskCell = sender as TaskCell
             let vc = segue.destinationViewController as TaskDetailViewController
             vc.setTask(taskCell.getTask()!)
+        } else if segue.identifier == "UserProfileTaskEdit" {
+            let vc = segue.destinationViewController as TaskEditViewController
+            if let user = self.user? {
+                vc.setOwner(user)
+            }
         }
     }
 }
