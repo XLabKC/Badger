@@ -79,7 +79,7 @@ class ObservableDataStore<T: DataEntity> {
         } else {
             observers!.append(WeakObserver(observer: observer))
             if let entry = self.entryByUrl[url]? {
-                //                self.sendUpdateFunc(entry.entity, observer)
+                self.sendUpdateFunc(entry.entity as T, observer)
             }
         }
 
@@ -137,10 +137,11 @@ class ObservableDataStore<T: DataEntity> {
                     }
                 }
             }
+            if let handle = self.handlesByUrl[url] {
+                // There are no observers, stop listening.
+                self.stopListening(snapshot.ref)
+            }
         }
-
-        // There are no recipients, remove observer.
-        self.stopListening(snapshot.ref)
     }
 
     // Stop listening for updates of a user.

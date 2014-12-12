@@ -1,6 +1,6 @@
 import UIKit
 
-class TeamMemberCell: BorderedCell, StatusRecipient {
+class TeamMemberCell: BorderedCell, UserObserver {
     private var hasAwakened = false
     private var user: User?
 
@@ -21,16 +21,19 @@ class TeamMemberCell: BorderedCell, StatusRecipient {
         }
     }
 
+    deinit {
+        if let user = self.user? {
+            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
+        }
+    }
+
     func setUser(user: User) {
         if let user = self.user? {
-            StatusListener.sharedInstance().removeRecipient(self, uid: user.uid)
+            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
         }
-        self.user = user
-        StatusListener.sharedInstance().addRecipient(self, uid: user.uid)
-
+        UserStore.sharedInstance().addObserver(self, uid: user.uid)
         if self.hasAwakened {
             self.profileCircle.setUser(user)
-            self.updateView()
         }
     }
 
@@ -38,16 +41,19 @@ class TeamMemberCell: BorderedCell, StatusRecipient {
         return self.user
     }
 
-    func statusUpdated(uid: String, newStatus: UserStatus) {
-        self.statusLabel.text = Helpers.statusToText(user, status: newStatus)
-        self.statusLabel.textColor = Helpers.statusToColor(newStatus)
+    func userUpdated(newUser: User) {
+        self.user = newUser
+        self.updateView()
     }
 
     private func updateView() {
-        if let user = self.user? {
-            self.statusUpdated(user.uid, newStatus: user.status)
-            self.nameLabel.text = user.fullName
-            self.metaLabel.text = "\(user.activeTasks) Active Tasks"
+        if self.hasAwakened {
+            if let user = self.user? {
+                self.statusLabel.text = Helpers.statusToText(user, status: user.status)
+                self.statusLabel.textColor = Helpers.statusToColor(user.status)
+                self.nameLabel.text = user.fullName
+                self.metaLabel.text = "\(user.activeTasks) Active Tasks"
+            }
         }
     }
 }

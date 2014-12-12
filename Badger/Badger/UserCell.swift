@@ -1,6 +1,6 @@
 import UIKit
 
-class UserCell: BorderedCell, StatusRecipient {
+class UserCell: BorderedCell, UserObserver {
     private var hasAwakened = false
     private var user: User?
 
@@ -22,25 +22,28 @@ class UserCell: BorderedCell, StatusRecipient {
     }
 
     func setUser(user: User) {
+        if let user = self.user? {
+            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
+        }
         self.user = user
-        self.updateView()
+        UserStore.sharedInstance().addObserver(self, uid: user.uid)
+        if self.hasAwakened {
+            self.profileCircle.setUser(user)
+            self.updateView()
+        }
     }
 
-    func statusUpdated(uid: String, newStatus: UserStatus) {
-        if let user = self.user? {
-            self.statusLabel.text = Helpers.statusToText(user, status: newStatus)
-            self.statusLabel.textColor = Helpers.statusToColor(newStatus)
-        } else {
-            self.statusLabel.text = ""
-        }
+    func userUpdated(newUser: User) {
+        self.user = newUser
+        self.updateView()
     }
 
     private func updateView() {
         if self.hasAwakened {
             if let user = self.user? {
-                self.profileCircle.setUser(user)
                 self.nameLabel.text = user.fullName
-                StatusListener.sharedInstance().addRecipient(self, uid: user.uid)
+                self.statusLabel.text = Helpers.statusToText(user, status: user.status)
+                self.statusLabel.textColor = Helpers.statusToColor(user.status)
             } else {
                 self.statusLabel.text = ""
                 self.nameLabel.text = "Loading..."

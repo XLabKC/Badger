@@ -1,7 +1,7 @@
 import UIKit
 
 
-class ProfileCircle: UIImageView, StatusRecipient {
+class ProfileCircle: UIImageView, UserObserver {
     var status = UserStatus.Unknown
     var user: User?
 
@@ -12,17 +12,22 @@ class ProfileCircle: UIImageView, StatusRecipient {
         self.layoutView()
     }
 
+    deinit {
+        if let user = self.user? {
+            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
+        }
+    }
+
     func setUid(uid: String) {
         UserStore.sharedInstance().getUser(uid, withBlock: self.setUser)
     }
 
     func setUser(user: User) {
         if let user = self.user? {
-            StatusListener.sharedInstance().removeRecipient(self, uid: user.uid)
+            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
         }
-        self.user = user
-        StatusListener.sharedInstance().addRecipient(self, uid: user.uid)
-        self.statusUpdated(user.uid, newStatus: user.status)
+        UserStore.sharedInstance().addObserver(self, uid: user.uid)
+        self.userUpdated(user)
     }
 
     override func layoutSubviews() {
@@ -30,16 +35,12 @@ class ProfileCircle: UIImageView, StatusRecipient {
         self.layoutView()
     }
 
-    func statusUpdated(uid: String, newStatus: UserStatus) {
-        if let user = self.user {
-            if let imagePath = user.profileImages[newStatus] {
-                self.image = UIImage(named: imagePath)
-            }
+    func userUpdated(newUser: User) {
+        self.user = newUser
+        if let imagePath = newUser.profileImages[newUser.status] {
+            self.image = UIImage(named: imagePath)
         }
-        CATransaction.begin()
-        CATransaction.setAnimationDuration(0.3)
-        self.layer.borderColor = Helpers.statusToColor(newStatus).CGColor
-        CATransaction.commit()
+        self.layer.borderColor = Helpers.statusToColor(newUser.status).CGColor
     }
 
     private func layoutView() {

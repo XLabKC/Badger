@@ -1,6 +1,6 @@
 import UIKit
 
-class ProfileHeaderCell: UITableViewCell, StatusRecipient {
+class ProfileHeaderCell: UITableViewCell, UserObserver {
 
     private var uid: String?
 
@@ -15,10 +15,10 @@ class ProfileHeaderCell: UITableViewCell, StatusRecipient {
 
     func setUser(user: User) {
         if let uid = self.uid? {
-            StatusListener.sharedInstance().removeRecipient(self, uid: uid)
+            UserStore.sharedInstance().removeObserver(self, uid: uid)
         }
         self.uid = user.uid
-        StatusListener.sharedInstance().addRecipient(self, uid: user.uid)
+        UserStore.sharedInstance().addObserver(self, uid: user.uid)
 
         self.setStatusLabel(user.status)
         if let nameLabel = self.nameLabel? {
@@ -30,8 +30,8 @@ class ProfileHeaderCell: UITableViewCell, StatusRecipient {
         // TODO: Set profile and background images.
     }
 
-    func statusUpdated(uid: String, newStatus: UserStatus) {
-        self.setStatusLabel(newStatus)
+    func userUpdated(newUser: User) {
+        self.setStatusLabel(newUser.status)
     }
 
     private func setStatusLabel(status: UserStatus) {

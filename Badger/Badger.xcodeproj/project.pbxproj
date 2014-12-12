@@ -34,7 +34,6 @@
 		7B4733B61A1BE31C00D88C00 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733B51A1BE31C00D88C00 /* ProfileHeaderCell.swift */; };
 		7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733B71A1BE35800D88C00 /* StatusSliderCell.swift */; };
 		7B4733BA1A1BE38700D88C00 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733B91A1BE38700D88C00 /* TaskCell.swift */; };
-		7B4733C01A1BECBB00D88C00 /* StatusListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */; };
 		7B4733C11A1C593B00D88C00 /* Brandon_med.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733B41A1BD65000D88C00 /* Brandon_med.otf */; };
 		7B4733C21A1C593B00D88C00 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733B21A1BCEC300D88C00 /* OpenSans-Light.ttf */; };
 		7B4733C31A1C593B00D88C00 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733B31A1BCEC300D88C00 /* OpenSans-Regular.ttf */; };
@@ -133,7 +132,6 @@
 		7B4733B51A1BE31C00D88C00 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
 		7B4733B71A1BE35800D88C00 /* StatusSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusSliderCell.swift; sourceTree = "<group>"; };
 		7B4733B91A1BE38700D88C00 /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
-		7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusListener.swift; sourceTree = "<group>"; };
 		7B4733C41A1D51BB00D88C00 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		7B4733C61A1D6C2600D88C00 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7B4733C81A1D93DE00D88C00 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -494,7 +492,6 @@
 			isa = PBXGroup;
 			children = (
 				7B15CD021A38DA8900519C8E /* Models */,
-				7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */,
 				7B4733C41A1D51BB00D88C00 /* UserStore.swift */,
 				7B15CD031A38EECD00519C8E /* TeamStore.swift */,
 				7B15CD161A3A59AF00519C8E /* ObservableDataStore.swift */,
@@ -668,7 +665,6 @@
 				7B4733D01A1E551600D88C00 /* Team.swift in Sources */,
 				7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */,
 				7B15CD071A3906ED00519C8E /* SelectTeamViewController.swift in Sources */,
-				7B4733C01A1BECBB00D88C00 /* StatusListener.swift in Sources */,
 				7B90E0C81A21427F005EC421 /* BorderedCell.swift in Sources */,
 				7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */,
 				7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */,
