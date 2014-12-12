@@ -25,7 +25,7 @@
                             <constraint firstAttribute="width" constant="54" id="hs1-Wf-ydI"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Team" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="WbP-vf-h7v">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="WbP-vf-h7v">
                         <rect key="frame" x="84" y="19" width="221" height="33"/>
                         <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
                         <color key="textColor" red="0.29803921570000003" green="0.30588235289999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

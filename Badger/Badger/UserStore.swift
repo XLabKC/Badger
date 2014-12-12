@@ -1,4 +1,8 @@
 
+@objc protocol UserObserver: class {
+    func userUpdated(newUser: User)
+}
+
 class UserStore {
     // Accesses the singleton.
     class func sharedInstance() -> UserStore {
@@ -12,97 +16,44 @@ class UserStore {
         return Static.instance!
     }
 
-    private var usersByUid: [String: UserStoreEntry] = [:]
-    private var waitersByUid: [String: [(User -> ())]] = [:]
     private let ref = Firebase(url: Global.FirebaseUsersUrl)
-    private let waitersLock = dispatch_queue_create("waitersLockQueue", nil)
-    private var authUser: AuthUser?
+    private let dataStore: ObservableDataStore<User>
 
     init() {
+        self.dataStore = ObservableDataStore<User>({ (user, observer:AnyObject) in
+            if let userObserver = observer as? UserObserver {
+                userObserver.userUpdated(user)
+            }
+        })
     }
 
+    // Returns the current auth user's uid.
     func getAuthUid() -> String {
         return self.ref.authData.uid
     }
 
+    // Returns a value indicating if this uid is the current auth user's.
     func isAuthUser(uid: String) -> Bool {
         return uid == self.ref.authData.uid
     }
 
-    func getAuthUser(withBlock: AuthUser -> ()) -> AuthUser? {
-        if let user = self.authUser? {
-            withBlock(user)
-            return user
-        }
-        self.getUser(self.ref.authData.uid, withBlock: { user in
-            withBlock(self.authUser!)
-        })
-
-        return nil
-    }
-
-    func getCachedUser(uid: String) -> User? {
-        if let userEntry = self.usersByUid[uid] {
-            return userEntry.user
-        }
-        return nil
+    // Returns the authenticated user.
+    func getAuthUser(withBlock: User -> ()) -> User? {
+        return self.getUser(self.ref.authData.uid, withBlock: withBlock)
     }
 
     // Returns the user immediately if available and passes it to the block, otherwise
     // makes the request and passes the user to the block.
     func getUser(uid: String, withBlock: User -> ()) -> User? {
-        // Return the auth user.
-        if self.authUser != nil && self.isAuthUser(uid) {
-            withBlock(self.authUser!)
-            return self.authUser
-        }
-
-        if let userEntry = self.usersByUid[uid] {
-            if userEntry.expiration.compare(NSDate()) == .OrderedDescending {
-                // Valid user entry. Just return.
-                withBlock(userEntry.user)
-                return userEntry.user
-            } else {
-                self.usersByUid.removeValueForKey(uid)
-            }
-        }
-
-        var needToMakeRequest = false
-
-        dispatch_sync(self.waitersLock) {
-            var waiters = self.waitersByUid[uid]
-            if waiters == nil {
-                waiters = []
-            }
-            needToMakeRequest = waiters!.isEmpty
-            waiters!.append(withBlock)
-            self.waitersByUid[uid] = waiters!
-        }
-
-        if needToMakeRequest {
-            self.ref.childByAppendingPath(uid).observeSingleEventOfType(.Value, withBlock: self.userFetched)
-        }
-
-        return nil
+        return self.dataStore.getEntity(self.createUserRef(uid), withBlock: withBlock)
     }
 
+    // Get users by uids.
     func getUsers(uids: [String], withBlock: [User] -> ()) {
-        if uids.isEmpty {
-            withBlock([])
-            return
-        }
-        var users = [User]()
-        let barrier = Barrier(count: uids.count, done: { _ in
-            withBlock(users)
-        })
-        for uid in uids {
-            self.getUser(uid, withBlock: { user in
-                users.append(user)
-                barrier.decrement()
-            })
-        }
+        self.dataStore.getEntities(uids.map(self.createUserRef), withBlock: withBlock)
     }
 
+    // Gets all users for the set of teams.
     func getUsersByTeams(teams: [Team], withBlock: [User] -> ()) {
         // Find all uids and remove duplicates.
         var uids = [String: Bool]()
@@ -114,6 +65,7 @@ class UserStore {
         self.getUsers(uids.keys.array, withBlock: withBlock)
     }
 
+    // Gets all users for the set of team ids.
     func getUsersByTeamIds(ids: [String], withBlock: [User] -> ()) {
         if ids.isEmpty {
             withBlock([])
@@ -124,42 +76,26 @@ class UserStore {
         })
     }
 
+    // Atomically adjusts the active count.
     func adjustActiveTaskCount(id: String, delta: Int) {
         let activeRef = self.ref.childByAppendingPath(id).childByAppendingPath("active_tasks")
         FirebaseAsync.adjustValueForRef(activeRef, delta: delta)
     }
 
-    private func userFetched(snapshot: FDataSnapshot!) {
-        let uid = snapshot.key
-
-        // Make sure that the snapshot is valid.
-        if !(snapshot.value is NSDictionary) {
-            return
-        }
-        dispatch_sync(self.waitersLock) {
-            var user = User.createUserFromSnapshot(snapshot)
-
-            if self.isAuthUser(uid) {
-                self.authUser = AuthUser.createFromUser(user)
-                user = self.authUser!
-            } else {
-                self.usersByUid[uid] = UserStoreEntry(user: user)
-            }
-            if let waiters = self.waitersByUid[uid]? {
-                for block in waiters {
-                    block(user)
-                }
-            }
-        }
+    // Adds an observer for a uid.
+    func addObserver(observer: UserObserver, uid: String) {
+        self.dataStore.addObserver(observer, ref: self.createUserRef(uid))
     }
-}
 
-class UserStoreEntry {
-    let user: User
-    let expiration: NSDate
-    init(user: User) {
-        self.user = user
-        // Set expiration for 15 minutes.
-        self.expiration = NSDate(timeIntervalSinceNow: 15.0 * 60.0)
+    func removeObserver(observer: UserObserver, uid: String) {
+        self.dataStore.removeObserver(observer, ref: self.createUserRef(uid))
+    }
+
+    private class func sendUpdate(user: User, toObserver: UserObserver) {
+        toObserver.userUpdated(user)
+    }
+
+    private func createUserRef(uid: String) -> Firebase {
+        return self.ref.childByAppendingPath(uid)
     }
 }

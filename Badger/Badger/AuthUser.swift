@@ -30,7 +30,7 @@ class AuthUser: User {
                 initialCall = false
                 return
             }
-            let updatedUser = User.createUserFromSnapshot(snapshot)
+            let updatedUser = User.createFromSnapshot(snapshot) as User
             self.updateFields(updatedUser)
             self.fetchTeams()
             self.notifyListeners()
@@ -99,7 +99,7 @@ class AuthUser: User {
     }
 
     private func teamUpdated(snapshot: FDataSnapshot!) {
-        let team = Team.createTeamFromSnapshot(snapshot)
+        let team = Team.createFromSnapshot(snapshot) as Team
         for id in self.teamIds {
             if id == team.id {
                 // Team is still valid!

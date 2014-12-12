@@ -1,6 +1,6 @@
 import UIKit
 
-class MenuViewController: UITableViewController, AuthUserListener {
+class MenuViewController: UITableViewController, UserObserver {
 
     let logoCellHeight: CGFloat = 46.0
     let contentCellHeight: CGFloat = 72.0
@@ -8,12 +8,12 @@ class MenuViewController: UITableViewController, AuthUserListener {
     let settingCellHeight: CGFloat = 144.0
     let minFooterCellHeight: CGFloat = 72.0
 
-    var authUser: AuthUser?
+    var user: User?
     var teams = [Team]()
 
     deinit {
-        if let user = self.authUser? {
-            user.removeListener(self)
+        if let user = self.user? {
+            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
         }
     }
 
@@ -21,19 +21,7 @@ class MenuViewController: UITableViewController, AuthUserListener {
         let userTableNib = UINib(nibName: "HeaderCell", bundle: nil)
         self.tableView.registerNib(userTableNib, forCellReuseIdentifier: "HeaderCell")
 
-        UserStore.sharedInstance().getAuthUser({ authUser in
-            self.authUser = authUser
-            authUser.addListener(self)
-            self.authUserUpdated(authUser)
-        })
-    }
-
-    func authUserUpdated(user: AuthUser) {
-        self.teams = [Team](user.teamsById.values)
-        self.teams.sort { (a, b) -> Bool in
-            return a.name < b.name
-        }
-        self.tableView.reloadData()
+        UserStore.sharedInstance().addObserver(self, uid: UserStore.sharedInstance().getAuthUid())
     }
 
     // TableViewController Overrides
@@ -118,5 +106,13 @@ class MenuViewController: UITableViewController, AuthUserListener {
             let vc = nav.topViewController as TeamProfileViewController
             vc.setTeam(team)
         }
+    }
+
+    func userUpdated(newUser: User) {
+//        self.teams = [Team](user.teamsById.values)
+//        self.teams.sort { (a, b) -> Bool in
+//            return a.name < b.name
+//        }
+//        self.tableView.reloadData()
     }
 }

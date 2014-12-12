@@ -1,4 +1,4 @@
-class User {
+@objc class User: DataEntity {
     let uid: String
     var firstName: String
     var lastName: String
@@ -33,7 +33,7 @@ class User {
         self.activeTasks = activeTasks
     }
 
-    class func createUserFromSnapshot(userSnapshot: FDataSnapshot) -> User {
+    class func createFromSnapshot(userSnapshot: FDataSnapshot) -> DataEntity {
         let uid = userSnapshot.key
         let first = Helpers.getString(userSnapshot.value, key: "first_name", backup: "John")
         var last = Helpers.getString(userSnapshot.value, key: "last_name", backup: "Doe")

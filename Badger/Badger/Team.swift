@@ -1,4 +1,5 @@
-class Team {
+
+@objc class Team: DataEntity {
     let id: String
     var name: String
     var activeTasks: Int
@@ -39,7 +40,7 @@ class Team {
         return self.ref!
     }
 
-    class func createTeamFromSnapshot(snapshot: FDataSnapshot) -> Team {
+    class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {
         let id = snapshot.key
         let name = Helpers.getString(snapshot.value, key: "name", backup: "No Name")
         let activeTasks = Helpers.getInt(snapshot.value, key: "active_tasks", backup: 0)

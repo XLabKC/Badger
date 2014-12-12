@@ -16,6 +16,7 @@
 		7B15CD091A39080400519C8E /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD081A39080400519C8E /* TeamCell.swift */; };
 		7B15CD0B1A39081600519C8E /* TeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B15CD0A1A39081600519C8E /* TeamCell.xib */; };
 		7B15CD0D1A3922EA00519C8E /* ResizedImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD0C1A3922EA00519C8E /* ResizedImageButton.swift */; };
+		7B15CD171A3A59AF00519C8E /* ObservableDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD161A3A59AF00519C8E /* ObservableDataStore.swift */; };
 		7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */; };
 		7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */; };
 		7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1921A22FC9D003920AD /* AuthUser.swift */; };
@@ -52,17 +53,12 @@
 		7B743A0419F87E4E0075690A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0319F87E4E0075690A /* Images.xcassets */; };
 		7B743A0719F87E4E0075690A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0519F87E4E0075690A /* LaunchScreen.xib */; };
 		7B743A1319F87E4E0075690A /* BadgerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A1219F87E4E0075690A /* BadgerTests.swift */; };
-		7B743A1E19F880110075690A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A1D19F880110075690A /* HomeViewController.swift */; };
 		7B743A2219F884070075690A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2119F884070075690A /* libicucore.dylib */; };
 		7B743A2419F884120075690A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2319F884120075690A /* libc++.dylib */; };
 		7B743A2619F8841B0075690A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2519F8841B0075690A /* CFNetwork.framework */; };
 		7B743A2819F884240075690A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2719F884240075690A /* Security.framework */; };
 		7B743A2A19F8842E0075690A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A2919F8842E0075690A /* SystemConfiguration.framework */; };
 		7B743A2E19F884AC0075690A /* Temp.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A2D19F884AC0075690A /* Temp.m */; };
-		7B743A3619F88B690075690A /* ProfileTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A3519F88B690075690A /* ProfileTableCell.swift */; };
-		7B743A3819F88B800075690A /* ProfileTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A3719F88B800075690A /* ProfileTableCell.xib */; };
-		7B743A3A19F895520075690A /* UserTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A3919F895520075690A /* UserTableCell.xib */; };
-		7B743A3C19F895700075690A /* UserTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A3B19F895700075690A /* UserTableCell.swift */; };
 		7B743A3E19F943D30075690A /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A3D19F943D30075690A /* Global.swift */; };
 		7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B743A3F19F946CD0075690A /* LoginViewController.swift */; };
 		7B743A4219F949B40075690A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B743A4119F949B40075690A /* AddressBook.framework */; };
@@ -117,6 +113,7 @@
 		7B15CD081A39080400519C8E /* TeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
 		7B15CD0A1A39081600519C8E /* TeamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamCell.xib; sourceTree = "<group>"; };
 		7B15CD0C1A3922EA00519C8E /* ResizedImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizedImageButton.swift; sourceTree = "<group>"; };
+		7B15CD161A3A59AF00519C8E /* ObservableDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableDataStore.swift; sourceTree = "<group>"; };
 		7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailAuthorCell.swift; sourceTree = "<group>"; };
 		7B29F1921A22FC9D003920AD /* AuthUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
@@ -159,7 +156,6 @@
 		7B743A0C19F87E4E0075690A /* BadgerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BadgerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B743A1119F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B743A1219F87E4E0075690A /* BadgerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgerTests.swift; sourceTree = "<group>"; };
-		7B743A1D19F880110075690A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7B743A2119F884070075690A /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		7B743A2319F884120075690A /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		7B743A2519F8841B0075690A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -167,10 +163,6 @@
 		7B743A2919F8842E0075690A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7B743A2C19F884AB0075690A /* Badger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Badger-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		7B743A2D19F884AC0075690A /* Temp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Temp.m; path = ../Temp.m; sourceTree = "<group>"; };
-		7B743A3519F88B690075690A /* ProfileTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableCell.swift; sourceTree = "<group>"; };
-		7B743A3719F88B800075690A /* ProfileTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileTableCell.xib; sourceTree = "<group>"; };
-		7B743A3919F895520075690A /* UserTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTableCell.xib; sourceTree = "<group>"; };
-		7B743A3B19F895700075690A /* UserTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableCell.swift; sourceTree = "<group>"; };
 		7B743A3D19F943D30075690A /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		7B743A3F19F946CD0075690A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7B743A4119F949B40075690A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -452,7 +444,6 @@
 				7BF066151A1437A500F3E6A1 /* Splashscreen */,
 				7B4733D41A1E84B100D88C00 /* Menu */,
 				7BF066141A1434DF00F3E6A1 /* Login */,
-				7B743A3019F8863C0075690A /* Home */,
 				7B39D28B1A01F6C00033D4FE /* User Profile */,
 				7B29F1941A263A90003920AD /* Team Profile */,
 				7B9A63551A2E8FA200DF1143 /* Task Edit */,
@@ -461,18 +452,6 @@
 				7B15CD051A3906D100519C8E /* Select Team */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		7B743A3019F8863C0075690A /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				7B743A1D19F880110075690A /* HomeViewController.swift */,
-				7B743A3519F88B690075690A /* ProfileTableCell.swift */,
-				7B743A3719F88B800075690A /* ProfileTableCell.xib */,
-				7B743A3B19F895700075690A /* UserTableCell.swift */,
-				7B743A3919F895520075690A /* UserTableCell.xib */,
-			);
-			name = Home;
 			sourceTree = "<group>";
 		};
 		7B7CAACE1A03E3020028E523 /* Elements */ = {
@@ -521,6 +500,7 @@
 				7B4733BF1A1BECBB00D88C00 /* StatusListener.swift */,
 				7B4733C41A1D51BB00D88C00 /* UserStore.swift */,
 				7B15CD031A38EECD00519C8E /* TeamStore.swift */,
+				7B15CD161A3A59AF00519C8E /* ObservableDataStore.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -625,12 +605,10 @@
 				7B4733C21A1C593B00D88C00 /* OpenSans-Light.ttf in Resources */,
 				7B15CD0B1A39081600519C8E /* TeamCell.xib in Resources */,
 				7B4733C31A1C593B00D88C00 /* OpenSans-Regular.ttf in Resources */,
-				7B743A3A19F895520075690A /* UserTableCell.xib in Resources */,
 				7B743A0219F87E4E0075690A /* Main.storyboard in Resources */,
 				7B5FE4211A33D79F002F24EA /* ApiKeys.plist in Resources */,
 				7B90E0BE1A1F9EA4005EC421 /* HeaderCell.xib in Resources */,
 				7B743A0719F87E4E0075690A /* LaunchScreen.xib in Resources */,
-				7B743A3819F88B800075690A /* ProfileTableCell.xib in Resources */,
 				7B469C521A225E430054019D /* LoadingCell.xib in Resources */,
 				7B743A5719F94A3D0075690A /* GooglePlus.bundle in Resources */,
 				7B743A0419F87E4E0075690A /* Images.xcassets in Resources */,
@@ -669,6 +647,7 @@
 				7B9A63591A2E9C8D00DF1143 /* TaskEditTitleCell.swift in Sources */,
 				7B5FE4231A357BD3002F24EA /* ApiKeys.swift in Sources */,
 				7B90E0C61A2141CD005EC421 /* MenuTeamCell.swift in Sources */,
+				7B15CD171A3A59AF00519C8E /* ObservableDataStore.swift in Sources */,
 				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
 				7B4733D91A1E8AB600D88C00 /* BaseTableViewController.swift in Sources */,
 				7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */,
@@ -679,7 +658,6 @@
 				7B15CD091A39080400519C8E /* TeamCell.swift in Sources */,
 				7B29F19E1A264465003920AD /* TeamMemberCell.swift in Sources */,
 				7B47339F1A1A9B4500D88C00 /* StatusSlider.swift in Sources */,
-				7B743A1E19F880110075690A /* HomeViewController.swift in Sources */,
 				7B90E0C21A206A89005EC421 /* MyProfileCell.swift in Sources */,
 				7B4733D31A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m in Sources */,
 				7B743A3E19F943D30075690A /* Global.swift in Sources */,
@@ -696,13 +674,11 @@
 				7B15CD071A3906ED00519C8E /* SelectTeamViewController.swift in Sources */,
 				7B4733C01A1BECBB00D88C00 /* StatusListener.swift in Sources */,
 				7B90E0C81A21427F005EC421 /* BorderedCell.swift in Sources */,
-				7B743A3C19F895700075690A /* UserTableCell.swift in Sources */,
 				7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */,
 				7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */,
 				7B90E0C01A1F9F6E005EC421 /* HeaderCell.swift in Sources */,
 				7B9A635B1A2E9CC800DF1143 /* TaskEditContentCell.swift in Sources */,
 				7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */,
-				7B743A3619F88B690075690A /* ProfileTableCell.swift in Sources */,
 				7B9A63281A2D641D00DF1143 /* TaskDetailTitleCell.swift in Sources */,
 				7B85DE401A0A92C00074A127 /* Task.swift in Sources */,
 				7B9A63541A2E8F9A00DF1143 /* TaskEditViewController.swift in Sources */,
