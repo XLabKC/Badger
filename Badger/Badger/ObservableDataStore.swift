@@ -114,11 +114,15 @@ class ObservableDataStore<T: DataEntity> {
             var entity = T.createFromSnapshot(snapshot) as T
             self.entryByUrl[url] = Entry(entity: entity)
 
+            // Reply to all waiters.
             if let waiters = self.waitersByUrl[url]? {
                 for block in waiters {
                     block(entity)
                 }
             }
+            self.waitersByUrl[url] = []
+
+            // Update all observers.
             if let observers = self.observersByUrl[url]? {
                 if !observers.isEmpty {
                     var valid = [WeakObserver]()
