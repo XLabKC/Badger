@@ -39,11 +39,17 @@ class TeamStore {
         FirebaseAsync.adjustValueForRef(activeRef, delta: delta)
     }
 
-    func addObserver(observer: UserObserver, id: String) {
+    func addObserver(observer: TeamObserver, id: String) {
         self.dataStore.addObserver(observer, ref: self.createTeamRef(id))
     }
 
-    func removeObserver(observer: UserObserver, id: String) {
+    func addObserver(observer: TeamObserver, ids: [String]) {
+        for id in ids {
+            self.addObserver(observer, id: id)
+        }
+    }
+
+    func removeObserver(observer: TeamObserver, id: String) {
         self.dataStore.removeObserver(observer, ref: self.createTeamRef(id))
     }
 

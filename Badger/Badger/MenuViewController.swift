@@ -109,10 +109,10 @@ class MenuViewController: UITableViewController, UserObserver {
     }
 
     func userUpdated(newUser: User) {
-//        self.teams = [Team](user.teamsById.values)
-//        self.teams.sort { (a, b) -> Bool in
-//            return a.name < b.name
-//        }
-//        self.tableView.reloadData()
+        self.user = newUser
+        TeamStore.sharedInstance().getTeams(newUser.teamIds, withBlock: { teams in
+            self.teams = teams
+            self.tableView.reloadData()
+        })
     }
 }
