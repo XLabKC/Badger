@@ -19,7 +19,6 @@
 		7B15CD171A3A59AF00519C8E /* ObservableDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD161A3A59AF00519C8E /* ObservableDataStore.swift */; };
 		7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */; };
 		7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */; };
-		7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1921A22FC9D003920AD /* AuthUser.swift */; };
 		7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1971A264346003920AD /* TeamProfileViewController.swift */; };
 		7B29F19A1A2643FC003920AD /* TeamHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1991A2643FC003920AD /* TeamHeaderCell.swift */; };
 		7B29F19C1A26443E003920AD /* TeamProfileControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */; };
@@ -116,7 +115,6 @@
 		7B15CD161A3A59AF00519C8E /* ObservableDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableDataStore.swift; sourceTree = "<group>"; };
 		7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailAuthorCell.swift; sourceTree = "<group>"; };
-		7B29F1921A22FC9D003920AD /* AuthUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		7B29F1971A264346003920AD /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
 		7B29F1991A2643FC003920AD /* TeamHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamHeaderCell.swift; sourceTree = "<group>"; };
 		7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileControlCell.swift; sourceTree = "<group>"; };
@@ -257,7 +255,6 @@
 		7B15CD021A38DA8900519C8E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7B29F1921A22FC9D003920AD /* AuthUser.swift */,
 				7B85DE3F1A0A92C00074A127 /* Task.swift */,
 				7B4733CF1A1E551600D88C00 /* Team.swift */,
 				7BCAA5EE1A00A7D4003B55C7 /* User.swift */,
@@ -635,7 +632,6 @@
 				7B4733B61A1BE31C00D88C00 /* ProfileHeaderCell.swift in Sources */,
 				7B29F19C1A26443E003920AD /* TeamProfileControlCell.swift in Sources */,
 				7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */,
-				7B29F1931A22FC9D003920AD /* AuthUser.swift in Sources */,
 				7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */,
 				7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */,
 				7BEC9AB71A38077E00080DDB /* TaskEditSubmitCell.swift in Sources */,
