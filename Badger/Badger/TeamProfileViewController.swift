@@ -1,6 +1,6 @@
 import UIKit
 
-class TeamProfileViewController: UITableViewController {
+class TeamProfileViewController: UITableViewController, TeamObserver {
     private let cellHeights: [CGFloat] = [225.0, 100.0, 112.0]
     private let memberAltBackground = Color.colorize(0xF6F6F6, alpha: 1.0)
 
@@ -28,11 +28,12 @@ class TeamProfileViewController: UITableViewController {
         self.navigationItem.titleView = label
 
         super.viewDidLoad()
-        if self.team != nil {
-            self.loadTeamProfile()
+
+        // If team is already set, start loading the data. See comment below.
+        if let team = self.team {
+            TeamStore.sharedInstance().addObserver(self, id: team.id)
         }
     }
-
 
     func setTeam(team: Team) {
         self.team = team
@@ -42,20 +43,35 @@ class TeamProfileViewController: UITableViewController {
         if let headerCell = self.headerCell? {
             headerCell.setTeam(team)
         }
+
+        // Only start loading team data when the view has loaded. Avoids bug that
+        // breaks menu navigation.
         if (self.isViewLoaded()) {
-            self.loadTeamProfile()
+            TeamStore.sharedInstance().addObserver(self, id: team.id)
         }
     }
 
-    private func loadTeamProfile() {
-        if let team = self.team? {
-            // Prefetch members.
-            UserStore.sharedInstance().getUsers(team.memberIds, withBlock: { users in
-                self.members = users
-                self.isLoadingMembers = false
+    func teamUpdated(newTeam: Team) {
+        self.team = newTeam
+        UserStore.sharedInstance().getUsers(newTeam.memberIds, withBlock: { members in
+            let oldMembers = self.members
+            self.members = members
+            self.isLoadingMembers = false
+
+            if oldMembers.isEmpty {
                 self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Left)
-            })
-        }
+            } else {
+                var updates = Helpers.diffArrays(oldMembers, end: members, section: 1, compare: { (a, b) -> Bool in
+                    return a.uid == b.uid
+                })
+                if !updates.inserts.isEmpty || !updates.deletes.isEmpty {
+                    self.tableView.beginUpdates()
+                    self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Left)
+                    self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
+                    self.tableView.endUpdates()
+                }
+            }
+        })
     }
 
     // TableViewController Overrides

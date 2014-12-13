@@ -146,4 +146,70 @@ class Helpers {
         NSUserDefaults.standardUserDefaults().setObject(auth.accessToken, forKey: "access_token")
         NSUserDefaults.standardUserDefaults().setObject(auth.expirationDate, forKey: "access_token_expiration")
     }
+
+    class func diffArrays<T>(start: [T], end: [T], section: Int, compare: (T, T) -> Bool) -> (inserts: [NSIndexPath], deletes: [NSIndexPath]) {
+        var inserts = [NSIndexPath]()
+        var deletes = [NSIndexPath]()
+        var startIndex = 0
+        var withDeletes = [T]()
+
+        for (i, a) in enumerate(start) {
+            var found = false
+            for var j = startIndex; j < end.count; j++ {
+                if compare(a, end[j]) {
+                    startIndex = j
+                    withDeletes.append(a)
+                    found = true
+                    break
+                }
+            }
+            if !found {
+                deletes.append(NSIndexPath(forRow: i, inSection: section))
+            }
+        }
+
+        var cur = 0
+        for (i, b) in enumerate(end) {
+            if cur < withDeletes.count && compare(b, withDeletes[cur]) {
+                cur++
+            } else {
+                inserts.append(NSIndexPath(forRow: i, inSection: section))
+            }
+        }
+        return (inserts: inserts, deletes: deletes)
+    }
+
+//    class func diffArrays<T>(start: [T], end: [T], section: Int, compare: (T, T) -> Bool) -> (inserts: [NSIndexPath], deletes: [NSIndexPath], movesFrom: [NSIndexPath], movesTo: [NSIndexPath]) {
+//        var accounted = [Bool](count: end.count, repeatedValue: false)
+//        var inserts = [NSIndexPath]()
+//        var deletes = [NSIndexPath]()
+//        var movesFrom = [NSIndexPath]()
+//        var movesTo = [NSIndexPath]()
+//
+//        for (i, a) in enumerate(start) {
+//            if compare(a, end[i]) {
+//                accounted[i] = true
+//            } else {
+//                // Item has moved or does not exist.
+//                for (j, b) in enumerate(end) {
+//                    // Item has moved.
+//                    if compare(a, b) {
+//                        movesFrom.append(NSIndexPath(forRow: i, inSection: section))
+//                        movesTo.append(NSIndexPath(forRow: j, inSection: section))
+//                        accounted[j] = true
+//                        continue
+//                    }
+//                }
+//                // Item has been deleted.
+//                deletes.append(NSIndexPath(forRow: i, inSection: section))
+//            }
+//        }
+//        for (i, val) in enumerate(accounted) {
+//            if !accounted[i] {
+//                inserts.append(NSIndexPath(forRow: i, inSection: section))
+//            }
+//        }
+//
+//        return (inserts: inserts, deletes: deletes, movesFrom: movesFrom, movesTo: movesTo)
+//    }
 }

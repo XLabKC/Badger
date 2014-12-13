@@ -20,76 +20,127 @@ class MenuViewController: UITableViewController, UserObserver {
     override func viewDidLoad() {
         let userTableNib = UINib(nibName: "HeaderCell", bundle: nil)
         self.tableView.registerNib(userTableNib, forCellReuseIdentifier: "HeaderCell")
-
         UserStore.sharedInstance().addObserver(self, uid: UserStore.sharedInstance().getAuthUid())
+    }
+
+    func userUpdated(newUser: User) {
+        self.user = newUser
+        TeamStore.sharedInstance().getTeams(newUser.teamIds, withBlock: { teams in
+            let oldTeams = self.teams
+            self.teams = teams
+            if oldTeams.isEmpty {
+                self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Left)
+            } else {
+                // Determine what updates need to be made.
+                var updates = Helpers.diffArrays(oldTeams, end: teams, section: 1, compare: { (a, b) -> Bool in
+                    return a.id == b.id
+                })
+                // Apply the updates to the table view.
+                self.tableView.beginUpdates()
+                if !updates.deletes.isEmpty {
+                    self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Left)
+                }
+                if !updates.inserts.isEmpty {
+                    self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
+                }
+                self.tableView.endUpdates()
+            }
+        })
     }
 
     // TableViewController Overrides
 
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Logo + Header + MyProfile + Header + Teams + Header + Settings + Logo
-        let teamCount = self.teams.isEmpty ? 1 : self.teams.count
-        return 4 + teamCount + 3
+        switch section {
+        case 0:
+            // Logo + Header + My Profile + Header
+            return 4
+        case 1:
+            // Teams
+            return self.teams.isEmpty ? 1 : self.teams.count
+        default:
+            // Header + Settings + Logo
+            return 3
+        }
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let teamCount = self.teams.isEmpty ? 1 : self.teams.count
-        if (indexPath.row == 0) {
-            return self.logoCellHeight
-        } else if (indexPath.row == 1 || indexPath.row == 3 || indexPath.row == 4 + teamCount) {
-            return self.headerCellHeight
-        } else if (indexPath.row == teamCount + 5) {
-            return self.settingCellHeight
-        } else if (indexPath.row > teamCount + 5) {
-            let contentCellsHeight = self.contentCellHeight * CGFloat(teamCount + 1)
-            let headerCellsHeight = self.headerCellHeight * 3
-            let contentHeight = self.logoCellHeight + contentCellsHeight + headerCellsHeight + self.settingCellHeight
-            var height = tableView.frame.height - contentHeight - 20
-            return height < self.minFooterCellHeight ? self.minFooterCellHeight : height
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                return self.logoCellHeight
+            case 2:
+                return self.contentCellHeight
+            default:
+                return self.headerCellHeight
+            }
+        case 1:
+            return self.contentCellHeight
+        default:
+            switch indexPath.row {
+            case 0:
+                return self.headerCellHeight
+            case 1:
+                return self.settingCellHeight
+            default:
+                let teamCount = self.teams.isEmpty ? 1 : self.teams.count
+                let contentCellsHeight = self.contentCellHeight * CGFloat(teamCount + 1)
+                let headerCellsHeight = self.headerCellHeight * 3
+                let contentHeight = self.logoCellHeight + contentCellsHeight + headerCellsHeight + self.settingCellHeight
+                var height = tableView.frame.height - contentHeight - 20
+                return height < self.minFooterCellHeight ? self.minFooterCellHeight : height
+            }
         }
-        return self.contentCellHeight
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let teamCount = self.teams.isEmpty ? 1 : self.teams.count
-
-        if (indexPath.row == 0) {
-            return tableView.dequeueReusableCellWithIdentifier("LogoCell") as UITableViewCell
-        } else if (indexPath.row == 1 || indexPath.row == 3 || indexPath.row == 4 + teamCount) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
-            cell.labelColor = Color.colorize(0x929292, alpha: 1)
-            switch (indexPath.row) {
-            case 1:
-                cell.title = "MY PROFILE"
-            case 3:
-                cell.title = "MY TEAMS"
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                return tableView.dequeueReusableCellWithIdentifier("LogoCell") as UITableViewCell
+            case 1, 3:
+                let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
+                cell.labelColor = Color.colorize(0x929292, alpha: 1)
+                cell.title = indexPath.row == 1 ? "MY PROFILE" : "MY TEAM"
+                return cell
             default:
-                cell.title = "SETTINGS"
+                let cell = tableView.dequeueReusableCellWithIdentifier("MyProfileCell") as MyProfileCell
+                UserStore.sharedInstance().getAuthUser({ user in
+                    cell.setUser(user)
+                })
+                return cell
             }
-            return cell
-        } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("MyProfileCell") as MyProfileCell
-            UserStore.sharedInstance().getAuthUser({ user in
-                cell.setUser(user)
-            })
-            return cell
-        } else if (indexPath.row < teamCount + 4) {
+        case 1:
             if self.teams.isEmpty {
                 return tableView.dequeueReusableCellWithIdentifier("MenuNoTeamsCell") as UITableViewCell
             }
             let cell = tableView.dequeueReusableCellWithIdentifier("MenuTeamCell") as MenuTeamCell
-            let index = indexPath.row - 4
-            cell.setTeam(self.teams[index])
-            cell.setTopBorder(index == 0 ? .Full : .None)
+            cell.setTeam(self.teams[indexPath.row])
+            cell.setTopBorder(indexPath.row == 0 ? .Full : .None)
             return cell
-        } else if (indexPath.row == teamCount + 5) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("MenuSettingsCell") as MenuSettingsCell
-            UserStore.sharedInstance().getAuthUser({ user in
-                cell.setUser(user)
-            })
-            return cell
+        default:
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
+                cell.labelColor = Color.colorize(0x929292, alpha: 1)
+                cell.title = "SETTINGS"
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCellWithIdentifier("MenuSettingsCell") as MenuSettingsCell
+                UserStore.sharedInstance().getAuthUser({ user in
+                    cell.setUser(user)
+                })
+                return cell
+            default:
+                return tableView.dequeueReusableCellWithIdentifier("MenuFooterCell") as UITableViewCell
+            }
         }
-        return tableView.dequeueReusableCellWithIdentifier("MenuFooterCell") as UITableViewCell
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -106,13 +157,5 @@ class MenuViewController: UITableViewController, UserObserver {
             let vc = nav.topViewController as TeamProfileViewController
             vc.setTeam(team)
         }
-    }
-
-    func userUpdated(newUser: User) {
-        self.user = newUser
-        TeamStore.sharedInstance().getTeams(newUser.teamIds, withBlock: { teams in
-            self.teams = teams
-            self.tableView.reloadData()
-        })
     }
 }

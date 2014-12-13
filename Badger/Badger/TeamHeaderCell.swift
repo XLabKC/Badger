@@ -1,6 +1,6 @@
 import UIKit
 
-class TeamHeaderCell: UITableViewCell {
+class TeamHeaderCell: UITableViewCell, TeamObserver {
     private var hasAwakened = false
     private var team: Team?
 
@@ -15,18 +15,29 @@ class TeamHeaderCell: UITableViewCell {
         self.updateView()
     }
 
-    func setTeam(team: Team) {
-        self.team = team
-        if self.hasAwakened {
-            self.updateView()
+    deinit {
+        if let team = self.team? {
+            TeamStore.sharedInstance().removeObserver(self, id: team.id)
         }
     }
 
+    func setTeam(team: Team) {
+        self.team = team
+        TeamStore.sharedInstance().addObserver(self, id: team.id)
+    }
+
+    func teamUpdated(newTeam: Team) {
+        self.team = newTeam
+        self.updateView()
+    }
+
     private func updateView() {
-        if let team = self.team? {
-            self.nameLabel.text = team.name
-            self.metaLabel.text = team.getMeta()
-            // TODO: set meta and team circle
+        if self.hasAwakened {
+            if let team = self.team? {
+                self.nameLabel.text = team.name
+                self.metaLabel.text = team.getMeta()
+                // TODO: set team circle
+            }
         }
     }
 }
