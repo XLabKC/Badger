@@ -1,12 +1,16 @@
 import UIKit
 
-class ProfileViewController: UITableViewController {
+class ProfileViewController: UITableViewController, HeaderCellDelegate {
 
-    private let cellHeights: [CGFloat] = [225.0, 100.0, 72.0]
+    private let cellHeights: [CGFloat] = [225.0, 100.0, 40.0, 72.0]
     private let titleLabel = Helpers.createTitleLabel("My Profile")
 
-    private var tasks = [Task]()
-    private var isLoadingTasks = true
+    private var activeTasks = [Task]()
+    private var completedTasks = [Task]()
+    private var isLoadingActiveTasks = true
+    private var isLoadingCompletedTasks = false
+    private var isShowingCompletedTasks = false
+    private var hasLoadedCompletedTasks = false
     private var statusSliderCell: StatusSliderCell?
     private var profileHeaderCell: ProfileHeaderCell?
     private var profileControlsCell: ProfileControlsCell?
@@ -28,9 +32,12 @@ class ProfileViewController: UITableViewController {
             }
         }
 
-        // Register loading cell.
+        // Register cells.
         let loadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)
         self.tableView.registerNib(loadingCellNib, forCellReuseIdentifier: "LoadingCell")
+
+        let headerCellNib = UINib(nibName: "HeaderCell", bundle: nil)
+        self.tableView.registerNib(headerCellNib, forCellReuseIdentifier: "HeaderCell")
 
         // Set up navigation bar.
         self.navigationItem.titleView = self.titleLabel
@@ -47,7 +54,7 @@ class ProfileViewController: UITableViewController {
 
     func setUser(user: User) {
         self.user = user
-        self.isLoadingTasks = true
+        self.isLoadingActiveTasks = true
 
         // Update table cells if they have already initialized.
         if let profileHeader = self.profileHeaderCell? {
@@ -71,21 +78,21 @@ class ProfileViewController: UITableViewController {
         // Load the users tasks.
         if let user = self.user? {
             let ref = Firebase(url: Global.FirebaseTasksUrl).childByAppendingPath(user.uid)
-            FirebaseAsync.observeEventType(ref, eventType: .ChildAdded, forEach: { (snapshot, isNew) -> () in
-                if !isNew {
-                    self.tasks.append(Task.createFromSnapshot(snapshot) as Task)
+            TaskStore.sharedInstance().getActiveTasksForUser(user, withBlock: { tasks in
+                // On completion, prefetch users before loading table cells.
+                self.activeTasks = tasks
+                var uids = [String: Bool]()
+                for task in self.activeTasks {
+                    uids[task.author] = true
                 }
-                }) { () -> () in
-                    // On completion, prefetch users before loading table cells.
-                    var uids = [String]() // Figure out how to set capacity
-                    for task in self.tasks {
-                        uids.append(task.author)
-                    }
-                    UserStore.sharedInstance().getUsers(uids, withBlock: { _ in
-                        self.isLoadingTasks = false
-                        self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Left)
-                    })
-            }
+                UserStore.sharedInstance().getUsers(uids.keys.array, withBlock: { _ in
+                    self.isLoadingActiveTasks = false
+                    var set = NSMutableIndexSet(index: 1)
+                    set.addIndex(2)
+                    self.tableView.reloadSections(set, withRowAnimation: .Bottom)
+                })
+            })
+
             if UserStore.sharedInstance().isAuthUser(user.uid) {
                 self.titleLabel.text = "My Profile"
             } else {
@@ -97,16 +104,32 @@ class ProfileViewController: UITableViewController {
     // TableViewController Overrides
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 4
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            // Header + Controls
+            // Header + Controls.
             return 2
+        case 1:
+            // Active tasks.
+            return self.activeTasks.isEmpty ? 1 : self.activeTasks.count
+        case 2:
+            // Show completed tasks header only if we aren't loading the active tasks.
+            if self.isLoadingActiveTasks {
+                return 0
+            }
+            return 1
         default:
-            return self.tasks.isEmpty ? 1 : self.tasks.count
+            // Completed tasks.
+            if !self.isShowingCompletedTasks {
+                return 0
+            }
+            if self.isLoadingCompletedTasks {
+                return 1
+            }
+            return self.completedTasks.count
         }
     }
 
@@ -114,6 +137,8 @@ class ProfileViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             return self.cellHeights[indexPath.row]
+        case 2:
+            return self.cellHeights[2]
         default:
             return self.cellHeights.last!
         }
@@ -145,14 +170,32 @@ class ProfileViewController: UITableViewController {
                 }
             }
             return self.statusSliderCell!
-        default:
-            if self.isLoadingTasks {
+        case 1:
+            if self.isLoadingActiveTasks {
                 return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
-            } else if self.tasks.count == 0 {
+            } else if self.activeTasks.count == 0 {
                 return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as UITableViewCell
             }
             let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
-            cell.setTask(self.tasks[indexPath.row])
+            cell.setTask(self.activeTasks[indexPath.row])
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
+            cell.delegate = self
+            cell.buttonText = self.isShowingCompletedTasks ? "HIDE" : "SHOW"
+            if let user = self.user? {
+                cell.title = "COMPLETED TASKS (\(user.completedTasks))"
+                cell.showButton = user.completedTasks > 0
+            }
+            return cell
+        default:
+            if self.isLoadingCompletedTasks {
+                return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
+            } else if self.activeTasks.count == 0 {
+                return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as UITableViewCell
+            }
+            let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
+            cell.setTask(self.completedTasks[indexPath.row])
             return cell
         }
     }
@@ -171,6 +214,23 @@ class ProfileViewController: UITableViewController {
             if let user = self.user? {
                 vc.setOwner(user)
             }
+        }
+    }
+
+    func headerCellButtonPressed(cell: HeaderCell) {
+        if self.isShowingCompletedTasks {
+            // Hide completed tasks.
+            self.isShowingCompletedTasks = false
+            cell.buttonText = "SHOW"
+            self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: UITableViewRowAnimation.Top)
+        } else {
+            self.isShowingCompletedTasks = true
+            cell.buttonText = "HIDE"
+            if !self.hasLoadedCompletedTasks {
+                self.isLoadingCompletedTasks = true
+                // Load completed tasks
+            }
+            self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: UITableViewRowAnimation.Top)
         }
     }
 }

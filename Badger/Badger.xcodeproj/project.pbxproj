@@ -38,7 +38,6 @@
 		7B4733C21A1C593B00D88C00 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733B21A1BCEC300D88C00 /* OpenSans-Light.ttf */; };
 		7B4733C31A1C593B00D88C00 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733B31A1BCEC300D88C00 /* OpenSans-Regular.ttf */; };
 		7B4733C51A1D51BB00D88C00 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733C41A1D51BB00D88C00 /* UserStore.swift */; };
-		7B4733C71A1D6C2600D88C00 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4733C61A1D6C2600D88C00 /* Firebase.framework */; };
 		7B4733CA1A1D93DE00D88C00 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733C91A1D93DE00D88C00 /* SWRevealViewController.m */; };
 		7B4733D01A1E551600D88C00 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733CF1A1E551600D88C00 /* Team.swift */; };
 		7B4733D31A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733D21A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m */; };
@@ -87,6 +86,8 @@
 		7B9A635B1A2E9CC800DF1143 /* TaskEditContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */; };
 		7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */; };
 		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
+		7BD0F9C61A3E36B400BDF70D /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD0F9C51A3E36B400BDF70D /* Firebase.framework */; };
+		7BD0F9C81A3E442400BDF70D /* TaskDetailCompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD0F9C71A3E442400BDF70D /* TaskDetailCompleteCell.swift */; };
 		7BD554CD1A3E04A8003D8BD0 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */; };
 		7BEC9AB71A38077E00080DDB /* TaskEditSubmitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */; };
 		7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */; };
@@ -134,7 +135,6 @@
 		7B4733B71A1BE35800D88C00 /* StatusSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusSliderCell.swift; sourceTree = "<group>"; };
 		7B4733B91A1BE38700D88C00 /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		7B4733C41A1D51BB00D88C00 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
-		7B4733C61A1D6C2600D88C00 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7B4733C81A1D93DE00D88C00 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		7B4733C91A1D93DE00D88C00 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		7B4733CF1A1E551600D88C00 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -190,6 +190,8 @@
 		7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditContentCell.swift; sourceTree = "<group>"; };
 		7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditPriorityCell.swift; sourceTree = "<group>"; };
 		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7BD0F9C51A3E36B400BDF70D /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
+		7BD0F9C71A3E442400BDF70D /* TaskDetailCompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailCompleteCell.swift; sourceTree = "<group>"; };
 		7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 		7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditSubmitCell.swift; sourceTree = "<group>"; };
 		7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
@@ -213,7 +215,7 @@
 				7B743A4619F949C90075690A /* Foundation.framework in Frameworks */,
 				7B743A4419F949BE0075690A /* AssetsLibrary.framework in Frameworks */,
 				7B743A4219F949B40075690A /* AddressBook.framework in Frameworks */,
-				7B4733C71A1D6C2600D88C00 /* Firebase.framework in Frameworks */,
+				7BD0F9C61A3E36B400BDF70D /* Firebase.framework in Frameworks */,
 				7B743A2619F8841B0075690A /* CFNetwork.framework in Frameworks */,
 				7B743A2419F884120075690A /* libc++.dylib in Frameworks */,
 				7B743A2219F884070075690A /* libicucore.dylib in Frameworks */,
@@ -277,6 +279,7 @@
 				7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */,
 				7B9A63271A2D641D00DF1143 /* TaskDetailTitleCell.swift */,
 				7B9A63291A2D642800DF1143 /* TaskDetailContentCell.swift */,
+				7BD0F9C71A3E442400BDF70D /* TaskDetailCompleteCell.swift */,
 			);
 			name = "Task Detail";
 			sourceTree = "<group>";
@@ -412,7 +415,7 @@
 		7B743A2B19F884840075690A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				7B4733C61A1D6C2600D88C00 /* Firebase.framework */,
+				7BD0F9C51A3E36B400BDF70D /* Firebase.framework */,
 				7B743A5319F94A3D0075690A /* GoogleOpenSource.framework */,
 				7B743A5419F94A3D0075690A /* GooglePlus.bundle */,
 				7B743A5519F94A3D0075690A /* GooglePlus.framework */,
@@ -631,6 +634,7 @@
 				7B4733BA1A1BE38700D88C00 /* TaskCell.swift in Sources */,
 				7B4733B61A1BE31C00D88C00 /* ProfileHeaderCell.swift in Sources */,
 				7B29F19C1A26443E003920AD /* TeamProfileControlCell.swift in Sources */,
+				7BD0F9C81A3E442400BDF70D /* TaskDetailCompleteCell.swift in Sources */,
 				7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */,
 				7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */,
 				7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */,

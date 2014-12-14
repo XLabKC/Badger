@@ -36,6 +36,42 @@ class TaskStore {
         return self.dataStore.getEntity(self.createTaskRef(uid, id: id), withBlock: withBlock)
     }
 
+    func getActiveTasksForUser(user: User, withBlock: [Task] -> ()) {
+        var tasks = [Task]()
+        // Immediately return if this user does not have any active tasks.
+        if user.activeTasks < 1 {
+            return withBlock(tasks)
+        }
+        let tasksRef = self.ref.childByAppendingPath(user.uid)
+        let queryRef = tasksRef.queryOrderedByPriority().queryLimitedToFirst(UInt(user.activeTasks))
+        queryRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let children = snapshot.children.allObjects as? [FDataSnapshot] {
+                for child in children {
+                    tasks.append(Task.createFromSnapshot(child) as Task)
+                }
+            }
+            withBlock(tasks)
+        })
+    }
+
+    func getCompletedTasksForUser(user: User, withBlock: [Task] -> ()) {
+        var tasks = [Task]()
+        // Immediately return if this user does not have any active tasks.
+        if user.completedTasks < 1 {
+            return withBlock(tasks)
+        }
+        let tasksRef = self.ref.childByAppendingPath(user.uid)
+        let queryRef = tasksRef.queryOrderedByPriority().queryLimitedToLast(UInt(user.completedTasks))
+        queryRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let children = snapshot.children.allObjects as? [FDataSnapshot] {
+                for child in children {
+                    tasks.append(Task.createFromSnapshot(child) as Task)
+                }
+            }
+            withBlock(tasks)
+        })
+    }
+
     // Adds an observer for a uid.
 //    func addObserver(observer: UserObserver, uid: String) {
 //        self.dataStore.addObserver(observer, ref: self.createUserRef(uid))

@@ -5,7 +5,6 @@ class FirebaseAsync {
     var forEach: ((FDataSnapshot, isNew: Bool) -> ())?
     var afterInitial: (() -> ())?
 
-
     init(firebase: Firebase) {
         self.firebase = firebase
     }

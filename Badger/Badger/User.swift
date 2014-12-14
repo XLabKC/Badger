@@ -15,8 +15,9 @@
     var ref: Firebase?
     var timestamp: NSDate
     var activeTasks: Int
+    var completedTasks: Int
 
-    init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus: String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], activeTasks: Int, ref: Firebase?)
+    init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus: String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], activeTasks: Int, completedTasks: Int, ref: Firebase?)
     {
         self.uid = uid
         self.firstName = firstName
@@ -31,6 +32,7 @@
         self.teamIds = teamIds
         self.ref = ref
         self.activeTasks = activeTasks
+        self.completedTasks = completedTasks
     }
 
     class func createFromSnapshot(userSnapshot: FDataSnapshot) -> DataEntity {
@@ -40,6 +42,7 @@
         let status = Helpers.getString(userSnapshot.value, key: "status", backup: "unknown")
         let email = Helpers.getString(userSnapshot.value, key: "email", backup: "Unknown")
         let activeTasks = Helpers.getInt(userSnapshot.value, key: "active_tasks", backup: 0)
+        let completedTasks = Helpers.getInt(userSnapshot.value, key: "completed_tasks", backup: 0)
         var userStatus = UserStatus(rawValue: status)
         if userStatus == nil {
             userStatus = .Unknown
@@ -75,7 +78,7 @@
                 }
             }
         }
-        let user = User(uid: uid, firstName: first, lastName: last, email: email, status: userStatus!, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, activeTasks: activeTasks, ref: userSnapshot.ref)
+        let user = User(uid: uid, firstName: first, lastName: last, email: email, status: userStatus!, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, activeTasks: activeTasks, completedTasks: completedTasks, ref: userSnapshot.ref)
         return user
     }
 }

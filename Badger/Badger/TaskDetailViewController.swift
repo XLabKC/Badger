@@ -1,6 +1,6 @@
 import UIKit
 
-class TaskDetailViewController: UITableViewController {
+class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDelegate {
     private let authorCellHeight = CGFloat(72.0)
     private let headerCellHeight = CGFloat(40.0)
     private let titleCellHeight = CGFloat(72.0)
@@ -78,6 +78,29 @@ class TaskDetailViewController: UITableViewController {
             return getContentCell()
         default:
             return tableView.dequeueReusableCellWithIdentifier("TaskDetailCompleteCell") as UITableViewCell
+        }
+    }
+
+    func detailCompleteCellPressed(cell: TaskDetailCompleteCell) {
+        if let task = self.task? {
+            let combinedId = TaskStore.combineId(task.owner, id: task.id)
+            let isActive = !task.active
+            let ref = task.getRef()
+            ref.childByAppendingPath("active").setValue(isActive)
+
+            // Update Firebase priority.
+            let mult = Task.getFirebasePriorityMult(task.priority, isActive: isActive)
+            let priority = NSDate.javascriptTimestampFromDate(task.timestamp).doubleValue * mult
+            ref.setPriority(priority)
+
+            UserStore.sharedInstance().adjustActiveTaskCount(task.owner, delta: isActive ? 1 : -1)
+            UserStore.sharedInstance().adjustCompletedTaskCount(task.owner, delta: isActive ? -1 : 1)
+
+            if isActive {
+                TeamStore.sharedInstance().addActiveTask(task.team, combinedId: combinedId)
+            } else {
+                TeamStore.sharedInstance().removeActiveTask(task.team, combinedId: combinedId)
+            }
         }
     }
 

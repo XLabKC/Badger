@@ -251,7 +251,9 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             "timestamp": timestamp
         ]
 
-        taskRef.setValue(taskValues, withCompletionBlock: { (error, ref) in
+        let mult = Task.getFirebasePriorityMult(self.getPriority(), isActive: isActive)
+        let priority = timestamp.doubleValue * mult
+        taskRef.setValue(taskValues, andPriority: priority, withCompletionBlock: { (err, ref) in
             // TODO: handle error
             var combinedKey = "\(taskOwner.uid)^\(taskRef.key)"
 

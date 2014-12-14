@@ -82,6 +82,12 @@ class UserStore {
         FirebaseAsync.adjustValueForRef(activeRef, delta: delta)
     }
 
+    // Atomically adjusts the completed count.
+    func adjustCompletedTaskCount(id: String, delta: Int) {
+        let activeRef = self.ref.childByAppendingPath(id).childByAppendingPath("completed_tasks")
+        FirebaseAsync.adjustValueForRef(activeRef, delta: delta)
+    }
+
     // Adds an observer for a uid.
     func addObserver(observer: UserObserver, uid: String) {
         self.dataStore.addObserver(observer, ref: self.createUserRef(uid))

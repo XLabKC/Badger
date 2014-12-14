@@ -7,9 +7,9 @@
     let content: String
     let priority: TaskPriority
     let timestamp: NSDate
-    var active: Bool
+    let active: Bool
     var ref: Firebase?
-    var timestampString: String?
+    private var timestampString: String?
 
     init(id: String, owner: String, team: String, author: String, title: String, content: String, priority: TaskPriority, active: Bool, timestamp: NSDate)
     {
@@ -22,6 +22,15 @@
         self.priority = priority
         self.active = active
         self.timestamp = timestamp
+    }
+
+    func getRef() -> Firebase {
+        if let ref = self.ref {
+            return ref
+        }
+        self.ref = Firebase(url: Global.FirebaseTasksUrl).childByAppendingPath(self.owner)
+            .childByAppendingPath(self.id)
+        return self.ref!
     }
 
     func getTimestampString() -> String {
@@ -51,5 +60,21 @@
         let task = Task(id: id, owner: owner, team: team, author: author, title: title, content: content, priority: taskPriority!, active: active, timestamp: timestamp)
         task.ref = snapshot.ref
         return task
+    }
+
+    class func getFirebasePriorityMult(priority: TaskPriority, isActive: Bool) -> Double {
+        if !isActive {
+            return 1.0
+        }
+        switch priority {
+        case .High:
+            return 1.0 / 8.0
+        case .Medium:
+            return 1.0 / 4.0
+        case .Low:
+            return 1.0 / 2.0
+        default:
+            return 1.0
+        }
     }
 }

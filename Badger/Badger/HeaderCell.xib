@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Brandon_med.otf">
+            <string>BrandonGrotesque-Medium</string>
             <string>BrandonGrotesque-Medium</string>
         </mutableArray>
     </customFonts>
@@ -19,24 +20,39 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LtL-rU-sk2">
-                        <rect key="frame" x="13" y="9.5" width="299" height="20.5"/>
+                        <rect key="frame" x="13" y="10" width="244" height="20.5"/>
                         <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0WE-ch-k9g">
+                        <rect key="frame" x="254" y="3.5" width="51" height="33"/>
+                        <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="14"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="0.55686274509803924" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="buttonPressed:" destination="LUQ-8u-vqu" eventType="touchUpInside" id="wa6-vo-3bd"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="LtL-rU-sk2" secondAttribute="centerY" constant="0.25" id="BYO-t0-HiI"/>
+                    <constraint firstAttribute="centerY" secondItem="0WE-ch-k9g" secondAttribute="centerY" id="CuY-qy-F0j"/>
+                    <constraint firstItem="0WE-ch-k9g" firstAttribute="leading" secondItem="LtL-rU-sk2" secondAttribute="trailing" constant="-3" id="Icz-VN-mmz"/>
+                    <constraint firstItem="0WE-ch-k9g" firstAttribute="trailing" secondItem="Zs8-6l-qgh" secondAttribute="trailingMargin" constant="-7" id="l5a-ij-QDZ"/>
                     <constraint firstItem="LtL-rU-sk2" firstAttribute="leading" secondItem="Zs8-6l-qgh" secondAttribute="leadingMargin" constant="5" id="mqk-WF-mpd"/>
-                    <constraint firstItem="LtL-rU-sk2" firstAttribute="trailing" secondItem="Zs8-6l-qgh" secondAttribute="trailingMargin" id="o3E-fJ-JXG"/>
+                    <constraint firstItem="LtL-rU-sk2" firstAttribute="trailing" secondItem="Zs8-6l-qgh" secondAttribute="trailingMargin" constant="-55" id="o3E-fJ-JXG"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="headerButton" destination="0WE-ch-k9g" id="A04-Za-E1v"/>
                 <outlet property="headerLabel" destination="LtL-rU-sk2" id="t0i-Ai-SsH"/>
             </connections>
-            <point key="canvasLocation" x="246" y="335"/>
+            <point key="canvasLocation" x="246" y="334.5"/>
         </tableViewCell>
     </objects>
 </document>

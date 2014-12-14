@@ -850,7 +850,7 @@
                                     <outlet property="contentTextView" destination="N7n-Tb-nW0" id="YCG-ge-tCJ"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskDetailCompleteCell" rowHeight="92" id="RQG-EO-1Gu">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskDetailCompleteCell" rowHeight="92" id="RQG-EO-1Gu" customClass="TaskDetailCompleteCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RQG-EO-1Gu" id="d2x-LP-b7r">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -868,6 +868,9 @@
                                             <state key="selected" title="Completed" backgroundImage="GrayButton">
                                                 <color key="titleColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="buttonPressed:" destination="RQG-EO-1Gu" eventType="touchUpInside" id="h0C-QB-3xJ"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
