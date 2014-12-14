@@ -1,6 +1,9 @@
 import UIKit
 
 class TaskDetailContentCell: BorderedCell {
+    private let minVerticalPadding: CGFloat = 40.0
+    private let minTextHeight: CGFloat = 24.0
+    
     private var hasAwakened = false
     private var task: Task?
 
@@ -9,20 +12,22 @@ class TaskDetailContentCell: BorderedCell {
     override func awakeFromNib() {
         self.hasAwakened = true
         self.updateView()
-        self.setBottomBorder(.Full)
-        self.setBorderColor(Color.colorize(0xE1E1E1, alpha: 1))
     }
 
     func setTask(task: Task) {
         self.task = task
-        if self.hasAwakened {
-            self.updateView()
-        }
+        self.updateView()
+    }
+
+    func calculateCellHeight() -> CGFloat {
+        return Helpers.calculateTextViewHeight(self.contentTextView, minVerticalPadding: self.minVerticalPadding, minTextHeight: self.minTextHeight)
     }
 
     private func updateView() {
-        if let task = self.task? {
-            contentTextView.text = task.content
+        if self.hasAwakened {
+            if let task = self.task? {
+                self.contentTextView.text = task.content
+            }
         }
     }
 }

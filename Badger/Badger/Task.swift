@@ -9,6 +9,7 @@
     let timestamp: NSDate
     var active: Bool
     var ref: Firebase?
+    var timestampString: String?
 
     init(id: String, owner: String, team: String, author: String, title: String, content: String, priority: TaskPriority, active: Bool, timestamp: NSDate)
     {
@@ -21,6 +22,16 @@
         self.priority = priority
         self.active = active
         self.timestamp = timestamp
+    }
+
+    func getTimestampString() -> String {
+        if let timestamp = self.timestampString? {
+            return timestamp
+        }
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "'Created at' h:mm a 'on' d/M/yy"
+        self.timestampString = dateFormatter.stringFromDate(self.timestamp)
+        return self.timestampString!
     }
 
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {

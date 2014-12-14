@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fuU-LW-MkP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fuU-LW-MkP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -238,7 +238,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NrB-se-HJV">
                                             <rect key="frame" x="66" y="46.5" width="207" height="14"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="10"/>
-                                            <color key="textColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" red="0.75294117647058822" green="0.75294117647058822" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MED" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6v-0q-JCf">
@@ -690,7 +690,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskDetailAuthorCell" rowHeight="72" id="X6i-YC-hez" customClass="TaskDetailAuthorCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskDetailAuthorCell" rowHeight="72" id="X6i-YC-hez" customClass="TaskDetailAuthorCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X6i-YC-hez" id="Gna-cV-ltc">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -742,6 +742,13 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="metaLabel" destination="BLF-uK-fjD" id="nQu-LZ-Ace"/>
                                     <outlet property="nameLabel" destination="0hR-rB-TZ6" id="51F-lq-tux"/>
@@ -749,7 +756,7 @@
                                     <outlet property="teamLabel" destination="mnQ-HW-fvu" id="yO5-rT-cUW"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskDetailTitleCell" rowHeight="72" id="6uj-Eo-htx" customClass="TaskDetailTitleCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskDetailTitleCell" rowHeight="72" id="6uj-Eo-htx" customClass="TaskDetailTitleCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6uj-Eo-htx" id="AW5-GG-5Cj">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -798,6 +805,13 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="inset"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="highLabel" destination="CsW-k2-1dJ" id="sde-TV-rsR"/>
                                     <outlet property="lowLabel" destination="lGF-To-1rX" id="b1Q-ux-8zF"/>
@@ -805,13 +819,13 @@
                                     <outlet property="titleLabel" destination="MxF-AW-uQn" id="ArJ-1P-rLU"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskDetailContentCell" rowHeight="72" id="xpk-Mu-yqK" customClass="TaskDetailContentCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskDetailContentCell" rowHeight="72" id="xpk-Mu-yqK" customClass="TaskDetailContentCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xpk-Mu-yqK" id="wM9-RU-02N">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7n-Tb-nW0">
-                                            <rect key="frame" x="15" y="20" width="290" height="32"/>
+                                            <rect key="frame" x="15" y="12" width="290" height="45"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
@@ -819,13 +833,19 @@
                                         </textView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="N7n-Tb-nW0" secondAttribute="bottom" constant="12" id="7db-IQ-JNr"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="N7n-Tb-nW0" secondAttribute="bottom" constant="7" id="7db-IQ-JNr"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="N7n-Tb-nW0" secondAttribute="trailing" constant="7" id="fN8-bR-yB5"/>
                                         <constraint firstItem="N7n-Tb-nW0" firstAttribute="leading" secondItem="wM9-RU-02N" secondAttribute="leadingMargin" constant="7" id="low-6R-sxL"/>
-                                        <constraint firstItem="N7n-Tb-nW0" firstAttribute="top" secondItem="wM9-RU-02N" secondAttribute="topMargin" constant="12" id="vKo-mb-y42"/>
+                                        <constraint firstItem="N7n-Tb-nW0" firstAttribute="top" secondItem="wM9-RU-02N" secondAttribute="topMargin" constant="4" id="vKo-mb-y42"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="contentTextView" destination="N7n-Tb-nW0" id="YCG-ge-tCJ"/>
                                 </connections>
@@ -835,7 +855,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RQG-EO-1Gu" id="d2x-LP-b7r">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzI-pd-rWq">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzI-pd-rWq" customClass="ResizedImageButton" customModule="Badger" customModuleProvider="target">
                                             <rect key="frame" x="15" y="15" width="290" height="60"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="ecc-wT-qfg"/>
@@ -1496,7 +1516,7 @@
         <image name="RightArrowIcon" width="8" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="7ze-C7-KaO"/>
         <segue reference="sG0-Gn-9tP"/>
-        <segue reference="kUo-1a-Owt"/>
     </inferredMetricsTieBreakers>
 </document>

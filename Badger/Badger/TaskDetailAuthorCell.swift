@@ -12,27 +12,26 @@ class TaskDetailAuthorCell: BorderedCell {
     override func awakeFromNib() {
         self.hasAwakened = true
         self.updateView()
-        self.setTopBorder(.Full)
-        self.setBottomBorder(.Full)
-        self.setBorderColor(Color.colorize(0xE1E1E1, alpha: 1))
     }
 
 
     func setTask(task: Task) {
         self.task = task
-        if self.hasAwakened {
-            self.updateView()
-        }
+        self.updateView()
     }
 
     private func updateView() {
-        if let task = self.task? {
-            UserStore.sharedInstance().getUser(task.author, withBlock: { user in
-                self.profileCircle.setUser(user)
-                self.nameLabel.text = user.fullName
-                self.teamLabel.text = "Unknown" // TODO: figure out best way to get team name
-                self.metaLabel.text = "Unknown" // TODO: display date
-            })
+        if self.hasAwakened {
+            if let task = self.task? {
+                UserStore.sharedInstance().getUser(task.author, withBlock: { user in
+                    self.profileCircle.setUser(user)
+                    self.nameLabel.text = user.fullName
+                    self.metaLabel.text = task.getTimestampString()
+                })
+                TeamStore.sharedInstance().getTeam(task.team, withBlock: { team in
+                    self.teamLabel.text = team.name
+                })
+            }
         }
     }
 }

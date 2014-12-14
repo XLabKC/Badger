@@ -179,6 +179,42 @@ class Helpers {
         return (inserts: inserts, deletes: deletes)
     }
 
+    class func calculateTextViewHeight(textView: UITextView, minVerticalPadding: CGFloat, minTextHeight: CGFloat) -> CGFloat {
+        var frame = textView.bounds
+
+        // Take account of the padding added around the text.
+        var textContainerInsets = textView.textContainerInset
+        var contentInsets = textView.contentInset
+
+        var leftRightPadding = textContainerInsets.left + textContainerInsets.right + textView.textContainer.lineFragmentPadding * 2 + contentInsets.left + contentInsets.right
+
+        var topBottomPadding = CGFloat(textContainerInsets.top + textContainerInsets.bottom + contentInsets.top + contentInsets.bottom) + textView.superview!.frame.height - frame.height
+
+        frame.size.width -= leftRightPadding;
+
+        var textToMeasure = textView.text as NSString
+        if textToMeasure.hasSuffix("\n") {
+            textToMeasure = "\(textToMeasure)-" as NSString
+        }
+
+        // NSString class method: boundingRectWithSize:options:attributes:context is
+        // available only on ios7.0 sdk.
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .ByWordWrapping
+
+        var attributes = [
+            NSFontAttributeName: textView.font,
+            NSParagraphStyleAttributeName: paragraphStyle
+        ]
+
+        var size = textToMeasure.boundingRectWithSize(CGSizeMake(frame.width, CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
+        size.size.height = size.height < minTextHeight ? minTextHeight : size.height
+        topBottomPadding = topBottomPadding < minVerticalPadding ? minVerticalPadding : topBottomPadding
+        
+        return ceil(size.height + topBottomPadding)
+    }
+
+
 //    class func diffArrays<T>(start: [T], end: [T], section: Int, compare: (T, T) -> Bool) -> (inserts: [NSIndexPath], deletes: [NSIndexPath], movesFrom: [NSIndexPath], movesTo: [NSIndexPath]) {
 //        var accounted = [Bool](count: end.count, repeatedValue: false)
 //        var inserts = [NSIndexPath]()

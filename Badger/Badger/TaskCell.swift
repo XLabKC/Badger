@@ -30,23 +30,27 @@ class TaskCell: BorderedCell {
     }
 
     func updateView() {
-        if self.hasAwakened && self.task != nil {
-            self.priorityHighLabel.textColor = inactiveColor
-            self.priorityMediumLabel.textColor = inactiveColor
-            self.priorityLowLabel.textColor = inactiveColor
-            switch self.task!.priority {
-            case .High:
-                self.priorityHighLabel.textColor = Colors.UnavailableStatus
-            case .Medium:
-                self.priorityMediumLabel.textColor = Colors.OccupiedStatus
-            case .Low:
-                self.priorityLowLabel.textColor = Colors.FreeStatus
-            default:
-                break
+        if self.hasAwakened {
+            if let task = self.task? {
+                self.priorityHighLabel.textColor = inactiveColor
+                self.priorityMediumLabel.textColor = inactiveColor
+                self.priorityLowLabel.textColor = inactiveColor
+                switch task.priority {
+                case .High:
+                    self.priorityHighLabel.textColor = Colors.UnavailableStatus
+                case .Medium:
+                    self.priorityMediumLabel.textColor = Colors.OccupiedStatus
+                case .Low:
+                    self.priorityLowLabel.textColor = Colors.FreeStatus
+                default:
+                    break
+                }
+                self.titleLabel.text = task.title
+                self.contentLabel.text = task.content
+                self.profileCircle.setUid(task.author)
+                self.metaLabel.text = task.getTimestampString()
+
             }
-            self.titleLabel.text = task!.title
-            self.contentLabel.text = task!.content
-            self.profileCircle.setUid(task!.author)
         }
     }
 }

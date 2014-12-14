@@ -5,9 +5,9 @@ class TaskDetailViewController: UITableViewController {
     private let headerCellHeight = CGFloat(40.0)
     private let titleCellHeight = CGFloat(72.0)
     private let completeButtonHeight = CGFloat(92.0)
-    private let minContentHeight = CGFloat(72.0)
 
     private var task: Task?
+    private var contentCell: TaskDetailContentCell?
 
     override func viewDidLoad() {
         self.navigationItem.titleView = Helpers.createTitleLabel("Task")
@@ -18,9 +18,9 @@ class TaskDetailViewController: UITableViewController {
         super.viewDidLoad()
     }
 
-
     func setTask(task: Task) {
         self.task = task
+        self.getContentCell().setTask(task)
         if (self.isViewLoaded()) {
             self.tableView.reloadData()
         }
@@ -46,44 +46,46 @@ class TaskDetailViewController: UITableViewController {
         case 1:
             return self.authorCellHeight
         case 3:
-            if let task = self.task? {
-                let calculationView = UITextView()
-                calculationView.text = task.content
-                let size = calculationView.sizeThatFits(CGSizeMake(self.view.frame.width, CGFloat(FLT_MAX)))
-                let height = size.height + 40
-                return height < self.minContentHeight ? self.minContentHeight : height
-            }
-            return self.minContentHeight
+            return self.titleCellHeight
         case 4:
-            return self.completeButtonHeight
+            let cell = self.getContentCell()
+            return cell.calculateCellHeight()
         default:
-            return 0
+            return self.completeButtonHeight
         }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if (indexPath.row == 0 || indexPath.row == 2) {
+        switch (indexPath.row) {
+        case 0, 2:
             let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
             cell.labelColor = Color.colorize(0x929292, alpha: 1)
-            switch (indexPath.row) {
-            case 0:
-                cell.title = "ASSIGNED BY"
-            case 2:
-                cell.title = "TASK INFO"
-            default:
-                break
+            cell.title = (indexPath.row == 0) ? "ASSIGNED BY" : "TASK INFO"
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCellWithIdentifier("TaskDetailAuthorCell") as TaskDetailAuthorCell
+            if let task = self.task? {
+                cell.setTask(task)
             }
             return cell
-        } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskDetailAuthorCell") as TaskDetailAuthorCell
-            return cell
-        } else if (indexPath.row == 3) {
+        case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier("TaskDetailTitleCell") as TaskDetailTitleCell
+            if let task = self.task? {
+                cell.setTask(task)
+            }
             return cell
-        } else if (indexPath.row == 4) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskDetailContentCell") as TaskDetailContentCell
+        case 4:
+            return getContentCell()
+        default:
+            return tableView.dequeueReusableCellWithIdentifier("TaskDetailCompleteCell") as UITableViewCell
+        }
+    }
+
+    private func getContentCell() -> TaskDetailContentCell {
+        if let cell = self.contentCell? {
             return cell
         }
-        return tableView.dequeueReusableCellWithIdentifier("TaskDetailCompleteCell") as UITableViewCell
+        self.contentCell = (self.tableView.dequeueReusableCellWithIdentifier("TaskDetailContentCell") as TaskDetailContentCell)
+        return self.contentCell!
     }
 }
