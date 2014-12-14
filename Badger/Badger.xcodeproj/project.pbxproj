@@ -87,6 +87,7 @@
 		7B9A635B1A2E9CC800DF1143 /* TaskEditContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */; };
 		7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */; };
 		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
+		7BD554CD1A3E04A8003D8BD0 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */; };
 		7BEC9AB71A38077E00080DDB /* TaskEditSubmitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */; };
 		7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */; };
 /* End PBXBuildFile section */
@@ -189,6 +190,7 @@
 		7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditContentCell.swift; sourceTree = "<group>"; };
 		7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditPriorityCell.swift; sourceTree = "<group>"; };
 		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 		7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditSubmitCell.swift; sourceTree = "<group>"; };
 		7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -492,9 +494,10 @@
 			isa = PBXGroup;
 			children = (
 				7B15CD021A38DA8900519C8E /* Models */,
-				7B4733C41A1D51BB00D88C00 /* UserStore.swift */,
-				7B15CD031A38EECD00519C8E /* TeamStore.swift */,
 				7B15CD161A3A59AF00519C8E /* ObservableDataStore.swift */,
+				7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */,
+				7B15CD031A38EECD00519C8E /* TeamStore.swift */,
+				7B4733C41A1D51BB00D88C00 /* UserStore.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */,
 				7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */,
 				7B743A4019F946CD0075690A /* LoginViewController.swift in Sources */,
+				7BD554CD1A3E04A8003D8BD0 /* TaskStore.swift in Sources */,
 				7BEC9AB71A38077E00080DDB /* TaskEditSubmitCell.swift in Sources */,
 				7B15CD011A38D73300519C8E /* SelectUserViewController.swift in Sources */,
 				7B15CD041A38EECD00519C8E /* TeamStore.swift in Sources */,

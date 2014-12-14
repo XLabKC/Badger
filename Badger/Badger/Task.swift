@@ -1,4 +1,4 @@
-class Task {
+@objc class Task: DataEntity {
     let id: String
     let owner: String
     let team: String
@@ -23,7 +23,7 @@ class Task {
         self.timestamp = timestamp
     }
 
-    class func createTaskFromSnapshot(snapshot: FDataSnapshot) -> Task {
+    class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {
         let id = snapshot.key
         let owner = snapshot.ref.parent.key
         let team = Helpers.getString(snapshot.value, key: "team", backup: "Unknown")

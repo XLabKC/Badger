@@ -73,7 +73,7 @@ class ProfileViewController: UITableViewController {
             let ref = Firebase(url: Global.FirebaseTasksUrl).childByAppendingPath(user.uid)
             FirebaseAsync.observeEventType(ref, eventType: .ChildAdded, forEach: { (snapshot, isNew) -> () in
                 if !isNew {
-                    self.tasks.append(Task.createTaskFromSnapshot(snapshot))
+                    self.tasks.append(Task.createFromSnapshot(snapshot) as Task)
                 }
                 }) { () -> () in
                     // On completion, prefetch users before loading table cells.
