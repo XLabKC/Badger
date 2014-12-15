@@ -5,7 +5,7 @@ protocol TaskEditSubmitCellDelegate: class {
 }
 
 class TaskEditSubmitCell: UITableViewCell {
-    var delegate: TaskEditSubmitCellDelegate?
+    weak var delegate: TaskEditSubmitCellDelegate?
 
     @IBAction func submitClicked(sender: AnyObject) {
         if let delegate = self.delegate {

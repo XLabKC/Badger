@@ -12,7 +12,7 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate {
     private var task: Task?
     private var currentHeight: CGFloat = 0
 
-    var delegate: TaskEditContentCellDelegate?
+    weak var delegate: TaskEditContentCellDelegate?
 
     @IBOutlet weak var textView: UITextView!
 

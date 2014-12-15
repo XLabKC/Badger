@@ -5,7 +5,7 @@ protocol TaskDetailCompleteCellDelegate: class {
 }
 
 class TaskDetailCompleteCell: UITableViewCell {
-    var delegate: TaskDetailCompleteCellDelegate?
+    weak var delegate: TaskDetailCompleteCellDelegate?
 
     @IBOutlet weak var button: ResizedImageButton!
 

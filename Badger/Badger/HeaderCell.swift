@@ -9,7 +9,7 @@ class HeaderCell : BorderedCell {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var headerButton: UIButton!
 
-    var delegate: HeaderCellDelegate?
+    weak var delegate: HeaderCellDelegate?
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

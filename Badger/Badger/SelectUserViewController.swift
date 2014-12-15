@@ -8,7 +8,7 @@ class SelectUserViewController: UITableViewController {
 
     private var users = [User]()
     private var teams: [Team]?
-    var delegate: SelectUserDelegate?
+    weak var delegate: SelectUserDelegate?
 
     override func viewDidLoad() {
         self.navigationItem.titleView = Helpers.createTitleLabel("Select User")

@@ -7,7 +7,7 @@ protocol SelectTeamDelegate: class {
 class SelectTeamViewController: UITableViewController {
     private var user: User?
     private var teams = [Team]()
-    var delegate: SelectTeamDelegate?
+    weak var delegate: SelectTeamDelegate?
 
     override func viewDidLoad() {
         self.navigationItem.titleView = Helpers.createTitleLabel("Select User")
