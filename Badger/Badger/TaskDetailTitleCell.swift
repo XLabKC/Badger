@@ -10,6 +10,7 @@ class TaskDetailTitleCell: BorderedCell {
     @IBOutlet weak var highLabel: UILabel!
     @IBOutlet weak var mediumLabel: UILabel!
     @IBOutlet weak var lowLabel: UILabel!
+    @IBOutlet weak var checkmarkIcon: UIImageView!
 
     override func awakeFromNib() {
         self.hasAwakened = true
@@ -24,19 +25,32 @@ class TaskDetailTitleCell: BorderedCell {
     private func updateView() {
         if self.hasAwakened {
             if let task = self.task? {
-                self.highLabel.textColor = inactiveColor
-                self.mediumLabel.textColor = inactiveColor
-                self.lowLabel.textColor = inactiveColor
-                switch task.priority {
-                case .High:
-                    self.highLabel.textColor = Colors.UnavailableStatus
-                case .Medium:
-                    self.mediumLabel.textColor = Colors.OccupiedStatus
-                case .Low:
-                    self.lowLabel.textColor = Colors.FreeStatus
-                default:
-                    break
+                if task.active {
+                    self.highLabel.hidden = false
+                    self.mediumLabel.hidden = false
+                    self.lowLabel.hidden = false
+                    self.checkmarkIcon.hidden = true
+                    self.highLabel.textColor = inactiveColor
+                    self.mediumLabel.textColor = inactiveColor
+                    self.lowLabel.textColor = inactiveColor
+                    switch task.priority {
+                    case .High:
+                        self.highLabel.textColor = Colors.UnavailableStatus
+                    case .Medium:
+                        self.mediumLabel.textColor = Colors.OccupiedStatus
+                    case .Low:
+                        self.lowLabel.textColor = Colors.FreeStatus
+                    default:
+                        break
+                    }
+                } else {
+                    self.highLabel.hidden = true
+                    self.mediumLabel.hidden = true
+                    self.lowLabel.hidden = true
+                    self.checkmarkIcon.hidden = false
                 }
+
+
                 self.titleLabel.text = task.title
             }
         }

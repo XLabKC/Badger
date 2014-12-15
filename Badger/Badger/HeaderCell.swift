@@ -4,7 +4,7 @@ protocol HeaderCellDelegate: class {
     func headerCellButtonPressed(cell: HeaderCell)
 }
 
-class HeaderCell : UITableViewCell {
+class HeaderCell : BorderedCell {
 
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var headerButton: UIButton!
@@ -13,7 +13,7 @@ class HeaderCell : UITableViewCell {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.userInteractionEnabled = false
+        self.selectionStyle = .None
     }
 
     override func awakeFromNib() {

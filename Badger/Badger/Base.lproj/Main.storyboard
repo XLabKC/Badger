@@ -154,6 +154,13 @@
                                         <constraint firstAttribute="centerY" secondItem="RRu-Hh-SlV" secondAttribute="centerY" id="pxE-mR-N4a"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="slider" destination="RRu-Hh-SlV" id="krW-Ui-O8t"/>
                                 </connections>
@@ -217,6 +224,13 @@
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskCell" rowHeight="72" id="7Ps-nG-vfV" customClass="TaskCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -265,6 +279,13 @@
                                                 <constraint firstAttribute="width" constant="50" id="wQ2-Es-vzV"/>
                                             </constraints>
                                         </imageView>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CheckmarkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ql9-S8-5V9">
+                                            <rect key="frame" x="275" y="21" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="3yC-B6-5ne"/>
+                                                <constraint firstAttribute="width" constant="30" id="pdq-A0-IMg"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -278,6 +299,7 @@
                                         <constraint firstItem="yRP-by-whW" firstAttribute="top" secondItem="Qhr-TF-O3y" secondAttribute="topMargin" constant="3" id="ROZ-2V-lQF"/>
                                         <constraint firstAttribute="centerY" secondItem="w6v-0q-JCf" secondAttribute="centerY" id="TAF-TR-RNq"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="5SM-Z1-Qbd" secondAttribute="trailing" constant="39" id="Wtc-A9-nFK"/>
+                                        <constraint firstAttribute="centerY" secondItem="ql9-S8-5V9" secondAttribute="centerY" id="Xkb-iR-uhD"/>
                                         <constraint firstItem="w6v-0q-JCf" firstAttribute="bottom" secondItem="Mdr-Io-gxr" secondAttribute="bottom" constant="-18" id="baR-rw-uAR"/>
                                         <constraint firstItem="zto-4E-n7Z" firstAttribute="trailing" secondItem="Qhr-TF-O3y" secondAttribute="trailingMargin" constant="-5" id="bbB-He-276"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="NrB-se-HJV" secondAttribute="trailing" constant="39" id="cii-7g-Cb1"/>
@@ -285,6 +307,7 @@
                                         <constraint firstItem="NrB-se-HJV" firstAttribute="leading" secondItem="yRP-by-whW" secondAttribute="trailing" constant="8" symbolic="YES" id="hfH-w6-fhq"/>
                                         <constraint firstItem="5SM-Z1-Qbd" firstAttribute="leading" secondItem="yRP-by-whW" secondAttribute="trailing" constant="8" symbolic="YES" id="ldN-sF-NqP"/>
                                         <constraint firstAttribute="centerY" secondItem="yRP-by-whW" secondAttribute="centerY" id="nYQ-UV-5sw"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ql9-S8-5V9" secondAttribute="trailing" constant="7" id="u9Y-uA-2jq"/>
                                         <constraint firstItem="n5E-hs-Nol" firstAttribute="leading" secondItem="yRP-by-whW" secondAttribute="trailing" constant="8" symbolic="YES" id="x5V-dy-eSn"/>
                                         <constraint firstItem="NrB-se-HJV" firstAttribute="bottom" secondItem="n5E-hs-Nol" secondAttribute="bottom" constant="16" id="y7l-3M-P50"/>
                                     </constraints>
@@ -294,7 +317,14 @@
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <outlet property="checkmarkIcon" destination="ql9-S8-5V9" id="GVM-la-XVr"/>
                                     <outlet property="contentLabel" destination="n5E-hs-Nol" id="EHz-au-9bK"/>
                                     <outlet property="metaLabel" destination="NrB-se-HJV" id="Apr-jO-JWm"/>
                                     <outlet property="priorityHighLabel" destination="zto-4E-n7Z" id="R4U-Ub-JcY"/>
@@ -774,7 +804,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOW" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGF-To-1rX">
-                                            <rect key="frame" x="278.5" y="45" width="26.5" height="17.5"/>
+                                            <rect key="frame" x="278" y="45" width="26.5" height="17.5"/>
                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="12"/>
                                             <color key="textColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -785,17 +815,26 @@
                                             <color key="textColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CheckmarkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="sff-Xz-oVF">
+                                            <rect key="frame" x="275" y="21" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="Bqs-OV-lkE"/>
+                                                <constraint firstAttribute="height" constant="30" id="FWB-wV-5zL"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="SC2-sq-Ake" secondAttribute="trailing" constant="7" id="8tV-aQ-fgJ"/>
                                         <constraint firstAttribute="centerY" secondItem="MxF-AW-uQn" secondAttribute="centerY" constant="0.5" id="BzS-tU-Qh6"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="lGF-To-1rX" secondAttribute="trailing" constant="7" id="Gux-Y6-FqO"/>
                                         <constraint firstItem="SC2-sq-Ake" firstAttribute="bottom" secondItem="lGF-To-1rX" secondAttribute="bottom" constant="-18" id="J7d-9i-Za0"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="sff-Xz-oVF" secondAttribute="trailing" constant="7" id="Jbd-SL-Uaw"/>
                                         <constraint firstItem="MxF-AW-uQn" firstAttribute="top" secondItem="AW5-GG-5Cj" secondAttribute="topMargin" constant="-3" id="N5g-2Y-fQ1"/>
                                         <constraint firstItem="MxF-AW-uQn" firstAttribute="leading" secondItem="AW5-GG-5Cj" secondAttribute="leadingMargin" constant="7" id="P7s-of-FJu"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="MxF-AW-uQn" secondAttribute="trailing" constant="7" id="PI1-UU-bla"/>
                                         <constraint firstAttribute="centerY" secondItem="SC2-sq-Ake" secondAttribute="centerY" constant="-0.25" id="ZAF-oo-9R2"/>
                                         <constraint firstItem="CsW-k2-1dJ" firstAttribute="top" secondItem="SC2-sq-Ake" secondAttribute="top" constant="-18" id="cy6-va-1jv"/>
+                                        <constraint firstAttribute="centerY" secondItem="sff-Xz-oVF" secondAttribute="centerY" id="v57-zs-FgG"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="CsW-k2-1dJ" secondAttribute="trailing" constant="7" id="x7b-1s-L4t"/>
                                     </constraints>
                                     <variation key="default">
@@ -813,6 +852,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="inset"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <outlet property="checkmarkIcon" destination="sff-Xz-oVF" id="03y-8w-zNG"/>
                                     <outlet property="highLabel" destination="CsW-k2-1dJ" id="sde-TV-rsR"/>
                                     <outlet property="lowLabel" destination="lGF-To-1rX" id="b1Q-ux-8zF"/>
                                     <outlet property="mediumLabel" destination="SC2-sq-Ake" id="tn2-Yw-ptH"/>
@@ -865,7 +905,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <state key="selected" title="Completed" backgroundImage="GrayButton">
+                                            <state key="selected" backgroundImage="GrayButton">
                                                 <color key="titleColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
@@ -887,6 +927,9 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="button" destination="zzI-pd-rWq" id="nzY-Yu-Nzg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1509,6 +1552,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="CheckmarkIcon" width="125" height="125"/>
         <image name="DefaultBackground" width="375" height="290"/>
         <image name="GrayButton" width="166" height="70"/>
         <image name="LogoBlackSmall" width="57" height="51"/>

@@ -173,7 +173,7 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
         case 1:
             if self.isLoadingActiveTasks {
                 return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
-            } else if self.activeTasks.count == 0 {
+            } else if self.activeTasks.isEmpty {
                 return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as UITableViewCell
             }
             let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
@@ -183,6 +183,8 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
             let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
             cell.delegate = self
             cell.buttonText = self.isShowingCompletedTasks ? "HIDE" : "SHOW"
+            cell.setBottomBorder(.Full)
+            cell.setBorderColor(Color.colorize(0xE0E0E0, alpha: 1.0))
             if let user = self.user? {
                 cell.title = "COMPLETED TASKS (\(user.completedTasks))"
                 cell.showButton = user.completedTasks > 0
@@ -191,7 +193,7 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
         default:
             if self.isLoadingCompletedTasks {
                 return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
-            } else if self.activeTasks.count == 0 {
+            } else if self.completedTasks.isEmpty {
                 return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as UITableViewCell
             }
             let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
@@ -219,18 +221,25 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
 
     func headerCellButtonPressed(cell: HeaderCell) {
         if self.isShowingCompletedTasks {
-            // Hide completed tasks.
             self.isShowingCompletedTasks = false
             cell.buttonText = "SHOW"
-            self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: UITableViewRowAnimation.Top)
         } else {
             self.isShowingCompletedTasks = true
             cell.buttonText = "HIDE"
             if !self.hasLoadedCompletedTasks {
                 self.isLoadingCompletedTasks = true
                 // Load completed tasks
+                if let user = self.user? {
+                    TaskStore.sharedInstance().getCompletedTasksForUser(user, withBlock: { tasks in
+                        self.isLoadingCompletedTasks = false
+                        self.hasLoadedCompletedTasks = true
+                        self.completedTasks = tasks
+                        self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: .Bottom)
+                    })
+                }
             }
-            self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: UITableViewRowAnimation.Top)
+
         }
+        self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: .Bottom)
     }
 }

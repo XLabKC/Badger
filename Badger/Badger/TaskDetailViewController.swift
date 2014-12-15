@@ -36,7 +36,8 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
             }
         }
         // Header + User + Header + Title + Content
-        return 5
+        // return 5
+        return 6 // FOR TEST ONLY
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -77,7 +78,12 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
         case 4:
             return getContentCell()
         default:
-            return tableView.dequeueReusableCellWithIdentifier("TaskDetailCompleteCell") as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TaskDetailCompleteCell") as TaskDetailCompleteCell
+            cell.delegate = self
+            if let task = self.task? {
+                cell.buttonTitle = task.active ? "Mark As Complete!" : "Mark As Incomplete"
+            }
+            return cell
         }
     }
 
@@ -101,6 +107,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
             } else {
                 TeamStore.sharedInstance().removeActiveTask(task.team, combinedId: combinedId)
             }
+            cell.buttonTitle = isActive ? "Mark As Complete!" : "Mark As Incomplete"
         }
     }
 

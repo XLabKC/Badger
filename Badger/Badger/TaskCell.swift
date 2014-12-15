@@ -12,6 +12,7 @@ class TaskCell: BorderedCell {
     @IBOutlet weak var priorityHighLabel: UILabel!
     @IBOutlet weak var priorityMediumLabel: UILabel!
     @IBOutlet weak var priorityLowLabel: UILabel!
+    @IBOutlet weak var checkmarkIcon: UIImageView!
 
     override func awakeFromNib() {
         self.hasAwakened = true
@@ -32,24 +33,34 @@ class TaskCell: BorderedCell {
     func updateView() {
         if self.hasAwakened {
             if let task = self.task? {
-                self.priorityHighLabel.textColor = inactiveColor
-                self.priorityMediumLabel.textColor = inactiveColor
-                self.priorityLowLabel.textColor = inactiveColor
-                switch task.priority {
-                case .High:
-                    self.priorityHighLabel.textColor = Colors.UnavailableStatus
-                case .Medium:
-                    self.priorityMediumLabel.textColor = Colors.OccupiedStatus
-                case .Low:
-                    self.priorityLowLabel.textColor = Colors.FreeStatus
-                default:
-                    break
+                if task.active {
+                    self.priorityHighLabel.hidden = false
+                    self.priorityMediumLabel.hidden = false
+                    self.priorityLowLabel.hidden = false
+                    self.checkmarkIcon.hidden = true
+                    self.priorityHighLabel.textColor = inactiveColor
+                    self.priorityMediumLabel.textColor = inactiveColor
+                    self.priorityLowLabel.textColor = inactiveColor
+                    switch task.priority {
+                    case .High:
+                        self.priorityHighLabel.textColor = Colors.UnavailableStatus
+                    case .Medium:
+                        self.priorityMediumLabel.textColor = Colors.OccupiedStatus
+                    case .Low:
+                        self.priorityLowLabel.textColor = Colors.FreeStatus
+                    default:
+                        break
+                    }
+                } else {
+                    self.priorityHighLabel.hidden = true
+                    self.priorityMediumLabel.hidden = true
+                    self.priorityLowLabel.hidden = true
+                    self.checkmarkIcon.hidden = false
                 }
                 self.titleLabel.text = task.title
                 self.contentLabel.text = task.content
                 self.profileCircle.setUid(task.author)
                 self.metaLabel.text = task.getTimestampString()
-
             }
         }
     }
