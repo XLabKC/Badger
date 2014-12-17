@@ -208,28 +208,34 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         if (self.owner == nil || self.team == nil) {
             return
         }
-        let ref = Firebase(url: Global.FirebaseTasksUrl)
         let taskOwner = self.owner!
         let taskTeam = self.team!
-        var taskRef = ref.childByAppendingPath(taskOwner.uid).childByAutoId()
         var timestamp = NSDate.javascriptTimestampNow()
         var isActive = true
         var isNew = self.task == nil
         var isUpdated = self.task != nil
 
+        var root = Firebase(url: isActive ? Global.FirebaseActiveTasksUrl : Global.FirebaseCompletedTasksUrl)
+        var taskRef = root.childByAppendingPath(taskOwner.uid).childByAutoId()
+
         if let task = self.task {
-            let oldRef = ref.childByAppendingPath(task.owner).childByAppendingPath(task.id)
             if task.owner == taskOwner.uid {
-                taskRef = oldRef
+                taskRef = task.getRef()
             } else {
-                // Task is moving to a different user so delete it from it's current locations.
-                oldRef.removeValue()
-                taskTeam.getRef().childByAppendingPath("tasks").childByAppendingPath(task.owner).removeValue()
+                // Task is moving to a different user so delete it from it's current location.
+                task.getRef().removeValue()
                 isNew = true
-                // Decrement active count if task is moving to a different user.
+
                 if isActive {
+                    // Decrement active count if task is moving to a different user.
                     UserStore.sharedInstance().adjustActiveTaskCount(task.owner, delta: -1)
+
+                    // The user is going to be different so the combined id needs to be changed.
+                    var oldTeamRef = Firebase(url: Global.FirebaseTeamsUrl).childByAppendingPath(task.team)
+                    oldTeamRef.childByAppendingPath("tasks/\(task.owner)").removeValue()
                 }
+                // Keep the same id to be helpful for the UI.
+                taskRef = root.childByAppendingPath("\(taskOwner.uid)/\(task.id)")
             }
             // This is an active task that's being moved to a different team so decrement the active count.
             if task.team != taskTeam.id && task.active {
@@ -251,8 +257,11 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             "timestamp": timestamp
         ]
 
+        // Calculate what the firebase priority of the task should be.
         let mult = Task.getFirebasePriorityMult(self.getPriority(), isActive: isActive)
         let priority = timestamp.doubleValue * mult
+
+        // Save the task.
         taskRef.setValue(taskValues, andPriority: priority, withCompletionBlock: { (err, ref) in
             // TODO: handle error
             var combinedKey = "\(taskOwner.uid)^\(taskRef.key)"
@@ -263,15 +272,15 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             }
 
             // Add the task to the appropriate team and incrememt count.
-            taskTeam.getRef().childByAppendingPath("tasks").childByAppendingPath(combinedKey).setValue(true)
             if isActive {
-                TeamStore.sharedInstance().adjustActiveTaskCount(taskTeam.id, delta: 1)
+                TeamStore.sharedInstance().addActiveTask(taskTeam.id, combinedId: combinedKey)
             }
 
             // Add to push message queues if new of updated.
             if isNew || isUpdated {
                 let val = isNew ? "new" : "updated"
-                Firebase(url: Global.FirebaseNewTasksUrl).childByAppendingPath(combinedKey).setValue(val)
+                // ENABLE WHEN PUSH NOTIFICATIONS WORK.
+                // Firebase(url: Global.FirebaseNewTasksUrl).childByAppendingPath(combinedKey).setValue(val)
             }
             if let nav = self.navigationController? {
                 nav.popViewControllerAnimated(true)

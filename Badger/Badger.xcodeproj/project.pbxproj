@@ -45,6 +45,7 @@
 		7B4733D91A1E8AB600D88C00 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733D81A1E8AB600D88C00 /* BaseTableViewController.swift */; };
 		7B5FE4211A33D79F002F24EA /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B5FE4201A33D79F002F24EA /* ApiKeys.plist */; };
 		7B5FE4231A357BD3002F24EA /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5FE4221A357BD3002F24EA /* ApiKeys.swift */; };
+		7B64F2BD1A40FFF2001FA518 /* ArrayRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64F2BC1A40FFF2001FA518 /* ArrayRef.swift */; };
 		7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7439FC19F87E4E0075690A /* AppDelegate.swift */; };
 		7B743A0219F87E4E0075690A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0019F87E4E0075690A /* Main.storyboard */; };
 		7B743A0419F87E4E0075690A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0319F87E4E0075690A /* Images.xcassets */; };
@@ -88,6 +89,7 @@
 		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
 		7BD0F9C61A3E36B400BDF70D /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD0F9C51A3E36B400BDF70D /* Firebase.framework */; };
 		7BD0F9C81A3E442400BDF70D /* TaskDetailCompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD0F9C71A3E442400BDF70D /* TaskDetailCompleteCell.swift */; };
+		7BD0F9CA1A3F326600BDF70D /* FirebaseObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */; };
 		7BD554CD1A3E04A8003D8BD0 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */; };
 		7BEC9AB71A38077E00080DDB /* TaskEditSubmitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */; };
 		7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */; };
@@ -144,6 +146,7 @@
 		7B4733D81A1E8AB600D88C00 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		7B5FE4201A33D79F002F24EA /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		7B5FE4221A357BD3002F24EA /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
+		7B64F2BC1A40FFF2001FA518 /* ArrayRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayRef.swift; sourceTree = "<group>"; };
 		7B7439F719F87E4E0075690A /* Badger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7439FB19F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B7439FC19F87E4E0075690A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +195,7 @@
 		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7BD0F9C51A3E36B400BDF70D /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7BD0F9C71A3E442400BDF70D /* TaskDetailCompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailCompleteCell.swift; sourceTree = "<group>"; };
+		7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseObserver.swift; sourceTree = "<group>"; };
 		7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 		7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditSubmitCell.swift; sourceTree = "<group>"; };
 		7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 		7B070FC71A112CA200997D50 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				7B64F2BC1A40FFF2001FA518 /* ArrayRef.swift */,
+				7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */,
 				7B4733C81A1D93DE00D88C00 /* SWRevealViewController.h */,
 				7B4733C91A1D93DE00D88C00 /* SWRevealViewController.m */,
 				7B4733D11A1E81B300D88C00 /* NSDate+JavascriptTimestamp.h */,
@@ -643,6 +649,7 @@
 				7B15CD011A38D73300519C8E /* SelectUserViewController.swift in Sources */,
 				7B15CD041A38EECD00519C8E /* TeamStore.swift in Sources */,
 				7B15CD0D1A3922EA00519C8E /* ResizedImageButton.swift in Sources */,
+				7BD0F9CA1A3F326600BDF70D /* FirebaseObserver.swift in Sources */,
 				7B4733C51A1D51BB00D88C00 /* UserStore.swift in Sources */,
 				7B469C501A223AB40054019D /* LoadingCell.swift in Sources */,
 				7B9A63591A2E9C8D00DF1143 /* TaskEditTitleCell.swift in Sources */,
@@ -674,6 +681,7 @@
 				7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */,
 				7B15CD071A3906ED00519C8E /* SelectTeamViewController.swift in Sources */,
 				7B90E0C81A21427F005EC421 /* BorderedCell.swift in Sources */,
+				7B64F2BD1A40FFF2001FA518 /* ArrayRef.swift in Sources */,
 				7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */,
 				7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */,
 				7B90E0C01A1F9F6E005EC421 /* HeaderCell.swift in Sources */,

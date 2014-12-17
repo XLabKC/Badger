@@ -2,32 +2,32 @@
 @objc class Team: DataEntity {
     let id: String
     var name: String
-    var activeTasks: Int
+    var activeTaskCount: Int
     var ownerIds: [String] = []
     var memberIds: [String] = []
     var logo: String
     var headerImage: String
-    var combinedTaskIds: [String] = []
+    var activeTaskCombinedIds: [String] = []
     var ref: Firebase?
 
-    init(id: String, name: String, activeTasks: Int)
+    init(id: String, name: String, activeTaskCount: Int)
     {
         self.id = id
         self.name = name
-        self.activeTasks = activeTasks
+        self.activeTaskCount = activeTaskCount
         self.headerImage = "DefaultBackground"
         self.logo = ""
     }
 
     func getMeta() -> String {
         var taskString: String
-        switch self.activeTasks {
+        switch self.activeTaskCount {
         case 0:
             taskString = "No Tasks"
         case 1:
             taskString = "1 Task"
         default:
-            taskString = "\(self.activeTasks) Tasks"
+            taskString = "\(self.activeTaskCount) Tasks"
         }
         return "\(self.memberIds.count) Members | \(taskString)"
     }
@@ -43,8 +43,8 @@
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {
         let id = snapshot.key
         let name = Helpers.getString(snapshot.value, key: "name", backup: "No Name")
-        let activeTasks = Helpers.getInt(snapshot.value, key: "active_tasks", backup: 0)
-        let team = Team(id: id, name: name, activeTasks: activeTasks)
+        let activeTaskCount = Helpers.getInt(snapshot.value, key: "active_task_count", backup: 0)
+        let team = Team(id: id, name: name, activeTaskCount: activeTaskCount)
 
         if let ownerData = Helpers.getDictionary(snapshot.value, key: "owners")? {
             for (uid, value) in ownerData {
@@ -62,17 +62,15 @@
             }
         }
 
-        if let taskData = Helpers.getDictionary(snapshot.value, key: "tasks")? {
+        if let taskData = Helpers.getDictionary(snapshot.value, key: "active_tasks")? {
             for (uid, value) in taskData {
                 if let combinedTaskId = uid as? String {
-                    team.combinedTaskIds.append(combinedTaskId)
+                    team.activeTaskCombinedIds.append(combinedTaskId)
                 }
             }
         }
 
         team.ref = snapshot.ref
         return team
-    }
-
-    
+    }    
 }

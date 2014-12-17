@@ -28,8 +28,7 @@
         if let ref = self.ref {
             return ref
         }
-        self.ref = Firebase(url: Global.FirebaseTasksUrl).childByAppendingPath(self.owner)
-            .childByAppendingPath(self.id)
+        self.ref = Task.createRef(self.owner, id: self.id, active: self.active)
         return self.ref!
     }
 
@@ -76,5 +75,15 @@
         default:
             return 1.0
         }
+    }
+
+    class func createRef(owner: String, id: String, active: Bool) -> Firebase {
+        var root: Firebase
+        if active {
+            root = Firebase(url: Global.FirebaseActiveTasksUrl)
+        } else {
+            root = Firebase(url: Global.FirebaseCompletedTasksUrl)
+        }
+        return root.childByAppendingPath("\(owner)/\(id)")
     }
 }

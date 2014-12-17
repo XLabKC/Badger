@@ -4,6 +4,8 @@ struct Global {
     static let FirebaseTasksUrl = Global.FirebaseUrl + "/tasks"
     static let FirebaseTeamsUrl = Global.FirebaseUrl + "/teams"
     static let FirebaseNewTasksUrl = Global.FirebaseUrl + "/new_tasks"
+    static let FirebaseActiveTasksUrl = Global.FirebaseUrl + "/active_tasks"
+    static let FirebaseCompletedTasksUrl = Global.FirebaseUrl + "/completed_tasks"
 }
 
 struct Colors {

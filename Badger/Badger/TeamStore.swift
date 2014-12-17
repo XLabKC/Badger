@@ -35,19 +35,19 @@ class TeamStore {
     }
 
     func addActiveTask(teamId: String, combinedId: String) {
-        self.ref.childByAppendingPath(teamId).childByAppendingPath("tasks")
+        self.ref.childByAppendingPath(teamId).childByAppendingPath("active_tasks")
             .childByAppendingPath(combinedId).setValue(true)
         self.adjustActiveTaskCount(teamId, delta: 1)
     }
 
     func removeActiveTask(teamId: String, combinedId: String) {
-        self.ref.childByAppendingPath(teamId).childByAppendingPath("tasks")
+        self.ref.childByAppendingPath(teamId).childByAppendingPath("active_tasks")
             .childByAppendingPath(combinedId).removeValue()
         self.adjustActiveTaskCount(teamId, delta: -1)
     }
 
     func adjustActiveTaskCount(id: String, delta: Int) {
-        let activeRef = self.ref.childByAppendingPath(id).childByAppendingPath("active_tasks")
+        let activeRef = self.ref.childByAppendingPath(id).childByAppendingPath("active_task_count")
         FirebaseAsync.adjustValueForRef(activeRef, delta: delta)
     }
 
