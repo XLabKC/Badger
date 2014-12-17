@@ -135,7 +135,7 @@ class TeamProfileViewController: UITableViewController, TeamObserver {
         if segue.identifier == "TeamProfileUser" {
             let memberCell = sender as TeamMemberCell
             let vc = segue.destinationViewController as ProfileViewController
-            vc.setUser(memberCell.getUser()!)
+            vc.setUid(memberCell.getUser()!.uid)
         } else if segue.identifier == "TeamProfileNewTask" {
             let vc = segue.destinationViewController as TaskEditViewController
             if let team = self.team? {

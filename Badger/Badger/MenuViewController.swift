@@ -151,9 +151,7 @@ class MenuViewController: UITableViewController, UserObserver {
         if segue.identifier == "MenuMyProfile" {
             let nav = segue.destinationViewController as UINavigationController
             let vc = nav.childViewControllers.first as ProfileViewController
-            UserStore.sharedInstance().getAuthUser({ user in
-                vc.setUser(user)
-            })
+            vc.setUid(UserStore.sharedInstance().getAuthUid())
         } else if segue.identifier == "MenuTeamProfile" {
             let teamCell = sender as MenuTeamCell
             let team = teamCell.getTeam()!

@@ -73,66 +73,66 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
         self.navigationItem.titleView = self.titleLabel
 
         super.viewDidLoad()
-        if self.user != nil {
-            self.loadUserProfile()
+        if let user = self.user? {
+            self.loadUserProfile(user.uid)
         }
     }
 
     func setUid(uid: String) {
+        self.userObserver = FirebaseObserver<User>(query: User.createRef(uid), withBlock: { user in
+            self.user = user
 
-        
-        UserStore.sharedInstance().getUser(uid, withBlock: self.setUser)
+            // Update table cells if they have already initialized.
+            if let profileHeader = self.profileHeaderCell? {
+                profileHeader.setUser(user)
+            }
+            if let statusSlider = self.statusSliderCell? {
+                statusSlider.setUser(user)
+            }
+
+            if self.isViewLoaded() {
+                self.loadUserProfile(uid)
+            }
+
+            if !self.isLoadingActiveTasks {
+                self.tableView.reloadRowsAtIndexPaths([NSIndexSet(index: 2)], withRowAnimation: .None)
+            }
+        })
+
+        //        for family in UIFont.familyNames() as [String] {
+        //            for font in UIFont.fontNamesForFamilyName(family) {
+        //                println(font)
+        //            }
+        //        }
     }
 
-    func setUser(user: User) {
-        self.user = user
-
-        // Update table cells if they have already initialized.
-        if let profileHeader = self.profileHeaderCell? {
-            profileHeader.setUser(user)
-        }
-        if let statusSlider = self.statusSliderCell? {
-            statusSlider.setUser(user)
-        }
-        if self.isViewLoaded() {
-            loadUserProfile()
-        }
-
-//        for family in UIFont.familyNames() as [String] {
-//            for font in UIFont.fontNamesForFamilyName(family) {
-//                println(font)
-//            }
-//        }
-    }
-
-    private func loadUserProfile() {
+    private func loadUserProfile(uid: String) {
         // Load the users tasks.
-        if let user = self.user? {
-            let ref = Firebase(url: Global.FirebaseActiveTasksUrl).childByAppendingPath(user.uid)
-            self.activeObserver = FirebaseObserver<Task>(query: ref.queryOrderedByPriority())
-            let observer = self.activeObserver!
+        let ref = Firebase(url: Global.FirebaseActiveTasksUrl).childByAppendingPath(uid)
+        self.activeObserver = FirebaseObserver<Task>(query: ref.queryOrderedByPriority())
+        let observer = self.activeObserver!
 
-            // Set up observer for active tasks.
-            observer.afterInitial = { _ in
-                // Finished loading active tasks but prefetch all the users before reloading table.
-                self.prefetchUsers(self.activeTasks, complete: { _ in
-                    var set = NSMutableIndexSet(index: 1)
-                    set.addIndex(2)
-                    self.tableView.reloadSections(set, withRowAnimation: .Bottom)
-                })
-            }
-            observer.childAdded = self.handleChildAdded(self.activeTasks, section: 1)
-            observer.childChanged = self.handleChildChanged(self.activeTasks, section: 1)
-            observer.childMoved = self.handleChildMoved(self.activeTasks, section: 1)
-            observer.childRemoved = self.handleChildRemoved(self.activeTasks, section: 1)
-            observer.start()
-
-            if UserStore.sharedInstance().isAuthUser(user.uid) {
-                self.titleLabel.text = "My Profile"
-            } else {
-                self.titleLabel.text = "Profile"
-            }
+        // Set up observer for active tasks.
+        observer.afterInitial = { _ in
+            // Finished loading active tasks but prefetch all the users before reloading table.
+            self.prefetchUsers(self.activeTasks, complete: { _ in
+                var set = NSMutableIndexSet(index: 1)
+                set.addIndex(2)
+                self.tableView.reloadSections(set, withRowAnimation: .Bottom)
+            })
         }
+        observer.childAdded = self.handleChildAdded(self.activeTasks, section: 1)
+        observer.childChanged = self.handleChildChanged(self.activeTasks, section: 1)
+        observer.childMoved = self.handleChildMoved(self.activeTasks, section: 1)
+        observer.childRemoved = self.handleChildRemoved(self.activeTasks, section: 1)
+        observer.start()
+
+        if UserStore.sharedInstance().isAuthUser(uid) {
+            self.titleLabel.text = "My Profile"
+        } else {
+            self.titleLabel.text = "Profile"
+        }
+
     }
 
     // TableViewController Overrides
@@ -274,6 +274,7 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
                         // Finished loading completed tasks but prefetch all the users before reloading table.
                         self.prefetchUsers(self.completedTasks, complete: { _ in
                             self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: .Bottom)
+                            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: .Top, animated: true)
                         })
                     }
                     observer.childAdded = self.handleChildAdded(self.completedTasks, section: 3)
@@ -282,8 +283,12 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
                     observer.childRemoved = self.handleChildRemoved(self.completedTasks, section: 3)
                     observer.start()
                 }
+            } else {
+                // Already observing the completed tasks so just reload the section.
+                self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: .Bottom)
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: .Top, animated: true)
+                return
             }
-
         }
         self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: .Bottom)
     }
