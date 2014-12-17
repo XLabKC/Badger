@@ -103,13 +103,13 @@ class UserStore {
     // Atomically adjusts the active count.
     class func adjustActiveTaskCount(id: String, delta: Int) {
         let ref = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath("\(id)/active_task_count")
-        FirebaseAsync.adjustValueForRef(ref, delta: delta)
+        FirebaseUtil.adjustValueForRef(ref, delta: delta)
     }
 
     // Atomically adjusts the completed count.
     class func adjustCompletedTaskCount(id: String, delta: Int) {
         let ref = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath("\(id)/completed_task_count")
-        FirebaseAsync.adjustValueForRef(ref, delta: delta)
+        FirebaseUtil.adjustValueForRef(ref, delta: delta)
     }
 
     private class func sendUpdate(user: User, toObserver: UserObserver) {
