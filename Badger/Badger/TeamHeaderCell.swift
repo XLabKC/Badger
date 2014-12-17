@@ -35,7 +35,7 @@ class TeamHeaderCell: UITableViewCell, TeamObserver {
         if self.hasAwakened {
             if let team = self.team? {
                 self.nameLabel.text = team.name
-                self.metaLabel.text = team.getMeta()
+                self.metaLabel.text = team.description()
                 // TODO: set team circle
             }
         }

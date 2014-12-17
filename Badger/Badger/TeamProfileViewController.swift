@@ -53,7 +53,7 @@ class TeamProfileViewController: UITableViewController, TeamObserver {
 
     func teamUpdated(newTeam: Team) {
         self.team = newTeam
-        UserStore.sharedInstance().getUsers(newTeam.memberIds, withBlock: { members in
+        UserStore.sharedInstance().getUsers(newTeam.memberIds.keys.array, withBlock: { members in
             let oldMembers = self.members
             self.members = members
             self.isLoadingMembers = false

@@ -1,5 +1,6 @@
 @objc protocol DataEntity: class {
-    class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity;
+    func toJson() -> Dictionary<String, AnyObject>
+    class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity
 }
 
 class ObservableDataStore<T: DataEntity> {

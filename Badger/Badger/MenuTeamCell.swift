@@ -38,7 +38,7 @@ class MenuTeamCell: BorderedCell, TeamObserver {
     private func updateView() {
         if self.team != nil && self.hasAwakened {
             self.nameLabel.text = self.team!.name
-            self.metaLabel.text = self.team!.getMeta()
+            self.metaLabel.text = self.team!.description()
         }
     }
 }

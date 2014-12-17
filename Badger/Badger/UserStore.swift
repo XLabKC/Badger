@@ -73,7 +73,7 @@ class UserStore {
         // Find all uids and remove duplicates.
         var uids = [String: Bool]()
         for team in teams {
-            for member in team.memberIds {
+            for member in team.memberIds.keys {
                 uids[member] = true
             }
         }

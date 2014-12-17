@@ -1,25 +1,42 @@
 
 @objc class Team: DataEntity {
     let id: String
-    var name: String
-    var activeTaskCount: Int
-    var ownerIds: [String] = []
-    var memberIds: [String] = []
-    var logo: String
-    var headerImage: String
-    var activeTaskCombinedIds: [String] = []
-    var ref: Firebase?
+    var name = ""
+    var activeTaskCount = 0
+    var ownerIds: [String: Bool] = [:]
+    var memberIds: [String: Bool] = [:]
+    var logo = "DefaultTeamLogo"
+    var headerImage = "DefaultTeamBackground"
+    var activeTaskCombinedIds: [String: Bool] = [:]
 
-    init(id: String, name: String, activeTaskCount: Int)
-    {
-        self.id = id
-        self.name = name
-        self.activeTaskCount = activeTaskCount
-        self.headerImage = "DefaultBackground"
-        self.logo = ""
+    var ref: Firebase {
+        return Team.createRef(self.id)
     }
 
-    func getMeta() -> String {
+    init(id: String)
+    {
+        self.id = id
+    }
+
+    init(id: String, json: Dictionary<String, AnyObject>) {
+        self.id = id
+        self.name = json["name"] as String
+        self.activeTaskCount = json["active_task_count"] as Int
+        self.logo = json["logo"] as String
+        self.headerImage = json["header_image"] as String
+
+        if let owners = json["owners"] as? Dictionary<String, Bool> {
+            self.ownerIds = owners
+        }
+        if let members = json["members"] as? Dictionary<String, Bool> {
+            self.memberIds = members
+        }
+        if let tasks = json["active_tasks"] as? Dictionary<String, Bool> {
+            self.activeTaskCombinedIds = tasks
+        }
+    }
+
+    func description() -> String {
         var taskString: String
         switch self.activeTaskCount {
         case 0:
@@ -32,49 +49,23 @@
         return "\(self.memberIds.count) Members | \(taskString)"
     }
 
-    func getRef() -> Firebase {
-        if let ref = self.ref {
-            return ref
-        }
-        self.ref = Firebase(url: Global.FirebaseTeamsUrl).childByAppendingPath(self.id)
-        return self.ref!
+    func toJson() -> Dictionary<String, AnyObject> {
+        return [
+            "name": self.name,
+            "active_task_count": self.activeTaskCount,
+            "logo": self.logo,
+            "header_image": self.headerImage,
+            "owners": self.ownerIds,
+            "members": self.memberIds,
+            "active_tasks": self.activeTaskCombinedIds
+        ]
     }
 
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {
-        let id = snapshot.key
-        let name = Helpers.getString(snapshot.value, key: "name", backup: "No Name")
-        let activeTaskCount = Helpers.getInt(snapshot.value, key: "active_task_count", backup: 0)
-        let team = Team(id: id, name: name, activeTaskCount: activeTaskCount)
-
-        if let ownerData = Helpers.getDictionary(snapshot.value, key: "owners")? {
-            for (uid, value) in ownerData {
-                if let uidString = uid as? String {
-                    team.ownerIds.append(uidString)
-                }
-            }
-        }
-
-        if let memberData = Helpers.getDictionary(snapshot.value, key: "members")? {
-            for (uid, value) in memberData {
-                if let uidString = uid as? String {
-                    team.memberIds.append(uidString)
-                }
-            }
-        }
-
-        if let taskData = Helpers.getDictionary(snapshot.value, key: "active_task_count")? {
-            for (uid, value) in taskData {
-                if let combinedTaskId = uid as? String {
-                    team.activeTaskCombinedIds.append(combinedTaskId)
-                }
-            }
-        }
-
-        team.ref = snapshot.ref
-        return team
+        return Team(id: snapshot.key, json: snapshot.value as Dictionary<String, AnyObject>)
     }
 
     class func createRef(id: String) -> Firebase {
-        return Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(id)
+        return Firebase(url: Global.FirebaseTeamsUrl).childByAppendingPath(id)
     }
 }
