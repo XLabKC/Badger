@@ -210,7 +210,8 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         }
         let newOwner = self.owner!
         let newTeam = self.team!
-        var timestamp = NSDate.javascriptTimestampNow()
+        var createdAt = NSDate.javascriptTimestampNow()
+        var completedAt: NSNumber? = nil
         var isActive = true
         var isNew = self.task == nil
         var isUpdated = self.task != nil
@@ -241,25 +242,38 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             if task.team != newTeam.id && task.active {
                 TeamStore.sharedInstance().adjustActiveTaskCount(task.team, delta: -1)
             }
-            // Keep the same timestamp and active state.
-            timestamp = NSDate.javascriptTimestampFromDate(task.timestamp)
+            // Keep the same timestamps and active state.
             isActive = task.active
+            createdAt = NSDate.javascriptTimestampFromDate(task.createdAt)
+            if let date = task.completedAt? {
+                completedAt = NSDate.javascriptTimestampFromDate(date)
+            }
         }
 
         // Create the task values.
-        let taskValues = [
+        var taskValues = [
             "author": UserStore.sharedInstance().getAuthUid(),
             "team": self.team!.id,
             "title": self.getTitle(),
             "content": self.getContentCell().getContent(),
             "priority": self.getPriority().rawValue as String,
             "active": isActive,
-            "timestamp": timestamp
+            "created_at": createdAt,
+
         ]
+
+        // Date to be used for calculating Firebase priority.
+        var dateForPriority = createdAt
+
+        // If there is a completion date, added it to values and change priority.
+        if let jsDate = completedAt? {
+            taskValues["completed_at"] = jsDate
+            dateForPriority = jsDate
+        }
 
         // Calculate what the firebase priority of the task should be.
         let mult = Task.getFirebasePriorityMult(self.getPriority(), isActive: isActive)
-        let priority = timestamp.doubleValue * mult
+        var priority = (-1 * dateForPriority.doubleValue) * mult
 
         // Save the task.
         taskRef.setValue(taskValues, andPriority: priority, withCompletionBlock: { (err, ref) in

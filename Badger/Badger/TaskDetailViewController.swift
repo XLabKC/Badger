@@ -107,6 +107,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
             let isActive = !task.active
             let oldRef = task.ref
             task.active = isActive
+            task.completedAt = NSDate()
 
             // Get Firebase priority.
             let priority = task.firebasePriority

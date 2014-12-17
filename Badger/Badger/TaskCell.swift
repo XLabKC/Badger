@@ -60,7 +60,7 @@ class TaskCell: BorderedCell {
                 self.titleLabel.text = task.title
                 self.contentLabel.text = task.content
                 self.profileCircle.setUid(task.author)
-                self.metaLabel.text = task.timestampString
+                self.metaLabel.text = task.createdAtString
             }
         }
     }

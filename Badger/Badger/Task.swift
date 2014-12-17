@@ -6,29 +6,46 @@
     var title: String
     var content: String
     var priority: TaskPriority
-    let timestamp: NSDate
+    let createdAt: NSDate
+    var completedAt: NSDate?
     var active: Bool
-    private var internalTimestampString: String?
+    private var internalCreatedAtString: String?
+    private var internalCompletedAtString: String?
 
     var ref: Firebase {
-        get {
-            return Task.createRef(self.owner, id: self.id, active: self.active)
-        }
+        return Task.createRef(self.owner, id: self.id, active: self.active)
     }
-    var timestampString: String {
-        if let timestamp = self.internalTimestampString? {
-            return timestamp
+    var createdAtString: String {
+        if let createdAt = self.internalCreatedAtString? {
+            return createdAt
         }
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "'Created at' h:mm a 'on' d/M/yy"
-        self.internalTimestampString = dateFormatter.stringFromDate(self.timestamp)
-        return self.internalTimestampString!
+        self.internalCreatedAtString = dateFormatter.stringFromDate(self.createdAt)
+        return self.internalCreatedAtString!
+    }
+    var completedAtString: String {
+        if let timestamp = self.internalCompletedAtString? {
+            return timestamp
+        }
+        if let completedAt = self.completedAt? {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "'Completed at' h:mm a 'on' d/M/yy"
+            self.internalCompletedAtString = dateFormatter.stringFromDate(self.createdAt)
+        } else {
+            self.internalCompletedAtString = "Not yet complete!"
+        }
+        return self.internalCompletedAtString!
     }
     var firebasePriority: Double {
-        get {
-            let mult = Task.getFirebasePriorityMult(self.priority, isActive: self.active)
-            return NSDate.javascriptTimestampFromDate(self.timestamp).doubleValue * mult
+        let mult = Task.getFirebasePriorityMult(self.priority, isActive: self.active)
+        var dateForPriority = self.createdAt
+
+        // If there is a completion date and task is not active, use it instead.
+        if self.completedAt != nil && !self.active {
+            dateForPriority = self.completedAt!
         }
+        return (-1 * NSDate.javascriptTimestampFromDate(dateForPriority).doubleValue) * mult
     }
 
     init(id: String, owner: String, json: Dictionary<String, AnyObject>) {
@@ -39,24 +56,32 @@
         self.title = json["title"] as String
         self.content = json["content"] as String
         self.active = json["active"] as Bool
-        self.timestamp = NSDate(fromJavascriptTimestamp: json["timestamp"] as NSNumber)
+        self.createdAt = NSDate(fromJavascriptTimestamp: json["created_at"] as NSNumber)
         var priority = TaskPriority(rawValue: json["priority"] as String)
         if priority == nil {
             priority = .Unknown
         }
         self.priority = priority!
+
+        if let completedAt = json["completed_at"] as? NSNumber {
+            self.completedAt = NSDate(fromJavascriptTimestamp: completedAt)
+        }
     }
 
     func toJson() -> Dictionary<String, AnyObject> {
-        return [
+        var json = [
             "team": self.team,
             "author": self.author,
             "title": self.title,
             "content": self.content,
             "active": self.active,
-            "timestamp": NSDate.javascriptTimestampFromDate(self.timestamp),
+            "create_at": NSDate.javascriptTimestampFromDate(self.createdAt),
             "priority": self.priority.rawValue
         ]
+        if let completedAt = self.completedAt? {
+            json["completed_at"] = NSDate.javascriptTimestampFromDate(completedAt)
+        }
+        return json
     }
 
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {

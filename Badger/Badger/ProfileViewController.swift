@@ -16,23 +16,24 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
     private var profileHeaderCell: ProfileHeaderCell?
     private var profileControlsCell: ProfileControlsCell?
     private var user: User?
+    private var isAuthUser = true
+
+    var hasSetup: Bool {
+        return self.activeObserver != nil
+    }
 
     var isLoadingActiveTasks: Bool {
-        get {
-            if let observer = self.activeObserver? {
-                return !observer.hasLoadedInitial()
-            }
-            return true
+        if let observer = self.activeObserver? {
+            return !observer.hasLoadedInitial()
         }
+        return true
     }
 
     var isLoadingCompletedTasks: Bool {
-        get {
-            if let observer = self.completedObserver? {
-                return !observer.hasLoadedInitial()
-            }
-            return false
+        if let observer = self.completedObserver? {
+            return !observer.hasLoadedInitial()
         }
+        return false
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -73,12 +74,13 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
         self.navigationItem.titleView = self.titleLabel
 
         super.viewDidLoad()
-        if let user = self.user? {
-            self.loadUserProfile(user.uid)
+        if self.user != nil && !self.hasSetup {
+            self.loadUserProfile(self.user!.uid)
         }
     }
 
     func setUid(uid: String) {
+        self.isAuthUser = UserStore.sharedInstance().isAuthUser(uid)
         self.userObserver = FirebaseObserver<User>(query: User.createRef(uid), withBlock: { user in
             self.user = user
 
@@ -90,12 +92,12 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
                 statusSlider.setUser(user)
             }
 
-            if self.isViewLoaded() {
+            if self.isViewLoaded() && !self.hasSetup {
                 self.loadUserProfile(uid)
             }
 
             if !self.isLoadingActiveTasks {
-                self.tableView.reloadRowsAtIndexPaths([NSIndexSet(index: 2)], withRowAnimation: .None)
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 2)], withRowAnimation: .None)
             }
         })
 
@@ -107,6 +109,8 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
     }
 
     private func loadUserProfile(uid: String) {
+        println("Loading for uid: \(uid))")
+
         // Load the users tasks.
         let ref = Firebase(url: Global.FirebaseActiveTasksUrl).childByAppendingPath(uid)
         self.activeObserver = FirebaseObserver<Task>(query: ref.queryOrderedByPriority())
@@ -192,18 +196,16 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
                 return self.profileHeaderCell!
             }
             // Control Cell
-            if let user = self.user? {
-                if !UserStore.sharedInstance().isAuthUser(user.uid) {
-                    return tableView.dequeueReusableCellWithIdentifier("ProfileControlsCell") as UITableViewCell
+            if self.isAuthUser {
+                if self.statusSliderCell == nil {
+                    self.statusSliderCell = (tableView.dequeueReusableCellWithIdentifier("StatusSliderCell") as StatusSliderCell)
+                    if let user = self.user? {
+                        self.statusSliderCell!.setUser(user)
+                    }
                 }
+                return self.statusSliderCell!
             }
-            if self.statusSliderCell == nil {
-                self.statusSliderCell = (tableView.dequeueReusableCellWithIdentifier("StatusSliderCell") as StatusSliderCell)
-                if let user = self.user? {
-                    self.statusSliderCell!.setUser(user)
-                }
-            }
-            return self.statusSliderCell!
+            return tableView.dequeueReusableCellWithIdentifier("ProfileControlsCell") as UITableViewCell
         case 1:
             if self.isLoadingActiveTasks {
                 return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
@@ -307,11 +309,31 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
         return { (task, previousId, isInitial) in
             println("added: \(task.id), previous: \(previousId), isInitial: \(isInitial)")
             if isInitial {
-                listRef.array.append(task)
+                // Kind of a hack.. Requests can come in reverse order, check that the last task
+                // is not the same as this one.
+                if listRef.array.isEmpty || listRef.array.last!.id != task.id {
+                    listRef.array.append(task)
+                }
             } else {
+                // Make sure this task isn't already in the list.
+                let currentIndex = self.findIndexOfTask(listRef, id: task.id)
+                if currentIndex >= 0 {
+                    // Task already in the list so instead let's just update it.
+                    // TODO: actually update the cell.
+                    return
+                }
+
+                self.tableView.beginUpdates()
+
+                // If the array is empty, make sure and delete the current (placeholder) cell.
+                if listRef.array.isEmpty {
+                    self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)], withRowAnimation: .Fade)
+                }
+
                 let index = self.findNextIndex(listRef, previousId: previousId)
                 listRef.array.insert(task, atIndex: index)
                 self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 1)], withRowAnimation: .Left)
+                self.tableView.endUpdates()
             }
         }
     }

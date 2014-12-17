@@ -26,7 +26,7 @@ class TaskDetailAuthorCell: BorderedCell {
                 UserStore.sharedInstance().getUser(task.author, withBlock: { user in
                     self.profileCircle.setUser(user)
                     self.nameLabel.text = user.fullName
-                    self.metaLabel.text = task.timestampString
+                    self.metaLabel.text = task.createdAtString
                 })
                 TeamStore.sharedInstance().getTeam(task.team, withBlock: { team in
                     self.teamLabel.text = team.name
