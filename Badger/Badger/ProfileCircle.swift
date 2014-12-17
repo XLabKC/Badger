@@ -23,7 +23,11 @@ class ProfileCircle: UIImageView, UserObserver {
     }
 
     func setUser(user: User) {
-        if let user = self.user? {
+        if let old = self.user? {
+            // Make sure the old and new user are actually different.
+            if old.uid == user.uid {
+                return
+            }
             UserStore.sharedInstance().removeObserver(self, uid: user.uid)
         }
         UserStore.sharedInstance().addObserver(self, uid: user.uid)

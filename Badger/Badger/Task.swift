@@ -15,6 +15,9 @@
     var ref: Firebase {
         return Task.createRef(self.owner, id: self.id, active: self.active)
     }
+    var timestampString: String {
+        return self.active ? self.createdAtString : self.completedAtString
+    }
     var createdAtString: String {
         if let createdAt = self.internalCreatedAtString? {
             return createdAt
@@ -75,7 +78,7 @@
             "title": self.title,
             "content": self.content,
             "active": self.active,
-            "create_at": NSDate.javascriptTimestampFromDate(self.createdAt),
+            "created_at": NSDate.javascriptTimestampFromDate(self.createdAt),
             "priority": self.priority.rawValue
         ]
         if let completedAt = self.completedAt? {

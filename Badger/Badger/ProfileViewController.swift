@@ -5,6 +5,11 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
     private let cellHeights: [CGFloat] = [225.0, 100.0, 40.0, 72.0]
     private let titleLabel = Helpers.createTitleLabel("My Profile")
 
+    private let headerSection = 0
+    private let activeTaskSection = 1
+    private let dividerSection = 2
+    private let completedTaskSection = 3
+
     private var userObserver: FirebaseObserver<User>?
     private var activeObserver: FirebaseObserver<Task>?
     private var completedObserver: FirebaseObserver<Task>?
@@ -97,7 +102,7 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
             }
 
             if !self.isLoadingActiveTasks {
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 2)], withRowAnimation: .None)
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: self.dividerSection)], withRowAnimation: .None)
             }
         })
 
@@ -120,15 +125,15 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
         observer.afterInitial = { _ in
             // Finished loading active tasks but prefetch all the users before reloading table.
             self.prefetchUsers(self.activeTasks, complete: { _ in
-                var set = NSMutableIndexSet(index: 1)
-                set.addIndex(2)
+                var set = NSMutableIndexSet(index: self.activeTaskSection)
+                set.addIndex(self.dividerSection)
                 self.tableView.reloadSections(set, withRowAnimation: .Bottom)
             })
         }
-        observer.childAdded = self.handleChildAdded(self.activeTasks, section: 1)
-        observer.childChanged = self.handleChildChanged(self.activeTasks, section: 1)
-        observer.childMoved = self.handleChildMoved(self.activeTasks, section: 1)
-        observer.childRemoved = self.handleChildRemoved(self.activeTasks, section: 1)
+        observer.childAdded = self.handleChildAdded(self.activeTasks, section: self.activeTaskSection)
+        observer.childChanged = self.handleChildChanged(self.activeTasks, section: self.activeTaskSection)
+        observer.childMoved = self.handleChildMoved(self.activeTasks, section: self.activeTaskSection)
+        observer.childRemoved = self.handleChildRemoved(self.activeTasks, section: self.activeTaskSection)
         observer.start()
 
         if UserStore.sharedInstance().isAuthUser(uid) {
@@ -279,20 +284,21 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
                             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: .Top, animated: true)
                         })
                     }
-                    observer.childAdded = self.handleChildAdded(self.completedTasks, section: 3)
-                    observer.childChanged = self.handleChildChanged(self.completedTasks, section: 3)
-                    observer.childMoved = self.handleChildMoved(self.completedTasks, section: 3)
-                    observer.childRemoved = self.handleChildRemoved(self.completedTasks, section: 3)
+                    let section = self.completedTaskSection
+                    observer.childAdded = self.handleChildAdded(self.completedTasks, section: section)
+                    observer.childChanged = self.handleChildChanged(self.completedTasks, section: section)
+                    observer.childMoved = self.handleChildMoved(self.completedTasks, section: section)
+                    observer.childRemoved = self.handleChildRemoved(self.completedTasks, section: section)
                     observer.start()
                 }
             } else {
                 // Already observing the completed tasks so just reload the section.
-                self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: .Bottom)
-                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: .Top, animated: true)
+                self.tableView.reloadSections(NSIndexSet(index: self.completedTaskSection), withRowAnimation: .Bottom)
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: self.dividerSection), atScrollPosition: .Top, animated: true)
                 return
             }
         }
-        self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: .Bottom)
+        self.tableView.reloadSections(NSIndexSet(index: self.completedTaskSection), withRowAnimation: .Bottom)
     }
 
     private func prefetchUsers(listRef: ArrayRef<Task>, complete: () -> ()) {
@@ -307,7 +313,7 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
 
     private func handleChildAdded(listRef: ArrayRef<Task>, section: Int) -> (Task, previousId: String?, isInitial: Bool) -> () {
         return { (task, previousId, isInitial) in
-            println("added: \(task.id), previous: \(previousId), isInitial: \(isInitial)")
+            println("added(section \(section)): \(task.id), previous: \(previousId), isInitial: \(isInitial)")
             if isInitial {
                 // Kind of a hack.. Requests can come in reverse order, check that the last task
                 // is not the same as this one.
@@ -322,17 +328,22 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
                     // TODO: actually update the cell.
                     return
                 }
+                let index = self.findNextIndex(listRef, previousId: previousId)
+                let wasEmpty = listRef.array.isEmpty
+                listRef.array.insert(task, atIndex: index)
+
+                // If the completed section is closed, make sure not to insert any rows.
+                if self.tableView.numberOfRowsInSection(section) == 0 {
+                    return
+                }
 
                 self.tableView.beginUpdates()
 
                 // If the array is empty, make sure and delete the current (placeholder) cell.
-                if listRef.array.isEmpty {
-                    self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)], withRowAnimation: .Fade)
+                if wasEmpty {
+                    self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: section)], withRowAnimation: .Fade)
                 }
-
-                let index = self.findNextIndex(listRef, previousId: previousId)
-                listRef.array.insert(task, atIndex: index)
-                self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 1)], withRowAnimation: .Left)
+                self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: section)], withRowAnimation: .Left)
                 self.tableView.endUpdates()
             }
         }
@@ -340,13 +351,13 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
 
     private func handleChildChanged(listRef: ArrayRef<Task>, section: Int) -> (Task, previousId: String?) -> () {
         return { (task, previousId) in
-            println("changed: \(task.id), previous: \(previousId)")
+            println("changed(section \(section)): \(task.id), previous: \(previousId)")
         }
     }
 
     private func handleChildMoved(listRef: ArrayRef<Task>, section: Int) -> (Task, previousId: String?) -> () {
         return { (task, previousId) in
-            println("moved: \(task.id), previous: \(previousId)")
+            println("moved(section \(section)): \(task.id), previous: \(previousId)")
             var oldIndex = self.findIndexOfTask(listRef, id: task.id)
             listRef.array.removeAtIndex(oldIndex)
             var newIndex = self.findNextIndex(listRef, previousId: previousId)
@@ -357,10 +368,23 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
 
     private func handleChildRemoved(listRef: ArrayRef<Task>, section: Int) -> (Task, previousId: String?) -> () {
         return { (task, previousId) in
-            println("removed: \(task.id), previous: \(previousId)")
+            println("removed(section \(section)): \(task.id), previous: \(previousId)")
             var oldIndex = self.findIndexOfTask(listRef, id: task.id)
             listRef.array.removeAtIndex(oldIndex)
+
+            self.tableView.beginUpdates()
             self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: oldIndex, inSection: section)], withRowAnimation: .Left)
+
+            if listRef.array.isEmpty {
+                if section == self.activeTaskSection {
+                    // The last row was just deleted, make sure to insert the 'no rows' cell.
+                    self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: section)], withRowAnimation: .Fade)
+                } else {
+                    // If there are no rows in the completed section, hide the section.
+                    self.isShowingCompletedTasks = false
+                }
+            }
+            self.tableView.endUpdates()
         }
     }
 
