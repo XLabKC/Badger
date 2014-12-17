@@ -52,7 +52,7 @@ class TeamMemberCell: BorderedCell, UserObserver {
                 self.statusLabel.text = Helpers.statusToText(user, status: user.status)
                 self.statusLabel.textColor = Helpers.statusToColor(user.status)
                 self.nameLabel.text = user.fullName
-                self.metaLabel.text = "\(user.activeTasks) Active Tasks"
+                self.metaLabel.text = "\(user.activeTaskCount) Active Tasks"
             }
         }
     }

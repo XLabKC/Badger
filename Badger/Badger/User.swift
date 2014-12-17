@@ -10,8 +10,8 @@
     var followingIds: [String] = []
     var teamIds: [String] = []
     var timestamp: NSDate
-    var activeTasks: Int
-    var completedTasks: Int
+    var activeTaskCount: Int
+    var completedTaskCount: Int
 
     var fullName: String {
         return "\(firstName) \(lastName)"
@@ -21,7 +21,7 @@
         return User.createRef(self.uid)
     }
 
-    init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus: String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], activeTasks: Int, completedTasks: Int)
+    init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus: String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], activeTaskCount: Int, completedTaskCount: Int)
     {
         self.uid = uid
         self.firstName = firstName
@@ -34,8 +34,8 @@
         self.followerIds = followerIds
         self.followingIds = followingIds
         self.teamIds = teamIds
-        self.activeTasks = activeTasks
-        self.completedTasks = completedTasks
+        self.activeTaskCount = activeTaskCount
+        self.completedTaskCount = completedTaskCount
     }
 
     class func createFromSnapshot(userSnapshot: FDataSnapshot) -> DataEntity {
@@ -44,8 +44,8 @@
         var last = Helpers.getString(userSnapshot.value, key: "last_name", backup: "Doe")
         let status = Helpers.getString(userSnapshot.value, key: "status", backup: "unknown")
         let email = Helpers.getString(userSnapshot.value, key: "email", backup: "Unknown")
-        let activeTasks = Helpers.getInt(userSnapshot.value, key: "active_tasks", backup: 0)
-        let completedTasks = Helpers.getInt(userSnapshot.value, key: "completed_tasks", backup: 0)
+        let activeTasks = Helpers.getInt(userSnapshot.value, key: "active_task_count", backup: 0)
+        let completedTasks = Helpers.getInt(userSnapshot.value, key: "completed_task_count", backup: 0)
         var userStatus = UserStatus(rawValue: status)
         if userStatus == nil {
             userStatus = .Unknown
@@ -81,7 +81,7 @@
                 }
             }
         }
-        let user = User(uid: uid, firstName: first, lastName: last, email: email, status: userStatus!, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, activeTasks: activeTasks, completedTasks: completedTasks)
+        let user = User(uid: uid, firstName: first, lastName: last, email: email, status: userStatus!, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, activeTaskCount: activeTasks, completedTaskCount: completedTasks)
         return user
     }
 

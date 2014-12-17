@@ -229,7 +229,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
 
                 if isActive {
                     // Decrement active count if task is moving to a different user.
-                    UserStore.sharedInstance().adjustActiveTaskCount(task.owner, delta: -1)
+                    UserStore.adjustActiveTaskCount(task.owner, delta: -1)
 
                     // The user is going to be different so the combined id needs to be changed.
                     var oldTeamRef = Firebase(url: Global.FirebaseTeamsUrl).childByAppendingPath(task.team)
@@ -240,7 +240,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             }
             // This is an active task that's being moved to a different team so decrement the active count.
             if task.team != newTeam.id && task.active {
-                TeamStore.sharedInstance().adjustActiveTaskCount(task.team, delta: -1)
+                TeamStore.adjustActiveTaskCount(task.team, delta: -1)
             }
             // Keep the same timestamps and active state.
             isActive = task.active
@@ -282,12 +282,12 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
 
             // Increment the active tasks count for the user if it's new and active.
             if isActive && isNew {
-                UserStore.sharedInstance().adjustActiveTaskCount(newOwner.uid, delta: 1)
+                UserStore.adjustActiveTaskCount(newOwner.uid, delta: 1)
             }
 
             // Add the task to the appropriate team and incrememt count.
             if isActive {
-                TeamStore.sharedInstance().addActiveTask(newTeam.id, combinedId: combinedKey)
+                TeamStore.addActiveTask(newTeam.id, combinedId: combinedKey)
             }
 
             // Add to push message queues if new of updated.

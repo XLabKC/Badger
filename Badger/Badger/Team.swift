@@ -62,7 +62,7 @@
             }
         }
 
-        if let taskData = Helpers.getDictionary(snapshot.value, key: "active_tasks")? {
+        if let taskData = Helpers.getDictionary(snapshot.value, key: "active_task_count")? {
             for (uid, value) in taskData {
                 if let combinedTaskId = uid as? String {
                     team.activeTaskCombinedIds.append(combinedTaskId)

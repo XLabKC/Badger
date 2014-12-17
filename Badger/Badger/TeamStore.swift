@@ -34,23 +34,6 @@ class TeamStore {
         self.dataStore.getEntities(ids.map(self.createTeamRef), withBlock: withBlock)
     }
 
-    func addActiveTask(teamId: String, combinedId: String) {
-        self.ref.childByAppendingPath(teamId).childByAppendingPath("active_tasks")
-            .childByAppendingPath(combinedId).setValue(true)
-        self.adjustActiveTaskCount(teamId, delta: 1)
-    }
-
-    func removeActiveTask(teamId: String, combinedId: String) {
-        self.ref.childByAppendingPath(teamId).childByAppendingPath("active_tasks")
-            .childByAppendingPath(combinedId).removeValue()
-        self.adjustActiveTaskCount(teamId, delta: -1)
-    }
-
-    func adjustActiveTaskCount(id: String, delta: Int) {
-        let activeRef = self.ref.childByAppendingPath(id).childByAppendingPath("active_task_count")
-        FirebaseAsync.adjustValueForRef(activeRef, delta: delta)
-    }
-
     func addObserver(observer: TeamObserver, id: String) {
         self.dataStore.addObserver(observer, ref: self.createTeamRef(id))
     }
@@ -63,6 +46,23 @@ class TeamStore {
 
     func removeObserver(observer: TeamObserver, id: String) {
         self.dataStore.removeObserver(observer, ref: self.createTeamRef(id))
+    }
+
+    class func addActiveTask(teamId: String, combinedId: String) {
+        let childPath = "\(teamId)/active_tasks/\(combinedId)"
+        Firebase(url: Global.FirebaseTeamsUrl).childByAppendingPath(childPath).setValue(true)
+        TeamStore.adjustActiveTaskCount(teamId, delta: 1)
+    }
+
+    class func removeActiveTask(teamId: String, combinedId: String) {
+        let childPath = "\(teamId)/active_tasks/\(combinedId)"
+        Firebase(url: Global.FirebaseTeamsUrl).childByAppendingPath(childPath).removeValue()
+        TeamStore.adjustActiveTaskCount(teamId, delta: -1)
+    }
+
+    class func adjustActiveTaskCount(id: String, delta: Int) {
+        let ref = Firebase(url: Global.FirebaseTeamsUrl).childByAppendingPath("\(id)/active_task_count")
+        FirebaseUtil.adjustValueForRef(ref, delta: delta)
     }
 
     private func createTeamRef(uid: String) -> Firebase {

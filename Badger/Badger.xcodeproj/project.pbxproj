@@ -46,6 +46,7 @@
 		7B5FE4211A33D79F002F24EA /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B5FE4201A33D79F002F24EA /* ApiKeys.plist */; };
 		7B5FE4231A357BD3002F24EA /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5FE4221A357BD3002F24EA /* ApiKeys.swift */; };
 		7B64F2BD1A40FFF2001FA518 /* ArrayRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64F2BC1A40FFF2001FA518 /* ArrayRef.swift */; };
+		7B64F2BF1A41E68C001FA518 /* FirebaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64F2BE1A41E68C001FA518 /* FirebaseUtil.swift */; };
 		7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7439FC19F87E4E0075690A /* AppDelegate.swift */; };
 		7B743A0219F87E4E0075690A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0019F87E4E0075690A /* Main.storyboard */; };
 		7B743A0419F87E4E0075690A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0319F87E4E0075690A /* Images.xcassets */; };
@@ -147,6 +148,7 @@
 		7B5FE4201A33D79F002F24EA /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		7B5FE4221A357BD3002F24EA /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		7B64F2BC1A40FFF2001FA518 /* ArrayRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayRef.swift; sourceTree = "<group>"; };
+		7B64F2BE1A41E68C001FA518 /* FirebaseUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUtil.swift; sourceTree = "<group>"; };
 		7B7439F719F87E4E0075690A /* Badger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7439FB19F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B7439FC19F87E4E0075690A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				7B4733AF1A1BC20000D88C00 /* Color.swift */,
 				7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */,
 				7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */,
+				7B64F2BE1A41E68C001FA518 /* FirebaseUtil.swift */,
 				7B4733D11A1E81B300D88C00 /* NSDate+JavascriptTimestamp.h */,
 				7B4733D21A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m */,
 				7B4733C81A1D93DE00D88C00 /* SWRevealViewController.h */,
@@ -676,6 +679,7 @@
 				7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */,
 				7B90E0C41A214137005EC421 /* TeamCircle.swift in Sources */,
 				7B29F19A1A2643FC003920AD /* TeamHeaderCell.swift in Sources */,
+				7B64F2BF1A41E68C001FA518 /* FirebaseUtil.swift in Sources */,
 				7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */,
 				7B4733D01A1E551600D88C00 /* Team.swift in Sources */,
 				7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */,

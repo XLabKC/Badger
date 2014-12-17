@@ -227,8 +227,8 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
             cell.setBottomBorder(.Full)
             cell.setBorderColor(Color.colorize(0xE0E0E0, alpha: 1.0))
             if let user = self.user? {
-                cell.title = "COMPLETED TASKS (\(user.completedTasks))"
-                cell.showButton = user.completedTasks > 0
+                cell.title = "COMPLETED TASKS (\(user.completedTaskCount))"
+                cell.showButton = user.completedTaskCount > 0
             }
             return cell
         default:

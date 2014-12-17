@@ -22,6 +22,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
         let headerCellNib = UINib(nibName: "HeaderCell", bundle: nil)
         self.tableView.registerNib(headerCellNib, forCellReuseIdentifier: "HeaderCell")
 
+        self.setRightButton()
         super.viewDidLoad()
     }
 
@@ -30,11 +31,38 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
         self.observer = FirebaseObserver<Task>(query: ref, withBlock: { task in
             self.task = task
             self.getContentCell().setTask(task)
+
             if (self.isViewLoaded()) {
                 // TODO: figure out a better way to update each cell.
                 self.tableView.reloadData()
+                self.setRightButton()
             }
         })
+    }
+
+    private func setRightButton() {
+        let authId = UserStore.sharedInstance().getAuthUid()
+        if let task = self.task? {
+            if task.author == authId {
+                // Auth user is author, add "Edit" button.
+                let button = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "editButtonPressed")
+                button.tintColor = Color.colorize(0x8E82FF, alpha: 1.0)
+                self.navigationItem.rightBarButtonItem = button
+            } else if task.owner == authId {
+                // Auth user is owner, add "Delete" button.
+                let button = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "deleteButtonPressed")
+                button.tintColor = Color.colorize(0xFF5C78, alpha: 1.0)
+                self.navigationItem.rightBarButtonItem = button
+            }
+        }
+    }
+
+    func editButtonPressed() {
+        self.performSegueWithIdentifier("TaskDetailEditExisting", sender: self)
+    }
+
+    func deleteButtonPressed() {
+        // TODO: Delete the task.
     }
 
     // TableViewController Overrides
@@ -117,19 +145,28 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
                 oldRef.removeValue()
 
                 // Adjust active/completed counts for user.
-                UserStore.sharedInstance().adjustActiveTaskCount(task.owner, delta: isActive ? 1 : -1)
-                UserStore.sharedInstance().adjustCompletedTaskCount(task.owner, delta: isActive ? -1 : 1)
+                UserStore.adjustActiveTaskCount(task.owner, delta: isActive ? 1 : -1)
+                UserStore.adjustCompletedTaskCount(task.owner, delta: isActive ? -1 : 1)
 
                 // Update active task count for team.
                 let combinedId = TaskStore.combineId(task.owner, id: task.id)
                 if isActive {
-                    TeamStore.sharedInstance().addActiveTask(task.team, combinedId: combinedId)
+                    TeamStore.addActiveTask(task.team, combinedId: combinedId)
                 } else {
-                    TeamStore.sharedInstance().removeActiveTask(task.team, combinedId: combinedId)
+                    TeamStore.removeActiveTask(task.team, combinedId: combinedId)
                 }
             })
 
             self.navigationController?.popViewControllerAnimated(true)
+        }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "TaskDetailEditExisting" {
+            let vc = segue.destinationViewController as TaskEditViewController
+            if let task = self.task? {
+                vc.setTask(task)
+            }
         }
     }
 

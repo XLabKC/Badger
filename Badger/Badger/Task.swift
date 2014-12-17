@@ -2,7 +2,7 @@
     let id: String
     var owner: String
     var team: String
-    var author: String
+    let author: String
     var title: String
     var content: String
     var priority: TaskPriority
@@ -49,6 +49,18 @@
             dateForPriority = self.completedAt!
         }
         return (-1 * NSDate.javascriptTimestampFromDate(dateForPriority).doubleValue) * mult
+    }
+
+    init(id: String, author: String) {
+        self.id = id
+        self.author = author
+        self.createdAt = NSDate()
+        self.owner = ""
+        self.team = ""
+        self.title = ""
+        self.content = ""
+        self.priority = .Unknown
+        self.active = true
     }
 
     init(id: String, owner: String, json: Dictionary<String, AnyObject>) {

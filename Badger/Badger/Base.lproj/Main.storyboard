@@ -938,6 +938,9 @@
                         </connections>
                     </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="WaY-Zu-mhH" kind="show" identifier="TaskDetailEditExisting" id="zwB-bM-66t"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2p0-7p-f1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1563,7 +1566,7 @@
         <image name="RightArrowIcon" width="8" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7ze-C7-KaO"/>
         <segue reference="sG0-Gn-9tP"/>
+        <segue reference="zwB-bM-66t"/>
     </inferredMetricsTieBreakers>
 </document>
