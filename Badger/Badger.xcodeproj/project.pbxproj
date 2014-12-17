@@ -240,14 +240,14 @@
 			isa = PBXGroup;
 			children = (
 				7B64F2BC1A40FFF2001FA518 /* ArrayRef.swift */,
+				7B469C4D1A2237EC0054019D /* Barrier.swift */,
+				7B4733AF1A1BC20000D88C00 /* Color.swift */,
+				7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */,
 				7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */,
-				7B4733C81A1D93DE00D88C00 /* SWRevealViewController.h */,
-				7B4733C91A1D93DE00D88C00 /* SWRevealViewController.m */,
 				7B4733D11A1E81B300D88C00 /* NSDate+JavascriptTimestamp.h */,
 				7B4733D21A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m */,
-				7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */,
-				7B4733AF1A1BC20000D88C00 /* Color.swift */,
-				7B469C4D1A2237EC0054019D /* Barrier.swift */,
+				7B4733C81A1D93DE00D88C00 /* SWRevealViewController.h */,
+				7B4733C91A1D93DE00D88C00 /* SWRevealViewController.m */,
 			);
 			name = Lib;
 			sourceTree = "<group>";

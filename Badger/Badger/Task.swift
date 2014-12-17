@@ -1,64 +1,78 @@
 @objc class Task: DataEntity {
     let id: String
-    let owner: String
-    let team: String
-    let author: String
-    let title: String
-    let content: String
-    let priority: TaskPriority
+    var owner: String
+    var team: String
+    var author: String
+    var title: String
+    var content: String
+    var priority: TaskPriority
     let timestamp: NSDate
-    let active: Bool
-    var ref: Firebase?
-    private var timestampString: String?
+    var active: Bool
+    private var internalTimestampString: String?
 
-    init(id: String, owner: String, team: String, author: String, title: String, content: String, priority: TaskPriority, active: Bool, timestamp: NSDate)
-    {
-        self.id = id
-        self.owner = owner
-        self.team = team
-        self.author = author
-        self.title = title
-        self.content = content
-        self.priority = priority
-        self.active = active
-        self.timestamp = timestamp
-    }
-
-    func getRef() -> Firebase {
-        if let ref = self.ref {
-            return ref
+    var ref: Firebase {
+        get {
+            return Task.createRef(self.owner, id: self.id, active: self.active)
         }
-        self.ref = Task.createRef(self.owner, id: self.id, active: self.active)
-        return self.ref!
     }
-
-    func getTimestampString() -> String {
-        if let timestamp = self.timestampString? {
+    var timestampString: String {
+        if let timestamp = self.internalTimestampString? {
             return timestamp
         }
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "'Created at' h:mm a 'on' d/M/yy"
-        self.timestampString = dateFormatter.stringFromDate(self.timestamp)
-        return self.timestampString!
+        self.internalTimestampString = dateFormatter.stringFromDate(self.timestamp)
+        return self.internalTimestampString!
+    }
+    var firebasePriority: Double {
+        get {
+            let mult = Task.getFirebasePriorityMult(self.priority, isActive: self.active)
+            return NSDate.javascriptTimestampFromDate(self.timestamp).doubleValue * mult
+        }
+    }
+
+    init(id: String, owner: String, json: Dictionary<String, AnyObject>) {
+        self.id = id
+        self.owner = owner
+        self.team = json["team"] as String
+        self.author = json["author"] as String
+        self.title = json["title"] as String
+        self.content = json["content"] as String
+        self.active = json["active"] as Bool
+        self.timestamp = NSDate(fromJavascriptTimestamp: json["timestamp"] as NSNumber)
+        var priority = TaskPriority(rawValue: json["priority"] as String)
+        if priority == nil {
+            priority = .Unknown
+        }
+        self.priority = priority!
+    }
+
+    func toJson() -> Dictionary<String, AnyObject> {
+        return [
+            "team": self.team,
+            "author": self.author,
+            "title": self.title,
+            "content": self.content,
+            "active": self.active,
+            "timestamp": NSDate.javascriptTimestampFromDate(self.timestamp),
+            "priority": self.priority.rawValue
+        ]
     }
 
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {
         let id = snapshot.key
         let owner = snapshot.ref.parent.key
-        let team = Helpers.getString(snapshot.value, key: "team", backup: "Unknown")
-        let author = Helpers.getString(snapshot.value, key: "author", backup: "Unknown")
-        let title = Helpers.getString(snapshot.value, key: "title", backup: "No Title")
-        let content = Helpers.getString(snapshot.value, key: "content", backup: "No content")
-        let priority = Helpers.getString(snapshot.value, key: "priority", backup: "unknown")
-        var taskPriority = TaskPriority(rawValue: priority)
-        if taskPriority == nil {
-            taskPriority = .Unknown
+        return Task(id: id, owner: owner, json: snapshot.value as Dictionary<String, AnyObject>)
+    }
+
+    class func createRef(owner: String, id: String, active: Bool) -> Firebase {
+        var root: Firebase
+        if active {
+            root = Firebase(url: Global.FirebaseActiveTasksUrl)
+        } else {
+            root = Firebase(url: Global.FirebaseCompletedTasksUrl)
         }
-        let active = Helpers.getBool(snapshot.value, key: "active", backup: true)
-        let timestamp = Helpers.getDate(snapshot.value, key: "timestamp")
-        let task = Task(id: id, owner: owner, team: team, author: author, title: title, content: content, priority: taskPriority!, active: active, timestamp: timestamp)
-        task.ref = snapshot.ref
-        return task
+        return root.childByAppendingPath("\(owner)/\(id)")
     }
 
     class func getFirebasePriorityMult(priority: TaskPriority, isActive: Bool) -> Double {
@@ -75,15 +89,5 @@
         default:
             return 1.0
         }
-    }
-
-    class func createRef(owner: String, id: String, active: Bool) -> Firebase {
-        var root: Firebase
-        if active {
-            root = Firebase(url: Global.FirebaseActiveTasksUrl)
-        } else {
-            root = Firebase(url: Global.FirebaseCompletedTasksUrl)
-        }
-        return root.childByAppendingPath("\(owner)/\(id)")
     }
 }

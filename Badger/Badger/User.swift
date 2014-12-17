@@ -2,9 +2,6 @@
     let uid: String
     var firstName: String
     var lastName: String
-    var fullName: String {
-        return "\(firstName) \(lastName)"
-    }
     var profileImages: [UserStatus: String] = [:]
     var headerImage: String
     var email: String
@@ -12,12 +9,19 @@
     var followerIds: [String] = []
     var followingIds: [String] = []
     var teamIds: [String] = []
-    var ref: Firebase?
     var timestamp: NSDate
     var activeTasks: Int
     var completedTasks: Int
 
-    init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus: String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], activeTasks: Int, completedTasks: Int, ref: Firebase?)
+    var fullName: String {
+        return "\(firstName) \(lastName)"
+    }
+
+    var ref: Firebase {
+        return User.createRef(self.uid)
+    }
+
+    init(uid: String, firstName: String, lastName: String, email: String, status: UserStatus, profileImages: [UserStatus: String], headerImage: String, followerIds: [String], followingIds: [String], teamIds: [String], activeTasks: Int, completedTasks: Int)
     {
         self.uid = uid
         self.firstName = firstName
@@ -30,7 +34,6 @@
         self.followerIds = followerIds
         self.followingIds = followingIds
         self.teamIds = teamIds
-        self.ref = ref
         self.activeTasks = activeTasks
         self.completedTasks = completedTasks
     }
@@ -78,7 +81,11 @@
                 }
             }
         }
-        let user = User(uid: uid, firstName: first, lastName: last, email: email, status: userStatus!, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, activeTasks: activeTasks, completedTasks: completedTasks, ref: userSnapshot.ref)
+        let user = User(uid: uid, firstName: first, lastName: last, email: email, status: userStatus!, profileImages: profileImages, headerImage: headerImage, followerIds: followerIds, followingIds: followingIds, teamIds: teamIds, activeTasks: activeTasks, completedTasks: completedTasks)
         return user
+    }
+
+    class func createRef(uid: String) -> Firebase {
+        return Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(uid)
     }
 }

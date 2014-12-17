@@ -7,7 +7,6 @@ class FirebaseObserver<T: DataEntity> {
     private var loadedInitial = false
 
     var afterInitial: (() -> ())?
-    var value: ((T) -> ())?
     var childAdded: ((T, previousId: String?, isInitial: Bool) -> ())?
     var childChanged: ((T, previousId: String?) -> ())?
     var childMoved: ((T, previousId: String?) -> ())?
@@ -16,41 +15,54 @@ class FirebaseObserver<T: DataEntity> {
     init(query: FQuery) {
         self.query = query
     }
+
+    convenience init(query: FQuery, withBlock: (T) -> ()) {
+        self.init(query: query)
+        self.observe(withBlock)
+    }
+
     deinit {
         dispose()
     }
 
+    // Starts observing the ref.
+    func observe(withBlock: (T) -> ()) {
+        if self.started {
+            return
+        }
+        self.started = true
+
+        var handle = self.query.observeEventType(.Value, withBlock: { snapshot in
+            withBlock(T.createFromSnapshot(snapshot) as T)
+        })
+        self.handles.append(handle)
+    }
+
+    // Starts observing the ref with the handlers that have been specified.
     func start() {
         if self.started {
             return
         }
         self.started = true
 
-        if let valueFunc = self.value? {
-            var handle = self.query.observeEventType(.ChildMoved, withBlock: { snapshot in
-                valueFunc(T.createFromSnapshot(snapshot) as T)
+        if let childAddedFunc = self.childAdded? {
+            var handle = self.query.observeEventType(.ChildAdded, andPreviousSiblingKeyWithBlock: { (snapshot, id) in
+                var data = T.createFromSnapshot(snapshot) as T
+                childAddedFunc(data, previousId: id, isInitial: !self.loadedInitial)
             })
             self.handles.append(handle)
-        } else {
-            if let childAddedFunc = self.childAdded? {
-                var handle = self.query.observeEventType(.ChildAdded, andPreviousSiblingKeyWithBlock: { (snapshot, id) in
-                    var data = T.createFromSnapshot(snapshot) as T
-                    childAddedFunc(data, previousId: id, isInitial: !self.loadedInitial)
-                })
-                self.handles.append(handle)
-            }
-            self.maybeAddObservingFunc(self.childChanged, type: .ChildChanged)
-            self.maybeAddObservingFunc(self.childMoved, type: .ChildMoved)
-            self.maybeAddObservingFunc(self.childRemoved, type: .ChildRemoved)
-
-            // After initial.
-            self.query.observeSingleEventOfType(.Value, withBlock: { _ in
-                self.loadedInitial = true
-                if let afterInitial = self.afterInitial? {
-                    afterInitial()
-                }
-            })
         }
+        self.maybeAddObservingFunc(self.childChanged, type: .ChildChanged)
+        self.maybeAddObservingFunc(self.childMoved, type: .ChildMoved)
+        self.maybeAddObservingFunc(self.childRemoved, type: .ChildRemoved)
+
+        // After initial.
+        self.query.observeSingleEventOfType(.Value, withBlock: { _ in
+            self.loadedInitial = true
+            if let afterInitial = self.afterInitial? {
+                afterInitial()
+            }
+        })
     }
 
     func isStarted() -> Bool {

@@ -5,8 +5,10 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
     private let cellHeights: [CGFloat] = [225.0, 100.0, 40.0, 72.0]
     private let titleLabel = Helpers.createTitleLabel("My Profile")
 
+    private var userObserver: FirebaseObserver<User>?
     private var activeObserver: FirebaseObserver<Task>?
     private var completedObserver: FirebaseObserver<Task>?
+
     private var activeTasks = ArrayRef<Task>()
     private var completedTasks = ArrayRef<Task>()
     private var isShowingCompletedTasks = false
@@ -14,7 +16,6 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
     private var profileHeaderCell: ProfileHeaderCell?
     private var profileControlsCell: ProfileControlsCell?
     private var user: User?
-
 
     var isLoadingActiveTasks: Bool {
         get {
@@ -38,6 +39,9 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
         super.init(coder: aDecoder)
     }
     deinit {
+        if let observer = self.userObserver? {
+            observer.dispose()
+        }
         if let observer = self.activeObserver? {
             observer.dispose()
         }
@@ -75,6 +79,8 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
     }
 
     func setUid(uid: String) {
+
+        
         UserStore.sharedInstance().getUser(uid, withBlock: self.setUser)
     }
 
@@ -236,9 +242,9 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "UserProfileTaskDetail" {
-            let taskCell = sender as TaskCell
             let vc = segue.destinationViewController as TaskDetailViewController
-            vc.setTask(taskCell.getTask()!)
+            let task = (sender as TaskCell).getTask()!
+            vc.setTask(task.owner, id: task.id, active: task.active)
         } else if segue.identifier == "UserProfileTaskEdit" {
             let vc = segue.destinationViewController as TaskEditViewController
             if let user = self.user? {

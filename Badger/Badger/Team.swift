@@ -72,5 +72,9 @@
 
         team.ref = snapshot.ref
         return team
-    }    
+    }
+
+    class func createRef(id: String) -> Firebase {
+        return Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath(id)
+    }
 }

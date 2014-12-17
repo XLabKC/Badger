@@ -6,8 +6,15 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
     private let titleCellHeight = CGFloat(72.0)
     private let completeButtonHeight = CGFloat(92.0)
 
+    private var observer: FirebaseObserver<Task>?
     private var task: Task?
     private var contentCell: TaskDetailContentCell?
+
+    deinit {
+        if let observer = self.observer? {
+            observer.dispose()
+        }
+    }
 
     override func viewDidLoad() {
         self.navigationItem.titleView = Helpers.createTitleLabel("Task")
@@ -18,12 +25,16 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
         super.viewDidLoad()
     }
 
-    func setTask(task: Task) {
-        self.task = task
-        self.getContentCell().setTask(task)
-        if (self.isViewLoaded()) {
-            self.tableView.reloadData()
-        }
+    func setTask(owner: String, id: String, active: Bool) {
+        let ref = Task.createRef(owner, id: id, active: active)
+        self.observer = FirebaseObserver<Task>(query: ref, withBlock: { task in
+            self.task = task
+            self.getContentCell().setTask(task)
+            if (self.isViewLoaded()) {
+                // TODO: figure out a better way to update each cell.
+                self.tableView.reloadData()
+            }
+        })
     }
 
     // TableViewController Overrides
@@ -89,25 +100,35 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
 
     func detailCompleteCellPressed(cell: TaskDetailCompleteCell) {
         if let task = self.task? {
-            let combinedId = TaskStore.combineId(task.owner, id: task.id)
+            // Stop listening so that we don't get the value changed event.
+            self.observer?.dispose()
+            self.observer = nil
+
             let isActive = !task.active
-            let ref = task.getRef()
-            ref.childByAppendingPath("active").setValue(isActive)
+            let oldRef = task.ref
+            task.active = isActive
 
-            // Update Firebase priority.
-            let mult = Task.getFirebasePriorityMult(task.priority, isActive: isActive)
-            let priority = NSDate.javascriptTimestampFromDate(task.timestamp).doubleValue * mult
-            ref.setPriority(priority)
+            // Get Firebase priority.
+            let priority = task.firebasePriority
 
-            UserStore.sharedInstance().adjustActiveTaskCount(task.owner, delta: isActive ? 1 : -1)
-            UserStore.sharedInstance().adjustCompletedTaskCount(task.owner, delta: isActive ? -1 : 1)
+            // Move the task to its new list.
+            task.ref.setValue(task.toJson(), andPriority: priority, withCompletionBlock: { (error, ref) in
+                oldRef.removeValue()
 
-            if isActive {
-                TeamStore.sharedInstance().addActiveTask(task.team, combinedId: combinedId)
-            } else {
-                TeamStore.sharedInstance().removeActiveTask(task.team, combinedId: combinedId)
-            }
-            cell.buttonTitle = isActive ? "Mark As Complete!" : "Mark As Incomplete"
+                // Adjust active/completed counts for user.
+                UserStore.sharedInstance().adjustActiveTaskCount(task.owner, delta: isActive ? 1 : -1)
+                UserStore.sharedInstance().adjustCompletedTaskCount(task.owner, delta: isActive ? -1 : 1)
+
+                // Update active task count for team.
+                let combinedId = TaskStore.combineId(task.owner, id: task.id)
+                if isActive {
+                    TeamStore.sharedInstance().addActiveTask(task.team, combinedId: combinedId)
+                } else {
+                    TeamStore.sharedInstance().removeActiveTask(task.team, combinedId: combinedId)
+                }
+            })
+
+            self.navigationController?.popViewControllerAnimated(true)
         }
     }
 
