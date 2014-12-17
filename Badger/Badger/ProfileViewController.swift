@@ -352,6 +352,13 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
     private func handleChildChanged(listRef: ArrayRef<Task>, section: Int) -> (Task, previousId: String?) -> () {
         return { (task, previousId) in
             println("changed(section \(section)): \(task.id), previous: \(previousId)")
+            let index = self.findIndexOfTask(listRef, id: task.id)
+            if index >= 0 {
+                let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: section))
+                if let taskCell = cell as? TaskCell {
+                    taskCell.setTask(task)
+                }
+            }
         }
     }
 

@@ -109,11 +109,11 @@
         }
         switch priority {
         case .High:
-            return 1.0 / 8.0
+            return 1.0 / 2.0
         case .Medium:
             return 1.0 / 4.0
         case .Low:
-            return 1.0 / 2.0
+            return 1.0 / 8.0
         default:
             return 1.0
         }
