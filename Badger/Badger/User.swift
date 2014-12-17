@@ -1,5 +1,6 @@
 @objc class User: DataEntity {
     let uid: String
+    let provider: String
     let createdAt: NSDate
     var firstName = ""
     var lastName = ""
@@ -21,8 +22,9 @@
         return User.createRef(self.uid)
     }
 
-    init(uid: String) {
+    init(uid: String, provider: String) {
         self.uid = uid
+        self.provider = provider
         self.createdAt = NSDate()
         self.firstName = ""
         self.lastName = ""
@@ -38,6 +40,7 @@
 
     init(uid: String, json: Dictionary<String, AnyObject>) {
         self.uid = uid
+        self.provider = json["provider"] as String
         self.createdAt = NSDate(fromJavascriptTimestamp: json["created_at"] as NSNumber)
         self.firstName = json["first_name"] as String
         self.lastName = json["last_name"] as String
@@ -67,7 +70,8 @@
 
     func toJson() -> Dictionary<String, AnyObject> {
         return [
-            "createdAt": NSDate.javascriptTimestampFromDate(self.createdAt) as NSNumber,
+            "provider": self.provider,
+            "created_at": NSDate.javascriptTimestampFromDate(self.createdAt) as NSNumber,
             "first_name": self.firstName,
             "last_name": self.lastName,
             "email": self.email,

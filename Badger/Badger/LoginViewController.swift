@@ -15,8 +15,7 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
             println("Google auth error \(error) and auth object \(auth)")
         } else {
             // Take access token and auth with Firebase.
-            let ref = Firebase(url: Global.FirebaseUrl)
-            ref.authWithOAuthProvider("google", token: auth.accessToken,
+            Firebase(url: Global.FirebaseUrl).authWithOAuthProvider("google", token: auth.accessToken,
                 withCompletionBlock: { error, authData in
                     if error != nil {
                         println("Firebase auth error \(error) and auth object \(authData)")
@@ -24,32 +23,31 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                         Helpers.saveAccessToken(auth)
 
                         // Check if the user already exists.
-                        let uidRef = ref.childByAppendingPath("users").childByAppendingPath(authData.uid)
-                        uidRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-
+                        let user = User(uid: authData.uid, provider: authData.provider)
+                        user.ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
                             // Add the user if they don't exist.
                             if snapshot.childrenCount == 0 {
-                                let newUser = [
-                                    "provider": authData.provider,
-                                    "email": authData.providerData["email"] as? NSString as? String,
-                                    "status": "green",
-                                    "first_name": authData.providerData["cachedUserProfile"]?["given_name"] as? NSString as? String,
-                                    "last_name": authData.providerData["cachedUserProfile"]?["family_name"] as? NSString as? String,
-                                    "unavailable_profile_image": authData.providerData["cachedUserProfile"]?["picture"] as? NSString as? String,
-                                    "free_profile_image": authData.providerData["cachedUserProfile"]?["picture"] as? NSString as? String,
-                                    "occupied_profile_image": authData.providerData["cachedUserProfile"]?["picture"] as? NSString as? String
-                                ]
+                                if let profile = authData.providerData["cachedUserProfile"] as? [String: AnyObject] {
+                                    user.firstName = profile["given_name"] as String
+                                    user.lastName = profile["family_name"] as String
+                                    user.email = profile["email"] as String
+                                    // TODO: use the profile picture provided?
+                                    // profile["picture"]
+                                }
+
                                 // Let device know we want to receive push notifications.
                                 UIApplication.sharedApplication().registerForRemoteNotifications()
 
-                                uidRef.setValue(newUser, withCompletionBlock: { (error, ref) in
-                                    self.presentViewController(Helpers.createRevealViewController(authData.uid), animated: true, completion: nil)
+                                user.ref.setValue(user.toJson(), withCompletionBlock: { (error, ref) in
+                                    self.presentViewController(Helpers.createRevealViewController(user.uid), animated: true, completion: nil)
                                 });
+
                             } else {
                                 // Transition to the home screen.
                                 self.presentViewController(Helpers.createRevealViewController(authData.uid), animated: true, completion: nil)
                             }
                         })
+
                     }
             })
         }
