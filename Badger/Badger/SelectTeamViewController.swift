@@ -24,13 +24,9 @@ class SelectTeamViewController: UITableViewController {
     func setUser(user: User) {
         self.user = user
         UserStore.sharedInstance().getAuthUser({ authUser in
-            var authUserTeamIds = [String: Bool]()
-            for id in user.teamIds {
-                authUserTeamIds[id] = true
-            }
-            TeamStore.sharedInstance().getTeams(self.user!.teamIds, withBlock: { teams in
+            TeamStore.sharedInstance().getTeams(self.user!.teamIds.keys.array, withBlock: { teams in
                 for team in teams {
-                    if authUserTeamIds[team.id] != nil {
+                    if authUser.teamIds[team.id] != nil {
                         self.teams.append(team)
                     }
                 }

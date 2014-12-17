@@ -25,7 +25,7 @@ class MenuViewController: UITableViewController, UserObserver {
 
     func userUpdated(newUser: User) {
         self.user = newUser
-        TeamStore.sharedInstance().getTeams(newUser.teamIds, withBlock: { teams in
+        TeamStore.sharedInstance().getTeams(newUser.teamIds.keys.array, withBlock: { teams in
             let oldTeams = self.teams
             self.teams = teams
             if oldTeams.isEmpty {

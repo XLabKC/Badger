@@ -169,7 +169,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             } else {
                 // Fetch all teams that the auth user's teams.
                 UserStore.sharedInstance().getAuthUser({ authUser in
-                    TeamStore.sharedInstance().getTeams(authUser.teamIds, withBlock: { teams in
+                    TeamStore.sharedInstance().getTeams(authUser.teamIds.keys.array, withBlock: { teams in
                         vc.setTeams(teams)
                     })
                 })
