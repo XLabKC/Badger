@@ -1,6 +1,6 @@
 import UIKit
 
-class MenuViewController: UITableViewController, UserObserver {
+class MenuViewController: UITableViewController {
 
     let logoCellHeight: CGFloat = 46.0
     let contentCellHeight: CGFloat = 72.0
@@ -8,44 +8,73 @@ class MenuViewController: UITableViewController, UserObserver {
     let settingCellHeight: CGFloat = 144.0
     let minFooterCellHeight: CGFloat = 72.0
 
+    var userObserver: FirebaseObserver<User>?
+    var teamsObserver: FirebaseListObserver<Team>?
     var user: User?
     var teams = [Team]()
 
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.loadData()
+    }
+
     deinit {
-        if let user = self.user? {
-            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
+        if let observer = self.teamsObserver? {
+            observer.dispose()
         }
     }
 
     override func viewDidLoad() {
         let userTableNib = UINib(nibName: "HeaderCell", bundle: nil)
         self.tableView.registerNib(userTableNib, forCellReuseIdentifier: "HeaderCell")
-        UserStore.sharedInstance().addObserver(self, uid: UserStore.sharedInstance().getAuthUid())
     }
 
-    func userUpdated(newUser: User) {
-        self.user = newUser
-        TeamStore.sharedInstance().getTeams(newUser.teamIds.keys.array, withBlock: { teams in
-            let oldTeams = self.teams
-            self.teams = teams
-            if oldTeams.isEmpty {
-                self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Left)
-            } else {
-                // Determine what updates need to be made.
-                var updates = Helpers.diffArrays(oldTeams, end: teams, section: 1, compare: { (a, b) -> Bool in
-                    return a.id == b.id
-                })
-                // Apply the updates to the table view.
-                self.tableView.beginUpdates()
-                if !updates.deletes.isEmpty {
-                    self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Left)
-                }
-                if !updates.inserts.isEmpty {
-                    self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
-                }
-                self.tableView.endUpdates()
+    func loadData() {
+        // Create team list observer.
+        let teamsRef = Firebase(url: Global.FirebaseTeamsUrl)
+        self.teamsObserver = FirebaseListObserver<Team>(ref: teamsRef, onChanged: self.teamsUpdated)
+
+        // Create user observer.
+        let userRef = UserStore.sharedInstance().getAuthUser().ref
+        self.userObserver = FirebaseObserver<User>(query: userRef, withBlock: { user in
+            self.user = user
+            if let teamsObserver = self.teamsObserver? {
+                teamsObserver.setKeys(user.teamIds.keys.array)
+            }
+
+            if !self.isViewLoaded() {
+                self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0))
+                self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2))
             }
         })
+    }
+
+    private func teamsUpdated(teams: [Team]) {
+        let oldTeams = self.teams
+        self.teams = teams
+
+        // Check to make sure the view is loaded before reloading table cells.
+        if !self.isViewLoaded() {
+            return
+        }
+
+        if oldTeams.isEmpty {
+            self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Left)
+        } else {
+            // Determine what updates need to be made.
+            var updates = Helpers.diffArrays(oldTeams, end: teams, section: 1, compare: { (a, b) -> Bool in
+                return a.id == b.id
+            })
+            // Apply the updates to the table view.
+            self.tableView.beginUpdates()
+            if !updates.deletes.isEmpty {
+                self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Left)
+            }
+            if !updates.inserts.isEmpty {
+                self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
+            }
+            self.tableView.endUpdates()
+        }
     }
 
     // TableViewController Overrides

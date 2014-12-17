@@ -61,6 +61,10 @@
         ]
     }
 
+    func getKey() -> String {
+        return self.id
+    }
+
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {
         return Team(id: snapshot.key, json: snapshot.value as Dictionary<String, AnyObject>)
     }

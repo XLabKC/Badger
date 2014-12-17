@@ -1,5 +1,5 @@
 @objc protocol DataEntity: class {
-    func toJson() -> Dictionary<String, AnyObject>
+    func getKey() -> String
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity
 }
 

@@ -99,6 +99,10 @@
         return json
     }
 
+    func getKey() -> String {
+        return self.id
+    }
+
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {
         let id = snapshot.key
         let owner = snapshot.ref.parent.key
@@ -129,5 +133,9 @@
         default:
             return 1.0
         }
+    }
+
+    class func combineId(owner: String, id: String) -> String {
+        return "\(owner)^\(id)"
     }
 }

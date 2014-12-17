@@ -88,6 +88,10 @@
         ]
     }
 
+    func getKey() -> String {
+        return self.uid
+    }
+
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {
         let uid = snapshot.key
         return User(uid: uid, json: snapshot.value as Dictionary<String, AnyObject>)
