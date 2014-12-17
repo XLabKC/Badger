@@ -18,6 +18,8 @@ class UserStore {
 
     private let ref = Firebase(url: Global.FirebaseUsersUrl)
     private let dataStore: ObservableDataStore<User>
+    private var observer: FirebaseObserver<User>?
+    private var authUser = User(uid: "unauthenticated", provider: "none")
 
     init() {
         self.dataStore = ObservableDataStore<User>({ (user, observer:AnyObject) in
@@ -26,20 +28,33 @@ class UserStore {
             }
         })
     }
+    deinit {
+        if let observer = self.observer? {
+            observer.dispose()
+        }
+    }
+
+    // Tells the store to start listening to the authorized user.
+    func authorized() {
+        let ref = User.createRef(self.ref.authData.uid)
+        self.observer = FirebaseObserver<User>(query: ref, withBlock: { user in
+            self.authUser = user
+        })
+    }
 
     // Returns the current auth user's uid.
     func getAuthUid() -> String {
-        return self.ref.authData.uid
+        return self.authUser.uid
     }
 
     // Returns a value indicating if this uid is the current auth user's.
     func isAuthUser(uid: String) -> Bool {
-        return uid == self.ref.authData.uid
+        return uid == self.authUser.uid
     }
 
     // Returns the authenticated user.
-    func getAuthUser(withBlock: User -> ()) -> User? {
-        return self.getUser(self.ref.authData.uid, withBlock: withBlock)
+    func getAuthUser() -> User {
+        return self.authUser
     }
 
     // Returns the user immediately if available and passes it to the block, otherwise

@@ -23,20 +23,18 @@ class SelectTeamViewController: UITableViewController {
 
     func setUser(user: User) {
         self.user = user
-        UserStore.sharedInstance().getAuthUser({ authUser in
-            TeamStore.sharedInstance().getTeams(self.user!.teamIds.keys.array, withBlock: { teams in
-                for team in teams {
-                    if authUser.teamIds[team.id] != nil {
-                        self.teams.append(team)
-                    }
+        TeamStore.sharedInstance().getTeams(self.user!.teamIds.keys.array, withBlock: { teams in
+            let authUser = UserStore.sharedInstance().getAuthUser()
+            for team in teams {
+                if authUser.teamIds[team.id] != nil {
+                    self.teams.append(team)
                 }
-                self.teams.sort({ (a, b) -> Bool in
-                    return a.name < b.name
-                })
-                self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Left)
+            }
+            self.teams.sort({ (a, b) -> Bool in
+                return a.name < b.name
             })
+            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Left)
         })
-
     }
 
     // TableViewController Overrides

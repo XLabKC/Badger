@@ -115,9 +115,7 @@ class MenuViewController: UITableViewController, UserObserver {
                 return cell
             default:
                 let cell = tableView.dequeueReusableCellWithIdentifier("MyProfileCell") as MyProfileCell
-                UserStore.sharedInstance().getAuthUser({ user in
-                    cell.setUser(user)
-                })
+                cell.setUser(UserStore.sharedInstance().getAuthUser())
                 return cell
             }
         case 1:
@@ -137,9 +135,7 @@ class MenuViewController: UITableViewController, UserObserver {
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCellWithIdentifier("MenuSettingsCell") as MenuSettingsCell
-                UserStore.sharedInstance().getAuthUser({ user in
-                    cell.setUser(user)
-                })
+                cell.setUser(UserStore.sharedInstance().getAuthUser())
                 return cell
             default:
                 return tableView.dequeueReusableCellWithIdentifier("MenuFooterCell") as UITableViewCell

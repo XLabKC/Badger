@@ -157,9 +157,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             if let owner = self.owner {
                 vc.setUser(owner)
             } else {
-                UserStore.sharedInstance().getAuthUser({ authUser in
-                    vc.setUser(authUser)
-                })
+                vc.setUser(UserStore.sharedInstance().getAuthUser())
             }
         } else if segue.identifier == self.selectUserSegue {
             let vc = segue.destinationViewController as SelectUserViewController
@@ -168,10 +166,9 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
                 vc.setTeams([team])
             } else {
                 // Fetch all teams that the auth user's teams.
-                UserStore.sharedInstance().getAuthUser({ authUser in
-                    TeamStore.sharedInstance().getTeams(authUser.teamIds.keys.array, withBlock: { teams in
-                        vc.setTeams(teams)
-                    })
+                let teamIds = UserStore.sharedInstance().getAuthUser().teamIds.keys.array
+                TeamStore.sharedInstance().getTeams(teamIds, withBlock: { teams in
+                    vc.setTeams(teams)
                 })
             }
         }

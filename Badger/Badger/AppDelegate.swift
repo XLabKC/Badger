@@ -12,6 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().tintColor = Color.colorize(0x929292, alpha: 1.0)
 
+        self.watchForAuthorization()
+
         // Try and use last sessions access token if it's still valid.
         if let token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as? String {
             if let expiration = NSUserDefaults.standardUserDefaults().objectForKey("access_token_expiration")
@@ -120,6 +122,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+
+    private func watchForAuthorization() {
+        Firebase(url: Global.FirebaseUrl).observeAuthEventWithBlock { authData in
+            UserStore.sharedInstance().authorized()
+        }
+    }
 
 }
 
