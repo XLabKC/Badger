@@ -35,21 +35,29 @@ class UserStore {
     }
 
     // Tells the store to start listening to the authorized user.
-    func authorized() {
+    func authorized(withBlock: User -> ()) {
+        if self.observer != nil {
+            return
+        }
         let ref = User.createRef(self.ref.authData.uid)
+        var firstTime = true
         self.observer = FirebaseObserver<User>(query: ref, withBlock: { user in
             self.authUser = user
+            if firstTime {
+                firstTime = false
+                withBlock(user)
+            }
         })
     }
 
     // Returns the current auth user's uid.
     func getAuthUid() -> String {
-        return self.authUser.uid
+        return self.ref.authData.uid
     }
 
     // Returns a value indicating if this uid is the current auth user's.
     func isAuthUser(uid: String) -> Bool {
-        return uid == self.authUser.uid
+        return uid == self.getAuthUid()
     }
 
     // Returns the authenticated user.

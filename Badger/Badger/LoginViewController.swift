@@ -46,8 +46,9 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                                 // Transition to the home screen.
                                 self.presentViewController(Helpers.createRevealViewController(authData.uid), animated: true, completion: nil)
                             }
+                            // Start the UserStore listening to the authenticated user.
+                            UserStore.sharedInstance().authorized({ _ in })
                         })
-
                     }
             })
         }

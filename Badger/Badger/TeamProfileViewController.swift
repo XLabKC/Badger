@@ -1,6 +1,6 @@
 import UIKit
 
-class TeamProfileViewController: UITableViewController, TeamObserver {
+class TeamProfileViewController: UITableViewController {
     private let cellHeights: [CGFloat] = [225.0, 100.0, 112.0]
     private let memberAltBackground = Color.colorize(0xF6F6F6, alpha: 1.0)
 
@@ -10,7 +10,19 @@ class TeamProfileViewController: UITableViewController, TeamObserver {
     private var headerCell: TeamHeaderCell?
     private var controlCell: TeamProfileControlCell?
 
+    private var teamObserver: FirebaseObserver<Team>?
+    private var membersObserver: FirebaseListObserver<User>?
+
     @IBOutlet weak var menuButton: UIBarButtonItem!
+
+    deinit {
+        if let observer = self.teamObserver? {
+            observer.dispose()
+        }
+        if let observer = self.membersObserver? {
+            observer.dispose()
+        }
+    }
 
     override func viewDidLoad() {
         if let revealVC = self.revealViewController()? {
@@ -28,50 +40,53 @@ class TeamProfileViewController: UITableViewController, TeamObserver {
         self.navigationItem.titleView = label
 
         super.viewDidLoad()
-
-        // If team is already set, start loading the data. See comment below.
-        if let team = self.team {
-            TeamStore.sharedInstance().addObserver(self, id: team.id)
-        }
     }
 
-    func setTeam(team: Team) {
-        self.team = team
-        self.isLoadingMembers = true
-
-        // Update table cells if they have already initialized.
-        if let headerCell = self.headerCell? {
-            headerCell.setTeam(team)
+    func setTeamId(id: String) {
+        // Create member list observer.
+        let usersRef = Firebase(url: Global.FirebaseUsersUrl)
+        self.membersObserver = FirebaseListObserver<User>(ref: usersRef, onChanged: self.membersUpdated)
+        self.membersObserver!.comparisonFunc = { (a, b) -> Bool in
+            return a.firstName < b.firstName
         }
 
-        // Only start loading team data when the view has loaded. Avoids bug that
-        // breaks menu navigation.
-        if (self.isViewLoaded()) {
-            TeamStore.sharedInstance().addObserver(self, id: team.id)
-        }
-    }
-
-    func teamUpdated(newTeam: Team) {
-        self.team = newTeam
-        UserStore.sharedInstance().getUsers(newTeam.memberIds.keys.array, withBlock: { members in
-            let oldMembers = self.members
-            self.members = members
-            self.isLoadingMembers = false
-
-            if oldMembers.isEmpty {
-                self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Left)
-            } else {
-                var updates = Helpers.diffArrays(oldMembers, end: members, section: 1, compare: { (a, b) -> Bool in
-                    return a.uid == b.uid
-                })
-                if !updates.inserts.isEmpty || !updates.deletes.isEmpty {
-                    self.tableView.beginUpdates()
-                    self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Left)
-                    self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
-                    self.tableView.endUpdates()
-                }
+        // Create user observer.
+        let teamRef = Team.createRef(id)
+        self.teamObserver = FirebaseObserver<Team>(query: teamRef, withBlock: { team in
+            self.team = team
+            if let membersObserver = self.membersObserver? {
+                membersObserver.setKeys(team.memberIds.keys.array)
             }
+
+//            if !self.isViewLoaded() {
+//                self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0))
+//                self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2))
+//            }
         })
+    }
+
+    private func membersUpdated(members: [User]) {
+        let oldMembers = self.members
+        self.members = members
+        self.isLoadingMembers = false
+
+        if !self.isViewLoaded() {
+            return
+        }
+
+        if oldMembers.isEmpty {
+            self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Left)
+        } else {
+            var updates = Helpers.diffArrays(oldMembers, end: members, section: 1, compare: { (a, b) -> Bool in
+                return a.uid == b.uid
+            })
+            if !updates.inserts.isEmpty || !updates.deletes.isEmpty {
+                self.tableView.beginUpdates()
+                self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Left)
+                self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
+                self.tableView.endUpdates()
+            }
+        }
     }
 
     // TableViewController Overrides

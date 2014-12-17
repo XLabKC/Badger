@@ -12,14 +12,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().tintColor = Color.colorize(0x929292, alpha: 1.0)
 
-        self.watchForAuthorization()
-
         // Try and use last sessions access token if it's still valid.
         if let token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as? String {
             if let expiration = NSUserDefaults.standardUserDefaults().objectForKey("access_token_expiration")
                 as? NSDate {
                     if expiration.compare(NSDate()) == .OrderedDescending {
-                        self.window?.rootViewController = Helpers.createRevealViewController(Firebase(url: Global.FirebaseUrl).authData.uid)
+                        self.navigateToProfile()
                         return true
                     }
             }
@@ -63,8 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
                     println("Firebase auth error \(error) and auth object \(authData)")
                 } else {
                     Helpers.saveAccessToken(auth)
-                    self.window?.rootViewController?.presentViewController(
-                        Helpers.createRevealViewController(authData.uid), animated: true, completion: nil)
+                    self.navigateToProfile()
                 }
             })
         }
@@ -122,12 +119,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
-    private func watchForAuthorization() {
-        Firebase(url: Global.FirebaseUrl).observeAuthEventWithBlock { authData in
-            UserStore.sharedInstance().authorized()
-        }
+    private func navigateToProfile() {
+        UserStore.sharedInstance().authorized({ authUser in
+            let vc = Helpers.createRevealViewController(authUser.uid)
+            if let root = self.window?.rootViewController? {
+                if root.isViewLoaded() {
+                    root.presentViewController(vc, animated: true, completion: nil)
+                    return
+                }
+            }
+            self.window?.rootViewController = vc
+        })
     }
-
 }
 

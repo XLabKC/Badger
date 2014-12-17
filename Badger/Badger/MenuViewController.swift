@@ -2,16 +2,16 @@ import UIKit
 
 class MenuViewController: UITableViewController {
 
-    let logoCellHeight: CGFloat = 46.0
-    let contentCellHeight: CGFloat = 72.0
-    let headerCellHeight: CGFloat = 40.0
-    let settingCellHeight: CGFloat = 144.0
-    let minFooterCellHeight: CGFloat = 72.0
+    private let logoCellHeight: CGFloat = 46.0
+    private let contentCellHeight: CGFloat = 72.0
+    private let headerCellHeight: CGFloat = 40.0
+    private let settingCellHeight: CGFloat = 144.0
+    private let minFooterCellHeight: CGFloat = 72.0
 
-    var userObserver: FirebaseObserver<User>?
-    var teamsObserver: FirebaseListObserver<Team>?
-    var user: User?
-    var teams = [Team]()
+    private var userObserver: FirebaseObserver<User>?
+    private var teamsObserver: FirebaseListObserver<Team>?
+    private var user: User?
+    private var teams = [Team]()
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -20,6 +20,9 @@ class MenuViewController: UITableViewController {
 
     deinit {
         if let observer = self.teamsObserver? {
+            observer.dispose()
+        }
+        if let observer = self.userObserver? {
             observer.dispose()
         }
     }
@@ -33,9 +36,12 @@ class MenuViewController: UITableViewController {
         // Create team list observer.
         let teamsRef = Firebase(url: Global.FirebaseTeamsUrl)
         self.teamsObserver = FirebaseListObserver<Team>(ref: teamsRef, onChanged: self.teamsUpdated)
+        self.teamsObserver!.comparisonFunc = { (a, b) -> Bool in
+            return a.name < b.name
+        }
 
         // Create user observer.
-        let userRef = UserStore.sharedInstance().getAuthUser().ref
+        let userRef = User.createRef(UserStore.sharedInstance().getAuthUid())
         self.userObserver = FirebaseObserver<User>(query: userRef, withBlock: { user in
             self.user = user
             if let teamsObserver = self.teamsObserver? {
@@ -182,7 +188,7 @@ class MenuViewController: UITableViewController {
             let team = teamCell.getTeam()!
             let nav = segue.destinationViewController as UINavigationController
             let vc = nav.topViewController as TeamProfileViewController
-            vc.setTeam(team)
+            vc.setTeamId(team.id)
         }
     }
 }
