@@ -46,7 +46,7 @@
         self.lastName = json["last_name"] as String
         self.email = json["email"] as String
         self.activeTaskCount = json["active_task_count"] as Int
-        self.activeTaskCount = json["completed_task_count"] as Int
+        self.completedTaskCount = json["completed_task_count"] as Int
         var status = UserStatus(rawValue: json["status"] as String)
         if status == nil {
             status = .Unknown
