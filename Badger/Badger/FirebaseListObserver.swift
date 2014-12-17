@@ -62,6 +62,10 @@ class FirebaseListObserver<T: DataEntity> {
     func disposeKey(key: String) {
         if let observer = self.keys[key]? {
             observer.dispose()
+            self.keys[key] = nil
+        } else {
+            // Key doesn't exist.
+            return
         }
         // Remove the element from the internal list.
         let index = self.findEntity(key)
