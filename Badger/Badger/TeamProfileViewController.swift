@@ -86,6 +86,13 @@ class TeamProfileViewController: UITableViewController {
                 self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
                 self.tableView.endUpdates()
             }
+            // Loop through and update the users for each cell.
+            for (index, member) in enumerate(members) {
+                let indexPath = NSIndexPath(forRow: index, inSection: 1)
+                if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? TeamMemberCell {
+                    cell.setUser(member)
+                }
+            }
         }
     }
 

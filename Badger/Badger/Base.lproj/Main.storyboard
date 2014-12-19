@@ -1110,6 +1110,13 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.28627450980392155" green="0.29803921568627451" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.047058823529411764" green="0.047058823529411764" blue="0.047058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="nameLabel" destination="evj-UV-Vhi" id="0cO-UL-5B1"/>
                                     <outlet property="profileCircle" destination="u3E-KR-KDE" id="dKV-8M-T02"/>
@@ -1487,6 +1494,12 @@
                                         <constraint firstAttribute="centerY" secondItem="btm-gL-asc" secondAttribute="centerY" id="u4o-PR-vh8"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="metaLabel" destination="ZVQ-0d-kgS" id="MMh-r9-Fn1"/>
                                     <outlet property="nameLabel" destination="ifG-RO-etM" id="T6g-6E-Nqb"/>
@@ -1566,7 +1579,7 @@
         <image name="RightArrowIcon" width="8" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="kUo-1a-Owt"/>
         <segue reference="sG0-Gn-9tP"/>
-        <segue reference="zwB-bM-66t"/>
     </inferredMetricsTieBreakers>
 </document>

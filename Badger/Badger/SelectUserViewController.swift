@@ -49,7 +49,7 @@ class SelectUserViewController: UITableViewController {
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as UserCell
         cell.setTopBorder(indexPath.row == 0 ? .Full : .None)
-        cell.setUser(self.users[indexPath.row])
+        cell.setUid(self.users[indexPath.row].uid)
         return cell
     }
 

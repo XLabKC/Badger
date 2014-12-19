@@ -1,9 +1,10 @@
 import UIKit
 
 
-class ProfileCircle: UIImageView, UserObserver {
+class ProfileCircle: UIImageView {
     var status = UserStatus.Unknown
     var user: User?
+    var observer: FirebaseObserver<User>?
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -13,30 +14,25 @@ class ProfileCircle: UIImageView, UserObserver {
     }
 
     deinit {
-        if let user = self.user? {
-            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
-        }
-    }
-
-    func setUid(uid: String) {
-        UserStore.sharedInstance().getUser(uid, withBlock: self.setUser)
-    }
-
-    func setUser(user: User) {
-        if let old = self.user? {
-            // Make sure the old and new user are actually different.
-            if old.uid == user.uid {
-                return
-            }
-            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
-        }
-        UserStore.sharedInstance().addObserver(self, uid: user.uid)
-        self.userUpdated(user)
+        self.dispose()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
         self.layoutView()
+    }
+
+    func setUid(uid: String) {
+        if let old = self.user? {
+            if old.uid == uid {
+                // Already setup.
+                return
+            } else {
+                self.dispose()
+            }
+        }
+        let ref = User.createRef(uid)
+        self.observer = FirebaseObserver<User>(query: ref, withBlock: self.userUpdated)
     }
 
     func userUpdated(newUser: User) {
@@ -55,6 +51,12 @@ class ProfileCircle: UIImageView, UserObserver {
             self.layer.borderWidth = 3.0
         } else {
             self.layer.borderWidth = 2.0
+        }
+    }
+
+    private func dispose() {
+        if let observer = self.observer? {
+            observer.dispose()
         }
     }
 }

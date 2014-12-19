@@ -1,12 +1,17 @@
 import UIKit
 
-class UserCell: BorderedCell, UserObserver {
+class UserCell: BorderedCell {
     private var hasAwakened = false
     private var user: User?
+    private var observer: FirebaseObserver<User>?
 
     @IBOutlet weak var profileCircle: ProfileCircle!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+
+    deinit {
+        self.dispose()
+    }
 
     override func awakeFromNib() {
         self.hasAwakened = true
@@ -14,28 +19,19 @@ class UserCell: BorderedCell, UserObserver {
     }
 
     func setUid(uid: String) {
-        self.user = nil
-        self.updateView()
-        UserStore.sharedInstance().getUser(uid, withBlock: { user in
-            self.setUser(user)
-        })
-    }
-
-    func setUser(user: User) {
         if let user = self.user? {
-            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
+            if user.uid == uid {
+                // Already setup.
+                return
+            } else {
+                self.dispose()
+            }
         }
-        self.user = user
-        UserStore.sharedInstance().addObserver(self, uid: user.uid)
-        if self.hasAwakened {
-            self.profileCircle.setUser(user)
+        let ref = User.createRef(uid)
+        self.observer = FirebaseObserver<User>(query: ref, withBlock: { user in
+            self.user = user
             self.updateView()
-        }
-    }
-
-    func userUpdated(newUser: User) {
-        self.user = newUser
-        self.updateView()
+        })
     }
 
     private func updateView() {
@@ -44,10 +40,17 @@ class UserCell: BorderedCell, UserObserver {
                 self.nameLabel.text = user.fullName
                 self.statusLabel.text = Helpers.statusToText(user, status: user.status)
                 self.statusLabel.textColor = Helpers.statusToColor(user.status)
+                self.profileCircle.setUid(user.uid)
             } else {
                 self.statusLabel.text = ""
                 self.nameLabel.text = "Loading..."
             }
+        }
+    }
+
+    private func dispose() {
+        if let observer = self.observer? {
+            observer.dispose()
         }
     }
 }

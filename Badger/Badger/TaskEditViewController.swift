@@ -142,7 +142,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         case 7:
             if let owner = self.owner? {
                 let cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as UserCell
-                cell.setUser(owner)
+                cell.setUid(owner.uid)
                 return cell
             }
             return tableView.dequeueReusableCellWithIdentifier("SelectUserCell") as UITableViewCell

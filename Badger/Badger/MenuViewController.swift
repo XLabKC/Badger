@@ -48,8 +48,13 @@ class MenuViewController: UITableViewController {
                 teamsObserver.setKeys(user.teamIds.keys.array)
             }
 
-            if !self.isViewLoaded() {
-                self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0))
+            if self.isViewLoaded() {
+                // Update the profile view.
+                if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) {
+                    if let profileCell = cell as? MyProfileCell {
+                        profileCell.setUser(user)
+                    }
+                }
                 self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2))
             }
         })

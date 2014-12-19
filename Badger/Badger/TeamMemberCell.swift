@@ -5,7 +5,6 @@ class TeamMemberCell: BorderedCell, UserObserver {
     private var user: User?
 
     @IBOutlet weak var profileCircle: ProfileCircle!
-
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var metaLabel: UILabel!
@@ -13,28 +12,12 @@ class TeamMemberCell: BorderedCell, UserObserver {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.hasAwakened = true
-        self.setBottomBorder(.Full)
-        self.setBorderColor(Color.colorize(0xE0E0E0, alpha: 1))
-        if let user = self.user? {
-            self.profileCircle.setUser(user)
-            self.updateView()
-        }
-    }
-
-    deinit {
-        if let user = self.user? {
-            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
-        }
+        self.updateView()
     }
 
     func setUser(user: User) {
-        if let user = self.user? {
-            UserStore.sharedInstance().removeObserver(self, uid: user.uid)
-        }
-        UserStore.sharedInstance().addObserver(self, uid: user.uid)
-        if self.hasAwakened {
-            self.profileCircle.setUser(user)
-        }
+        self.user = user
+        self.updateView()
     }
 
     func getUser() -> User? {
@@ -49,6 +32,7 @@ class TeamMemberCell: BorderedCell, UserObserver {
     private func updateView() {
         if self.hasAwakened {
             if let user = self.user? {
+                self.profileCircle.setUid(user.uid)
                 self.statusLabel.text = Helpers.statusToText(user, status: user.status)
                 self.statusLabel.textColor = Helpers.statusToColor(user.status)
                 self.nameLabel.text = user.fullName

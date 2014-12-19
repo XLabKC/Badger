@@ -24,7 +24,7 @@ class TaskDetailAuthorCell: BorderedCell {
         if self.hasAwakened {
             if let task = self.task? {
                 UserStore.sharedInstance().getUser(task.author, withBlock: { user in
-                    self.profileCircle.setUser(user)
+                    self.profileCircle.setUid(user.uid)
                     self.nameLabel.text = user.fullName
                     self.metaLabel.text = task.createdAtString
                 })
