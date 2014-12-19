@@ -138,4 +138,9 @@
     class func combineId(owner: String, id: String) -> String {
         return "\(owner)^\(id)"
     }
+
+    class func separateCombinedId(combinedId: String) -> (uid: String, taskId: String) {
+        let comp = combinedId.componentsSeparatedByString("^")
+        return (uid: comp[0], taskId: comp[1])
+    }
 }

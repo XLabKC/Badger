@@ -149,7 +149,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
                 UserStore.adjustCompletedTaskCount(task.owner, delta: isActive ? -1 : 1)
 
                 // Update active task count for team.
-                let combinedId = TaskStore.combineId(task.owner, id: task.id)
+                let combinedId = Task.combineId(task.owner, id: task.id)
                 if isActive {
                     TeamStore.addActiveTask(task.team, combinedId: combinedId)
                 } else {
