@@ -306,9 +306,7 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
         for task in listRef.array {
             uids[task.author] = true
         }
-        UserStore.sharedInstance().getUsers(uids.keys.array, withBlock: { _ in
-            complete()
-        })
+        UserStore.prefetchUsers(uids.keys.array, withBlock: complete)
     }
 
     private func handleChildAdded(listRef: ArrayRef<Task>, section: Int) -> (Task, previousId: String?, isInitial: Bool) -> () {

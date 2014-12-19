@@ -175,13 +175,11 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             let vc = segue.destinationViewController as SelectUserViewController
             vc.delegate = self
             if let team = self.team {
-                vc.setTeams([team])
+                vc.setTeamIds([team.id])
             } else {
                 // Fetch all teams that the auth user's teams.
                 let teamIds = UserStore.sharedInstance().getAuthUser().teamIds.keys.array
-                TeamStore.sharedInstance().getTeams(teamIds, withBlock: { teams in
-                    vc.setTeams(teams)
-                })
+                vc.setTeamIds(teamIds)
             }
         }
     }

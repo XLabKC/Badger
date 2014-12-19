@@ -1,6 +1,6 @@
 import UIKit
 
-class TeamMemberCell: BorderedCell, UserObserver {
+class TeamMemberCell: BorderedCell {
     private var hasAwakened = false
     private var user: User?
 

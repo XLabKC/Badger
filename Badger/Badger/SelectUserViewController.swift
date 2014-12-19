@@ -6,9 +6,16 @@ protocol SelectUserDelegate: class {
 
 class SelectUserViewController: UITableViewController {
 
+    private var teamsObserver: FirebaseListObserver<Team>?
+    private var usersObserver: FirebaseListObserver<User>?
+
     private var users = [User]()
-    private var teams: [Team]?
+    private var teamIds: [String]?
     weak var delegate: SelectUserDelegate?
+
+    deinit {
+        self.dispose()
+    }
 
     override func viewDidLoad() {
         self.navigationItem.titleView = Helpers.createTitleLabel("Select User")
@@ -22,15 +29,52 @@ class SelectUserViewController: UITableViewController {
         super.viewDidLoad()
     }
 
-    func setTeams(teams: [Team]) {
-        self.teams = teams
-        UserStore.sharedInstance().getUsersByTeams(teams, withBlock: { users in
-            self.users = users
-            self.users.sort({ (a, b) -> Bool in
-                return a.fullName < b.fullName
-            })
+    func setTeamIds(ids: [String]) {
+        self.teamIds = ids
+        self.dispose()
+        let usersRef = Firebase(url: Global.FirebaseUsersUrl)
+        self.usersObserver = FirebaseListObserver<User>(ref: usersRef, onChanged: self.usersChanged)
+        self.usersObserver!.comparisonFunc = { (a, b) -> Bool in
+            return a.firstName < b.firstName
+        }
+
+        let teamsRef = Firebase(url: Global.FirebaseTeamsUrl)
+        self.teamsObserver = FirebaseListObserver<Team>(ref: teamsRef, keys: ids, onChanged: self.teamsChanged)
+    }
+
+    private func teamsChanged(teams: [Team]) {
+        if let observer = self.usersObserver? {
+            var uids = [String: Bool]()
+            for team in teams {
+                for member in team.memberIds.keys {
+                    uids[member] = true
+                }
+            }
+            observer.setKeys(uids.keys.array)
+        }
+    }
+
+    private func usersChanged(users: [User]) {
+        let oldUsers = self.users
+        self.users = users
+
+        if !self.isViewLoaded() {
+            return
+        }
+
+        if oldUsers.isEmpty {
             self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Left)
-        })
+        } else {
+            var updates = Helpers.diffArrays(oldUsers, end: users, section: 0, compare: { (a, b) -> Bool in
+                return a.uid == b.uid
+            })
+            if !updates.inserts.isEmpty || !updates.deletes.isEmpty {
+                self.tableView.beginUpdates()
+                self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Left)
+                self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
+                self.tableView.endUpdates()
+            }
+        }
     }
 
     // TableViewController Overrides
@@ -60,4 +104,12 @@ class SelectUserViewController: UITableViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
 
+    private func dispose() {
+        if let observer = self.teamsObserver? {
+            observer.dispose()
+        }
+        if let observer = self.usersObserver? {
+            observer.dispose()
+        }
+    }
 }

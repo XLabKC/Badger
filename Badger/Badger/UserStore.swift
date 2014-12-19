@@ -1,8 +1,4 @@
 
-@objc protocol UserObserver: class {
-    func userUpdated(newUser: User)
-}
-
 class UserStore {
     // Accesses the singleton.
     class func sharedInstance() -> UserStore {
@@ -17,17 +13,9 @@ class UserStore {
     }
 
     private let ref = Firebase(url: Global.FirebaseUsersUrl)
-    private let dataStore: ObservableDataStore<User>
     private var observer: FirebaseObserver<User>?
     private var authUser = User(uid: "unauthenticated", provider: "none")
 
-    init() {
-        self.dataStore = ObservableDataStore<User>({ (user, observer:AnyObject) in
-            if let userObserver = observer as? UserObserver {
-                userObserver.userUpdated(user)
-            }
-        })
-    }
     deinit {
         if let observer = self.observer? {
             observer.dispose()
@@ -65,47 +53,12 @@ class UserStore {
         return self.authUser
     }
 
-    // Returns the user immediately if available and passes it to the block, otherwise
-    // makes the request and passes the user to the block.
-    func getUser(uid: String, withBlock: User -> ()) -> User? {
-        return self.dataStore.getEntity(self.createUserRef(uid), withBlock: withBlock)
-    }
-
-    // Get users by uids.
-    func getUsers(uids: [String], withBlock: [User] -> ()) {
-        self.dataStore.getEntities(uids.map(self.createUserRef), withBlock: withBlock)
-    }
-
-    // Gets all users for the set of teams.
-    func getUsersByTeams(teams: [Team], withBlock: [User] -> ()) {
-        // Find all uids and remove duplicates.
-        var uids = [String: Bool]()
-        for team in teams {
-            for member in team.memberIds.keys {
-                uids[member] = true
-            }
-        }
-        self.getUsers(uids.keys.array, withBlock: withBlock)
-    }
-
-    // Gets all users for the set of team ids.
-    func getUsersByTeamIds(ids: [String], withBlock: [User] -> ()) {
-        if ids.isEmpty {
-            withBlock([])
-            return
-        }
-        TeamStore.sharedInstance().getTeams(ids, withBlock: { teams in
-            self.getUsersByTeams(teams, withBlock: withBlock)
+    // Prefetches the uids.
+    class func prefetchUsers(uids: [String], withBlock: () -> ()) {
+        let refs = uids.map(User.createRef)
+        FirebaseAsync.fetchValues(refs, withBlock: { snapshots in
+            withBlock()
         })
-    }
-
-    // Adds an observer for a uid.
-    func addObserver(observer: UserObserver, uid: String) {
-        self.dataStore.addObserver(observer, ref: self.createUserRef(uid))
-    }
-
-    func removeObserver(observer: UserObserver, uid: String) {
-        self.dataStore.removeObserver(observer, ref: self.createUserRef(uid))
     }
 
     // Atomically adjusts the active count.
@@ -118,13 +71,5 @@ class UserStore {
     class func adjustCompletedTaskCount(id: String, delta: Int) {
         let ref = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath("\(id)/completed_task_count")
         FirebaseUtil.adjustValueForRef(ref, delta: delta)
-    }
-
-    private class func sendUpdate(user: User, toObserver: UserObserver) {
-        toObserver.userUpdated(user)
-    }
-
-    private func createUserRef(uid: String) -> Firebase {
-        return self.ref.childByAppendingPath(uid)
     }
 }
