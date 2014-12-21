@@ -16,7 +16,6 @@
 		7B15CD091A39080400519C8E /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD081A39080400519C8E /* TeamCell.swift */; };
 		7B15CD0B1A39081600519C8E /* TeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B15CD0A1A39081600519C8E /* TeamCell.xib */; };
 		7B15CD0D1A3922EA00519C8E /* ResizedImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD0C1A3922EA00519C8E /* ResizedImageButton.swift */; };
-		7B15CD171A3A59AF00519C8E /* ObservableDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD161A3A59AF00519C8E /* ObservableDataStore.swift */; };
 		7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */; };
 		7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */; };
 		7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1971A264346003920AD /* TeamProfileViewController.swift */; };
@@ -48,6 +47,7 @@
 		7B64F2BD1A40FFF2001FA518 /* ArrayRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64F2BC1A40FFF2001FA518 /* ArrayRef.swift */; };
 		7B64F2BF1A41E68C001FA518 /* FirebaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64F2BE1A41E68C001FA518 /* FirebaseUtil.swift */; };
 		7B64F2C11A42128E001FA518 /* FirebaseListObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64F2C01A42128E001FA518 /* FirebaseListObserver.swift */; };
+		7B64F2C31A467974001FA518 /* DataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64F2C21A467974001FA518 /* DataEntity.swift */; };
 		7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7439FC19F87E4E0075690A /* AppDelegate.swift */; };
 		7B743A0219F87E4E0075690A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0019F87E4E0075690A /* Main.storyboard */; };
 		7B743A0419F87E4E0075690A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0319F87E4E0075690A /* Images.xcassets */; };
@@ -117,7 +117,6 @@
 		7B15CD081A39080400519C8E /* TeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
 		7B15CD0A1A39081600519C8E /* TeamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamCell.xib; sourceTree = "<group>"; };
 		7B15CD0C1A3922EA00519C8E /* ResizedImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizedImageButton.swift; sourceTree = "<group>"; };
-		7B15CD161A3A59AF00519C8E /* ObservableDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableDataStore.swift; sourceTree = "<group>"; };
 		7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailAuthorCell.swift; sourceTree = "<group>"; };
 		7B29F1971A264346003920AD /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +150,7 @@
 		7B64F2BC1A40FFF2001FA518 /* ArrayRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayRef.swift; sourceTree = "<group>"; };
 		7B64F2BE1A41E68C001FA518 /* FirebaseUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUtil.swift; sourceTree = "<group>"; };
 		7B64F2C01A42128E001FA518 /* FirebaseListObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseListObserver.swift; sourceTree = "<group>"; };
+		7B64F2C21A467974001FA518 /* DataEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataEntity.swift; sourceTree = "<group>"; };
 		7B7439F719F87E4E0075690A /* Badger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7439FB19F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B7439FC19F87E4E0075690A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -246,6 +246,7 @@
 				7B64F2BC1A40FFF2001FA518 /* ArrayRef.swift */,
 				7B469C4D1A2237EC0054019D /* Barrier.swift */,
 				7B4733AF1A1BC20000D88C00 /* Color.swift */,
+				7B64F2C21A467974001FA518 /* DataEntity.swift */,
 				7B070FC81A112CBD00997D50 /* FirebaseAsync.swift */,
 				7B64F2C01A42128E001FA518 /* FirebaseListObserver.swift */,
 				7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */,
@@ -509,7 +510,6 @@
 			isa = PBXGroup;
 			children = (
 				7B15CD021A38DA8900519C8E /* Models */,
-				7B15CD161A3A59AF00519C8E /* ObservableDataStore.swift */,
 				7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */,
 				7B15CD031A38EECD00519C8E /* TeamStore.swift */,
 				7B4733C41A1D51BB00D88C00 /* UserStore.swift */,
@@ -661,7 +661,6 @@
 				7B9A63591A2E9C8D00DF1143 /* TaskEditTitleCell.swift in Sources */,
 				7B5FE4231A357BD3002F24EA /* ApiKeys.swift in Sources */,
 				7B90E0C61A2141CD005EC421 /* MenuTeamCell.swift in Sources */,
-				7B15CD171A3A59AF00519C8E /* ObservableDataStore.swift in Sources */,
 				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
 				7B4733D91A1E8AB600D88C00 /* BaseTableViewController.swift in Sources */,
 				7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */,
@@ -691,6 +690,7 @@
 				7B90E0C81A21427F005EC421 /* BorderedCell.swift in Sources */,
 				7B64F2BD1A40FFF2001FA518 /* ArrayRef.swift in Sources */,
 				7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */,
+				7B64F2C31A467974001FA518 /* DataEntity.swift in Sources */,
 				7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */,
 				7B90E0C01A1F9F6E005EC421 /* HeaderCell.swift in Sources */,
 				7B9A635B1A2E9CC800DF1143 /* TaskEditContentCell.swift in Sources */,

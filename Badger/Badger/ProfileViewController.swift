@@ -114,7 +114,7 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
     }
 
     private func loadUserProfile(uid: String) {
-        println("Loading for uid: \(uid))")
+        println("Loading for uid: \(uid)")
 
         // Load the users tasks.
         let ref = Firebase(url: Global.FirebaseActiveTasksUrl).childByAppendingPath(uid)

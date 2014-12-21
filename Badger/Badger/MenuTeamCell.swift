@@ -1,6 +1,6 @@
 import UIKit
 
-class MenuTeamCell: BorderedCell, TeamObserver {
+class MenuTeamCell: BorderedCell {
     private var hasAwakened = false
     private var team: Team?
 
@@ -8,16 +8,8 @@ class MenuTeamCell: BorderedCell, TeamObserver {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var metaLabel: UILabel!
 
-    deinit {
-        if let team = self.team? {
-            TeamStore.sharedInstance().removeObserver(self, id: team.id)
-        }
-    }
-
     override func awakeFromNib() {
         self.hasAwakened = true
-        self.setBottomBorder(.Full)
-        self.setBorderColor(Color.colorize(0x0C0C0C, alpha: 1))
         self.updateView()
     }
 
@@ -28,11 +20,6 @@ class MenuTeamCell: BorderedCell, TeamObserver {
 
     func getTeam() -> Team? {
         return self.team
-    }
-
-    func teamUpdated(newTeam: Team) {
-        self.team = newTeam
-        self.updateView()
     }
 
     private func updateView() {

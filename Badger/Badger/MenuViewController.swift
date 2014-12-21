@@ -85,6 +85,14 @@ class MenuViewController: UITableViewController {
                 self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
             }
             self.tableView.endUpdates()
+
+            // Update each table cell.
+            for (index, team) in enumerate(teams) {
+                let indexPath = NSIndexPath(forRow: index, inSection: 1)
+                if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? MenuTeamCell {
+                    cell.setTeam(team)
+                }
+            }
         }
     }
 

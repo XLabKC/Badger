@@ -5,9 +5,19 @@ protocol SelectTeamDelegate: class {
 }
 
 class SelectTeamViewController: UITableViewController {
+
+    private var teamsObserver: FirebaseListObserver<Team>?
+    private var userObserver: FirebaseObserver<User>?
+
+    private var teams: [Team] = []
     private var user: User?
-    private var teams = [Team]()
+    private var uid: String?
+
     weak var delegate: SelectTeamDelegate?
+
+    deinit {
+        self.dispose()
+    }
 
     override func viewDidLoad() {
         self.navigationItem.titleView = Helpers.createTitleLabel("Select User")
@@ -21,20 +31,54 @@ class SelectTeamViewController: UITableViewController {
         super.viewDidLoad()
     }
 
-    func setUser(user: User) {
-        self.user = user
-        TeamStore.sharedInstance().getTeams(self.user!.teamIds.keys.array, withBlock: { teams in
+    func setUid(uid: String) {
+        self.dispose()
+
+        let teamsRef = Firebase(url: Global.FirebaseTeamsUrl)
+        self.teamsObserver = FirebaseListObserver<Team>(ref: teamsRef, onChanged: self.teamsChanged)
+        self.teamsObserver!.comparisonFunc = { (a, b) -> Bool in
+            return a.name < b.name
+        }
+
+        let userRef = User.createRef(uid)
+        self.userObserver = FirebaseObserver<User>(query: userRef, withBlock: { user in
+            self.user = user
             let authUser = UserStore.sharedInstance().getAuthUser()
-            for team in teams {
-                if authUser.teamIds[team.id] != nil {
-                    self.teams.append(team)
+
+            // Filter out teams that the auth user is not a member of.
+            var newIds: [String: Bool] = [:]
+            for id in user.teamIds.keys {
+                if authUser.teamIds[id] != nil {
+                    newIds[id] = true
                 }
             }
-            self.teams.sort({ (a, b) -> Bool in
-                return a.name < b.name
-            })
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Left)
+            if let observer = self.teamsObserver? {
+                observer.setKeys(newIds.keys.array)
+            }
         })
+    }
+
+    private func teamsChanged(teams: [Team]) {
+        let oldTeams = self.teams
+        self.teams = teams
+
+        if !self.isViewLoaded() {
+            return
+        }
+
+        if oldTeams.isEmpty {
+            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Left)
+        } else {
+            var updates = Helpers.diffArrays(oldTeams, end: teams, section: 0, compare: { (a, b) -> Bool in
+                return a.id == b.id
+            })
+            if !updates.inserts.isEmpty || !updates.deletes.isEmpty {
+                self.tableView.beginUpdates()
+                self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Left)
+                self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
+                self.tableView.endUpdates()
+            }
+        }
     }
 
     // TableViewController Overrides
@@ -63,5 +107,13 @@ class SelectTeamViewController: UITableViewController {
         }
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
+
+    private func dispose() {
+        if let observer = self.userObserver? {
+            observer.dispose()
+        }
+        if let observer = self.teamsObserver? {
+            observer.dispose()
+        }
+    }
 }

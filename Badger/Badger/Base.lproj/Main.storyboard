@@ -1170,6 +1170,12 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.28627450980392155" green="0.29803921568627451" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.047058823529411764" green="0.047058823529411764" blue="0.047058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="metaLabel" destination="ecc-mQ-Xet" id="EiL-ie-x0E"/>
                                     <outlet property="nameLabel" destination="cqk-6p-ZF7" id="Qdq-tf-NWq"/>

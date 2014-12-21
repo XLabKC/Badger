@@ -16,7 +16,7 @@ class FirebaseObserver<T: DataEntity> {
         self.query = query
     }
 
-    convenience init(query: FQuery, withBlock: (T) -> ()) {
+    convenience init(query: FQuery, withBlock: T -> ()) {
         self.init(query: query)
         self.observe(withBlock)
     }
@@ -26,7 +26,7 @@ class FirebaseObserver<T: DataEntity> {
     }
 
     // Starts observing the ref.
-    func observe(withBlock: (T) -> ()) {
+    func observe(withBlock: T -> ()) {
         if self.started {
             return
         }

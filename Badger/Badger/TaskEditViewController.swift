@@ -167,9 +167,9 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             let vc = segue.destinationViewController as SelectTeamViewController
             vc.delegate = self
             if let owner = self.owner {
-                vc.setUser(owner)
+                vc.setUid(owner.uid)
             } else {
-                vc.setUser(UserStore.sharedInstance().getAuthUser())
+                vc.setUid(UserStore.sharedInstance().getAuthUid())
             }
         } else if segue.identifier == self.selectUserSegue {
             let vc = segue.destinationViewController as SelectUserViewController

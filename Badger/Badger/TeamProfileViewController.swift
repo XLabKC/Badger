@@ -58,6 +58,13 @@ class TeamProfileViewController: UITableViewController {
                 membersObserver.setKeys(team.memberIds.keys.array)
             }
 
+            if self.isViewLoaded() {
+                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? TeamHeaderCell {
+                    cell.setTeam(team)
+                }
+            }
+
 //            if !self.isViewLoaded() {
 //                self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0))
 //                self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2))
