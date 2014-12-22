@@ -1,15 +1,15 @@
 import UIKit
 
-protocol TaskEditContentCellDelegate: class {
+protocol TaskEditContentCellDelegate: InputCellDelegate {
     func editContentCell(cell: TaskEditContentCell, hasChangedHeight: CGFloat);
 }
 
-class TaskEditContentCell: BorderedCell, UITextViewDelegate {
+class TaskEditContentCell: BorderedCell, UITextViewDelegate, InputCell {
     private let minVerticalPadding: CGFloat = 59.0
     private let minTextHeight: CGFloat = 24.0
 
     private var hasAwakened = false
-    private var task: Task?
+    private var textToSet: String?
     private var currentHeight: CGFloat = 0
 
     weak var delegate: TaskEditContentCellDelegate?
@@ -18,8 +18,9 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate {
 
     override func awakeFromNib() {
         self.hasAwakened = true
-        self.updateView()
-
+        if let text = self.textToSet? {
+            self.textView.text = text
+        }
         self.textView.delegate = self
         self.textViewDidChange(self.textView)
     }
@@ -35,25 +36,35 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate {
         self.textView.scrollRectToVisible(CGRectMake(0, 0, self.textView.frame.width, 1), animated: true)
     }
 
+    func textViewDidBeginEditing(textView: UITextView) {
+        if let delegate = self.delegate? {
+            delegate.cellDidBeginEditing(self)
+        }
+    }
+
     func calculateCellHeight() -> CGFloat {
         return Helpers.calculateTextViewHeight(self.textView, minVerticalPadding: self.minVerticalPadding, minTextHeight: self.minTextHeight)
     }
 
-    func setTask(task: Task) {
-        self.task = task
+    func setText(text: String) {
         if self.hasAwakened {
-            self.updateView()
+            self.textView.text = text
+        } else {
+            self.textToSet = text
         }
+
     }
 
-    func getContent() -> String {
+    func getText() -> String {
         return self.textView.text
     }
 
-    private func updateView() {
-        if let task = self.task? {
-            self.textView.text = task.content
-        }
+    func closeKeyboard() {
+        self.textView.resignFirstResponder()
+    }
+
+    func openKeyboard() {
+        self.textView.becomeFirstResponder()
     }
 }
 

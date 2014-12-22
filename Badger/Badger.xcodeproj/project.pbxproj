@@ -48,6 +48,7 @@
 		7B64F2BF1A41E68C001FA518 /* FirebaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64F2BE1A41E68C001FA518 /* FirebaseUtil.swift */; };
 		7B64F2C11A42128E001FA518 /* FirebaseListObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64F2C01A42128E001FA518 /* FirebaseListObserver.swift */; };
 		7B64F2C31A467974001FA518 /* DataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64F2C21A467974001FA518 /* DataEntity.swift */; };
+		7B64F2C51A487C65001FA518 /* InputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64F2C41A487C65001FA518 /* InputCell.swift */; };
 		7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7439FC19F87E4E0075690A /* AppDelegate.swift */; };
 		7B743A0219F87E4E0075690A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0019F87E4E0075690A /* Main.storyboard */; };
 		7B743A0419F87E4E0075690A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B743A0319F87E4E0075690A /* Images.xcassets */; };
@@ -151,6 +152,7 @@
 		7B64F2BE1A41E68C001FA518 /* FirebaseUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUtil.swift; sourceTree = "<group>"; };
 		7B64F2C01A42128E001FA518 /* FirebaseListObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseListObserver.swift; sourceTree = "<group>"; };
 		7B64F2C21A467974001FA518 /* DataEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataEntity.swift; sourceTree = "<group>"; };
+		7B64F2C41A487C65001FA518 /* InputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputCell.swift; sourceTree = "<group>"; };
 		7B7439F719F87E4E0075690A /* Badger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7439FB19F87E4E0075690A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B7439FC19F87E4E0075690A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				7B64F2C01A42128E001FA518 /* FirebaseListObserver.swift */,
 				7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */,
 				7B64F2BE1A41E68C001FA518 /* FirebaseUtil.swift */,
+				7B64F2C41A487C65001FA518 /* InputCell.swift */,
 				7B4733D11A1E81B300D88C00 /* NSDate+JavascriptTimestamp.h */,
 				7B4733D21A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m */,
 				7B4733C81A1D93DE00D88C00 /* SWRevealViewController.h */,
@@ -692,6 +695,7 @@
 				7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */,
 				7B64F2C31A467974001FA518 /* DataEntity.swift in Sources */,
 				7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */,
+				7B64F2C51A487C65001FA518 /* InputCell.swift in Sources */,
 				7B90E0C01A1F9F6E005EC421 /* HeaderCell.swift in Sources */,
 				7B9A635B1A2E9CC800DF1143 /* TaskEditContentCell.swift in Sources */,
 				7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */,

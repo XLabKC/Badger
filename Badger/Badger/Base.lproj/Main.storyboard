@@ -460,7 +460,7 @@
                                             <rect key="frame" x="15" y="34" width="291" height="33"/>
                                             <color key="textColor" red="0.55686274509803924" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                         </textField>
                                     </subviews>
                                     <constraints>

@@ -1,6 +1,18 @@
 import UIKit
 
-class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate, TaskEditSubmitCellDelegate, SelectUserDelegate, SelectTeamDelegate {
+private enum Rows: Int {
+    case TeamHeader = 0
+    case SelectTeam = 1
+    case InfoHeader = 2
+    case Title = 3
+    case Content = 4
+    case Priority = 5
+    case AssignToHeader = 6
+    case Assignee = 7
+    case Submit = 8
+}
+
+class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate, TaskEditSubmitCellDelegate, SelectUserDelegate, SelectTeamDelegate, InputCellDelegate {
     private let selectTeamCellHeight = CGFloat(72.0)
     private let headerCellHeight = CGFloat(40.0)
     private let titleCellHeight = CGFloat(76.0)
@@ -37,7 +49,6 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         super.viewDidLoad()
     }
 
-
     func setTask(task: Task) {
         self.task = task
         if (self.isViewLoaded()) {
@@ -48,14 +59,16 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     func setOwner(owner: User) {
         self.owner = owner
         if self.isViewLoaded() {
-            self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 7, inSection: 0)], withRowAnimation: .Left)
+            let indexPath = NSIndexPath(forRow: Rows.Assignee.rawValue, inSection: 0)
+            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }
     }
 
     func setTeam(team: Team) {
         self.team = team
         if self.isViewLoaded() {
-            self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: .Left)
+            let indexPath = NSIndexPath(forRow: Rows.SelectTeam.rawValue, inSection: 0)
+            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }
     }
 
@@ -67,21 +80,22 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch (indexPath.row) {
-        case 0, 2, 6:
+        let row = Rows(rawValue: indexPath.row)!
+        switch (row) {
+        case .TeamHeader, .InfoHeader, .AssignToHeader:
             return self.headerCellHeight
-        case 1:
+        case .SelectTeam:
             return self.selectTeamCellHeight
-        case 3:
+        case .Title:
             return self.titleCellHeight
-        case 4:
+        case .Content:
             let cell = self.getContentCell()
             return cell.calculateCellHeight()
-        case 5:
+        case .Priority:
             return self.priorityCellHeight
-        case 7:
+        case .Assignee:
             return self.assigneeCellHeight
-        case 8:
+        case .Submit:
             return self.submitButtonHeight
         default:
             return 0
@@ -89,75 +103,16 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = self.cells[indexPath.row]? {
-            return cell
-        }
-
-        switch (indexPath.row) {
-        case 0, 2, 6:
-            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
-            cell.labelColor = Color.colorize(0x929292, alpha: 1)
-            switch (indexPath.row) {
-            case 0:
-                cell.title = "TEAM"
-            case 2:
-                cell.title = "TASK INFO"
-            case 6:
-                cell.title = "ASSIGN TO"
-            default:
-                break
-            }
-            self.cells[indexPath.row] = cell
-            return cell
-        case 1:
-            if let team = self.team? {
-                let cell = tableView.dequeueReusableCellWithIdentifier("TeamCell") as TeamCell
-                cell.setTeam(team)
-                self.cells[indexPath.row] = cell
-            } else {
-                self.cells[indexPath.row] = tableView.dequeueReusableCellWithIdentifier("SelectTeamCell") as? UITableViewCell
-            }
-            return self.cells[indexPath.row]!
-        case 3:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditTitleCell") as TaskEditTitleCell
-            if let task = self.task {
-                cell.setTask(task)
-            }
-            self.cells[indexPath.row] = cell
-            return cell
-        case 4:
-            if let task = self.task {
-                let cell = self.getContentCell()
-                cell.setTask(task)
-                return cell
-            }
-            return self.getContentCell()
-        case 5:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditPriorityCell") as TaskEditPriorityCell
-            if let task = self.task {
-                cell.setTask(task)
-            }
-            self.cells[indexPath.row] = cell
-            return cell
-        case 7:
-            if let owner = self.owner? {
-                let cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as UserCell
-                cell.setUid(owner.uid)
-                return cell
-            }
-            return tableView.dequeueReusableCellWithIdentifier("SelectUserCell") as UITableViewCell
-        default:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditSubmitCell") as TaskEditSubmitCell
-            cell.delegate = self
-            self.cells[indexPath.row] = cell
-            return cell
-        }
+        return self.cellForIndex(indexPath.row)
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 1 {
+        self.getContentCell().closeKeyboard()
+        self.getTitleCell().closeKeyboard()
+
+        if indexPath.row == Rows.SelectTeam.rawValue {
             self.performSegueWithIdentifier(self.selectTeamSegue, sender: self)
-        } else if indexPath.row == 7 {
+        } else if indexPath.row == Rows.Assignee.rawValue {
             self.performSegueWithIdentifier(self.selectUserSegue, sender: self)
         }
     }
@@ -184,6 +139,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         }
     }
 
+    // Adjusts the height of the content cell.
     func editContentCell(cell: TaskEditContentCell, hasChangedHeight: CGFloat) {
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
@@ -197,20 +153,22 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             }
         }
         self.owner = user
-        self.cells[7] = nil
-        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 7, inSection: 0)], withRowAnimation: .Left)
+        self.cells[Rows.Assignee.rawValue] = nil
+        let indexPath = NSIndexPath(forRow: Rows.Assignee.rawValue, inSection: 0)
+        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
     }
 
     func selectedTeam(team: Team) {
-        // // Don't do anything if this is the same team.
+        // Don't do anything if this is the same team.
         if let cur = self.team {
             if cur.id == team.id {
                 return
             }
         }
         self.team = team
-        self.cells[1] = nil
-        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: .Left)
+        self.cells[Rows.SelectTeam.rawValue] = nil
+        let indexPath = NSIndexPath(forRow: Rows.SelectTeam.rawValue, inSection: 0)
+        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
     }
 
     func editSubmitCellSubmitted(cell: TaskEditSubmitCell) {
@@ -263,9 +221,9 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         var taskValues = [
             "author": UserStore.sharedInstance().getAuthUid(),
             "team": self.team!.id,
-            "title": self.getTitle(),
-            "content": self.getContentCell().getContent(),
-            "priority": self.getPriority().rawValue as String,
+            "title": self.getTitleCell().getText(),
+            "content": self.getContentCell().getText(),
+            "priority": self.getPriorityCell().getPriority().rawValue as String,
             "active": isActive,
             "created_at": createdAt,
 
@@ -281,7 +239,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         }
 
         // Calculate what the firebase priority of the task should be.
-        let mult = Task.getFirebasePriorityMult(self.getPriority(), isActive: isActive)
+        let mult = Task.getFirebasePriorityMult(self.getPriorityCell().getPriority(), isActive: isActive)
         var priority = (-1 * dateForPriority.doubleValue) * mult
 
         // Save the task.
@@ -302,7 +260,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             // Add to push message queues if new of updated.
             if isNew || isUpdated {
                 let val = isNew ? "new" : "updated"
-                // ENABLE WHEN PUSH NOTIFICATIONS WORK.s
+                // ENABLE WHEN PUSH NOTIFICATIONS WORK.
                 // Firebase(url: Global.FirebaseNewTasksUrl).childByAppendingPath(combinedKey).setValue(val)
             }
             if let nav = self.navigationController? {
@@ -311,26 +269,101 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         })
     }
 
-    private func getTitle() -> String {
-        if let cell = self.cells[3]? {
-            return (cell as TaskEditTitleCell).getTitle()
-        }
-        return ""
+    // InputCellDelegate: opens the next cell when the "next" key is pressed on the keyboard.
+    func shouldSelectNext(cell: InputCell) {
+        let cell = self.cellForIndex(Rows.Content.rawValue) as TaskEditContentCell
+        cell.openKeyboard()
     }
 
-    private func getPriority() -> TaskPriority {
-        if let cell = self.cells[5]? {
-            return (cell as TaskEditPriorityCell).getPriority()
+    func cellDidBeginEditing(cell:InputCell) {
+        var indexPath: NSIndexPath
+        if cell === self.getTitleCell() {
+            indexPath = NSIndexPath(forRow: Rows.InfoHeader.rawValue, inSection: 0)
+        } else {
+            indexPath = NSIndexPath(forRow: Rows.Content.rawValue, inSection: 0)
         }
-        return .Unknown
+        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+    }
+
+    private func cellForIndex(index: Int) -> UITableViewCell {
+        if let cell = self.cells[index]? {
+            return cell
+        }
+        // Create new table cells.
+        let row = Rows(rawValue: index)!
+        switch (row) {
+        case .TeamHeader, .InfoHeader, .AssignToHeader:
+            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
+            cell.labelColor = Color.colorize(0x929292, alpha: 1)
+            switch (row) {
+            case .TeamHeader:
+                cell.title = "TEAM"
+            case .InfoHeader:
+                cell.title = "TASK INFO"
+            default:
+                cell.title = "ASSIGN TO"
+            }
+            self.cells[index] = cell
+            return cell
+        case .SelectTeam:
+            if let team = self.team? {
+                let cell = tableView.dequeueReusableCellWithIdentifier("TeamCell") as TeamCell
+                cell.setTeam(team)
+                self.cells[index] = cell
+            } else {
+                self.cells[index] = tableView.dequeueReusableCellWithIdentifier("SelectTeamCell") as? UITableViewCell
+            }
+            return self.cells[index]!
+        case .Title:
+            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditTitleCell") as TaskEditTitleCell
+            cell.delegate = self
+            if let task = self.task {
+                cell.setText(task.title)
+            }
+            self.cells[index] = cell
+            return cell
+        case .Content:
+            let cell = (self.tableView.dequeueReusableCellWithIdentifier("TaskEditContentCell") as TaskEditContentCell)
+            cell.delegate = self
+            if let task = self.task {
+                cell.setText(task.content)
+            }
+            self.cells[index] = cell
+            return cell
+        case .Priority:
+            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditPriorityCell") as TaskEditPriorityCell
+            if let task = self.task {
+                cell.setTask(task)
+            }
+            self.cells[index] = cell
+            return cell
+        case .Assignee:
+            if let owner = self.owner? {
+                let cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as UserCell
+                cell.setUid(owner.uid)
+                self.cells[index] = cell
+                return cell
+            }
+            self.cells[index] = (tableView.dequeueReusableCellWithIdentifier("SelectUserCell") as UITableViewCell)
+            return self.cells[index]!
+        default:
+            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditSubmitCell") as TaskEditSubmitCell
+            cell.delegate = self
+            self.cells[index] = cell
+            return cell
+        }
+    }
+
+
+    private func getTitleCell() -> TaskEditTitleCell {
+        return self.cellForIndex(Rows.Title.rawValue) as TaskEditTitleCell
     }
 
     private func getContentCell() -> TaskEditContentCell {
-        if let cell = self.contentCell? {
-            return cell
-        }
-        self.contentCell = (self.tableView.dequeueReusableCellWithIdentifier("TaskEditContentCell") as TaskEditContentCell)
-        self.contentCell!.delegate = self
-        return self.contentCell!
+        return self.cellForIndex(Rows.Content.rawValue) as TaskEditContentCell
+    }
+
+    private func getPriorityCell() -> TaskEditPriorityCell {
+        return self.cellForIndex(Rows.Priority.rawValue) as TaskEditPriorityCell
     }
 }
