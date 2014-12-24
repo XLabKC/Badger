@@ -142,6 +142,10 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
 
             // Move the task to its new list.
             task.ref.setValue(task.toJson(), andPriority: priority, withCompletionBlock: { (error, ref) in
+                if (error != nil) {
+                    return
+                }
+
                 oldRef.removeValue()
 
                 // Adjust active/completed counts for user.
