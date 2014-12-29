@@ -7,8 +7,9 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
 
     private let headerSection = 0
     private let activeTaskSection = 1
-    private let dividerSection = 2
-    private let completedTaskSection = 3
+    private let newTaskSection = 2
+    private let dividerSection = 3
+    private let completedTaskSection = 4
 
     private var userObserver: FirebaseObserver<User>?
     private var activeObserver: FirebaseObserver<Task>?
@@ -147,18 +148,21 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
     // TableViewController Overrides
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
+        case self.headerSection:
             // Header + Controls.
             return 2
-        case 1:
+        case self.activeTaskSection:
             // Active tasks.
             return self.activeTasks.array.isEmpty ? 1 : self.activeTasks.array.count
-        case 2:
+        case self.newTaskSection:
+            // Show the create new task button only if this is the auth users profile.
+            return self.isAuthUser ? 1 : 0
+        case self.dividerSection:
             // Show completed tasks header only if we aren't loading the active tasks.
             if self.isLoadingActiveTasks {
                 return 0
@@ -178,9 +182,11 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0:
+        case self.headerSection:
             return self.cellHeights[indexPath.row]
-        case 2:
+        case self.newTaskSection:
+            return self.cellHeights[1]
+        case self.dividerSection:
             return self.cellHeights[2]
         default:
             return self.cellHeights.last!
@@ -189,7 +195,7 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0:
+        case self.headerSection:
             // Header Cell
             if indexPath.row == 0 {
                 if self.profileHeaderCell == nil {
@@ -211,7 +217,7 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
                 return self.statusSliderCell!
             }
             return tableView.dequeueReusableCellWithIdentifier("ProfileControlsCell") as UITableViewCell
-        case 1:
+        case self.activeTaskSection:
             if self.isLoadingActiveTasks {
                 return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
             } else if self.activeTasks.array.isEmpty {
@@ -220,7 +226,9 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
             let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
             cell.setTask(self.activeTasks.array[indexPath.row])
             return cell
-        case 2:
+        case self.newTaskSection:
+            return tableView.dequeueReusableCellWithIdentifier("NewTaskCell") as UITableViewCell
+        case self.dividerSection:
             let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
             cell.delegate = self
             cell.buttonText = self.isShowingCompletedTasks ? "HIDE" : "SHOW"
@@ -280,8 +288,9 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
                     observer.afterInitial = { _ in
                         // Finished loading completed tasks but prefetch all the users before reloading table.
                         self.prefetchUsers(self.completedTasks, complete: { _ in
-                            self.tableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: .Bottom)
-                            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: .Top, animated: true)
+                            let section = self.completedTaskSection
+                            self.tableView.reloadSections(NSIndexSet(index: section), withRowAnimation: .Bottom)
+                            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: section), atScrollPosition: .Top, animated: true)
                         })
                     }
                     let section = self.completedTaskSection

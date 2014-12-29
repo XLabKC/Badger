@@ -54,6 +54,7 @@
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
@@ -230,6 +231,42 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewTaskCell" rowHeight="100" id="eut-E6-a2w" customClass="BorderedCell" customModule="Badger" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eut-E6-a2w" id="cAP-2y-Gic">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAe-v1-6tK" customClass="ResizedImageButton" customModule="Badger" customModuleProvider="target">
+                                            <rect key="frame" x="15" y="15" width="290" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="tZh-tw-l96"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
+                                            <state key="normal" title="New Task" backgroundImage="GrayButton">
+                                                <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted" backgroundImage="PurpleButton">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="WaY-Zu-mhH" kind="show" identifier="UserProfileTaskEditAuth" id="dhT-2f-k0x"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="PAe-v1-6tK" firstAttribute="leading" secondItem="cAP-2y-Gic" secondAttribute="leadingMargin" constant="7" id="EJR-QK-9o4"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="PAe-v1-6tK" secondAttribute="trailing" constant="7" id="czS-QB-SUI"/>
+                                        <constraint firstAttribute="centerY" secondItem="PAe-v1-6tK" secondAttribute="centerY" id="o8B-fQ-QAh"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
                                 </userDefinedRuntimeAttributes>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskCell" rowHeight="72" id="7Ps-nG-vfV" customClass="TaskCell" customModule="Badger" customModuleProvider="target">
@@ -1585,7 +1622,7 @@
         <image name="RightArrowIcon" width="8" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kUo-1a-Owt"/>
         <segue reference="sG0-Gn-9tP"/>
+        <segue reference="dhT-2f-k0x"/>
     </inferredMetricsTieBreakers>
 </document>
