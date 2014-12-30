@@ -25,7 +25,7 @@ class ProfileHeaderCell: UITableViewCell {
             if let user = self.user? {
                 self.nameLabel.text = user.fullName
                 self.profileCircle.setUid(user.uid)
-                self.statusLabel.text = Helpers.statusToText(nil, status: user.status)
+                self.statusLabel.text = user.statusText
                 self.statusLabel.textColor = Helpers.statusToColor(user.status)
             }
         }

@@ -5,6 +5,7 @@
     var firstName = ""
     var lastName = ""
     var profileImages: [UserStatus: String] = [:]
+    var textStatuses: [UserStatus: String] = [:]
     var headerImage = "DefaultUserBackground"
     var email = ""
     var status: UserStatus
@@ -21,6 +22,9 @@
     var ref: Firebase {
         return User.createRef(self.uid)
     }
+    var statusText: String {
+        return self.textStatuses[self.status]!
+    }
 
     init(uid: String, provider: String) {
         self.uid = uid
@@ -35,6 +39,12 @@
             .Unavailable: "DefaultUserProfile",
             .Occupied: "DefaultUserProfile",
             .Unknown: "DefaultUserProfile"
+        ]
+        self.textStatuses = [
+            .Free: "Free",
+            .Unavailable: "Unavailable",
+            .Occupied: "Occupied",
+            .Unknown: "Unknown"
         ]
     }
 
@@ -55,6 +65,10 @@
         self.profileImages[.Free] = json["free_profile_image"] as? String
         self.profileImages[.Unavailable] = json["unavailable_profile_image"] as? String
         self.profileImages[.Occupied] = json["occupied_profile_image"] as? String
+        self.textStatuses[.Free] = json["free_text"] as? String
+        self.textStatuses[.Unavailable] = json["unavailable_text"] as? String
+        self.textStatuses[.Occupied] = json["occupied_text"] as? String
+
         self.headerImage = json["header_image"] as String
 
         if let teams = json["teams"] as? Dictionary<String, Bool> {
@@ -79,6 +93,9 @@
             "free_profile_image": self.profileImages[.Free]!,
             "unavailable_profile_image": self.profileImages[.Unavailable]!,
             "occupied_profile_image": self.profileImages[.Occupied]!,
+            "free_text": self.textStatuses[.Free]!,
+            "unavailable_text": self.profileImages[.Unavailable]!,
+            "occupied_text": self.profileImages[.Occupied]!,
             "header_image": self.headerImage,
             "active_task_count": self.activeTaskCount,
             "completed_task_count": self.completedTaskCount,

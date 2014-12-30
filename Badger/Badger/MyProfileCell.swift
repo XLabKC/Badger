@@ -26,7 +26,7 @@ class MyProfileCell: BorderedCell {
     private func updateView() {
         if self.user != nil && self.hasAwakened {
             self.statusLabel.textColor = Helpers.statusToColor(self.user!.status)
-            self.statusLabel.text = Helpers.statusToText(self.user!, status: self.user!.status)
+            self.statusLabel.text = self.user!.statusText
             self.nameLabel.text = self.user!.fullName
         }
     }

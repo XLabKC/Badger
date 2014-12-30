@@ -258,10 +258,11 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             }
 
             // Add to push message queues if new of updated.
-            if isNew || isUpdated {
+            if isNew && isActive {
                 let val = isNew ? "new" : "updated"
                 // ENABLE WHEN PUSH NOTIFICATIONS WORK.
-                // Firebase(url: Global.FirebaseNewTasksUrl).childByAppendingPath(combinedKey).setValue(val)
+                let now = NSDate.javascriptTimestampNow()
+                Firebase(url: Global.FirebaseNewTasksUrl).childByAppendingPath(combinedKey).setValue(now)
             }
             if let nav = self.navigationController? {
                 nav.popViewControllerAnimated(true)

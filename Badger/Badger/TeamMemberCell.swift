@@ -33,7 +33,7 @@ class TeamMemberCell: BorderedCell {
         if self.hasAwakened {
             if let user = self.user? {
                 self.profileCircle.setUid(user.uid)
-                self.statusLabel.text = Helpers.statusToText(user, status: user.status)
+                self.statusLabel.text = user.statusText
                 self.statusLabel.textColor = Helpers.statusToColor(user.status)
                 self.nameLabel.text = user.fullName
                 self.metaLabel.text = "\(user.activeTaskCount) Active Tasks"

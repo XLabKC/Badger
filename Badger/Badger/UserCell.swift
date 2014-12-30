@@ -38,7 +38,7 @@ class UserCell: BorderedCell {
         if self.hasAwakened {
             if let user = self.user? {
                 self.nameLabel.text = user.fullName
-                self.statusLabel.text = Helpers.statusToText(user, status: user.status)
+                self.statusLabel.text = user.statusText
                 self.statusLabel.textColor = Helpers.statusToColor(user.status)
                 self.profileCircle.setUid(user.uid)
             } else {

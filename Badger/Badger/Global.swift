@@ -3,7 +3,7 @@ struct Global {
     static let FirebaseUsersUrl = Global.FirebaseUrl + "/users"
     static let FirebaseTasksUrl = Global.FirebaseUrl + "/tasks"
     static let FirebaseTeamsUrl = Global.FirebaseUrl + "/teams"
-    static let FirebaseNewTasksUrl = Global.FirebaseUrl + "/new_tasks"
+    static let FirebaseNewTasksUrl = Global.FirebaseUrl + "/push_new_task"
     static let FirebaseActiveTasksUrl = Global.FirebaseUrl + "/active_tasks"
     static let FirebaseCompletedTasksUrl = Global.FirebaseUrl + "/completed_tasks"
 }
@@ -43,19 +43,6 @@ class Helpers {
             return Colors.FreeStatus
         case .Occupied:
             return Colors.OccupiedStatus
-        }
-    }
-
-    class func statusToText(user: User?, status: UserStatus) -> String {
-        switch status {
-        case .Unavailable:
-            return "Unavailable"
-        case .Free:
-            return "Free"
-        case .Occupied:
-            return "Occupied"
-        default:
-            return "Unknown"
         }
     }
 
