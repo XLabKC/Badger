@@ -120,8 +120,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
     }
 
     private func navigateToProfile() {
-        UserStore.sharedInstance().authorized({ authUser in
-            let vc = Helpers.createRevealViewController(authUser.uid)
+        UserStore.sharedInstance().authorized({ _ in
+            let vc = RevealManager.sharedInstance().initialize()
             if let root = self.window?.rootViewController? {
                 if root.isViewLoaded() {
                     root.presentViewController(vc, animated: true, completion: nil)

@@ -32,7 +32,10 @@ class MenuViewController: UITableViewController {
         self.tableView.registerNib(userTableNib, forCellReuseIdentifier: "HeaderCell")
     }
 
-    func loadData() {
+
+
+    // TableViewController Overrides
+func loadData() {
         // Create team list observer.
         let teamsRef = Firebase(url: Global.FirebaseTeamsUrl)
         self.teamsObserver = FirebaseListObserver<Team>(ref: teamsRef, onChanged: self.teamsUpdated)
@@ -55,7 +58,6 @@ class MenuViewController: UITableViewController {
                         profileCell.setUser(user)
                     }
                 }
-                self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2))
             }
         })
     }
@@ -95,9 +97,6 @@ class MenuViewController: UITableViewController {
             }
         }
     }
-
-    // TableViewController Overrides
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }

@@ -30,10 +30,6 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
 
     private var cells = [UITableViewCell?](count: 9, repeatedValue: nil)
 
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
     override func viewDidLoad() {
         self.navigationItem.titleView = Helpers.createTitleLabel("Task")
 

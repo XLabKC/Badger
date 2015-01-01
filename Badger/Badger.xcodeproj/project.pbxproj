@@ -16,6 +16,11 @@
 		7B15CD091A39080400519C8E /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD081A39080400519C8E /* TeamCell.swift */; };
 		7B15CD0B1A39081600519C8E /* TeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B15CD0A1A39081600519C8E /* TeamCell.xib */; };
 		7B15CD0D1A3922EA00519C8E /* ResizedImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B15CD0C1A3922EA00519C8E /* ResizedImageButton.swift */; };
+		7B21D8B91A530B2F006AFEC0 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21D8B81A530B2F006AFEC0 /* StatusViewController.swift */; };
+		7B21D8BB1A530B80006AFEC0 /* StatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21D8BA1A530B80006AFEC0 /* StatusCell.swift */; };
+		7B21D8BD1A5369FF006AFEC0 /* RevealableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21D8BC1A5369FF006AFEC0 /* RevealableTableViewController.swift */; };
+		7B21D8BF1A545D48006AFEC0 /* RevealControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21D8BE1A545D48006AFEC0 /* RevealControllerManager.swift */; };
+		7B21D8C11A54C395006AFEC0 /* StatusCloseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21D8C01A54C395006AFEC0 /* StatusCloseCell.swift */; };
 		7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */; };
 		7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */; };
 		7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1971A264346003920AD /* TeamProfileViewController.swift */; };
@@ -118,6 +123,11 @@
 		7B15CD081A39080400519C8E /* TeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
 		7B15CD0A1A39081600519C8E /* TeamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamCell.xib; sourceTree = "<group>"; };
 		7B15CD0C1A3922EA00519C8E /* ResizedImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizedImageButton.swift; sourceTree = "<group>"; };
+		7B21D8B81A530B2F006AFEC0 /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		7B21D8BA1A530B80006AFEC0 /* StatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCell.swift; sourceTree = "<group>"; };
+		7B21D8BC1A5369FF006AFEC0 /* RevealableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealableTableViewController.swift; sourceTree = "<group>"; };
+		7B21D8BE1A545D48006AFEC0 /* RevealControllerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealControllerManager.swift; sourceTree = "<group>"; };
+		7B21D8C01A54C395006AFEC0 /* StatusCloseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCloseCell.swift; sourceTree = "<group>"; };
 		7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailAuthorCell.swift; sourceTree = "<group>"; };
 		7B29F1971A264346003920AD /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
@@ -256,6 +266,7 @@
 				7B64F2C41A487C65001FA518 /* InputCell.swift */,
 				7B4733D11A1E81B300D88C00 /* NSDate+JavascriptTimestamp.h */,
 				7B4733D21A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m */,
+				7B21D8BE1A545D48006AFEC0 /* RevealControllerManager.swift */,
 				7B4733C81A1D93DE00D88C00 /* SWRevealViewController.h */,
 				7B4733C91A1D93DE00D88C00 /* SWRevealViewController.m */,
 			);
@@ -340,7 +351,7 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
-		7B4733D41A1E84B100D88C00 /* Menu */ = {
+		7B4733D41A1E84B100D88C00 /* Menus */ = {
 			isa = PBXGroup;
 			children = (
 				7B4733D51A1E84C900D88C00 /* MenuViewController.swift */,
@@ -348,8 +359,11 @@
 				7B90E0C51A2141CD005EC421 /* MenuTeamCell.swift */,
 				7B90E0C91A21AA68005EC421 /* MenuNoTeamsCell.swift */,
 				7B469C4B1A21B4AC0054019D /* MenuSettingsCell.swift */,
+				7B21D8B81A530B2F006AFEC0 /* StatusViewController.swift */,
+				7B21D8BA1A530B80006AFEC0 /* StatusCell.swift */,
+				7B21D8C01A54C395006AFEC0 /* StatusCloseCell.swift */,
 			);
-			name = Menu;
+			name = Menus;
 			sourceTree = "<group>";
 		};
 		7B4733D71A1E8A7E00D88C00 /* Bases */ = {
@@ -458,7 +472,7 @@
 			children = (
 				7B4733D71A1E8A7E00D88C00 /* Bases */,
 				7BF066151A1437A500F3E6A1 /* Splashscreen */,
-				7B4733D41A1E84B100D88C00 /* Menu */,
+				7B4733D41A1E84B100D88C00 /* Menus */,
 				7BF066141A1434DF00F3E6A1 /* Login */,
 				7B39D28B1A01F6C00033D4FE /* User Profile */,
 				7B29F1941A263A90003920AD /* Team Profile */,
@@ -478,6 +492,7 @@
 				7B90E0C31A214137005EC421 /* TeamCircle.swift */,
 				7B90E0C71A21427F005EC421 /* BorderedCell.swift */,
 				7B15CD0C1A3922EA00519C8E /* ResizedImageButton.swift */,
+				7B21D8BC1A5369FF006AFEC0 /* RevealableTableViewController.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -649,6 +664,7 @@
 				7B4733BA1A1BE38700D88C00 /* TaskCell.swift in Sources */,
 				7B4733B61A1BE31C00D88C00 /* ProfileHeaderCell.swift in Sources */,
 				7B29F19C1A26443E003920AD /* TeamProfileControlCell.swift in Sources */,
+				7B21D8B91A530B2F006AFEC0 /* StatusViewController.swift in Sources */,
 				7BD0F9C81A3E442400BDF70D /* TaskDetailCompleteCell.swift in Sources */,
 				7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */,
 				7B070FC91A112CBD00997D50 /* FirebaseAsync.swift in Sources */,
@@ -678,17 +694,21 @@
 				7B90E0C21A206A89005EC421 /* MyProfileCell.swift in Sources */,
 				7B4733D31A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m in Sources */,
 				7B743A3E19F943D30075690A /* Global.swift in Sources */,
+				7B21D8BD1A5369FF006AFEC0 /* RevealableTableViewController.swift in Sources */,
 				7B15CCFC1A38D22100519C8E /* UserCell.swift in Sources */,
 				7B4733CA1A1D93DE00D88C00 /* SWRevealViewController.m in Sources */,
+				7B21D8BF1A545D48006AFEC0 /* RevealControllerManager.swift in Sources */,
 				7B469C4E1A2237EC0054019D /* Barrier.swift in Sources */,
 				7B90E0CA1A21AA68005EC421 /* MenuNoTeamsCell.swift in Sources */,
 				7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */,
 				7B90E0C41A214137005EC421 /* TeamCircle.swift in Sources */,
+				7B21D8C11A54C395006AFEC0 /* StatusCloseCell.swift in Sources */,
 				7B29F19A1A2643FC003920AD /* TeamHeaderCell.swift in Sources */,
 				7B64F2BF1A41E68C001FA518 /* FirebaseUtil.swift in Sources */,
 				7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */,
 				7B4733D01A1E551600D88C00 /* Team.swift in Sources */,
 				7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */,
+				7B21D8BB1A530B80006AFEC0 /* StatusCell.swift in Sources */,
 				7B15CD071A3906ED00519C8E /* SelectTeamViewController.swift in Sources */,
 				7B90E0C81A21427F005EC421 /* BorderedCell.swift in Sources */,
 				7B64F2BD1A40FFF2001FA518 /* ArrayRef.swift in Sources */,

@@ -1,6 +1,6 @@
 import UIKit
 
-class TeamProfileViewController: UITableViewController {
+class TeamProfileViewController: RevealableTableViewController {
     private let cellHeights: [CGFloat] = [225.0, 100.0, 112.0]
     private let memberAltBackground = Color.colorize(0xF6F6F6, alpha: 1.0)
 
@@ -25,11 +25,7 @@ class TeamProfileViewController: UITableViewController {
     }
 
     override func viewDidLoad() {
-        if let revealVC = self.revealViewController()? {
-            self.menuButton.target = revealVC
-            self.menuButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(revealVC.panGestureRecognizer())
-        }
+        super.viewDidLoad()
 
         // Register loading cell.
         let loadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)

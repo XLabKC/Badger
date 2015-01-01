@@ -61,21 +61,6 @@ class Helpers {
         return newImage;
     }
 
-    class func createRevealViewController(uid: String) -> UIViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let menuVC = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as UITableViewController
-        let frontVC = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as UINavigationController
-        let revealVC = SWRevealViewController(rearViewController: menuVC, frontViewController: frontVC)
-        revealVC.draggableBorderWidth = 20
-        revealVC.rearViewRevealWidth = -54
-
-        // Set uid for profile.
-        if let profileVC = frontVC.topViewController as? ProfileViewController {
-            profileVC.setUid(uid)
-        }
-        return revealVC
-    }
-
     class func createTitleLabel(title: String) -> UILabel {
         let label = UILabel(frame: CGRectMake(0, 0, 100, 30))
         label.backgroundColor = UIColor.clearColor()

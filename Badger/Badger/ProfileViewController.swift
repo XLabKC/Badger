@@ -1,6 +1,6 @@
 import UIKit
 
-class ProfileViewController: UITableViewController, HeaderCellDelegate {
+class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
 
     private let cellHeights: [CGFloat] = [225.0, 100.0, 40.0, 72.0]
     private let titleLabel = Helpers.createTitleLabel("My Profile")
@@ -42,9 +42,6 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
         return false
     }
 
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     deinit {
         if let observer = self.userObserver? {
             observer.dispose()
@@ -58,16 +55,7 @@ class ProfileViewController: UITableViewController, HeaderCellDelegate {
     }
 
     override func viewDidLoad() {
-        if let nav = self.navigationController? {
-            if nav.viewControllers.first as? ProfileViewController == self {
-                if let revealVC = self.revealViewController()? {
-                    var button = UIBarButtonItem(image: UIImage(named: "MenuIcon"), style: .Plain, target: revealVC, action: "revealToggle:")
-                    button.tintColor = Color.colorize(0x929292, alpha: 1.0)
-                    self.navigationItem.leftBarButtonItem = button
-                    self.view.addGestureRecognizer(revealVC.panGestureRecognizer())
-                }
-            }
-        }
+        super.viewDidLoad()
 
         // Register cells.
         let loadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)

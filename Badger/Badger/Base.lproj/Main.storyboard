@@ -68,7 +68,7 @@
         <!--My Profile-->
         <scene sceneID="otr-eJ-a5c">
             <objects>
-                <tableViewController title="My Profile" id="lxJ-ye-3j0" customClass="ProfileViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ProfileViewController" title="My Profile" id="lxJ-ye-3j0" customClass="ProfileViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="QPs-b2-1vV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1022,7 +1022,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Lb-By-r0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-177" y="54"/>
+            <point key="canvasLocation" x="-161" y="-375"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="dBU-bU-Jq2">
@@ -1592,6 +1592,91 @@
             </objects>
             <point key="canvasLocation" x="817" y="1164"/>
         </scene>
+        <!--Status View Controller-->
+        <scene sceneID="Syt-TX-1pS">
+            <objects>
+                <tableViewController storyboardIdentifier="StatusViewController" extendedLayoutIncludesOpaqueBars="YES" id="MBp-vA-YNO" customClass="StatusViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="m8X-HN-7Qz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.24313725489999999" green="0.25490196079999999" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StatusCloseCell" rowHeight="62" id="clo-Sy-OK8" customClass="StatusCloseCell" customModule="Badger" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="clo-Sy-OK8" id="zeS-Ht-Phy">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78c-BU-w2B">
+                                            <rect key="frame" x="0.0" y="-22" width="320" height="76"/>
+                                            <color key="backgroundColor" red="0.2627450980392157" green="0.27058823529411763" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCG-cQ-YkF">
+                                            <rect key="frame" x="259" y="7" width="48" height="48"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="48" id="Ayl-nO-2AA"/>
+                                                <constraint firstAttribute="height" constant="48" id="ZdI-7c-5oP"/>
+                                            </constraints>
+                                            <state key="normal" image="CloseIcon">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="closeButtonPressed:" destination="clo-Sy-OK8" eventType="touchUpInside" id="dHU-yW-2di"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="78c-BU-w2B" secondAttribute="bottom" id="9K7-h8-Cs9"/>
+                                        <constraint firstItem="78c-BU-w2B" firstAttribute="top" secondItem="zeS-Ht-Phy" secondAttribute="topMargin" constant="-30" id="AzC-kl-4lG"/>
+                                        <constraint firstItem="78c-BU-w2B" firstAttribute="leading" secondItem="zeS-Ht-Phy" secondAttribute="leadingMargin" constant="-8" id="cYA-f3-OeB"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="yCG-cQ-YkF" secondAttribute="trailing" constant="5" id="kQw-TN-M1m"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="78c-BU-w2B" secondAttribute="trailing" constant="-8" id="mbR-xs-PAH"/>
+                                        <constraint firstAttribute="centerY" secondItem="yCG-cQ-YkF" secondAttribute="centerY" id="pG1-08-LSg"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.2627450980392157" green="0.27058823529411763" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StatusCell" rowHeight="72" id="bV4-mS-e2D" customClass="StatusCell" customModule="Badger" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bV4-mS-e2D" id="wiK-gB-FW2">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XDS-2e-J3d" customClass="ProfileCircle" customModule="Badger" customModuleProvider="target">
+                                            <rect key="frame" x="256" y="8" width="56" height="56"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="56" id="NgG-h9-B2N"/>
+                                                <constraint firstAttribute="height" constant="56" id="pna-ZJ-tJP"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="XDS-2e-J3d" firstAttribute="trailing" secondItem="wiK-gB-FW2" secondAttribute="trailingMargin" id="R7T-uA-dR3"/>
+                                        <constraint firstAttribute="centerY" secondItem="XDS-2e-J3d" secondAttribute="centerY" id="ZQa-8a-hCP"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="profileCircle" destination="XDS-2e-J3d" id="jUc-X5-9gE"/>
+                                    <segue destination="PV4-3y-2XN" kind="custom" identifier="StatusProfile" customClass="SWRevealViewControllerSeguePushController" id="G2U-IQ-PaM"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MBp-vA-YNO" id="4OB-Lx-XN6"/>
+                            <outlet property="delegate" destination="MBp-vA-YNO" id="5h2-Gl-Urf"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nZl-qP-Pby" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-161" y="298"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="0rK-N4-3L7">
             <objects>
@@ -1612,6 +1697,7 @@
     </scenes>
     <resources>
         <image name="CheckmarkIcon" width="125" height="125"/>
+        <image name="CloseIcon" width="20" height="20"/>
         <image name="DefaultBackground" width="375" height="290"/>
         <image name="GrayButton" width="166" height="70"/>
         <image name="LogoBlackSmall" width="57" height="51"/>
@@ -1622,7 +1708,8 @@
         <image name="RightArrowIcon" width="8" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sG0-Gn-9tP"/>
         <segue reference="dhT-2f-k0x"/>
+        <segue reference="sG0-Gn-9tP"/>
+        <segue reference="G2U-IQ-PaM"/>
     </inferredMetricsTieBreakers>
 </document>
