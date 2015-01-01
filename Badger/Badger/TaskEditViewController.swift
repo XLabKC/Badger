@@ -50,21 +50,30 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         if (self.isViewLoaded()) {
             self.tableView.reloadData()
         }
+        // Load the team and owner.
+        Team.createRef(task.team).observeSingleEventOfType(.Value, withBlock: { snapshot in
+            self.setTeam(Team.createFromSnapshot(snapshot) as Team)
+        })
+        User.createRef(task.owner).observeSingleEventOfType(.Value, withBlock: { snapshot in
+            self.setOwner(User.createFromSnapshot(snapshot) as User)
+        })
     }
 
     func setOwner(owner: User) {
         self.owner = owner
         if self.isViewLoaded() {
+            self.cells[Rows.Assignee.rawValue] = nil
             let indexPath = NSIndexPath(forRow: Rows.Assignee.rawValue, inSection: 0)
-            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
 
     func setTeam(team: Team) {
         self.team = team
         if self.isViewLoaded() {
+            self.cells[Rows.SelectTeam.rawValue] = nil
             let indexPath = NSIndexPath(forRow: Rows.SelectTeam.rawValue, inSection: 0)
-            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
 

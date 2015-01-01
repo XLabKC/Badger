@@ -63,15 +63,15 @@ class SelectUserViewController: UITableViewController {
         }
 
         if oldUsers.isEmpty {
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Left)
+            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
         } else {
             var updates = Helpers.diffArrays(oldUsers, end: users, section: 0, compare: { (a, b) -> Bool in
                 return a.uid == b.uid
             })
             if !updates.inserts.isEmpty || !updates.deletes.isEmpty {
                 self.tableView.beginUpdates()
-                self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Left)
-                self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
+                self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Fade)
+                self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Fade)
                 self.tableView.endUpdates()
             }
         }

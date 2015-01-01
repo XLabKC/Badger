@@ -67,15 +67,15 @@ class SelectTeamViewController: UITableViewController {
         }
 
         if oldTeams.isEmpty {
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Left)
+            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
         } else {
             var updates = Helpers.diffArrays(oldTeams, end: teams, section: 0, compare: { (a, b) -> Bool in
                 return a.id == b.id
             })
             if !updates.inserts.isEmpty || !updates.deletes.isEmpty {
                 self.tableView.beginUpdates()
-                self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Left)
-                self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
+                self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Fade)
+                self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Fade)
                 self.tableView.endUpdates()
             }
         }
