@@ -27,11 +27,19 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     private var contentCell: TaskEditContentCell?
     private var owner: User?
     private var team: Team?
+    private var isNew: Bool {
+        return self.task == nil
+    }
 
     private var cells = [UITableViewCell?](count: 9, repeatedValue: nil)
 
     override func viewDidLoad() {
-        self.navigationItem.titleView = Helpers.createTitleLabel("Task")
+        self.navigationItem.titleView = Helpers.createTitleLabel(self.isNew ? "Create Task" : "Edit Task")
+
+        // Add Done button to nav header.
+        var button = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "saveTask")
+        button.tintColor = Color.colorize(0x8E7EFF, alpha: 1.0)
+        self.navigationItem.rightBarButtonItem = button
 
         let headerCellNib = UINib(nibName: "HeaderCell", bundle: nil)
         self.tableView.registerNib(headerCellNib, forCellReuseIdentifier: "HeaderCell")
@@ -42,6 +50,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         let teamCellNib = UINib(nibName: "TeamCell", bundle: nil)
         self.tableView.registerNib(teamCellNib, forCellReuseIdentifier: "TeamCell")
 
+        // Auto populate the team if the auth user only is part of a single team.
         if self.team == nil {
             let authUser = UserStore.sharedInstance().getAuthUser()
             if authUser.teamIds.count == 1 {
@@ -58,6 +67,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     func setTask(task: Task) {
         self.task = task
         if (self.isViewLoaded()) {
+            self.navigationItem.titleView = Helpers.createTitleLabel("Edit Task")
             self.tableView.reloadData()
         }
         // Load the team and owner.
@@ -187,6 +197,10 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     }
 
     func editSubmitCellSubmitted(cell: TaskEditSubmitCell) {
+        self.saveTask()
+    }
+
+    func saveTask() {
         if (self.owner == nil || self.team == nil) {
             return
         }

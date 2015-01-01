@@ -12,6 +12,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().tintColor = Color.colorize(0x929292, alpha: 1.0)
 
+        var attributes: [NSObject: AnyObject] = [:]
+        attributes[NSFontAttributeName] = UIFont(name: "OpenSans", size: 17.0)
+        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: .Normal)
+
         // Try and use last sessions access token if it's still valid.
         if let token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as? String {
             if let expiration = NSUserDefaults.standardUserDefaults().objectForKey("access_token_expiration")
