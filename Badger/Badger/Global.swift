@@ -1,11 +1,12 @@
 struct Global {
     static let FirebaseUrl = "https://fiery-inferno-4698.firebaseio.com"
-    static let FirebaseUsersUrl = Global.FirebaseUrl + "/users"
-    static let FirebaseTasksUrl = Global.FirebaseUrl + "/tasks"
-    static let FirebaseTeamsUrl = Global.FirebaseUrl + "/teams"
-    static let FirebaseNewTasksUrl = Global.FirebaseUrl + "/push_new_task"
-    static let FirebaseActiveTasksUrl = Global.FirebaseUrl + "/active_tasks"
-    static let FirebaseCompletedTasksUrl = Global.FirebaseUrl + "/completed_tasks"
+    static let FirebaseUsersUrl = "\(Global.FirebaseUrl)/users"
+    static let FirebaseTasksUrl = "\(Global.FirebaseUrl)/tasks"
+    static let FirebaseTeamsUrl = "\(Global.FirebaseUrl)/teams"
+    static let FirebaseNewTasksUrl = "\(Global.FirebaseUrl)/push_new_task"
+    static let FirebaseStatusUpdatedUrl = "\(Global.FirebaseUrl)/push_status_updated"
+    static let FirebaseActiveTasksUrl = "\(Global.FirebaseUrl)/active_tasks"
+    static let FirebaseCompletedTasksUrl = "\(Global.FirebaseUrl)/completed_tasks"
 }
 
 struct Colors {
