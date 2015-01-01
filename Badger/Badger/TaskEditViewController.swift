@@ -42,6 +42,16 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         let teamCellNib = UINib(nibName: "TeamCell", bundle: nil)
         self.tableView.registerNib(teamCellNib, forCellReuseIdentifier: "TeamCell")
 
+        if self.team == nil {
+            let authUser = UserStore.sharedInstance().getAuthUser()
+            if authUser.teamIds.count == 1 {
+                let ref = Team.createRef(authUser.teamIds.keys.array.first!)
+                ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                    self.setTeam(Team.createFromSnapshot(snapshot) as Team)
+                })
+            }
+        }
+
         super.viewDidLoad()
     }
 
