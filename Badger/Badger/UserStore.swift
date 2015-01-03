@@ -72,4 +72,14 @@ class UserStore {
         let ref = Firebase(url: Global.FirebaseUsersUrl).childByAppendingPath("\(id)/completed_task_count")
         FirebaseUtil.adjustValueForRef(ref, delta: delta)
     }
+
+    class func followUser(follower: String, otherUid: String) {
+        User.createRef(otherUid).childByAppendingPath("followers/\(follower)").setValue(true)
+        User.createRef(follower).childByAppendingPath("following/\(otherUid)").setValue(true)
+    }
+
+    class func unFollowUser(follower: String, otherUid: String) {
+        User.createRef(otherUid).childByAppendingPath("followers/\(follower)").removeValue()
+        User.createRef(follower).childByAppendingPath("following/\(otherUid)").removeValue()
+    }
 }

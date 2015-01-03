@@ -85,6 +85,9 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
             if let statusSlider = self.statusSliderCell? {
                 statusSlider.setUser(user)
             }
+            if let controlSlider = self.profileControlsCell? {
+                controlSlider.setUser(user)
+            }
 
             if self.isViewLoaded() && !self.hasSetup {
                 self.loadUserProfile(uid)
@@ -204,7 +207,13 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
                 }
                 return self.statusSliderCell!
             }
-            return tableView.dequeueReusableCellWithIdentifier("ProfileControlsCell") as UITableViewCell
+            if self.profileControlsCell == nil {
+                self.profileControlsCell = (tableView.dequeueReusableCellWithIdentifier("ProfileControlsCell") as ProfileControlsCell)
+                if let user = self.user? {
+                    self.profileControlsCell!.setUser(user)
+                }
+            }
+            return self.profileControlsCell!
         case self.activeTaskSection:
             if self.isLoadingActiveTasks {
                 return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell

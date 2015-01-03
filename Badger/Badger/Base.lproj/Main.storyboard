@@ -171,7 +171,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lNH-ls-uGL" id="FKS-1I-PJ4">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seu-yZ-JdM">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seu-yZ-JdM" customClass="ResizedImageButton" customModule="Badger" customModuleProvider="target">
                                             <rect key="frame" x="16" y="15" width="136.5" height="70"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="70" id="GtX-LP-kMI"/>
@@ -196,16 +196,25 @@
                                                 <constraint firstAttribute="height" constant="70" id="vq7-yX-nFm"/>
                                             </constraints>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xzP-la-AL6">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xzP-la-AL6" customClass="ResizedImageButton" customModule="Badger" customModuleProvider="target">
                                             <rect key="frame" x="167" y="15" width="137.5" height="70"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="70" id="rcu-OI-MKg"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="21"/>
-                                            <state key="normal" title="Subscribe">
+                                            <state key="normal" title="Subscribe" backgroundImage="GrayButton">
                                                 <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <state key="selected" backgroundImage="PurpleButton">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted" backgroundImage="PurpleButton">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="subscribedPressed:" destination="lNH-ls-uGL" eventType="touchUpInside" id="8UW-Tg-X3c"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -232,6 +241,9 @@
                                         <color key="value" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="subscribeButton" destination="xzP-la-AL6" id="Z7T-pq-5fw"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewTaskCell" rowHeight="100" id="eut-E6-a2w" customClass="BorderedCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1440,7 +1452,7 @@
                                                 <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <state key="selected">
+                                            <state key="selected" backgroundImage="PurpleButton">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="highlighted" backgroundImage="PurpleButton">
@@ -1601,7 +1613,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.24313725489999999" green="0.25490196079999999" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StatusCloseCell" rowHeight="62" id="clo-Sy-OK8" customClass="StatusCloseCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatusCloseCell" rowHeight="62" id="clo-Sy-OK8" customClass="StatusCloseCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="clo-Sy-OK8" id="zeS-Ht-Phy">
                                     <autoresizingMask key="autoresizingMask"/>

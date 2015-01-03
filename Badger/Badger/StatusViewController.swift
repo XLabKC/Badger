@@ -49,39 +49,45 @@ class StatusViewController: UITableViewController {
             return
         }
 
-        if oldFollowing.isEmpty {
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Left)
-        } else {
-            // Determine what updates need to be made.
-            var updates = Helpers.diffArrays(oldFollowing, end: following, section: 0, compare: { (a, b) -> Bool in
-                return a.uid == b.uid
-            })
-            // Apply the updates to the table view.
-            self.tableView.beginUpdates()
-            if !updates.deletes.isEmpty {
-                self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Left)
-            }
-            if !updates.inserts.isEmpty {
-                self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Left)
-            }
-            self.tableView.endUpdates()
+        var updates = Helpers.diffArrays(oldFollowing, end: following, section: 1, compare: { (a, b) -> Bool in
+            return a.uid == b.uid
+        })
+        // Apply the updates to the table view.
+        self.tableView.beginUpdates()
+        if !updates.deletes.isEmpty {
+            self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Fade)
         }
+        if !updates.inserts.isEmpty {
+            self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Fade)
+        }
+        self.tableView.endUpdates()
+
+//        if oldFollowing.isEmpty {
+//            self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Left)
+//        } else {
+//            // Determine what updates need to be made.
+//
+//        }
+    }
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 45.0 : 70.0
+        return indexPath.section == 0 ? 45.0 : 70.0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.following.count + 1
+        return section == 0 ? 1 : self.following.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             return tableView.dequeueReusableCellWithIdentifier("StatusCloseCell") as UITableViewCell
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("StatusCell") as StatusCell
-        cell.setUser(self.following[indexPath.row - 1])
+        cell.setUser(self.following[indexPath.row])
         return cell
     }
 
@@ -96,5 +102,4 @@ class StatusViewController: UITableViewController {
             }
         }
     }
-
 }
