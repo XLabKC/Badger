@@ -61,13 +61,6 @@ class StatusViewController: UITableViewController {
             self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Fade)
         }
         self.tableView.endUpdates()
-
-//        if oldFollowing.isEmpty {
-//            self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Left)
-//        } else {
-//            // Determine what updates need to be made.
-//
-//        }
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
