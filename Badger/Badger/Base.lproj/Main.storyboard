@@ -1720,8 +1720,8 @@
         <image name="RightArrowIcon" width="8" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dhT-2f-k0x"/>
         <segue reference="sG0-Gn-9tP"/>
+        <segue reference="kUo-1a-Owt"/>
         <segue reference="G2U-IQ-PaM"/>
     </inferredMetricsTieBreakers>
 </document>
