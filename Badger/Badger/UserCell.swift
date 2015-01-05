@@ -8,6 +8,7 @@ class UserCell: BorderedCell {
     @IBOutlet weak var profileCircle: ProfileCircle!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var arrowImage: UIImageView!
 
     deinit {
         self.dispose()

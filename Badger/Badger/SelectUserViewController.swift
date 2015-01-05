@@ -99,6 +99,7 @@ class SelectUserViewController: UITableViewController {
             return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as LoadingCell
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as UserCell
+        cell.arrowImage.hidden = true
         cell.setTopBorder(indexPath.row == 0 ? .Full : .None)
         cell.setUid(self.users[indexPath.row].uid)
         return cell

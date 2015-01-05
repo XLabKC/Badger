@@ -273,6 +273,12 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
 
         // Save the task.
         taskRef.setValue(taskValues, andPriority: priority, withCompletionBlock: { (err, ref) in
+            if err != nil {
+                println("Failed to create/edit task")
+                println(taskValues)
+                return
+            }
+
             // TODO: handle error
             var combinedKey = "\(newOwner.uid)^\(taskRef.key)"
 

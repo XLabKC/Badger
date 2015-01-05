@@ -103,6 +103,7 @@ class SelectTeamViewController: UITableViewController {
             return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as LoadingCell
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("TeamCell") as TeamCell
+        cell.arrowImage.hidden = true
         cell.setTopBorder(indexPath.row == 0 ? .Full : .None)
         cell.setTeam(self.teams[indexPath.row])
         return cell

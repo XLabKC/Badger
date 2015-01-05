@@ -142,7 +142,9 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
 
             // Move the task to its new list.
             task.ref.setValue(task.toJson(), andPriority: priority, withCompletionBlock: { (error, ref) in
-                if (error != nil) {
+                if error != nil {
+                    println("Failed to change completion of task.")
+                    println(task.toJson())
                     return
                 }
 

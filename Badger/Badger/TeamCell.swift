@@ -6,6 +6,7 @@ class TeamCell: BorderedCell {
 
     @IBOutlet weak var teamCircle: TeamCircle!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var arrowImage: UIImageView!
 
     override func awakeFromNib() {
         self.hasAwakened = true

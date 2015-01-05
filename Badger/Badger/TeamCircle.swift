@@ -2,6 +2,7 @@ import UIKit
 
 
 class TeamCircle: UIImageView {
+    private var team: Team?
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -12,7 +13,8 @@ class TeamCircle: UIImageView {
     }
 
     func setTeam(team: Team) {
-        
+        self.team = team
+        self.image = UIImage(named: team.logo)
     }
 
     override func layoutSubviews() {

@@ -20,7 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
             if let expiration = NSUserDefaults.standardUserDefaults().objectForKey("access_token_expiration")
                 as? NSDate {
                     if expiration.compare(NSDate()) == .OrderedDescending {
-                        self.navigateToProfile()
+                        let ref = Firebase(url: Global.FirebaseUrl)
+                        ref.authWithOAuthProvider("google", token: token, withCompletionBlock: { error, authData in
+                            if error != nil {
+                                println("Firebase auth error \(error) and auth object \(authData)")
+                            } else {
+                                self.navigateToProfile()
+                            }
+                        })
                         return true
                     }
             }

@@ -25,7 +25,7 @@ class TeamHeaderCell: UITableViewCell {
             if let team = self.team? {
                 self.nameLabel.text = team.name
                 self.metaLabel.text = team.description()
-                // TODO: set team circle
+                self.teamCircle.setTeam(team)
             }
         }
     }

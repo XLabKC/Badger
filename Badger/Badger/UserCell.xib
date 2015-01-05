@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -38,15 +38,20 @@
                             <constraint firstAttribute="width" constant="54" id="wiU-QN-pG1"/>
                         </constraints>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelectArrow" translatesAutoresizingMaskIntoConstraints="NO" id="CVO-8b-54d">
+                        <rect key="frame" x="291" y="25" width="14" height="22"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="rsv-7t-Aot" firstAttribute="leading" secondItem="QMi-Zm-vUZ" secondAttribute="leadingMargin" constant="7" id="8uD-CK-TPA"/>
                     <constraint firstItem="Ef5-Sg-KBc" firstAttribute="leading" secondItem="rsv-7t-Aot" secondAttribute="trailing" constant="13" id="Jxa-N0-C2E"/>
                     <constraint firstItem="Kyy-5p-cZi" firstAttribute="top" secondItem="Ef5-Sg-KBc" secondAttribute="bottom" id="LpK-Of-mP2"/>
                     <constraint firstItem="Ef5-Sg-KBc" firstAttribute="top" secondItem="QMi-Zm-vUZ" secondAttribute="topMargin" constant="2" id="U0a-My-c9n"/>
+                    <constraint firstAttribute="centerY" secondItem="CVO-8b-54d" secondAttribute="centerY" id="ac7-cC-FFH"/>
                     <constraint firstAttribute="centerY" secondItem="rsv-7t-Aot" secondAttribute="centerY" id="cCD-PD-rHH"/>
                     <constraint firstAttribute="centerY" secondItem="Kyy-5p-cZi" secondAttribute="centerY" constant="-0.5" id="hDZ-rD-8w4"/>
                     <constraint firstItem="Kyy-5p-cZi" firstAttribute="leading" secondItem="rsv-7t-Aot" secondAttribute="trailing" constant="13" id="ovW-Mu-f9k"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="CVO-8b-54d" secondAttribute="trailing" constant="7" id="yfb-px-UW7"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -62,6 +67,7 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="arrowImage" destination="CVO-8b-54d" id="HGc-cj-xX9"/>
                 <outlet property="nameLabel" destination="Ef5-Sg-KBc" id="nFC-UH-41E"/>
                 <outlet property="profileCircle" destination="rsv-7t-Aot" id="LmV-7z-Z9E"/>
                 <outlet property="statusLabel" destination="Kyy-5p-cZi" id="TzV-Oc-Ym8"/>
@@ -69,4 +75,7 @@
             <point key="canvasLocation" x="290" y="290"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="SelectArrow" width="14" height="22"/>
+    </resources>
 </document>
