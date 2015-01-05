@@ -23,6 +23,8 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     private let selectUserSegue = "EditTaskSelectUser"
     private let selectTeamSegue = "EditTaskSelectTeam"
 
+
+    private var rightButton = UIBarButtonItem(title: "Done", style: .Plain, target: nil, action: "saveTask")
     private var task: Task?
     private var contentCell: TaskEditContentCell?
     private var owner: User?
@@ -33,13 +35,17 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
 
     private var cells = [UITableViewCell?](count: 9, repeatedValue: nil)
 
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.rightButton.target = self
+        self.rightButton.tintColor = Color.colorize(0x8E7EFF, alpha: 1.0)
+    }
+
     override func viewDidLoad() {
         self.navigationItem.titleView = Helpers.createTitleLabel(self.isNew ? "Create Task" : "Edit Task")
 
         // Add Done button to nav header.
-        var button = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "saveTask")
-        button.tintColor = Color.colorize(0x8E7EFF, alpha: 1.0)
-        self.navigationItem.rightBarButtonItem = button
+        self.navigationItem.rightBarButtonItem = rightButton
 
         let headerCellNib = UINib(nibName: "HeaderCell", bundle: nil)
         self.tableView.registerNib(headerCellNib, forCellReuseIdentifier: "HeaderCell")
@@ -77,6 +83,11 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         User.createRef(task.owner).observeSingleEventOfType(.Value, withBlock: { snapshot in
             self.setOwner(User.createFromSnapshot(snapshot) as User)
         })
+
+        // Set the right button to be "Delete" instead of "Done".
+        self.rightButton.title = "Delete"
+        self.rightButton.tintColor = Color.colorize(0xFF5C78, alpha: 1.0)
+        self.rightButton.action = "deleteTask"
     }
 
     func setOwner(owner: User) {
@@ -303,6 +314,22 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
                 nav.popViewControllerAnimated(true)
             }
         })
+    }
+
+    func deleteTask() {
+        if let task = self.task? {
+            TaskStore.deleteTask(task)
+            if let nav = self.navigationController? {
+                let previousIndex = nav.viewControllers.count - 2
+                // Skip the detail vc and pop back to the vc before.
+                if nav.viewControllers[previousIndex] is TaskDetailViewController {
+                    let vc = nav.viewControllers[previousIndex - 1] as UIViewController
+                    nav.popToViewController(vc, animated: true)
+                } else {
+                    nav.popViewControllerAnimated(true)
+                }
+            }
+        }
     }
 
     // InputCellDelegate: opens the next cell when the "next" key is pressed on the keyboard.

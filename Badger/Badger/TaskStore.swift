@@ -11,7 +11,7 @@ class TaskStore {
             UserStore.adjustActiveTaskCount(task.owner, delta: -1)
             TeamStore.removeActiveTask(task.team, combinedId: combinedId)
         } else {
-            UserStore.adjustActiveTaskCount(task.owner, delta: -1)
+            UserStore.adjustCompletedTaskCount(task.owner, delta: -1)
         }
     }
 }

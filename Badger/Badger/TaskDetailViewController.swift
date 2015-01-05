@@ -50,7 +50,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
                 self.navigationItem.rightBarButtonItem = button
             } else if task.owner == authId {
                 // Auth user is owner, add "Delete" button.
-                let button = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "deleteButtonPressed")
+                let button = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.Plain, target: self, action: "deleteButtonPressed")
                 button.tintColor = Color.colorize(0xFF5C78, alpha: 1.0)
                 self.navigationItem.rightBarButtonItem = button
             }
@@ -62,7 +62,12 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
     }
 
     func deleteButtonPressed() {
-        // TODO: Delete the task.
+        if let task = self.task? {
+            TaskStore.deleteTask(task)
+        }
+        if let nav = self.navigationController? {
+            nav.popViewControllerAnimated(true)
+        }
     }
 
     // TableViewController Overrides
