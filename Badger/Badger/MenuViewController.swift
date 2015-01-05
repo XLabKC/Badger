@@ -35,7 +35,7 @@ class MenuViewController: UITableViewController {
 
 
     // TableViewController Overrides
-func loadData() {
+    func loadData() {
         // Create team list observer.
         let teamsRef = Firebase(url: Global.FirebaseTeamsUrl)
         self.teamsObserver = FirebaseListObserver<Team>(ref: teamsRef, onChanged: self.teamsUpdated)

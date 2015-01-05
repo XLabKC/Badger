@@ -1728,8 +1728,8 @@
         <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QdX-CM-bP2"/>
+        <segue reference="kUo-1a-Owt"/>
         <segue reference="ASy-Id-BnR"/>
-        <segue reference="dhT-2f-k0x"/>
+        <segue reference="QdX-CM-bP2"/>
     </inferredMetricsTieBreakers>
 </document>

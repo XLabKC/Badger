@@ -37,7 +37,7 @@ class SelectTeamViewController: UITableViewController {
         let teamsRef = Firebase(url: Global.FirebaseTeamsUrl)
         self.teamsObserver = FirebaseListObserver<Team>(ref: teamsRef, onChanged: self.teamsChanged)
         self.teamsObserver!.comparisonFunc = { (a, b) -> Bool in
-            return a.name < b.name
+            return a.name > b.name
         }
 
         let userRef = User.createRef(uid)
@@ -77,6 +77,13 @@ class SelectTeamViewController: UITableViewController {
                 self.tableView.deleteRowsAtIndexPaths(updates.deletes, withRowAnimation: .Fade)
                 self.tableView.insertRowsAtIndexPaths(updates.inserts, withRowAnimation: .Fade)
                 self.tableView.endUpdates()
+            }
+            for (index, team) in enumerate(teams) {
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? TeamCell {
+                    cell.setTopBorder(index == 0 ? .Full : .None)
+                    cell.setTeam(team)
+                }
             }
         }
     }
