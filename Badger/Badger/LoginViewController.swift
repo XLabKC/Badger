@@ -21,6 +21,26 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                         println("Firebase auth error \(error) and auth object \(authData)")
                     } else {
                         Helpers.saveAccessToken(auth)
+                        let presentInitial = { () -> () in
+                            // Let device know we want to receive push notifications.
+                            let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
+                            if iOS8 {
+                                // Register for push in iOS 8.
+                                let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, categories: nil)
+                                UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+                                UIApplication.sharedApplication().registerForRemoteNotifications()
+                            } else {
+                                // Register for push in iOS 7.
+                                UIApplication.sharedApplication().registerForRemoteNotificationTypes(UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound | UIRemoteNotificationType.Alert)
+                            }
+
+                            // Start the UserStore listening to the authenticated user.
+                            UserStore.sharedInstance().authorized({ _ in })
+
+                            // Transition to the home screen.
+                            let vc = RevealManager.sharedInstance().initialize()
+                            self.presentViewController(vc, animated: true, completion: nil)
+                        }
 
                         // Check if the user already exists.
                         let user = User(uid: authData.uid, provider: authData.provider)
@@ -35,21 +55,12 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                                     // profile["picture"]
                                 }
 
-                                // Let device know we want to receive push notifications.
-                                UIApplication.sharedApplication().registerForRemoteNotifications()
-
                                 user.ref.setValue(user.toJson(), withCompletionBlock: { (error, ref) in
-                                    let vc = RevealManager.sharedInstance().initialize()
-                                    self.presentViewController(vc, animated: true, completion: nil)
+                                    presentInitial()
                                 });
-
                             } else {
-                                // Transition to the home screen.
-                                let vc = RevealManager.sharedInstance().initialize()
-                                self.presentViewController(vc, animated: true, completion: nil)
+                                presentInitial()
                             }
-                            // Start the UserStore listening to the authenticated user.
-                            UserStore.sharedInstance().authorized({ _ in })
                         })
                     }
             })
