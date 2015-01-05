@@ -119,6 +119,7 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
             self.prefetchUsers(self.activeTasks, complete: { _ in
                 var set = NSMutableIndexSet(index: self.activeTaskSection)
                 set.addIndex(self.dividerSection)
+                set.addIndex(self.newTaskSection)
                 self.tableView.reloadSections(set, withRowAnimation: .Bottom)
             })
         }
@@ -151,14 +152,12 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
             // Active tasks.
             return self.activeTasks.array.isEmpty ? 1 : self.activeTasks.array.count
         case self.newTaskSection:
-            // Show the create new task button only if this is the auth users profile.
-            return self.isAuthUser ? 1 : 0
+            // Show the create new task button only if this is the auth users profile and
+            // we aren't loading the active tasks.
+            return self.isLoadingActiveTasks ? 0 : (self.isAuthUser ? 1 : 0)
         case self.dividerSection:
             // Show completed tasks header only if we aren't loading the active tasks.
-            if self.isLoadingActiveTasks {
-                return 0
-            }
-            return 1
+            return self.isLoadingActiveTasks ? 0 : 1
         default:
             // Completed tasks.
             if !self.isShowingCompletedTasks {

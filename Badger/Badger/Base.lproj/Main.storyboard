@@ -171,22 +171,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lNH-ls-uGL" id="FKS-1I-PJ4">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seu-yZ-JdM" customClass="ResizedImageButton" customModule="Badger" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="15" width="136.5" height="70"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="70" id="GtX-LP-kMI"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
-                                            <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="New Task" image="PlusIcon" backgroundImage="GrayButton">
-                                                <color key="titleColor" red="0.55686274509803924" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <segue destination="WaY-Zu-mhH" kind="show" identifier="UserProfileTaskEdit" id="7ze-C7-KaO"/>
-                                            </connections>
-                                        </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEq-gs-YtP">
                                             <rect key="frame" x="152" y="15" width="15" height="70"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -201,7 +185,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="70" id="rcu-OI-MKg"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="21"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="19"/>
                                             <state key="normal" title="Subscribe" backgroundImage="GrayButton">
                                                 <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -214,6 +198,20 @@
                                             </state>
                                             <connections>
                                                 <action selector="subscribedPressed:" destination="lNH-ls-uGL" eventType="touchUpInside" id="8UW-Tg-X3c"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seu-yZ-JdM" customClass="ResizedImageButton" customModule="Badger" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="15" width="136.5" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="GtX-LP-kMI"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="19"/>
+                                            <state key="normal" title="New Task" backgroundImage="GrayButton">
+                                                <color key="titleColor" red="0.55686274509803924" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="WaY-Zu-mhH" kind="show" identifier="UserProfileTaskEdit" id="7ze-C7-KaO"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -448,16 +446,21 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Team" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="r3s-0n-YZS">
-                                            <rect key="frame" x="15" y="19" width="290" height="33"/>
+                                            <rect key="frame" x="15" y="19" width="267" height="33"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
                                             <color key="textColor" red="0.29803921570000003" green="0.30588235289999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelectArrow" translatesAutoresizingMaskIntoConstraints="NO" id="PAL-PA-Pqu">
+                                            <rect key="frame" x="291" y="25" width="14" height="22"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="r3s-0n-YZS" firstAttribute="leading" secondItem="JdC-Vv-NQG" secondAttribute="leadingMargin" constant="7" id="2r2-aI-Z2g"/>
+                                        <constraint firstAttribute="centerY" secondItem="PAL-PA-Pqu" secondAttribute="centerY" id="4c6-eP-B5X"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="PAL-PA-Pqu" secondAttribute="trailing" constant="7" id="ieV-Yd-CF2"/>
                                         <constraint firstAttribute="centerY" secondItem="r3s-0n-YZS" secondAttribute="centerY" id="tT2-Ys-5r2"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="r3s-0n-YZS" secondAttribute="trailing" constant="7" id="xoM-YR-WaD"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="r3s-0n-YZS" secondAttribute="trailing" constant="30" id="xoM-YR-WaD"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <userDefinedRuntimeAttributes>
@@ -474,16 +477,21 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select User" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="YmP-BT-lJ6">
-                                            <rect key="frame" x="15" y="19" width="290" height="33"/>
+                                            <rect key="frame" x="15" y="19" width="267" height="33"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
                                             <color key="textColor" red="0.29803921570000003" green="0.30588235289999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelectArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Zad-Z4-sY8">
+                                            <rect key="frame" x="291" y="25" width="14" height="22"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Zad-Z4-sY8" secondAttribute="trailing" constant="7" id="ASd-bP-paA"/>
+                                        <constraint firstAttribute="centerY" secondItem="Zad-Z4-sY8" secondAttribute="centerY" id="FXM-qX-WP2"/>
                                         <constraint firstAttribute="centerY" secondItem="YmP-BT-lJ6" secondAttribute="centerY" id="GYD-O2-4bO"/>
                                         <constraint firstItem="YmP-BT-lJ6" firstAttribute="leading" secondItem="Y1N-G3-I2R" secondAttribute="leadingMargin" constant="7" id="PN8-tL-eAA"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="YmP-BT-lJ6" secondAttribute="trailing" constant="7" id="iet-bf-o6W"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="YmP-BT-lJ6" secondAttribute="trailing" constant="30" id="iet-bf-o6W"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <userDefinedRuntimeAttributes>
@@ -509,7 +517,7 @@
                                             <rect key="frame" x="15" y="34" width="291" height="33"/>
                                             <color key="textColor" red="0.55686274509803924" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
-                                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -1008,14 +1016,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPurpleHuge" translatesAutoresizingMaskIntoConstraints="NO" id="DgK-OK-ZA3">
-                                <rect key="frame" x="60" y="95" width="200" height="179"/>
+                                <rect key="frame" x="60" y="100" width="200" height="179"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="179" id="gRW-69-OQy"/>
                                     <constraint firstAttribute="width" constant="200" id="vvp-lM-0eD"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authenticating..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sow-kU-WbS">
-                                <rect key="frame" x="16" y="289" width="288" height="27.5"/>
+                                <rect key="frame" x="16" y="294" width="288" height="27.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="20"/>
                                 <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1023,7 +1031,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="DgK-OK-ZA3" firstAttribute="top" secondItem="ohg-U3-LDZ" secondAttribute="bottom" constant="75" id="4Ka-wj-tk5"/>
+                            <constraint firstItem="DgK-OK-ZA3" firstAttribute="top" secondItem="ohg-U3-LDZ" secondAttribute="bottom" constant="80" id="4Ka-wj-tk5"/>
                             <constraint firstItem="Sow-kU-WbS" firstAttribute="leading" secondItem="OFc-Rh-m3a" secondAttribute="leadingMargin" id="TRq-EQ-i7t"/>
                             <constraint firstItem="Sow-kU-WbS" firstAttribute="trailing" secondItem="OFc-Rh-m3a" secondAttribute="trailingMargin" id="ZTJ-jn-B3c"/>
                             <constraint firstItem="Sow-kU-WbS" firstAttribute="top" secondItem="DgK-OK-ZA3" secondAttribute="bottom" constant="15" id="s1T-Ud-a2Y"/>
@@ -1445,9 +1453,9 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IHQ-ne-D7h" id="9Ik-fC-hdb">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbW-2I-wny">
-                                            <rect key="frame" x="167" y="14.5" width="138" height="70"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbW-2I-wny">
+                                            <rect key="frame" x="167" y="14" width="138" height="70"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="19"/>
                                             <state key="normal" title="Send Invite" backgroundImage="GrayButton">
                                                 <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1461,7 +1469,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IO5-Fi-rM8">
                                             <rect key="frame" x="15" y="14" width="137.5" height="70"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="19"/>
                                             <state key="normal" title="New Task" backgroundImage="GrayButton">
                                                 <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1715,13 +1723,13 @@
         <image name="LogoBlackSmall" width="57" height="51"/>
         <image name="LogoPurpleHuge" width="407" height="362"/>
         <image name="MenuIcon" width="22" height="21"/>
-        <image name="PlusIcon" width="25" height="25"/>
         <image name="PurpleButton" width="166" height="70"/>
         <image name="RightArrowIcon" width="8" height="13"/>
+        <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sG0-Gn-9tP"/>
-        <segue reference="kUo-1a-Owt"/>
-        <segue reference="G2U-IQ-PaM"/>
+        <segue reference="QdX-CM-bP2"/>
+        <segue reference="ASy-Id-BnR"/>
+        <segue reference="dhT-2f-k0x"/>
     </inferredMetricsTieBreakers>
 </document>
