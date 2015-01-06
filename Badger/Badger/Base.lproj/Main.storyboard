@@ -676,7 +676,7 @@
                                     <outlet property="mediumButton" destination="UPk-R5-Em8" id="HcB-Z8-F0Y"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskEditSubmitCell" rowHeight="92" id="vuM-Kr-0QH" customClass="TaskEditSubmitCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskEditSubmitCell" rowHeight="92" id="vuM-Kr-0QH" customClass="TaskEditSubmitCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vuM-Kr-0QH" id="MQx-ro-C5o">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1278,7 +1278,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.28627450980392155" green="0.29803921568627451" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuSettingsCell" rowHeight="144" id="Y9I-Ng-Q3E" customClass="MenuSettingsCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuSettingsCell" rowHeight="144" id="Y9I-Ng-Q3E" customClass="MenuSettingsCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y9I-Ng-Q3E" id="Jk1-Et-Cla">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1728,8 +1728,8 @@
         <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kUo-1a-Owt"/>
-        <segue reference="ASy-Id-BnR"/>
+        <segue reference="dhT-2f-k0x"/>
         <segue reference="QdX-CM-bP2"/>
+        <segue reference="ASy-Id-BnR"/>
     </inferredMetricsTieBreakers>
 </document>
