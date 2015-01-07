@@ -28,6 +28,9 @@
 		7B29F19C1A26443E003920AD /* TeamProfileControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */; };
 		7B29F19E1A264465003920AD /* TeamMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F19D1A264465003920AD /* TeamMemberCell.swift */; };
 		7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */; };
+		7B42B2DF1A5D8DA100854065 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B42B2DE1A5D8DA100854065 /* NotificationManager.swift */; };
+		7B42B2E11A5D8DB100854065 /* NotificationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B42B2E01A5D8DB100854065 /* NotificationPopup.swift */; };
+		7B42B2E31A5D8E0700854065 /* NotificationPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B42B2E21A5D8E0700854065 /* NotificationPopup.xib */; };
 		7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B469C4B1A21B4AC0054019D /* MenuSettingsCell.swift */; };
 		7B469C4E1A2237EC0054019D /* Barrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B469C4D1A2237EC0054019D /* Barrier.swift */; };
 		7B469C501A223AB40054019D /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B469C4F1A223AB40054019D /* LoadingCell.swift */; };
@@ -135,6 +138,9 @@
 		7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileControlCell.swift; sourceTree = "<group>"; };
 		7B29F19D1A264465003920AD /* TeamMemberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberCell.swift; sourceTree = "<group>"; };
 		7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7B42B2DE1A5D8DA100854065 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		7B42B2E01A5D8DB100854065 /* NotificationPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPopup.swift; sourceTree = "<group>"; };
+		7B42B2E21A5D8E0700854065 /* NotificationPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationPopup.xib; sourceTree = "<group>"; };
 		7B469C4B1A21B4AC0054019D /* MenuSettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSettingsCell.swift; sourceTree = "<group>"; };
 		7B469C4D1A2237EC0054019D /* Barrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Barrier.swift; sourceTree = "<group>"; };
 		7B469C4F1A223AB40054019D /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
@@ -334,6 +340,16 @@
 			name = "User Profile";
 			sourceTree = "<group>";
 		};
+		7B42B2DD1A5D8D8D00854065 /* Internal Notification */ = {
+			isa = PBXGroup;
+			children = (
+				7B42B2DE1A5D8DA100854065 /* NotificationManager.swift */,
+				7B42B2E01A5D8DB100854065 /* NotificationPopup.swift */,
+				7B42B2E21A5D8E0700854065 /* NotificationPopup.xib */,
+			);
+			name = "Internal Notification";
+			sourceTree = "<group>";
+		};
 		7B4733A01A1ACBC400D88C00 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,6 +412,7 @@
 		7B7439F919F87E4E0075690A /* Badger */ = {
 			isa = PBXGroup;
 			children = (
+				7B42B2DD1A5D8D8D00854065 /* Internal Notification */,
 				7B90E0BC1A1F9E84005EC421 /* Shared Cells */,
 				7B070FC71A112CA200997D50 /* Lib */,
 				7B7CAACE1A03E3020028E523 /* Elements */,
@@ -634,6 +651,7 @@
 			files = (
 				7B4733C11A1C593B00D88C00 /* Brandon_med.otf in Resources */,
 				7B4733C21A1C593B00D88C00 /* OpenSans-Light.ttf in Resources */,
+				7B42B2E31A5D8E0700854065 /* NotificationPopup.xib in Resources */,
 				7B15CD0B1A39081600519C8E /* TeamCell.xib in Resources */,
 				7B4733C31A1C593B00D88C00 /* OpenSans-Regular.ttf in Resources */,
 				7B743A0219F87E4E0075690A /* Main.storyboard in Resources */,
@@ -693,6 +711,7 @@
 				7B29F19E1A264465003920AD /* TeamMemberCell.swift in Sources */,
 				7B47339F1A1A9B4500D88C00 /* StatusSlider.swift in Sources */,
 				7B90E0C21A206A89005EC421 /* MyProfileCell.swift in Sources */,
+				7B42B2DF1A5D8DA100854065 /* NotificationManager.swift in Sources */,
 				7B4733D31A1E81B300D88C00 /* NSDate+JavascriptTimestamp.m in Sources */,
 				7B743A3E19F943D30075690A /* Global.swift in Sources */,
 				7B21D8BD1A5369FF006AFEC0 /* RevealableTableViewController.swift in Sources */,
@@ -705,6 +724,7 @@
 				7B90E0C41A214137005EC421 /* TeamCircle.swift in Sources */,
 				7B21D8C11A54C395006AFEC0 /* StatusCloseCell.swift in Sources */,
 				7B29F19A1A2643FC003920AD /* TeamHeaderCell.swift in Sources */,
+				7B42B2E11A5D8DB100854065 /* NotificationPopup.swift in Sources */,
 				7B64F2BF1A41E68C001FA518 /* FirebaseUtil.swift in Sources */,
 				7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */,
 				7B4733D01A1E551600D88C00 /* Team.swift in Sources */,

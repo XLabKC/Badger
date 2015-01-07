@@ -16,22 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: .Normal)
 
         // Try and use last sessions access token if it's still valid.
-        if let token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as? String {
-            if let expiration = NSUserDefaults.standardUserDefaults().objectForKey("access_token_expiration")
-                as? NSDate {
-                    if expiration.compare(NSDate()) == .OrderedDescending {
-                        let ref = Firebase(url: Global.FirebaseUrl)
-                        ref.authWithOAuthProvider("google", token: token, withCompletionBlock: { error, authData in
-                            if error != nil {
-                                println("Firebase auth error \(error) and auth object \(authData)")
-                            } else {
-                                self.navigateToProfile()
-                            }
-                        })
-                        return true
-                    }
-            }
-        }
+//        if let token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as? String {
+//            if let expiration = NSUserDefaults.standardUserDefaults().objectForKey("access_token_expiration")
+//                as? NSDate {
+//                    if expiration.compare(NSDate()) == .OrderedDescending {
+//                        let ref = Firebase(url: Global.FirebaseUrl)
+//                        ref.authWithOAuthProvider("google", token: token, withCompletionBlock: { error, authData in
+//                            if error != nil {
+//                                println("Firebase auth error \(error) and auth object \(authData)")
+//                            } else {
+//                                self.navigateToProfile()
+//                            }
+//                        })
+//                        return true
+//                    }
+//            }
+//        }
 
         // Set up options for signing in.
         var signIn = GPPSignIn.sharedInstance()
@@ -127,6 +127,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        println(userInfo)
     }
 
     private func navigateToProfile() {
