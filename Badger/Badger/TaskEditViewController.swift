@@ -290,7 +290,6 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
                 return
             }
 
-            // TODO: handle error
             var combinedKey = "\(newOwner.uid)^\(taskRef.key)"
 
             // Increment the active tasks count for the user if it's new and active.

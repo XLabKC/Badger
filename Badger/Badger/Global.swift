@@ -14,7 +14,7 @@ struct Colors {
     static let UnknownStatus = Color.colorize(0x8A9693, alpha: 1)
     static let FreeStatus = Color.colorize(0x50E3C2, alpha: 1)
     static let OccupiedStatus = Color.colorize(0xFFDB7B, alpha: 1)
-    static let NavHeaderTitle = Color.colorize(0x1B3DA3, alpha: 1)
+    static let HighlightPurple = Color.colorize(0x8E7EFF, alpha: 1)
 }
 
 
@@ -67,14 +67,9 @@ class Helpers {
         label.backgroundColor = UIColor.clearColor()
         label.font = UIFont(name: "OpenSans", size: 17.0)
         label.textAlignment = .Center
-        label.textColor = Colors.NavHeaderTitle
+        label.textColor = Colors.HighlightPurple
         label.text = title
         return label
-    }
-
-    class func saveAccessToken(auth: GTMOAuth2Authentication) {
-        NSUserDefaults.standardUserDefaults().setObject(auth.accessToken, forKey: "access_token")
-        NSUserDefaults.standardUserDefaults().setObject(auth.expirationDate, forKey: "access_token_expiration")
     }
 
     class func diffArrays<T>(start: [T], end: [T], section: Int, compare: (T, T) -> Bool) -> (inserts: [NSIndexPath], deletes: [NSIndexPath]) {
