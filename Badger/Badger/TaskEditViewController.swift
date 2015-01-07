@@ -282,10 +282,6 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         let mult = Task.getFirebasePriorityMult(self.getPriorityCell().getPriority(), isActive: isActive)
         var priority = (-1 * dateForPriority.doubleValue) * mult
 
-
-        taskRef.childByAppendingPath("author").setValue(taskValues["author"])
-
-
         // Save the task.
         taskRef.setValue(taskValues, andPriority: priority, withCompletionBlock: { (err, ref) in
             if err != nil {

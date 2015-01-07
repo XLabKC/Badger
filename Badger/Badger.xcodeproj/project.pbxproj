@@ -31,6 +31,7 @@
 		7B42B2DF1A5D8DA100854065 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B42B2DE1A5D8DA100854065 /* NotificationManager.swift */; };
 		7B42B2E11A5D8DB100854065 /* NotificationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B42B2E01A5D8DB100854065 /* NotificationPopup.swift */; };
 		7B42B2E31A5D8E0700854065 /* NotificationPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B42B2E21A5D8E0700854065 /* NotificationPopup.xib */; };
+		7B42B2E51A5DE94B00854065 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B42B2E41A5DE94B00854065 /* Firebase.framework */; };
 		7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B469C4B1A21B4AC0054019D /* MenuSettingsCell.swift */; };
 		7B469C4E1A2237EC0054019D /* Barrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B469C4D1A2237EC0054019D /* Barrier.swift */; };
 		7B469C501A223AB40054019D /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B469C4F1A223AB40054019D /* LoadingCell.swift */; };
@@ -98,7 +99,6 @@
 		7B9A635B1A2E9CC800DF1143 /* TaskEditContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */; };
 		7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */; };
 		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
-		7BD0F9C61A3E36B400BDF70D /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD0F9C51A3E36B400BDF70D /* Firebase.framework */; };
 		7BD0F9C81A3E442400BDF70D /* TaskDetailCompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD0F9C71A3E442400BDF70D /* TaskDetailCompleteCell.swift */; };
 		7BD0F9CA1A3F326600BDF70D /* FirebaseObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */; };
 		7BD554CD1A3E04A8003D8BD0 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */; };
@@ -141,6 +141,7 @@
 		7B42B2DE1A5D8DA100854065 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		7B42B2E01A5D8DB100854065 /* NotificationPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPopup.swift; sourceTree = "<group>"; };
 		7B42B2E21A5D8E0700854065 /* NotificationPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationPopup.xib; sourceTree = "<group>"; };
+		7B42B2E41A5DE94B00854065 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7B469C4B1A21B4AC0054019D /* MenuSettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSettingsCell.swift; sourceTree = "<group>"; };
 		7B469C4D1A2237EC0054019D /* Barrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Barrier.swift; sourceTree = "<group>"; };
 		7B469C4F1A223AB40054019D /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
@@ -215,7 +216,6 @@
 		7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditContentCell.swift; sourceTree = "<group>"; };
 		7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditPriorityCell.swift; sourceTree = "<group>"; };
 		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		7BD0F9C51A3E36B400BDF70D /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7BD0F9C71A3E442400BDF70D /* TaskDetailCompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailCompleteCell.swift; sourceTree = "<group>"; };
 		7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseObserver.swift; sourceTree = "<group>"; };
 		7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
@@ -241,7 +241,7 @@
 				7B743A4619F949C90075690A /* Foundation.framework in Frameworks */,
 				7B743A4419F949BE0075690A /* AssetsLibrary.framework in Frameworks */,
 				7B743A4219F949B40075690A /* AddressBook.framework in Frameworks */,
-				7BD0F9C61A3E36B400BDF70D /* Firebase.framework in Frameworks */,
+				7B42B2E51A5DE94B00854065 /* Firebase.framework in Frameworks */,
 				7B743A2619F8841B0075690A /* CFNetwork.framework in Frameworks */,
 				7B743A2419F884120075690A /* libc++.dylib in Frameworks */,
 				7B743A2219F884070075690A /* libicucore.dylib in Frameworks */,
@@ -462,7 +462,7 @@
 		7B743A2B19F884840075690A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				7BD0F9C51A3E36B400BDF70D /* Firebase.framework */,
+				7B42B2E41A5DE94B00854065 /* Firebase.framework */,
 				7B743A5319F94A3D0075690A /* GoogleOpenSource.framework */,
 				7B743A5419F94A3D0075690A /* GooglePlus.bundle */,
 				7B743A5519F94A3D0075690A /* GooglePlus.framework */,

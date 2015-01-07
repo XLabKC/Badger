@@ -1,7 +1,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -11,70 +11,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().tintColor = Color.colorize(0x929292, alpha: 1.0)
 
+        // Set the font of all bar buttons to be Open Sans.
         var attributes: [NSObject: AnyObject] = [:]
         attributes[NSFontAttributeName] = UIFont(name: "OpenSans", size: 17.0)
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: .Normal)
 
-        // Try and use last sessions access token if it's still valid.
-//        if let token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as? String {
-//            if let expiration = NSUserDefaults.standardUserDefaults().objectForKey("access_token_expiration")
-//                as? NSDate {
-//                    if expiration.compare(NSDate()) == .OrderedDescending {
-//                        let ref = Firebase(url: Global.FirebaseUrl)
-//                        ref.authWithOAuthProvider("google", token: token, withCompletionBlock: { error, authData in
-//                            if error != nil {
-//                                println("Firebase auth error \(error) and auth object \(authData)")
-//                            } else {
-//                                self.navigateToProfile()
-//                            }
-//                        })
-//                        return true
-//                    }
-//            }
-//        }
+        var handle: UInt = 0
+        let ref = Firebase(url: Global.FirebaseUrl)
+        handle = ref.observeAuthEventWithBlock { authData in
+            // Stop listening to auth events.
+            ref.removeAuthEventObserverWithHandle(handle)
 
-        // Set up options for signing in.
-        var signIn = GPPSignIn.sharedInstance()
-        signIn.shouldFetchGooglePlusUser = true
-        signIn.shouldFetchGoogleUserEmail = true
-        signIn.clientID = ApiKeys.getGoogleClientId()
-        signIn.scopes = []
-        signIn.delegate = self
-        signIn.attemptSSO = true
-
-        // Try and silently authenticate the user.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if (!signIn.trySilentAuthentication()) {
-            let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
-            self.window?.rootViewController = vc
-        }
-
-        return true
-    }
-
-    func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
-        if error != nil {
-            println("Google auth error \(error) and auth object \(auth)")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
-            if let root = self.window?.rootViewController? {
-                if root.isViewLoaded() {
-                    root.presentViewController(vc, animated: true, completion: nil)
-                    return
-                }
+            // Navigate to the next logical view.
+            if authData == nil {
+                self.navigateToLogin()
+            } else {
+                self.navigateToProfile()
             }
-            self.window?.rootViewController = vc
-        } else {
-            let ref = Firebase(url: Global.FirebaseUrl)
-            ref.authWithOAuthProvider("google", token: auth.accessToken, withCompletionBlock: { error, authData in
-                if error != nil {
-                    println("Firebase auth error \(error) and auth object \(authData)")
-                } else {
-                    Helpers.saveAccessToken(auth)
-                    self.navigateToProfile()
-                }
-            })
         }
+        return true
     }
 
     func application(application: UIApplication,
@@ -133,17 +88,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
         println(userInfo)
     }
 
+    private func navigateToLogin() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
+        self.navigateToViewController(vc)
+    }
+
     private func navigateToProfile() {
         UserStore.sharedInstance().authorized({ _ in
             let vc = RevealManager.sharedInstance().initialize()
-            if let root = self.window?.rootViewController? {
-                if root.isViewLoaded() {
-                    root.presentViewController(vc, animated: true, completion: nil)
-                    return
-                }
-            }
-            self.window?.rootViewController = vc
+            self.navigateToViewController(vc)
         })
+    }
+
+    private func navigateToViewController(viewController: UIViewController) {
+        if let root = self.window?.rootViewController? {
+            if root.isViewLoaded() {
+                root.presentViewController(viewController, animated: true, completion: nil)
+                return
+            }
+        }
+        self.window?.rootViewController = viewController
     }
 }
 
