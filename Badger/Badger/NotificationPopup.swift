@@ -11,6 +11,8 @@ class NotificationPopup: UIView {
         return nibs.first as NotificationPopup
     }
 
+    private var isDismissing = false
+
     @IBOutlet weak var profileCircle: ProfileCircle!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
@@ -18,6 +20,10 @@ class NotificationPopup: UIView {
     weak var delegate: NotificationPopupDelegate?
 
     @IBAction func dismiss(sender: AnyObject) {
+        if self.isDismissing {
+            return
+        }
+        self.isDismissing = true
         if let delegate = self.delegate? {
             delegate.notificationPopupDismissed(self)
         }
@@ -30,5 +36,9 @@ class NotificationPopup: UIView {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "h:mm"
         self.dateLabel.text = dateFormatter.stringFromDate(notification.timestamp)
+    }
+
+    func startTimer() {
+        NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "dismiss:", userInfo: nil, repeats: false)
     }
 }

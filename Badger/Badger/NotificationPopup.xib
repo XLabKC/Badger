@@ -36,7 +36,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6iA-66-yxK">
-                    <rect key="frame" x="260" y="0.0" width="60" height="71"/>
+                    <rect key="frame" x="260" y="0.0" width="60" height="72"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="d8W-Vd-Bgn"/>
                     </constraints>
@@ -59,8 +59,9 @@
                 <constraint firstItem="r3e-TS-9Re" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="hjt-FN-fXe"/>
                 <constraint firstItem="ycQ-vy-WS3" firstAttribute="leading" secondItem="r3e-TS-9Re" secondAttribute="trailing" constant="13" id="igV-vV-EVW"/>
                 <constraint firstAttribute="centerY" secondItem="r3e-TS-9Re" secondAttribute="centerY" constant="-1" id="khF-W4-Y2a"/>
-                <constraint firstAttribute="bottom" secondItem="6iA-66-yxK" secondAttribute="bottom" constant="1" id="mze-N3-jly"/>
+                <constraint firstAttribute="bottom" secondItem="6iA-66-yxK" secondAttribute="bottom" id="mze-N3-jly"/>
                 <constraint firstItem="6iA-66-yxK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="260" id="sCT-K2-ulC"/>
+                <constraint firstAttribute="trailing" secondItem="6iA-66-yxK" secondAttribute="trailing" id="xBX-FK-bEd"/>
                 <constraint firstItem="ycQ-vy-WS3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="39" id="xhd-AN-mdE"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -68,6 +69,7 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="xhd-AN-mdE"/>
+                    <exclude reference="sCT-K2-ulC"/>
                 </mask>
             </variation>
             <connections>
