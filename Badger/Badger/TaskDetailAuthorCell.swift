@@ -9,6 +9,7 @@ class TaskDetailAuthorCell: BorderedCell {
     private var authorObserver: FirebaseObserver<User>?
     private var teamObserver: FirebaseObserver<Team>?
 
+
     @IBOutlet weak var profileCircle: ProfileCircle!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!

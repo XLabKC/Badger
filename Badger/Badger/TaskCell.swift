@@ -5,6 +5,7 @@ class TaskCell: BorderedCell {
     private var task: Task?
     private var hasAwakened = false
 
+
     @IBOutlet weak var profileCircle: ProfileCircle!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
@@ -60,6 +61,7 @@ class TaskCell: BorderedCell {
                 self.titleLabel.text = task.title
                 self.contentLabel.text = task.content
                 self.profileCircle.setUid(task.author)
+                self.profileCircle.setTeamId(task.team)
                 self.metaLabel.text = task.timestampString
             }
         }

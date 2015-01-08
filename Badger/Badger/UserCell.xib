@@ -31,26 +31,27 @@
                         <color key="textColor" red="0.29803921570000003" green="0.30588235289999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rsv-7t-Aot" customClass="ProfileCircle" customModule="Badger" customModuleProvider="target">
-                        <rect key="frame" x="15" y="9" width="54" height="54"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="54" id="BWh-hP-cKs"/>
-                            <constraint firstAttribute="width" constant="54" id="wiU-QN-pG1"/>
-                        </constraints>
-                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelectArrow" translatesAutoresizingMaskIntoConstraints="NO" id="CVO-8b-54d">
                         <rect key="frame" x="291" y="25" width="14" height="22"/>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhK-9p-yCP" customClass="ProfileCircle" customModule="Badger" customModuleProvider="target">
+                        <rect key="frame" x="15" y="9" width="54" height="54"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="54" id="12X-Tw-zOy"/>
+                            <constraint firstAttribute="width" constant="54" id="m5Z-g2-8J6"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="rsv-7t-Aot" firstAttribute="leading" secondItem="QMi-Zm-vUZ" secondAttribute="leadingMargin" constant="7" id="8uD-CK-TPA"/>
-                    <constraint firstItem="Ef5-Sg-KBc" firstAttribute="leading" secondItem="rsv-7t-Aot" secondAttribute="trailing" constant="13" id="Jxa-N0-C2E"/>
+                    <constraint firstAttribute="centerY" secondItem="fhK-9p-yCP" secondAttribute="centerY" id="8UT-v4-LO0"/>
+                    <constraint firstItem="Kyy-5p-cZi" firstAttribute="leading" secondItem="fhK-9p-yCP" secondAttribute="trailing" constant="13" id="E6n-15-PT8"/>
                     <constraint firstItem="Kyy-5p-cZi" firstAttribute="top" secondItem="Ef5-Sg-KBc" secondAttribute="bottom" id="LpK-Of-mP2"/>
                     <constraint firstItem="Ef5-Sg-KBc" firstAttribute="top" secondItem="QMi-Zm-vUZ" secondAttribute="topMargin" constant="2" id="U0a-My-c9n"/>
+                    <constraint firstItem="fhK-9p-yCP" firstAttribute="leading" secondItem="QMi-Zm-vUZ" secondAttribute="leadingMargin" constant="7" id="WAd-1h-G2Y"/>
                     <constraint firstAttribute="centerY" secondItem="CVO-8b-54d" secondAttribute="centerY" id="ac7-cC-FFH"/>
-                    <constraint firstAttribute="centerY" secondItem="rsv-7t-Aot" secondAttribute="centerY" id="cCD-PD-rHH"/>
+                    <constraint firstItem="Ef5-Sg-KBc" firstAttribute="leading" secondItem="fhK-9p-yCP" secondAttribute="trailing" constant="13" id="fuk-zt-lte"/>
                     <constraint firstAttribute="centerY" secondItem="Kyy-5p-cZi" secondAttribute="centerY" constant="-0.5" id="hDZ-rD-8w4"/>
-                    <constraint firstItem="Kyy-5p-cZi" firstAttribute="leading" secondItem="rsv-7t-Aot" secondAttribute="trailing" constant="13" id="ovW-Mu-f9k"/>
                     <constraint firstAttribute="trailingMargin" secondItem="CVO-8b-54d" secondAttribute="trailing" constant="7" id="yfb-px-UW7"/>
                 </constraints>
                 <variation key="default">
@@ -69,7 +70,7 @@
             <connections>
                 <outlet property="arrowImage" destination="CVO-8b-54d" id="HGc-cj-xX9"/>
                 <outlet property="nameLabel" destination="Ef5-Sg-KBc" id="nFC-UH-41E"/>
-                <outlet property="profileCircle" destination="rsv-7t-Aot" id="LmV-7z-Z9E"/>
+                <outlet property="profileCircle" destination="fhK-9p-yCP" id="x7h-Pw-6lD"/>
                 <outlet property="statusLabel" destination="Kyy-5p-cZi" id="TzV-Oc-Ym8"/>
             </connections>
             <point key="canvasLocation" x="290" y="290"/>
