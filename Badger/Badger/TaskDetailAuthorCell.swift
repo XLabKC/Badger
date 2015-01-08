@@ -57,6 +57,7 @@ class TaskDetailAuthorCell: BorderedCell {
             if let task = self.task? {
                 self.metaLabel.text = task.createdAtString
                 self.profileCircle.setUid(task.author)
+                self.profileCircle.setTeamId(task.team)
                 if let author = self.author? {
                     self.nameLabel.text = author.fullName
                 }
