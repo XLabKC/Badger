@@ -68,16 +68,22 @@ class StatusViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 45.0 : 70.0
+        return indexPath.section == 0 && indexPath.row == 0 ? 45.0 : 70.0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : self.following.count
+        return section == 0 ? 2 : self.following.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("StatusCloseCell") as UITableViewCell
+            if indexPath.row == 0 {
+                return tableView.dequeueReusableCellWithIdentifier("StatusCloseCell") as UITableViewCell
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier("StatusCell") as StatusCell
+                cell.setUser(UserStore.sharedInstance().getAuthUser())
+                return cell
+            }
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("StatusCell") as StatusCell
         cell.setUser(self.following[indexPath.row])
