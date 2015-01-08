@@ -43,7 +43,7 @@ class TeamProfileViewController: RevealableTableViewController {
         let usersRef = Firebase(url: Global.FirebaseUsersUrl)
         self.membersObserver = FirebaseListObserver<User>(ref: usersRef, onChanged: self.membersUpdated)
         self.membersObserver!.comparisonFunc = { (a, b) -> Bool in
-            return a.firstName < b.firstName
+            return a.fullName < b.fullName
         }
 
         // Create user observer.

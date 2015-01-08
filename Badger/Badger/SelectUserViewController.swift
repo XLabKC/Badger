@@ -35,7 +35,7 @@ class SelectUserViewController: UITableViewController {
         let usersRef = Firebase(url: Global.FirebaseUsersUrl)
         self.usersObserver = FirebaseListObserver<User>(ref: usersRef, onChanged: self.usersChanged)
         self.usersObserver!.comparisonFunc = { (a, b) -> Bool in
-            return a.firstName > b.firstName
+            return a.fullName < b.fullName
         }
 
         let teamsRef = Firebase(url: Global.FirebaseTeamsUrl)

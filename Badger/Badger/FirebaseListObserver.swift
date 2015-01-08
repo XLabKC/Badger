@@ -87,11 +87,11 @@ class FirebaseListObserver<T: DataEntity> {
         var found = false
         for (index, other) in enumerate(self.internalEntities) {
             if other.getKey() == entity.getKey() {
-                // Already exists so insert it
+                // Already exists so insert it.
                 found = true
-                self.internalEntities[index] = entity
+                self.internalEntities[index + 1] = entity
                 break
-            } else if self.comparisonFunc(other, entity) {
+            } else if self.comparisonFunc(entity, other) {
                 // List is sorted so we know that this entity is not in the list
                 // and should be inserted here.
                 found = true
