@@ -33,6 +33,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     private var isNew: Bool {
         return self.task == nil
     }
+    private var isConfirmingDelete = false
 
     private var cells = [UITableViewCell?](count: 9, repeatedValue: nil)
 
@@ -289,7 +290,8 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         taskRef.setValue(taskValues, andPriority: priority, withCompletionBlock: { (err, ref) in
             if err != nil {
                 println("Failed to create/edit task")
-                println(taskValues)
+                println("Values: \(taskValues)")
+                println("Error: \(err)")
                 return
             }
 
@@ -319,19 +321,30 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     }
 
     func deleteTask() {
-        if let task = self.task? {
-            TaskStore.deleteTask(task)
-            if let nav = self.navigationController? {
-                let previousIndex = nav.viewControllers.count - 2
-                // Skip the detail vc and pop back to the vc before.
-                if nav.viewControllers[previousIndex] is TaskDetailViewController {
-                    let vc = nav.viewControllers[previousIndex - 1] as UIViewController
-                    nav.popToViewController(vc, animated: true)
-                } else {
-                    nav.popViewControllerAnimated(true)
+        if self.isConfirmingDelete {
+            if let task = self.task? {
+                TaskStore.deleteTask(task)
+                if let nav = self.navigationController? {
+                    let previousIndex = nav.viewControllers.count - 2
+                    // Skip the detail vc and pop back to the vc before.
+                    if nav.viewControllers[previousIndex] is TaskDetailViewController {
+                        let vc = nav.viewControllers[previousIndex - 1] as UIViewController
+                        nav.popToViewController(vc, animated: true)
+                    } else {
+                        nav.popViewControllerAnimated(true)
+                    }
                 }
             }
+        } else {
+            self.rightButton.title = "Confirm"
+            self.isConfirmingDelete = true
+            NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "stopConfirmingDelete", userInfo: nil, repeats: false)
         }
+    }
+
+    func stopConfirmingDelete() {
+        self.isConfirmingDelete = false
+        self.rightButton.title = "Delete"
     }
 
     // InputCellDelegate: opens the next cell when the "next" key is pressed on the keyboard.
