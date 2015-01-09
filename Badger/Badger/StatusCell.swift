@@ -1,6 +1,6 @@
 import UIKit
 
-class StatusCell: UITableViewCell {
+class StatusCell: SelectBackgroundCell {
     private var hasAwakened = false
     private var user: User?
 

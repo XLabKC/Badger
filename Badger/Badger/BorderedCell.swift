@@ -6,7 +6,7 @@ public enum BorderedCellStyle: String {
     case None = "none"
 }
 
-class BorderedCell: UITableViewCell {
+class BorderedCell: SelectBackgroundCell {
     private var lineColor = Color.colorize(0x28292C, alpha: 1)
     private let inset = CGFloat(30.0)
 

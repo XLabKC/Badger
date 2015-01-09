@@ -101,6 +101,7 @@
 		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
 		7BD0F9C81A3E442400BDF70D /* TaskDetailCompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD0F9C71A3E442400BDF70D /* TaskDetailCompleteCell.swift */; };
 		7BD0F9CA1A3F326600BDF70D /* FirebaseObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */; };
+		7BD521081A604634000DACFC /* SelectBackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD521071A604634000DACFC /* SelectBackgroundCell.swift */; };
 		7BD554CD1A3E04A8003D8BD0 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */; };
 		7BEC9AB71A38077E00080DDB /* TaskEditSubmitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */; };
 		7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */; };
@@ -218,6 +219,7 @@
 		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7BD0F9C71A3E442400BDF70D /* TaskDetailCompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailCompleteCell.swift; sourceTree = "<group>"; };
 		7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseObserver.swift; sourceTree = "<group>"; };
+		7BD521071A604634000DACFC /* SelectBackgroundCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectBackgroundCell.swift; sourceTree = "<group>"; };
 		7BD554CC1A3E04A8003D8BD0 /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 		7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditSubmitCell.swift; sourceTree = "<group>"; };
 		7BF066161A1437B500F3E6A1 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 				7B90E0C71A21427F005EC421 /* BorderedCell.swift */,
 				7B15CD0C1A3922EA00519C8E /* ResizedImageButton.swift */,
 				7B21D8BC1A5369FF006AFEC0 /* RevealableTableViewController.swift */,
+				7BD521071A604634000DACFC /* SelectBackgroundCell.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -717,6 +720,7 @@
 				7B21D8BD1A5369FF006AFEC0 /* RevealableTableViewController.swift in Sources */,
 				7B15CCFC1A38D22100519C8E /* UserCell.swift in Sources */,
 				7B4733CA1A1D93DE00D88C00 /* SWRevealViewController.m in Sources */,
+				7BD521081A604634000DACFC /* SelectBackgroundCell.swift in Sources */,
 				7B21D8BF1A545D48006AFEC0 /* RevealControllerManager.swift in Sources */,
 				7B469C4E1A2237EC0054019D /* Barrier.swift in Sources */,
 				7B90E0CA1A21AA68005EC421 /* MenuNoTeamsCell.swift in Sources */,

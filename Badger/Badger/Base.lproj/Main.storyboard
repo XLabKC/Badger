@@ -1191,6 +1191,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                        <color key="value" red="0.14509803921568629" green="0.15294117647058825" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="nameLabel" destination="evj-UV-Vhi" id="0cO-UL-5B1"/>
@@ -1250,6 +1253,9 @@
                                         <color key="value" red="0.047058823529411764" green="0.047058823529411764" blue="0.047058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                        <color key="value" red="0.1450980392" green="0.1529411765" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="metaLabel" destination="ecc-mQ-Xet" id="EiL-ie-x0E"/>
@@ -1295,6 +1301,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.28627450980392155" green="0.29803921568627451" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                        <color key="value" red="0.1450980392" green="0.1529411765" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuSettingsCell" rowHeight="144" id="Y9I-Ng-Q3E" customClass="MenuSettingsCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1530,7 +1541,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
                                 </userDefinedRuntimeAttributes>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TeamMemberCell" rowHeight="112" id="VJT-tJ-aKb" customClass="TeamMemberCell" customModule="Badger" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TeamMemberCell" rowHeight="112" id="VJT-tJ-aKb" customClass="TeamMemberCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VJT-tJ-aKb" id="szS-4E-VAz">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1700,6 +1711,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                        <color key="value" red="0.1450980392" green="0.1529411765" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="profileCircle" destination="a2r-pz-ohr" id="Agx-Sh-c0W"/>
                                     <segue destination="PV4-3y-2XN" kind="custom" identifier="StatusProfile" customClass="SWRevealViewControllerSeguePushController" id="G2U-IQ-PaM"/>
@@ -1748,8 +1764,8 @@
         <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zwB-bM-66t"/>
         <segue reference="sG0-Gn-9tP"/>
+        <segue reference="kUo-1a-Owt"/>
         <segue reference="G2U-IQ-PaM"/>
     </inferredMetricsTieBreakers>
 </document>
