@@ -859,8 +859,8 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6uj-Eo-htx" id="AW5-GG-5Cj">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="MxF-AW-uQn">
-                                            <rect key="frame" x="15" y="19" width="290" height="33"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MxF-AW-uQn">
+                                            <rect key="frame" x="15" y="19" width="252" height="33"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
                                             <color key="textColor" red="0.29803921570000003" green="0.30588235289999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -899,7 +899,7 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="sff-Xz-oVF" secondAttribute="trailing" constant="7" id="Jbd-SL-Uaw"/>
                                         <constraint firstItem="MxF-AW-uQn" firstAttribute="top" secondItem="AW5-GG-5Cj" secondAttribute="topMargin" constant="-3" id="N5g-2Y-fQ1"/>
                                         <constraint firstItem="MxF-AW-uQn" firstAttribute="leading" secondItem="AW5-GG-5Cj" secondAttribute="leadingMargin" constant="7" id="P7s-of-FJu"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="MxF-AW-uQn" secondAttribute="trailing" constant="7" id="PI1-UU-bla"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="MxF-AW-uQn" secondAttribute="trailing" constant="45" id="PI1-UU-bla"/>
                                         <constraint firstAttribute="centerY" secondItem="SC2-sq-Ake" secondAttribute="centerY" constant="-0.25" id="ZAF-oo-9R2"/>
                                         <constraint firstItem="CsW-k2-1dJ" firstAttribute="top" secondItem="SC2-sq-Ake" secondAttribute="top" constant="-18" id="cy6-va-1jv"/>
                                         <constraint firstAttribute="centerY" secondItem="sff-Xz-oVF" secondAttribute="centerY" id="v57-zs-FgG"/>
@@ -1748,7 +1748,7 @@
         <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kUo-1a-Owt"/>
+        <segue reference="zwB-bM-66t"/>
         <segue reference="sG0-Gn-9tP"/>
         <segue reference="G2U-IQ-PaM"/>
     </inferredMetricsTieBreakers>
