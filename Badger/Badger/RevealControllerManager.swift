@@ -37,20 +37,33 @@ class RevealManager: NSObject, SWRevealViewControllerDelegate {
         }
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let menuVC = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as UITableViewController
         let frontVC = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as UINavigationController
+
+        // Set uid for profile.
+        if let profileVC = frontVC.topViewController as? ProfileViewController {
+            profileVC.setUid(UserStore.sharedInstance().getAuthUid())
+        }
+
+        return self.initialize(frontVC)
+    }
+
+    func initialize(vc: UIViewController) -> SWRevealViewController {
+        // Return existing reveal view controller if we have already initialized.
+        if let existingVC = self.internalRevealVC? {
+            existingVC.setFrontViewController(vc, animated: true)
+            return existingVC
+        }
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let menuVC = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as UITableViewController
         let rightVC = storyboard.instantiateViewControllerWithIdentifier("StatusViewController") as UITableViewController
-        let revealVC = SWRevealViewController(rearViewController: menuVC, frontViewController: frontVC)
+        let revealVC = SWRevealViewController(rearViewController: menuVC, frontViewController: vc)
         revealVC.rightViewController = rightVC
         revealVC.draggableBorderWidth = 20
         revealVC.rearViewRevealWidth = -54
         revealVC.rightViewRevealWidth = 74
         revealVC.delegate = self
 
-        // Set uid for profile.
-        if let profileVC = frontVC.topViewController as? ProfileViewController {
-            profileVC.setUid(UserStore.sharedInstance().getAuthUid())
-        }
         self.internalRevealVC = revealVC
         return revealVC
     }

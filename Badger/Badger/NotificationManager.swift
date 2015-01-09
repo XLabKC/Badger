@@ -42,6 +42,17 @@ class NotificationManager: NotificationPopupDelegate {
         })
     }
 
+    func notificationPopupSelected(popup: NotificationPopup) {
+        if let notification = popup.getNotification()? {
+            if let revealVC = RevealManager.sharedInstance().revealVC? {
+                if let vc = NotificationManager.createViewControllerFromNotification(notification.raw)? {
+                    revealVC.setFrontViewController(vc, animated: true)
+                }
+            }
+        }
+        self.notificationPopupDismissed(popup)
+    }
+
     private func show(notification: RemoteNotification) {
         let delegate = UIApplication.sharedApplication().delegate as AppDelegate
         let window = delegate.window!
@@ -82,7 +93,7 @@ class NotificationManager: NotificationPopupDelegate {
                     if snapshot != nil {
                         let task = Task.createFromSnapshot(snapshot) as Task
                         let content = "New Task: \(task.title)"
-                        let note = RemoteNotification(type: "new_task", content: content, uid: authorUid)
+                        let note = RemoteNotification(type: "new_task", content: content, uid: authorUid, raw: notification)
                         self.enqueueNotification(note)
                     }
                 })
@@ -96,10 +107,44 @@ class NotificationManager: NotificationPopupDelegate {
             if snapshot != nil {
                 let user = User.createFromSnapshot(snapshot) as User
                 let content = "\(user.fullName) is now \(user.statusText.lowercaseString)."
-                let note = RemoteNotification(type: "new_status", content: content, uid: uid)
+                let note = RemoteNotification(type: "new_status", content: content, uid: uid, raw: notification)
                 self.enqueueNotification(note)
             }
         })
+    }
+
+    class func createProfileViewController(uid: String) -> UINavigationController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let nav = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as UINavigationController
+        if let profileVC = nav.topViewController as? ProfileViewController {
+            profileVC.setUid(uid)
+        }
+        return nav
+    }
+
+    class func createViewControllerFromNotification(notification: [NSObject: AnyObject]) -> UIViewController? {
+        if let type = notification["type"] as? String {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            switch type {
+            case "new_task":
+                if let taskId = notification["task"] as? String {
+                    let owner = UserStore.sharedInstance().getAuthUid()
+                    let nav = NotificationManager.createProfileViewController(owner)
+                    let taskDetail = storyboard.instantiateViewControllerWithIdentifier("TaskDetailViewController") as TaskDetailViewController
+                    taskDetail.setTask(owner, id: taskId, active: true)
+                    nav.pushViewController(taskDetail, animated: false)
+                    return nav
+                }
+                break
+            case "new_status":
+                if let uid = notification["uid"] as? String {
+                    return NotificationManager.createProfileViewController(uid)
+                }
+            default:
+                break
+            }
+        }
+        return nil
     }
 }
 
@@ -108,10 +153,12 @@ class RemoteNotification {
     let content: String
     let uid: String
     let timestamp = NSDate()
+    let raw: [NSObject: AnyObject]
 
-    init(type: String, content: String, uid: String) {
+    init(type: String, content: String, uid: String, raw: [NSObject: AnyObject]) {
         self.type = type
         self.content = content
         self.uid = uid
+        self.raw = raw
     }
 }

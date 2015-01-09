@@ -781,7 +781,7 @@
         <!--Task Detail View Controller-->
         <scene sceneID="9Ug-Qc-OHP">
             <objects>
-                <tableViewController id="E19-a5-I5g" customClass="TaskDetailViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TaskDetailViewController" id="E19-a5-I5g" customClass="TaskDetailViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="IBr-5M-TSx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1764,8 +1764,8 @@
         <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zwB-bM-66t"/>
         <segue reference="sG0-Gn-9tP"/>
-        <segue reference="kUo-1a-Owt"/>
         <segue reference="G2U-IQ-PaM"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if authData == nil {
                 self.navigateToLogin()
             } else {
-                self.navigateToProfile()
+                self.navigateToFirstView(launchOptions)
             }
         }
         return true
@@ -86,7 +86,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        self.notificationManager.notify(userInfo)
+        if application.applicationState == .Active {
+            // Application was already in foreground.
+            self.notificationManager.notify(userInfo)
+        } else {
+            // Application was in the background.
+            if let revealVC = RevealManager.sharedInstance().revealVC? {
+                if let vc = NotificationManager.createViewControllerFromNotification(userInfo)? {
+                    revealVC.setFrontViewController(vc, animated: true)
+                }
+            }
+        }
     }
 
     private func navigateToLogin() {
@@ -95,7 +105,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.navigateToViewController(vc)
     }
 
-    private func navigateToProfile() {
+    private func navigateToFirstView(launchOptions: [NSObject: AnyObject]?) {
+        if let options = launchOptions? {
+            if let note = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject] {
+                if let vc = NotificationManager.createViewControllerFromNotification(note)? {
+                    UserStore.sharedInstance().authorized({ _ in
+                        let reveal = RevealManager.sharedInstance().initialize(vc)
+                        self.navigateToViewController(reveal)
+                    })
+                    return
+                }
+            }
+        }
         UserStore.sharedInstance().authorized({ _ in
             let vc = RevealManager.sharedInstance().initialize()
             self.navigateToViewController(vc)

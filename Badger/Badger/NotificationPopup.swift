@@ -2,6 +2,7 @@ import UIKit
 
 @objc protocol NotificationPopupDelegate {
     func notificationPopupDismissed(popup: NotificationPopup)
+    func notificationPopupSelected(popup: NotificationPopup)
 }
 
 class NotificationPopup: UIView {
@@ -11,6 +12,7 @@ class NotificationPopup: UIView {
         return nibs.first as NotificationPopup
     }
 
+    private var notification: RemoteNotification?
     private var isDismissing = false
 
     @IBOutlet weak var profileCircle: ProfileCircle!
@@ -18,6 +20,11 @@ class NotificationPopup: UIView {
     @IBOutlet weak var contentLabel: UILabel!
 
     weak var delegate: NotificationPopupDelegate?
+
+    override func awakeFromNib() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: "handleTap")
+        self.addGestureRecognizer(tapGesture)
+    }
 
     @IBAction func dismiss(sender: AnyObject) {
         if self.isDismissing {
@@ -30,6 +37,7 @@ class NotificationPopup: UIView {
     }
 
     func setNotification(notification: RemoteNotification) {
+        self.notification = notification
         self.profileCircle.setUid(notification.uid)
         self.contentLabel.text = notification.content
 
@@ -38,7 +46,21 @@ class NotificationPopup: UIView {
         self.dateLabel.text = dateFormatter.stringFromDate(notification.timestamp)
     }
 
+    func getNotification() -> RemoteNotification? {
+        return self.notification
+    }
+
     func startTimer() {
         NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "dismiss:", userInfo: nil, repeats: false)
+    }
+
+    func handleTap() {
+        if self.isDismissing {
+            return
+        }
+        self.isDismissing = true
+        if let delegate = self.delegate? {
+            delegate.notificationPopupSelected(self)
+        }
     }
 }
