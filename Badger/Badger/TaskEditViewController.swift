@@ -29,6 +29,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     private var contentCell: TaskEditContentCell?
     private var owner: User?
     private var team: Team?
+    private var isSaving = false
     private var isNew: Bool {
         return self.task == nil
     }
@@ -212,9 +213,11 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     }
 
     func saveTask() {
-        if (self.owner == nil || self.team == nil) {
+        if (self.isSaving || self.owner == nil || self.team == nil) {
             return
         }
+        self.isSaving = true
+
         let newOwner = self.owner!
         let newTeam = self.team!
         var createdAt = NSDate.javascriptTimestampNow()
@@ -308,6 +311,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
                 let now = NSDate.javascriptTimestampNow()
                 Firebase(url: Global.FirebaseNewTasksUrl).childByAppendingPath(combinedKey).setValue(now)
             }
+            self.isSaving = false
             if let nav = self.navigationController? {
                 nav.popViewControllerAnimated(true)
             }
