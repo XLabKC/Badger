@@ -106,6 +106,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func navigateToFirstView(launchOptions: [NSObject: AnyObject]?) {
+        // For some reason, it's possible to get to this point but for the UserStore to not actually
+        // have valid auth data. Make sure we catch these cases and redirect to login.
+        if !UserStore.sharedInstance().hasValidAuth() {
+            self.navigateToLogin()
+        }
+
         if let options = launchOptions? {
             if let note = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject] {
                 if let vc = NotificationManager.createViewControllerFromNotification(note)? {

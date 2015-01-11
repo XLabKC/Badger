@@ -38,6 +38,10 @@ class UserStore {
         })
     }
 
+    func hasValidAuth() -> Bool {
+        return self.ref.authData != nil && self.ref.authData.uid != nil
+    }
+
     // Returns the current auth user's uid.
     func getAuthUid() -> String {
         return self.ref.authData.uid

@@ -13,6 +13,7 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
         signIn.scopes = []
         signIn.attemptSSO = true
         signIn.delegate = self
+        signIn.trySilentAuthentication()
     }
 
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
