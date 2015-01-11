@@ -32,8 +32,12 @@ class FirebaseObserver<T: DataEntity> {
         }
         self.started = true
 
-        var handle = self.query.observeEventType(.Value, withBlock: { snapshot in
-            withBlock(T.createFromSnapshot(snapshot) as T)
+        let handle = self.query.observeEventType(.Value, withBlock: { snapshot in
+            if snapshot.childrenCount > 0 {
+                withBlock(T.createFromSnapshot(snapshot) as T)
+            } else {
+                println("No data at: \(snapshot.ref.description())")
+            }
         })
         self.handles.append(handle)
     }

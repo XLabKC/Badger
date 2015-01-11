@@ -88,10 +88,8 @@ class NotificationManager: NotificationPopupDelegate {
         User.createRef(authorUid).observeSingleEventOfType(.Value, withBlock: { snapshot in
             if snapshot != nil {
                 let author = User.createFromSnapshot(snapshot) as User
-                let taskRef = Task.createRef(uid, id: taskId, active: true)
-                taskRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-                    if snapshot != nil {
-                        let task = Task.createFromSnapshot(snapshot) as Task
+                TaskStore.tryGetTask(uid, id: taskId, startWithActive: true, withBlock: { maybeTask in
+                    if let task = maybeTask? {
                         let content = "New Task: \(task.title)"
                         let note = RemoteNotification(type: "new_task", content: content, uid: authorUid, raw: notification)
                         self.enqueueNotification(note)

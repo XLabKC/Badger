@@ -27,15 +27,21 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
     }
 
     func setTask(owner: String, id: String, active: Bool) {
-        let ref = Task.createRef(owner, id: id, active: active)
-        self.observer = FirebaseObserver<Task>(query: ref, withBlock: { task in
-            self.task = task
-            self.getContentCell().setTask(task)
+        TaskStore.tryGetTask(owner, id: id, startWithActive: active, withBlock: { maybeTask in
+            if let task = maybeTask? {
+                self.observer = FirebaseObserver<Task>(query: task.ref, withBlock: { task in
+                    self.task = task
+                    self.getContentCell().setTask(task)
 
-            if (self.isViewLoaded()) {
-                // TODO: figure out a better way to update each cell.
-                self.tableView.reloadData()
-                self.setRightButton()
+                    if (self.isViewLoaded()) {
+                        // TODO: figure out a better way to update each cell.
+                        self.tableView.reloadData()
+                        self.setRightButton()
+                    }
+                })
+            } else {
+                // Task no longer exists.
+                self.navigationController?.popViewControllerAnimated(true)
             }
         })
     }
