@@ -17,6 +17,8 @@ class NotificationManager: NotificationPopupDelegate {
             switch type {
             case "new_task":
                 return self.createNewTaskNote(notification)
+            case "completed_task":
+                return self.createCompletedTaskNote(notification)
             case "new_status":
                 return self.createNewStatusNote(notification)
             default:
@@ -99,6 +101,18 @@ class NotificationManager: NotificationPopupDelegate {
         })
     }
 
+    private func createCompletedTaskNote(notification: [NSObject: AnyObject]) {
+        let owner = notification["owner"] as String
+        let taskId = notification["task"] as String
+        TaskStore.tryGetTask(owner, id: taskId, startWithActive: false, withBlock: { maybeTask in
+            if let task = maybeTask? {
+                let content = "Completed: \(task.title)"
+                let note = RemoteNotification(type: "completed_task", content: content, uid: owner, raw: notification)
+                self.enqueueNotification(note)
+            }
+        })
+    }
+
     private func createNewStatusNote(notification: [NSObject: AnyObject]) {
         let uid = notification["uid"] as String
         User.createRef(uid).observeSingleEventOfType(.Value, withBlock: { snapshot in
@@ -120,18 +134,30 @@ class NotificationManager: NotificationPopupDelegate {
         return nav
     }
 
+    class func createTaskDetailViewController(owner: String, id: String, active: Bool) -> UIViewController? {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let nav = NotificationManager.createProfileViewController(owner)
+        let taskDetail = storyboard.instantiateViewControllerWithIdentifier("TaskDetailViewController") as TaskDetailViewController
+        taskDetail.setTask(owner, id: id, active: active)
+        nav.pushViewController(taskDetail, animated: false)
+        return nav
+    }
+
     class func createViewControllerFromNotification(notification: [NSObject: AnyObject]) -> UIViewController? {
         if let type = notification["type"] as? String {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
             switch type {
             case "new_task":
                 if let taskId = notification["task"] as? String {
                     let owner = UserStore.sharedInstance().getAuthUid()
-                    let nav = NotificationManager.createProfileViewController(owner)
-                    let taskDetail = storyboard.instantiateViewControllerWithIdentifier("TaskDetailViewController") as TaskDetailViewController
-                    taskDetail.setTask(owner, id: taskId, active: true)
-                    nav.pushViewController(taskDetail, animated: false)
-                    return nav
+                    return NotificationManager.createTaskDetailViewController(owner, id: taskId, active: true)
+                }
+                break
+            case "completed_task":
+                if let taskId = notification["task"] as? String {
+                    if let owner = notification["owner"] as? String {
+                        return NotificationManager.createTaskDetailViewController(owner, id: taskId, active: false)
+                    }
                 }
                 break
             case "new_status":

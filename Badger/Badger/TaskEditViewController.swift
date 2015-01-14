@@ -309,9 +309,8 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
 
             // Add to push message queues if new of updated.
             if isNew && isActive {
-                let val = isNew ? "new" : "updated"
                 let now = NSDate.javascriptTimestampNow()
-                Firebase(url: Global.FirebaseNewTasksUrl).childByAppendingPath(combinedKey).setValue(now)
+                Firebase(url: Global.FirebasePushNewTaskUrl).childByAppendingPath(combinedKey).setValue(now)
             }
             self.isSaving = false
             if let nav = self.navigationController? {

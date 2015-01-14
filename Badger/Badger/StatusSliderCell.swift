@@ -39,7 +39,7 @@ class StatusSliderCell: BorderedCell, StatusSliderDelegate {
         let oldStatus = timer.userInfo as String
         if self.currentStatus.rawValue != oldStatus {
             let uid = UserStore.sharedInstance().getAuthUid()
-            let ref = Firebase(url: Global.FirebaseStatusUpdatedUrl).childByAppendingPath(uid)
+            let ref = Firebase(url: Global.FirebasePushStatusUpdatedUrl).childByAppendingPath(uid)
             ref.setValue(self.currentStatus.rawValue)
         }
     }

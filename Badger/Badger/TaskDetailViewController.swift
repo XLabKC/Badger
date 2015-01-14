@@ -9,6 +9,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
     private var observer: FirebaseObserver<Task>?
     private var task: Task?
     private var contentCell: TaskDetailContentCell?
+    private var isConfirmingDelete = false
 
     deinit {
         if let observer = self.observer? {
@@ -68,12 +69,23 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
     }
 
     func deleteButtonPressed() {
-        if let task = self.task? {
-            TaskStore.deleteTask(task)
+        if self.isConfirmingDelete {
+            if let task = self.task? {
+                TaskStore.deleteTask(task)
+                if let nav = self.navigationController? {
+                    nav.popViewControllerAnimated(true)
+                }
+            }
+        } else {
+            self.navigationItem.rightBarButtonItem?.title = "Confirm"
+            self.isConfirmingDelete = true
+            NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "stopConfirmingDelete", userInfo: nil, repeats: false)
         }
-        if let nav = self.navigationController? {
-            nav.popViewControllerAnimated(true)
-        }
+    }
+
+    func stopConfirmingDelete() {
+        self.isConfirmingDelete = false
+        self.navigationItem.rightBarButtonItem?.title = "Delete"
     }
 
     // TableViewController Overrides
@@ -166,11 +178,15 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
                 UserStore.adjustCompletedTaskCount(task.owner, delta: isActive ? -1 : 1)
 
                 // Update active task count for team.
-                let combinedId = Task.combineId(task.owner, id: task.id)
+                let combinedKey = Task.combineId(task.owner, id: task.id)
                 if isActive {
-                    TeamStore.addActiveTask(task.team, combinedId: combinedId)
+                    TeamStore.addActiveTask(task.team, combinedId: combinedKey)
                 } else {
-                    TeamStore.removeActiveTask(task.team, combinedId: combinedId)
+                    TeamStore.removeActiveTask(task.team, combinedId: combinedKey)
+
+                    // Add push notification for completing task.
+                    let now = NSDate.javascriptTimestampNow()
+                    Firebase(url: Global.FirebasePushCompletedTaskUrl).childByAppendingPath(combinedKey).setValue(now)
                 }
             })
 

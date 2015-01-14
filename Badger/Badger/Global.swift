@@ -3,8 +3,9 @@ struct Global {
     static let FirebaseUsersUrl = "\(Global.FirebaseUrl)/users"
     static let FirebaseTasksUrl = "\(Global.FirebaseUrl)/tasks"
     static let FirebaseTeamsUrl = "\(Global.FirebaseUrl)/teams"
-    static let FirebaseNewTasksUrl = "\(Global.FirebaseUrl)/push_new_task"
-    static let FirebaseStatusUpdatedUrl = "\(Global.FirebaseUrl)/push_status_updated"
+    static let FirebasePushNewTaskUrl = "\(Global.FirebaseUrl)/push_new_task"
+    static let FirebasePushCompletedTaskUrl = "\(Global.FirebaseUrl)/push_completed_task"
+    static let FirebasePushStatusUpdatedUrl = "\(Global.FirebaseUrl)/push_status_updated"
     static let FirebaseActiveTasksUrl = "\(Global.FirebaseUrl)/active_tasks"
     static let FirebaseCompletedTasksUrl = "\(Global.FirebaseUrl)/completed_tasks"
 }
