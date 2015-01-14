@@ -23,7 +23,7 @@
             return createdAt
         }
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "'Created at' h:mm a 'on' d/M/yy"
+        dateFormatter.dateFormat = "'Created at' h:mm a 'on' M/d/yy"
         self.internalCreatedAtString = dateFormatter.stringFromDate(self.createdAt)
         return self.internalCreatedAtString!
     }
@@ -33,7 +33,7 @@
         }
         if let completedAt = self.completedAt? {
             let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "'Completed at' h:mm a 'on' d/M/yy"
+            dateFormatter.dateFormat = "'Completed at' h:mm a 'on' M/d/yy"
             self.internalCompletedAtString = dateFormatter.stringFromDate(self.createdAt)
         } else {
             self.internalCompletedAtString = "Not yet complete!"
