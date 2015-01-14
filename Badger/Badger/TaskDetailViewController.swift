@@ -98,8 +98,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
             }
         }
         // Header + User + Header + Title + Content
-        // return 5
-        return 6 // FOR TEST ONLY
+        return 5
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
