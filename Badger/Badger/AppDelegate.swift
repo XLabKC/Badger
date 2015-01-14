@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         attributes[NSFontAttributeName] = UIFont(name: "OpenSans", size: 17.0)
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: .Normal)
 
+        // Set up the user store.
+        UserStore.sharedInstance().initialize()
+        UserStore.sharedInstance().unauthorizedBlock = self.loggedOut
+
         var handle: UInt = 0
         let ref = Firebase(url: Global.FirebaseUrl)
         handle = ref.observeAuthEventWithBlock { authData in
@@ -99,6 +103,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    private func loggedOut() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
+        vc.view.alpha = 0
+
+        RevealManager.sharedInstance().removeRevealVC()
+        UIApplication.sharedApplication().keyWindow?.rootViewController = vc
+
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            vc.view.alpha = 1
+        })
+    }
+
     private func navigateToLogin() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
@@ -115,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let options = launchOptions? {
             if let note = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject] {
                 if let vc = NotificationManager.createViewControllerFromNotification(note)? {
-                    UserStore.sharedInstance().authorized({ _ in
+                    UserStore.sharedInstance().waitForUser({ _ in
                         let reveal = RevealManager.sharedInstance().initialize(vc)
                         self.navigateToViewController(reveal)
                     })
@@ -123,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        UserStore.sharedInstance().authorized({ _ in
+        UserStore.sharedInstance().waitForUser({ _ in
             let vc = RevealManager.sharedInstance().initialize()
             self.navigateToViewController(vc)
         })

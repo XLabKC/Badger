@@ -20,6 +20,10 @@ class ProfileHeaderCell: UITableViewCell {
         self.updateView()
     }
 
+    @IBAction func logout(sender: AnyObject) {
+        Firebase(url: Global.FirebaseUrl).unauth()
+    }
+
     private func updateView() {
         if self.hasAwakened {
             if let user = self.user? {

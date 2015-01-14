@@ -47,12 +47,11 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                 UIApplication.sharedApplication().registerForRemoteNotificationTypes(UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound | UIRemoteNotificationType.Alert)
             }
 
-            // Start the UserStore listening to the authenticated user.
-            UserStore.sharedInstance().authorized({ _ in })
-
             // Transition to the home screen.
-            let vc = RevealManager.sharedInstance().initialize()
-            self.presentViewController(vc, animated: true, completion: nil)
+            UserStore.sharedInstance().waitForUser({ user in
+                let vc = RevealManager.sharedInstance().initialize()
+                self.presentViewController(vc, animated: true, completion: nil)
+            })
         }
 
         // Check if the user already exists.

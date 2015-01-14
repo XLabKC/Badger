@@ -31,11 +31,6 @@ class RevealManager: NSObject, SWRevealViewControllerDelegate {
     // Creates the reveal view controller. This is delayed to make sure that the user is first authenticated
     // before the reveal view controller is created.
     func initialize() -> SWRevealViewController {
-        // Return existing reveal view controller if we have already initialized.
-        if let existingVC = self.internalRevealVC? {
-            return existingVC
-        }
-
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let frontVC = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as UINavigationController
 
@@ -66,6 +61,10 @@ class RevealManager: NSObject, SWRevealViewControllerDelegate {
 
         self.internalRevealVC = revealVC
         return revealVC
+    }
+
+    func removeRevealVC() {
+        self.internalRevealVC = nil
     }
 
     func revealController(revealController: SWRevealViewController!, willMoveToPosition position: FrontViewPosition) {

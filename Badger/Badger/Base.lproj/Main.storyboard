@@ -112,6 +112,15 @@
                                                 <constraint firstAttribute="height" constant="136" id="n6v-58-BvK"/>
                                             </constraints>
                                         </view>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lY-G5-odp">
+                                            <rect key="frame" x="15" y="8" width="49" height="30"/>
+                                            <state key="normal" title="Logout">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="logout:" destination="n1g-Xu-mf1" eventType="touchUpInside" id="l4N-aE-CSj"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="S2K-j3-4Pp" secondAttribute="trailing" constant="-8" id="029-mx-mFH"/>
@@ -1784,8 +1793,8 @@
         <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kUo-1a-Owt"/>
         <segue reference="sG0-Gn-9tP"/>
+        <segue reference="dhT-2f-k0x"/>
         <segue reference="G2U-IQ-PaM"/>
     </inferredMetricsTieBreakers>
 </document>
