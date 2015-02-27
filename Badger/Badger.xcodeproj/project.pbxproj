@@ -28,6 +28,10 @@
 		7B29F19C1A26443E003920AD /* TeamProfileControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */; };
 		7B29F19E1A264465003920AD /* TeamMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F19D1A264465003920AD /* TeamMemberCell.swift */; };
 		7B39B8821A91552B0080D462 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B39B8811A91552B0080D462 /* Firebase.framework */; };
+		7B39B8851A91AC2D0080D462 /* TeamEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B8841A91AC2D0080D462 /* TeamEditViewController.swift */; };
+		7B39B8891A9E5A290080D462 /* TeamEditMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B8881A9E5A290080D462 /* TeamEditMemberCell.swift */; };
+		7B39B88D1AA01F690080D462 /* EditTeamInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B88C1AA01F690080D462 /* EditTeamInfoCell.swift */; };
+		7B39B88F1AA01FE50080D462 /* EditTeamInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39B88E1AA01FE50080D462 /* EditTeamInfoCell.xib */; };
 		7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */; };
 		7B42B2DF1A5D8DA100854065 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B42B2DE1A5D8DA100854065 /* NotificationManager.swift */; };
 		7B42B2E11A5D8DB100854065 /* NotificationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B42B2E01A5D8DB100854065 /* NotificationPopup.swift */; };
@@ -139,6 +143,10 @@
 		7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileControlCell.swift; sourceTree = "<group>"; };
 		7B29F19D1A264465003920AD /* TeamMemberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberCell.swift; sourceTree = "<group>"; };
 		7B39B8811A91552B0080D462 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
+		7B39B8841A91AC2D0080D462 /* TeamEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamEditViewController.swift; sourceTree = "<group>"; };
+		7B39B8881A9E5A290080D462 /* TeamEditMemberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamEditMemberCell.swift; sourceTree = "<group>"; };
+		7B39B88C1AA01F690080D462 /* EditTeamInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTeamInfoCell.swift; sourceTree = "<group>"; };
+		7B39B88E1AA01FE50080D462 /* EditTeamInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditTeamInfoCell.xib; sourceTree = "<group>"; };
 		7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7B42B2DE1A5D8DA100854065 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		7B42B2E01A5D8DB100854065 /* NotificationPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPopup.swift; sourceTree = "<group>"; };
@@ -330,6 +338,15 @@
 			name = "Team Profile";
 			sourceTree = "<group>";
 		};
+		7B39B8831A91ABFE0080D462 /* Team Edit */ = {
+			isa = PBXGroup;
+			children = (
+				7B39B8841A91AC2D0080D462 /* TeamEditViewController.swift */,
+				7B39B8881A9E5A290080D462 /* TeamEditMemberCell.swift */,
+			);
+			name = "Team Edit";
+			sourceTree = "<group>";
+		};
 		7B39D28B1A01F6C00033D4FE /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,6 +512,7 @@
 				7BF066141A1434DF00F3E6A1 /* Login */,
 				7B39D28B1A01F6C00033D4FE /* User Profile */,
 				7B29F1941A263A90003920AD /* Team Profile */,
+				7B39B8831A91ABFE0080D462 /* Team Edit */,
 				7B9A63551A2E8FA200DF1143 /* Task Edit */,
 				7B24278D1A2D3E5400A3144E /* Task Detail */,
 				7B15CCFF1A38D71000519C8E /* Select User */,
@@ -528,6 +546,8 @@
 				7B15CCFD1A38D22F00519C8E /* UserCell.xib */,
 				7B15CD081A39080400519C8E /* TeamCell.swift */,
 				7B15CD0A1A39081600519C8E /* TeamCell.xib */,
+				7B39B88C1AA01F690080D462 /* EditTeamInfoCell.swift */,
+				7B39B88E1AA01FE50080D462 /* EditTeamInfoCell.xib */,
 			);
 			name = "Shared Cells";
 			sourceTree = "<group>";
@@ -664,6 +684,7 @@
 				7B469C521A225E430054019D /* LoadingCell.xib in Resources */,
 				7B743A5719F94A3D0075690A /* GooglePlus.bundle in Resources */,
 				7B743A0419F87E4E0075690A /* Images.xcassets in Resources */,
+				7B39B88F1AA01FE50080D462 /* EditTeamInfoCell.xib in Resources */,
 				7B15CCFE1A38D22F00519C8E /* UserCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -729,14 +750,17 @@
 				7B21D8C11A54C395006AFEC0 /* StatusCloseCell.swift in Sources */,
 				7B29F19A1A2643FC003920AD /* TeamHeaderCell.swift in Sources */,
 				7B42B2E11A5D8DB100854065 /* NotificationPopup.swift in Sources */,
+				7B39B88D1AA01F690080D462 /* EditTeamInfoCell.swift in Sources */,
 				7B64F2BF1A41E68C001FA518 /* FirebaseUtil.swift in Sources */,
 				7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */,
 				7B4733D01A1E551600D88C00 /* Team.swift in Sources */,
+				7B39B8891A9E5A290080D462 /* TeamEditMemberCell.swift in Sources */,
 				7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */,
 				7B21D8BB1A530B80006AFEC0 /* StatusCell.swift in Sources */,
 				7B15CD071A3906ED00519C8E /* SelectTeamViewController.swift in Sources */,
 				7B90E0C81A21427F005EC421 /* BorderedCell.swift in Sources */,
 				7B64F2BD1A40FFF2001FA518 /* ArrayRef.swift in Sources */,
+				7B39B8851A91AC2D0080D462 /* TeamEditViewController.swift in Sources */,
 				7BF066171A1437B500F3E6A1 /* SplashScreenViewController.swift in Sources */,
 				7B64F2C31A467974001FA518 /* DataEntity.swift in Sources */,
 				7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */,

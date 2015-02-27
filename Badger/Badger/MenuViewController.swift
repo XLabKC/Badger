@@ -1,6 +1,6 @@
 import UIKit
 
-class MenuViewController: UITableViewController {
+class MenuViewController: UITableViewController, HeaderCellDelegate {
 
     private let logoCellHeight: CGFloat = 46.0
     private let contentCellHeight: CGFloat = 72.0
@@ -158,7 +158,14 @@ class MenuViewController: UITableViewController {
             case 1, 3:
                 let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
                 cell.labelColor = Color.colorize(0x929292, alpha: 1)
-                cell.title = indexPath.row == 1 ? "MY PROFILE" : "MY TEAM"
+                cell.title = indexPath.row == 1 ? "MY PROFILE" : "MY TEAMS"
+                if indexPath.row == 3 {
+                    cell.delegate = self
+                    cell.buttonText = "NEW TEAM"
+                    cell.showButton = true
+                    println(cell.buttonInset)
+                    cell.buttonInset = -68
+                }
                 return cell
             default:
                 let cell = tableView.dequeueReusableCellWithIdentifier("MyProfileCell") as MyProfileCell
@@ -202,5 +209,9 @@ class MenuViewController: UITableViewController {
             let vc = nav.topViewController as TeamProfileViewController
             vc.setTeamId(team.id)
         }
+    }
+
+    func headerCellButtonPressed(headerCell: HeaderCell) {
+        
     }
 }

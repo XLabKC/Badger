@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -25,7 +25,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0WE-ch-k9g">
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0WE-ch-k9g">
                         <rect key="frame" x="254" y="3.5" width="51" height="33"/>
                         <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="14"/>
                         <state key="normal" title="Button">
@@ -41,7 +41,6 @@
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="LtL-rU-sk2" secondAttribute="centerY" constant="0.25" id="BYO-t0-HiI"/>
                     <constraint firstAttribute="centerY" secondItem="0WE-ch-k9g" secondAttribute="centerY" id="CuY-qy-F0j"/>
-                    <constraint firstItem="0WE-ch-k9g" firstAttribute="leading" secondItem="LtL-rU-sk2" secondAttribute="trailing" constant="-3" id="Icz-VN-mmz"/>
                     <constraint firstItem="0WE-ch-k9g" firstAttribute="trailing" secondItem="Zs8-6l-qgh" secondAttribute="trailingMargin" constant="-7" id="l5a-ij-QDZ"/>
                     <constraint firstItem="LtL-rU-sk2" firstAttribute="leading" secondItem="Zs8-6l-qgh" secondAttribute="leadingMargin" constant="5" id="mqk-WF-mpd"/>
                     <constraint firstItem="LtL-rU-sk2" firstAttribute="trailing" secondItem="Zs8-6l-qgh" secondAttribute="trailingMargin" constant="-55" id="o3E-fJ-JXG"/>
@@ -49,6 +48,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="buttonConstraint" destination="l5a-ij-QDZ" id="2lR-k8-kSl"/>
                 <outlet property="headerButton" destination="0WE-ch-k9g" id="A04-Za-E1v"/>
                 <outlet property="headerLabel" destination="LtL-rU-sk2" id="t0i-Ai-SsH"/>
             </connections>

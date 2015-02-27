@@ -17,4 +17,18 @@ class TeamStore {
         let ref = Firebase(url: Global.FirebaseTeamsUrl).childByAppendingPath("\(id)/active_task_count")
         FirebaseUtil.adjustValueForRef(ref, delta: delta)
     }
+
+    class func deactivateTeam(team: Team) {
+        if team.ownerIds[UserStore.sharedInstance().getAuthUid()] != true {
+            return
+        }
+        team.ref.childByAppendingPath("active").setValue(false)
+    }
+
+    class func activateTeam(team: Team) {
+        if team.ownerIds[UserStore.sharedInstance().getAuthUid()] != true {
+            return
+        }
+        team.ref.childByAppendingPath("active").setValue(true)
+    }
 }

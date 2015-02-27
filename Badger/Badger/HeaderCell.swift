@@ -8,6 +8,7 @@ class HeaderCell : BorderedCell {
 
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var headerButton: UIButton!
+    @IBOutlet weak var buttonConstraint: NSLayoutConstraint!
 
     weak var delegate: HeaderCellDelegate?
 
@@ -56,7 +57,16 @@ class HeaderCell : BorderedCell {
             self.headerButton.hidden = !show
         }
     }
-    
+
+    var buttonInset: CGFloat {
+        get {
+            return self.buttonConstraint.constant
+        }
+        set(value) {
+            self.buttonConstraint.constant = value
+        }
+    }
+
     @IBAction func buttonPressed(sender: AnyObject) {
         if let delegate = self.delegate? {
             delegate.headerCellButtonPressed(self)

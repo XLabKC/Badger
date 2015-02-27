@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fuU-LW-MkP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fuU-LW-MkP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -17,6 +17,8 @@
             <string>BrandonGrotesque-Medium</string>
         </mutableArray>
         <mutableArray key="OpenSans-Light.ttf">
+            <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
@@ -757,7 +759,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hv4-KC-rNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1441" y="1164"/>
+            <point key="canvasLocation" x="1371" y="1164"/>
         </scene>
         <!--Select User View Controller-->
         <scene sceneID="tX2-cU-Lhv">
@@ -776,7 +778,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E5H-MG-ziQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1980" y="1164"/>
+            <point key="canvasLocation" x="1950" y="1164"/>
         </scene>
         <!--Select Team View Controller-->
         <scene sceneID="ySm-7k-Q2S">
@@ -795,7 +797,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXh-D5-thA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1980" y="1876"/>
+            <point key="canvasLocation" x="1950" y="1899"/>
         </scene>
         <!--Task Detail View Controller-->
         <scene sceneID="9Ug-Qc-OHP">
@@ -1031,7 +1033,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2p0-7p-f1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1441" y="410"/>
+            <point key="canvasLocation" x="1371" y="409"/>
         </scene>
         <!--Splash Screen View Controller-->
         <scene sceneID="wYI-BD-nsm">
@@ -1469,6 +1471,16 @@
                                                 <constraint firstAttribute="height" constant="300" id="d6b-Ul-htf"/>
                                             </constraints>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcq-E6-OFf">
+                                            <rect key="frame" x="20" y="16" width="46" height="30"/>
+                                            <state key="normal" title="Edit">
+                                                <color key="titleColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="PIn-zT-ega" kind="presentation" modalTransitionStyle="coverVertical" id="x0l-RS-XZX"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="gMr-Cr-ypj" firstAttribute="bottom" secondItem="9MC-HP-Uds" secondAttribute="bottom" constant="-21" id="24x-aU-KSv"/>
@@ -1779,11 +1791,131 @@
             </objects>
             <point key="canvasLocation" x="371" y="1164"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DMU-l8-Chl">
+            <objects>
+                <navigationController id="PIn-zT-ega" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fxx-hM-dum">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="asz-zP-P4H" kind="relationship" relationship="rootViewController" id="ned-Hm-NV5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pe6-u6-Y8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="817" y="1899"/>
+        </scene>
+        <!--Team Edit View Controller-->
+        <scene sceneID="TiB-Aj-Yxk">
+            <objects>
+                <tableViewController id="asz-zP-P4H" customClass="TeamEditViewController" customModule="Badger" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="He8-ns-yaF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeamEditMemberCell" rowHeight="72" id="0Ak-Dv-Gxq" customClass="TeamEditMemberCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Ak-Dv-Gxq" id="auW-Kj-EaI">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cef-Re-jb4">
+                                            <rect key="frame" x="60" y="10" width="48.5" height="25"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
+                                            <color key="textColor" red="0.29803921570000003" green="0.30588235289999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="PcH-VH-9Km">
+                                            <rect key="frame" x="60" y="35" width="50.5" height="25"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
+                                            <color key="textColor" red="0.29803921570000003" green="0.30588235289999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPh-Ki-cwf">
+                                            <rect key="frame" x="15" y="10" width="30" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="Gtt-1S-TUB"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="fRy-mi-urY"/>
+                                            </constraints>
+                                            <state key="normal" image="DeleteIcon">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="fRy-mi-urY"/>
+                                                </mask>
+                                            </variation>
+                                            <connections>
+                                                <action selector="deleteButtonClicked:" destination="0Ak-Dv-Gxq" eventType="touchUpInside" id="88l-ay-jWA"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMK-Sr-Zbq">
+                                            <rect key="frame" x="275" y="21" width="30" height="30"/>
+                                            <state key="normal" image="AdminInactiveIcon">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected" image="AdminActiveIcon"/>
+                                            <connections>
+                                                <action selector="adminButtonClicked:" destination="0Ak-Dv-Gxq" eventType="touchUpInside" id="r51-1y-fPY"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="uPh-Ki-cwf" secondAttribute="centerY" constant="0.5" id="12T-aM-cTs"/>
+                                        <constraint firstItem="PcH-VH-9Km" firstAttribute="leading" secondItem="uPh-Ki-cwf" secondAttribute="trailing" constant="15" id="7aP-fA-6Ij"/>
+                                        <constraint firstItem="Cef-Re-jb4" firstAttribute="top" secondItem="auW-Kj-EaI" secondAttribute="topMargin" constant="2" id="8Hb-63-yls"/>
+                                        <constraint firstItem="uPh-Ki-cwf" firstAttribute="leading" secondItem="auW-Kj-EaI" secondAttribute="leadingMargin" constant="7" id="FVC-Lj-Xvk"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="pMK-Sr-Zbq" secondAttribute="trailing" constant="7" id="OR1-Zz-Gxs"/>
+                                        <constraint firstItem="Cef-Re-jb4" firstAttribute="leading" secondItem="uPh-Ki-cwf" secondAttribute="trailing" constant="15" id="S8I-Kd-X8E"/>
+                                        <constraint firstAttribute="centerY" secondItem="pMK-Sr-Zbq" secondAttribute="centerY" id="YR8-Kw-iZ8"/>
+                                        <constraint firstItem="PcH-VH-9Km" firstAttribute="top" secondItem="Cef-Re-jb4" secondAttribute="bottom" id="ee2-8u-9g3"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="inset"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="adminButton" destination="pMK-Sr-Zbq" id="wu3-3W-6TV"/>
+                                    <outlet property="adminButtonClicked" destination="pMK-Sr-Zbq" id="4vc-7a-oGA"/>
+                                    <outlet property="nameLabel" destination="Cef-Re-jb4" id="69w-xE-Omt"/>
+                                    <outlet property="statusLabel" destination="PcH-VH-9Km" id="web-up-xwH"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="asz-zP-P4H" id="ryi-fc-lUO"/>
+                            <outlet property="delegate" destination="asz-zP-P4H" id="iu3-xd-hwF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="LpQ-WW-3hp">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="0a5-De-P9r">
+                            <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Delete" id="l6e-mO-ynm">
+                            <color key="tintColor" red="1" green="0.36078431372549019" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t9p-rC-KTu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1371" y="1899"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="AdminActiveIcon" width="30" height="30"/>
+        <image name="AdminInactiveIcon" width="30" height="30"/>
         <image name="CheckmarkIcon" width="125" height="125"/>
         <image name="CloseIcon" width="20" height="20"/>
         <image name="DefaultBackground" width="375" height="290"/>
+        <image name="DeleteIcon" width="30" height="30"/>
         <image name="GrayButton" width="166" height="70"/>
         <image name="LogoBlackSmall" width="57" height="51"/>
         <image name="LogoPurpleHuge" width="407" height="362"/>
@@ -1793,8 +1925,8 @@
         <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ASy-Id-BnR"/>
         <segue reference="sG0-Gn-9tP"/>
-        <segue reference="dhT-2f-k0x"/>
-        <segue reference="G2U-IQ-PaM"/>
+        <segue reference="kUo-1a-Owt"/>
     </inferredMetricsTieBreakers>
 </document>
