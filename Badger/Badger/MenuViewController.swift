@@ -163,7 +163,6 @@ class MenuViewController: UITableViewController, HeaderCellDelegate {
                     cell.delegate = self
                     cell.buttonText = "NEW TEAM"
                     cell.showButton = true
-                    println(cell.buttonInset)
                     cell.buttonInset = -68
                 }
                 return cell

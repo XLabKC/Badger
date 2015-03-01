@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="OpenSans-Light.ttf">
+            <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserProfileHeaderCell" rowHeight="225" id="0Vh-3z-egO" customClass="UserProfileHeaderCell" customModule="Badger" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="225"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Vh-3z-egO" id="fBc-Xh-thY">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultBackground" translatesAutoresizingMaskIntoConstraints="NO" id="bHv-fI-kGQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="225"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMA-ao-jXv">
+                        <rect key="frame" x="0.0" y="-300" width="320" height="300"/>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="300" id="lEq-Rv-3Ae"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6YZ-Q9-leC">
+                        <rect key="frame" x="15" y="160" width="290" height="33"/>
+                        <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
+                        <color key="textColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="occupied" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdV-Nk-1MI">
+                        <rect key="frame" x="8" y="193" width="304" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="F90-57-fsP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
+                        <color key="textColor" red="0.67452745879999998" green="0.68734892960000005" blue="0.66492098070000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MPk-G0-knw" customClass="ProfileCircle" customModule="Badger" customModuleProvider="target">
+                        <rect key="frame" x="92" y="16" width="136" height="136"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="136" id="d8C-Op-AyR"/>
+                            <constraint firstAttribute="height" constant="136" id="hUy-mp-G1o"/>
+                        </constraints>
+                    </view>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hlz-FC-VXi">
+                        <rect key="frame" x="15" y="8" width="49" height="30"/>
+                        <state key="normal" title="Logout">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="logout:" destination="0Vh-3z-egO" eventType="touchUpInside" id="l4B-o0-8kt"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OdV-Nk-1MI" firstAttribute="top" secondItem="6YZ-Q9-leC" secondAttribute="bottom" id="3Zv-k5-TAu"/>
+                    <constraint firstAttribute="centerX" secondItem="MPk-G0-knw" secondAttribute="centerX" id="8Jw-K3-ZmS"/>
+                    <constraint firstItem="OdV-Nk-1MI" firstAttribute="top" secondItem="6YZ-Q9-leC" secondAttribute="bottom" id="8dd-Kq-Sel"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="FMA-ao-jXv" secondAttribute="trailing" constant="-8" id="Dgb-Pt-iIa"/>
+                    <constraint firstItem="FMA-ao-jXv" firstAttribute="leading" secondItem="fBc-Xh-thY" secondAttribute="leadingMargin" constant="-8" id="FnK-D1-LpW"/>
+                    <constraint firstItem="FMA-ao-jXv" firstAttribute="top" secondItem="fBc-Xh-thY" secondAttribute="topMargin" constant="-308" id="J2L-t8-slq"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bHv-fI-kGQ" secondAttribute="trailing" constant="-8" id="JKW-dY-iWY"/>
+                    <constraint firstItem="OdV-Nk-1MI" firstAttribute="leading" secondItem="fBc-Xh-thY" secondAttribute="leadingMargin" id="NFf-IJ-Ggl"/>
+                    <constraint firstAttribute="bottom" secondItem="bHv-fI-kGQ" secondAttribute="bottom" id="PRT-zD-W73"/>
+                    <constraint firstItem="6YZ-Q9-leC" firstAttribute="bottom" secondItem="OdV-Nk-1MI" secondAttribute="bottom" constant="-21" id="QRB-bB-Nh3"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="OdV-Nk-1MI" secondAttribute="bottom" constant="5" id="SuJ-4c-gGw"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="6YZ-Q9-leC" secondAttribute="trailing" constant="7" id="TCt-jv-sYR"/>
+                    <constraint firstItem="OdV-Nk-1MI" firstAttribute="trailing" secondItem="fBc-Xh-thY" secondAttribute="trailingMargin" id="ULD-Jq-zX0"/>
+                    <constraint firstItem="6YZ-Q9-leC" firstAttribute="leading" secondItem="fBc-Xh-thY" secondAttribute="leadingMargin" constant="7" id="Xln-3n-QEt"/>
+                    <constraint firstItem="bHv-fI-kGQ" firstAttribute="top" secondItem="fBc-Xh-thY" secondAttribute="top" id="YEh-sD-Ki6"/>
+                    <constraint firstItem="OdV-Nk-1MI" firstAttribute="leading" secondItem="6YZ-Q9-leC" secondAttribute="leading" id="gQo-ee-fdA"/>
+                    <constraint firstItem="bHv-fI-kGQ" firstAttribute="centerX" secondItem="6YZ-Q9-leC" secondAttribute="centerX" id="hCY-br-pyS"/>
+                    <constraint firstItem="MPk-G0-knw" firstAttribute="top" secondItem="fBc-Xh-thY" secondAttribute="topMargin" constant="8" id="jQR-Ru-t40"/>
+                    <constraint firstItem="bHv-fI-kGQ" firstAttribute="leading" secondItem="fBc-Xh-thY" secondAttribute="leading" id="nWe-sK-MbG"/>
+                    <constraint firstItem="6YZ-Q9-leC" firstAttribute="top" secondItem="MPk-G0-knw" secondAttribute="bottom" constant="8" id="zo7-bh-kun"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="hCY-br-pyS"/>
+                        <exclude reference="8dd-Kq-Sel"/>
+                        <exclude reference="SuJ-4c-gGw"/>
+                        <exclude reference="gQo-ee-fdA"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="backgroundImage" destination="bHv-fI-kGQ" id="lLN-ZS-Omd"/>
+                <outlet property="nameLabel" destination="6YZ-Q9-leC" id="LLh-Gx-2Y5"/>
+                <outlet property="profileCircle" destination="MPk-G0-knw" id="VsR-i4-6Ku"/>
+                <outlet property="statusLabel" destination="OdV-Nk-1MI" id="Kfc-z9-6AS"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="DefaultBackground" width="375" height="290"/>
+    </resources>
+</document>

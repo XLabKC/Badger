@@ -23,6 +23,7 @@
 		7B21D8C11A54C395006AFEC0 /* StatusCloseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21D8C01A54C395006AFEC0 /* StatusCloseCell.swift */; };
 		7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */; };
 		7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */; };
+		7B295EAD1AA3CB5C00E259E1 /* UserAvailabilityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B295EAC1AA3CB5C00E259E1 /* UserAvailabilityCell.swift */; };
 		7B29F1981A264346003920AD /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1971A264346003920AD /* TeamProfileViewController.swift */; };
 		7B29F19A1A2643FC003920AD /* TeamHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F1991A2643FC003920AD /* TeamHeaderCell.swift */; };
 		7B29F19C1A26443E003920AD /* TeamProfileControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */; };
@@ -30,8 +31,11 @@
 		7B39B8821A91552B0080D462 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B39B8811A91552B0080D462 /* Firebase.framework */; };
 		7B39B8851A91AC2D0080D462 /* TeamEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B8841A91AC2D0080D462 /* TeamEditViewController.swift */; };
 		7B39B8891A9E5A290080D462 /* TeamEditMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B8881A9E5A290080D462 /* TeamEditMemberCell.swift */; };
-		7B39B88D1AA01F690080D462 /* EditTeamInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B88C1AA01F690080D462 /* EditTeamInfoCell.swift */; };
-		7B39B88F1AA01FE50080D462 /* EditTeamInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39B88E1AA01FE50080D462 /* EditTeamInfoCell.xib */; };
+		7B39B88D1AA01F690080D462 /* EditProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B88C1AA01F690080D462 /* EditProfileInfoCell.swift */; };
+		7B39B88F1AA01FE50080D462 /* EditProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39B88E1AA01FE50080D462 /* EditProfileInfoCell.xib */; };
+		7B39B8911AA0CDDB0080D462 /* UserProfileHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39B8901AA0CDDB0080D462 /* UserProfileHeaderCell.xib */; };
+		7B39B8931AA0CDEF0080D462 /* UserProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B8921AA0CDEF0080D462 /* UserProfileHeaderCell.swift */; };
+		7B39B8961AA0E41A0080D462 /* UserEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B8951AA0E41A0080D462 /* UserEditViewController.swift */; };
 		7B39D28D1A01F6E10033D4FE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */; };
 		7B42B2DF1A5D8DA100854065 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B42B2DE1A5D8DA100854065 /* NotificationManager.swift */; };
 		7B42B2E11A5D8DB100854065 /* NotificationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B42B2E01A5D8DB100854065 /* NotificationPopup.swift */; };
@@ -43,7 +47,6 @@
 		7B47339F1A1A9B4500D88C00 /* StatusSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47339E1A1A9B4500D88C00 /* StatusSlider.swift */; };
 		7B4733AE1A1BC11100D88C00 /* ProfileCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733AD1A1BC11100D88C00 /* ProfileCircle.swift */; };
 		7B4733B01A1BC20000D88C00 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733AF1A1BC20000D88C00 /* Color.swift */; };
-		7B4733B61A1BE31C00D88C00 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733B51A1BE31C00D88C00 /* ProfileHeaderCell.swift */; };
 		7B4733B81A1BE35800D88C00 /* StatusSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733B71A1BE35800D88C00 /* StatusSliderCell.swift */; };
 		7B4733BA1A1BE38700D88C00 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4733B91A1BE38700D88C00 /* TaskCell.swift */; };
 		7B4733C11A1C593B00D88C00 /* Brandon_med.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B4733B41A1BD65000D88C00 /* Brandon_med.otf */; };
@@ -138,6 +141,7 @@
 		7B21D8C01A54C395006AFEC0 /* StatusCloseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCloseCell.swift; sourceTree = "<group>"; };
 		7B24278E1A2D3E7500A3144E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		7B2427901A2D63F100A3144E /* TaskDetailAuthorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailAuthorCell.swift; sourceTree = "<group>"; };
+		7B295EAC1AA3CB5C00E259E1 /* UserAvailabilityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAvailabilityCell.swift; sourceTree = "<group>"; };
 		7B29F1971A264346003920AD /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
 		7B29F1991A2643FC003920AD /* TeamHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamHeaderCell.swift; sourceTree = "<group>"; };
 		7B29F19B1A26443E003920AD /* TeamProfileControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileControlCell.swift; sourceTree = "<group>"; };
@@ -145,8 +149,11 @@
 		7B39B8811A91552B0080D462 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7B39B8841A91AC2D0080D462 /* TeamEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamEditViewController.swift; sourceTree = "<group>"; };
 		7B39B8881A9E5A290080D462 /* TeamEditMemberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamEditMemberCell.swift; sourceTree = "<group>"; };
-		7B39B88C1AA01F690080D462 /* EditTeamInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTeamInfoCell.swift; sourceTree = "<group>"; };
-		7B39B88E1AA01FE50080D462 /* EditTeamInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditTeamInfoCell.xib; sourceTree = "<group>"; };
+		7B39B88C1AA01F690080D462 /* EditProfileInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileInfoCell.swift; sourceTree = "<group>"; };
+		7B39B88E1AA01FE50080D462 /* EditProfileInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditProfileInfoCell.xib; sourceTree = "<group>"; };
+		7B39B8901AA0CDDB0080D462 /* UserProfileHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileHeaderCell.xib; sourceTree = "<group>"; };
+		7B39B8921AA0CDEF0080D462 /* UserProfileHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeaderCell.swift; sourceTree = "<group>"; };
+		7B39B8951AA0E41A0080D462 /* UserEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEditViewController.swift; sourceTree = "<group>"; };
 		7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7B42B2DE1A5D8DA100854065 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		7B42B2E01A5D8DB100854065 /* NotificationPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPopup.swift; sourceTree = "<group>"; };
@@ -161,7 +168,6 @@
 		7B4733B21A1BCEC300D88C00 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		7B4733B31A1BCEC300D88C00 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		7B4733B41A1BD65000D88C00 /* Brandon_med.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_med.otf; sourceTree = "<group>"; };
-		7B4733B51A1BE31C00D88C00 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
 		7B4733B71A1BE35800D88C00 /* StatusSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusSliderCell.swift; sourceTree = "<group>"; };
 		7B4733B91A1BE38700D88C00 /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		7B4733C41A1D51BB00D88C00 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
@@ -347,11 +353,19 @@
 			name = "Team Edit";
 			sourceTree = "<group>";
 		};
+		7B39B8941AA0D0340080D462 /* User Edit */ = {
+			isa = PBXGroup;
+			children = (
+				7B39B8951AA0E41A0080D462 /* UserEditViewController.swift */,
+				7B295EAC1AA3CB5C00E259E1 /* UserAvailabilityCell.swift */,
+			);
+			name = "User Edit";
+			sourceTree = "<group>";
+		};
 		7B39D28B1A01F6C00033D4FE /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
 				7B39D28C1A01F6E10033D4FE /* ProfileViewController.swift */,
-				7B4733B51A1BE31C00D88C00 /* ProfileHeaderCell.swift */,
 				7B9A63511A2E8A2F00DF1143 /* ProfileControlsCell.swift */,
 				7B4733B71A1BE35800D88C00 /* StatusSliderCell.swift */,
 				7B4733B91A1BE38700D88C00 /* TaskCell.swift */,
@@ -511,6 +525,7 @@
 				7B4733D41A1E84B100D88C00 /* Menus */,
 				7BF066141A1434DF00F3E6A1 /* Login */,
 				7B39D28B1A01F6C00033D4FE /* User Profile */,
+				7B39B8941AA0D0340080D462 /* User Edit */,
 				7B29F1941A263A90003920AD /* Team Profile */,
 				7B39B8831A91ABFE0080D462 /* Team Edit */,
 				7B9A63551A2E8FA200DF1143 /* Task Edit */,
@@ -546,8 +561,10 @@
 				7B15CCFD1A38D22F00519C8E /* UserCell.xib */,
 				7B15CD081A39080400519C8E /* TeamCell.swift */,
 				7B15CD0A1A39081600519C8E /* TeamCell.xib */,
-				7B39B88C1AA01F690080D462 /* EditTeamInfoCell.swift */,
-				7B39B88E1AA01FE50080D462 /* EditTeamInfoCell.xib */,
+				7B39B88C1AA01F690080D462 /* EditProfileInfoCell.swift */,
+				7B39B88E1AA01FE50080D462 /* EditProfileInfoCell.xib */,
+				7B39B8921AA0CDEF0080D462 /* UserProfileHeaderCell.swift */,
+				7B39B8901AA0CDDB0080D462 /* UserProfileHeaderCell.xib */,
 			);
 			name = "Shared Cells";
 			sourceTree = "<group>";
@@ -684,7 +701,8 @@
 				7B469C521A225E430054019D /* LoadingCell.xib in Resources */,
 				7B743A5719F94A3D0075690A /* GooglePlus.bundle in Resources */,
 				7B743A0419F87E4E0075690A /* Images.xcassets in Resources */,
-				7B39B88F1AA01FE50080D462 /* EditTeamInfoCell.xib in Resources */,
+				7B39B8911AA0CDDB0080D462 /* UserProfileHeaderCell.xib in Resources */,
+				7B39B88F1AA01FE50080D462 /* EditProfileInfoCell.xib in Resources */,
 				7B15CCFE1A38D22F00519C8E /* UserCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,7 +723,6 @@
 			files = (
 				7B4733AE1A1BC11100D88C00 /* ProfileCircle.swift in Sources */,
 				7B4733BA1A1BE38700D88C00 /* TaskCell.swift in Sources */,
-				7B4733B61A1BE31C00D88C00 /* ProfileHeaderCell.swift in Sources */,
 				7B29F19C1A26443E003920AD /* TeamProfileControlCell.swift in Sources */,
 				7B21D8B91A530B2F006AFEC0 /* StatusViewController.swift in Sources */,
 				7BD0F9C81A3E442400BDF70D /* TaskDetailCompleteCell.swift in Sources */,
@@ -726,6 +743,8 @@
 				7B7439FD19F87E4E0075690A /* AppDelegate.swift in Sources */,
 				7B4733D91A1E8AB600D88C00 /* BaseTableViewController.swift in Sources */,
 				7B24278F1A2D3E7500A3144E /* TaskDetailViewController.swift in Sources */,
+				7B39B8931AA0CDEF0080D462 /* UserProfileHeaderCell.swift in Sources */,
+				7B295EAD1AA3CB5C00E259E1 /* UserAvailabilityCell.swift in Sources */,
 				7B2427911A2D63F100A3144E /* TaskDetailAuthorCell.swift in Sources */,
 				7B9A632A1A2D642800DF1143 /* TaskDetailContentCell.swift in Sources */,
 				7B4733D61A1E84C900D88C00 /* MenuViewController.swift in Sources */,
@@ -750,10 +769,11 @@
 				7B21D8C11A54C395006AFEC0 /* StatusCloseCell.swift in Sources */,
 				7B29F19A1A2643FC003920AD /* TeamHeaderCell.swift in Sources */,
 				7B42B2E11A5D8DB100854065 /* NotificationPopup.swift in Sources */,
-				7B39B88D1AA01F690080D462 /* EditTeamInfoCell.swift in Sources */,
+				7B39B88D1AA01F690080D462 /* EditProfileInfoCell.swift in Sources */,
 				7B64F2BF1A41E68C001FA518 /* FirebaseUtil.swift in Sources */,
 				7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */,
 				7B4733D01A1E551600D88C00 /* Team.swift in Sources */,
+				7B39B8961AA0E41A0080D462 /* UserEditViewController.swift in Sources */,
 				7B39B8891A9E5A290080D462 /* TeamEditMemberCell.swift in Sources */,
 				7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */,
 				7B21D8BB1A530B80006AFEC0 /* StatusCell.swift in Sources */,

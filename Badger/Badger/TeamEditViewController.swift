@@ -12,7 +12,7 @@ class TeamEditViewController: UITableViewController {
 
     private var rightButton = UIBarButtonItem(title: "Delete", style: .Plain, target: nil, action: "deleteTeam")
     private var isConfirmingDelete = false
-    private var teamInfoCell: EditTeamInfoCell?
+    private var teamInfoCell: EditProfileInfoCell?
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -32,21 +32,19 @@ class TeamEditViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Register loading cell.
+        // Register cells.
         let loadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)
         self.tableView.registerNib(loadingCellNib, forCellReuseIdentifier: "LoadingCell")
 
-        // Register edit team info cell.
-        let teamInfoCellNib = UINib(nibName: "EditTeamInfoCell", bundle: nil)
-        self.tableView.registerNib(teamInfoCellNib, forCellReuseIdentifier: "EditTeamInfoCell")
+        let editProfileInfoCellNib = UINib(nibName: "EditProfileInfoCell", bundle: nil)
+        self.tableView.registerNib(editProfileInfoCellNib, forCellReuseIdentifier: "EditProfileInfoCell")
+
+        let headerCellNib = UINib(nibName: "HeaderCell", bundle: nil)
+        self.tableView.registerNib(headerCellNib, forCellReuseIdentifier: "HeaderCell")
 
         // Set up navigation bar.
         self.navigationItem.titleView = Helpers.createTitleLabel("Edit Team")
         self.navigationItem.rightBarButtonItem = rightButton
-
-        // Register loading cell.
-        let headerCellNib = UINib(nibName: "HeaderCell", bundle: nil)
-        self.tableView.registerNib(headerCellNib, forCellReuseIdentifier: "HeaderCell")
     }
 
     func setTeamId(teamId: String) {
@@ -114,7 +112,7 @@ class TeamEditViewController: UITableViewController {
             if let cell = self.teamInfoCell? {
                 return cell
             }
-            self.teamInfoCell = tableView.dequeueReusableCellWithIdentifier("EditTeamInfoCell") as? EditTeamInfoCell
+            self.teamInfoCell = tableView.dequeueReusableCellWithIdentifier("EditProfileInfoCell") as? EditProfileInfoCell
             if let team = self.team? {
                 self.teamInfoCell!.name = team.name
             }

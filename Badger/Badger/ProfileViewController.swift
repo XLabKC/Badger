@@ -19,7 +19,7 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
     private var completedTasks = ArrayRef<Task>()
     private var isShowingCompletedTasks = false
     private var statusSliderCell: StatusSliderCell?
-    private var profileHeaderCell: ProfileHeaderCell?
+    private var profileHeaderCell: UserProfileHeaderCell?
     private var profileControlsCell: ProfileControlsCell?
     private var user: User?
     private var isAuthUser = true
@@ -63,6 +63,9 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
 
         let headerCellNib = UINib(nibName: "HeaderCell", bundle: nil)
         self.tableView.registerNib(headerCellNib, forCellReuseIdentifier: "HeaderCell")
+
+        let profileCellNib = UINib(nibName: "UserProfileHeaderCell", bundle: nil)
+        self.tableView.registerNib(profileCellNib, forCellReuseIdentifier: "UserProfileHeaderCell")
 
         // Set up navigation bar.
         self.navigationItem.titleView = self.titleLabel
@@ -189,7 +192,7 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
             // Header Cell
             if indexPath.row == 0 {
                 if self.profileHeaderCell == nil {
-                    self.profileHeaderCell = (tableView.dequeueReusableCellWithIdentifier("ProfileHeaderCell") as ProfileHeaderCell)
+                    self.profileHeaderCell = (tableView.dequeueReusableCellWithIdentifier("UserProfileHeaderCell") as UserProfileHeaderCell)
                     if let user = self.user? {
                         self.profileHeaderCell!.setUser(user)
                     }

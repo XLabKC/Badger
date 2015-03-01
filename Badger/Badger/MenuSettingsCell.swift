@@ -4,7 +4,7 @@ class MenuSettingsCell: BorderedCell {
     private var hasAwakened = false
     private var user: User?
 
-    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var emailButton: UIButton!
 
     override func awakeFromNib() {
         self.hasAwakened = true
@@ -21,7 +21,7 @@ class MenuSettingsCell: BorderedCell {
 
     private func updateView() {
         if self.user != nil && self.hasAwakened {
-            self.emailLabel.text = self.user!.email
+            self.emailButton.setTitle(self.user!.email, forState: .Normal)
         }
     }
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-class ProfileHeaderCell: UITableViewCell {
+class UserProfileHeaderCell: UITableViewCell {
 
     private var hasAwakened = false
     private var user: User?
@@ -9,7 +9,7 @@ class ProfileHeaderCell: UITableViewCell {
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-
+    
     override func awakeFromNib() {
         self.hasAwakened = true
         self.updateView()
