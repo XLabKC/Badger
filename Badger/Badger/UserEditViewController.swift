@@ -6,7 +6,7 @@ class UserEditViewController: UITableViewController {
     private let editInfoCellHeight: CGFloat = 226.0
     private let editStatusCellHeight: CGFloat = 72.0
 
-    private var cells = [UITableViewCell?](count: 5, repeatedValue: nil)
+    private var cells = [UITableViewCell?](count: 6, repeatedValue: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,9 @@ class UserEditViewController: UITableViewController {
         let editProfileInfoCellNib = UINib(nibName: "EditProfileInfoCell", bundle: nil)
         self.tableView.registerNib(editProfileInfoCellNib, forCellReuseIdentifier: "EditProfileInfoCell")
 
+        let textFieldCellNib = UINib(nibName: "TextFieldCell", bundle: nil)
+        self.tableView.registerNib(textFieldCellNib, forCellReuseIdentifier: "TextFieldCell")
+
         // Set up navigation bar.
         self.navigationItem.titleView = Helpers.createTitleLabel("Edit Profile")
     }
@@ -31,8 +34,8 @@ class UserEditViewController: UITableViewController {
     // TableViewController Overrides
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Header + Info + Free + Occupied + Unavailable
-        return 5
+        // Header + Info + Header + Free + Occupied + Unavailable
+        return 6
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -40,7 +43,7 @@ class UserEditViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+        if indexPath.row == 0 || indexPath.row == 2 {
             return self.headerCellHeight
         }
         if indexPath.row == 1 {
@@ -64,9 +67,9 @@ class UserEditViewController: UITableViewController {
         let user = UserStore.sharedInstance().getAuthUser()
 
         switch (index) {
-        case 0:
+        case 0, 2:
             let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
-            cell.title = "MY PROFILE"
+            cell.title = index == 0 ? "MY PROFILE" : "STATUSES"
             cell.labelColor = Color.colorize(0x929292, alpha: 1.0)
             return cell
 
@@ -83,17 +86,25 @@ class UserEditViewController: UITableViewController {
             self.cells[index] = cell
             return cell
         default:
-            let cell = tableView.dequeueReusableCellWithIdentifier("UserAvailabilityCell") as UserAvailabilityCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as TextFieldCell
             let statuses: [UserStatus] = [.Free, .Occupied, .Unavailable]
             let labels = ["Default Available Status", "Default Away Status", "Default Unavailable Status"]
-            let status = statuses[index - 2]
+            let status = statuses[index - 3]
 
-            cell.statusTextField.text = user.textStatuses[status]
-            cell.statusTextField.textColor = Helpers.statusToColor(status)
-            cell.statusLabel.text = labels[index - 2]
+            cell.textField.placeholder = "Status"
+            cell.textField.text = user.textStatuses[status]
+            cell.textField.textColor = Helpers.statusToColor(status)
+            cell.label.text = labels[index - 3]
+            cell.label.textColor = Color.colorize(0x929292, alpha: 1.0)
+            cell.borderColor = Color.colorize(0xE1E1E1, alpha: 1.0)
 
             if status == .Unavailable {
                 cell.bottomBorderStyle = "full"
+            } else {
+                cell.bottomBorderStyle = "inset"
+                if status == .Free {
+                    cell.topBorderStyle = "full"
+                }
             }
 
             self.cells[index] = cell

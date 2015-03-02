@@ -58,6 +58,9 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         let teamCellNib = UINib(nibName: "TeamCell", bundle: nil)
         self.tableView.registerNib(teamCellNib, forCellReuseIdentifier: "TeamCell")
 
+        let textFieldCellNib = UINib(nibName: "TextFieldCell", bundle: nil)
+        self.tableView.registerNib(textFieldCellNib, forCellReuseIdentifier: "TextFieldCell")
+
         // Auto populate the team if the auth user only is part of a single team.
         if self.team == nil {
             let authUser = UserStore.sharedInstance().getAuthUser()
@@ -392,8 +395,14 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             }
             return self.cells[index]!
         case .Title:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditTitleCell") as TaskEditTitleCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as TextFieldCell
             cell.delegate = self
+            cell.label.text = "Title"
+            cell.label.textColor = Color.colorize(0x929292, alpha: 1.0)
+            cell.textField.placeholder = "Title"
+            cell.borderColor = Color.colorize(0xE1E1E1, alpha: 1.0)
+            cell.topBorderStyle = "full"
+            cell.bottomBorderStyle = "inset"
             if let task = self.task {
                 cell.setText(task.title)
             }
@@ -432,8 +441,8 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     }
 
 
-    private func getTitleCell() -> TaskEditTitleCell {
-        return self.cellForIndex(Rows.Title.rawValue) as TaskEditTitleCell
+    private func getTitleCell() -> TextFieldCell {
+        return self.cellForIndex(Rows.Title.rawValue) as TextFieldCell
     }
 
     private func getContentCell() -> TaskEditContentCell {

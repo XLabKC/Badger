@@ -1,35 +1,33 @@
 import UIKit
 
-class TaskEditTitleCell: BorderedCell, InputCell, UITextFieldDelegate {
-    private var hasAwakened = false
+class TextFieldCell: BorderedCell, InputCell, UITextFieldDelegate  {
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var textField: UITextField!
     weak var delegate: InputCellDelegate?
 
-    @IBOutlet weak var titleTextField: UITextField!
-
     override func awakeFromNib() {
-        self.titleTextField.delegate = self
-        self.hasAwakened = true
+        self.textField.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow", name: UIKeyboardDidShowNotification, object: nil)
     }
 
     func getText() -> String {
-        return self.titleTextField.text
+        return self.textField.text
     }
 
     func setText(text: String) {
-        self.titleTextField.text = text
+        self.textField.text = text
     }
 
     func closeKeyboard() {
-        self.titleTextField.resignFirstResponder()
+        self.textField.resignFirstResponder()
     }
 
     func openKeyboard() {
-        self.titleTextField.becomeFirstResponder()
+        self.textField.becomeFirstResponder()
     }
 
     func keyboardDidShow() {
-        if self.titleTextField.editing {
+        if self.textField.editing {
             if let delegate = self.delegate? {
                 delegate.cellDidBeginEditing(self)
             }

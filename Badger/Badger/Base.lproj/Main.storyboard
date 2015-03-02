@@ -53,10 +53,6 @@
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
-            <string>OpenSans-Light</string>
-            <string>OpenSans-Light</string>
-            <string>OpenSans-Light</string>
-            <string>OpenSans-Light</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
@@ -446,51 +442,6 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="full"/>
                                 </userDefinedRuntimeAttributes>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskEditTitleCell" rowHeight="76" id="WIw-Wz-ByA" customClass="TaskEditTitleCell" customModule="Badger" customModuleProvider="target">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WIw-Wz-ByA" id="x41-o0-gH8">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="HpR-Xz-mOn">
-                                            <rect key="frame" x="15" y="13" width="57" height="19.5"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="14"/>
-                                            <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yd9-OY-ccR">
-                                            <rect key="frame" x="15" y="34" width="291" height="33"/>
-                                            <color key="textColor" red="0.55686274509803924" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="Yd9-OY-ccR" firstAttribute="top" secondItem="HpR-Xz-mOn" secondAttribute="bottom" constant="1.5" id="2Ql-jm-hz7"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="HpR-Xz-mOn" secondAttribute="trailing" constant="7" id="387-h8-RH2"/>
-                                        <constraint firstAttribute="centerY" secondItem="HpR-Xz-mOn" secondAttribute="centerY" id="LS0-gn-Cl5"/>
-                                        <constraint firstItem="HpR-Xz-mOn" firstAttribute="leading" secondItem="x41-o0-gH8" secondAttribute="leadingMargin" constant="7" id="Ntf-Dl-8ZJ"/>
-                                        <constraint firstItem="Yd9-OY-ccR" firstAttribute="leading" secondItem="x41-o0-gH8" secondAttribute="leadingMargin" constant="7" id="d3b-mu-BBN"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Yd9-OY-ccR" secondAttribute="trailing" constant="6" id="e6K-XD-cqa"/>
-                                        <constraint firstItem="HpR-Xz-mOn" firstAttribute="top" secondItem="x41-o0-gH8" secondAttribute="topMargin" constant="5" id="fGu-mc-SkA"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="387-h8-RH2"/>
-                                            <exclude reference="LS0-gn-Cl5"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="topBorderStyle" value="full"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="inset"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outlet property="titleTextField" destination="Yd9-OY-ccR" id="Jlr-Hc-wzY"/>
-                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskEditContentCell" rowHeight="72" id="tSa-mI-qNg" customClass="TaskEditContentCell" customModule="Badger" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1701,46 +1652,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="UserAvailabilityCell" rowHeight="72" id="9ae-Kk-ghZ" customClass="UserAvailabilityCell" customModule="Badger" customModuleProvider="target">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ae-Kk-ghZ" id="R1I-Yj-n4g">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Status" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5iR-wp-RAX">
-                                            <rect key="frame" x="15" y="29" width="290" height="33"/>
-                                            <color key="textColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="24"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
-                                        </textField>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="YiO-zZ-LBd">
-                                            <rect key="frame" x="15" y="8" width="77" height="19.5"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="14"/>
-                                            <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="5iR-wp-RAX" secondAttribute="trailing" constant="7" id="4SC-Ap-RWJ"/>
-                                        <constraint firstItem="5iR-wp-RAX" firstAttribute="leading" secondItem="R1I-Yj-n4g" secondAttribute="leadingMargin" constant="7" id="Gb1-y5-NSj"/>
-                                        <constraint firstItem="5iR-wp-RAX" firstAttribute="top" secondItem="YiO-zZ-LBd" secondAttribute="bottom" constant="2" id="YMd-0G-Ahb"/>
-                                        <constraint firstItem="YiO-zZ-LBd" firstAttribute="leading" secondItem="R1I-Yj-n4g" secondAttribute="leadingMargin" constant="7" id="k2c-wW-iqd"/>
-                                        <constraint firstItem="YiO-zZ-LBd" firstAttribute="top" secondItem="R1I-Yj-n4g" secondAttribute="topMargin" id="lvp-U1-9Xf"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomBorderStyle" value="inset"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outlet property="statusLabel" destination="YiO-zZ-LBd" id="JEf-bR-I1B"/>
-                                    <outlet property="statusTextField" destination="5iR-wp-RAX" id="Lr8-lO-3rO"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="kTy-E8-i7F" id="Epm-3I-vgI"/>
                             <outlet property="delegate" destination="kTy-E8-i7F" id="BS8-ik-Ew3"/>
