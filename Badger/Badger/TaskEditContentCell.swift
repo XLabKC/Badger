@@ -4,7 +4,7 @@ protocol TaskEditContentCellDelegate: InputCellDelegate {
     func editContentCell(cell: TaskEditContentCell, hasChangedHeight: CGFloat);
 }
 
-class TaskEditContentCell: BorderedCell, UITextViewDelegate, InputCell {
+class TaskEditContentCell: InputCell, UITextViewDelegate {
     private let minVerticalPadding: CGFloat = 59.0
     private let minTextHeight: CGFloat = 24.0
 
@@ -12,11 +12,12 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate, InputCell {
     private var textToSet: String?
     private var currentHeight: CGFloat = 0
 
-    weak var delegate: TaskEditContentCellDelegate?
+    weak var cellDelegate: TaskEditContentCellDelegate?
 
     @IBOutlet weak var textView: UITextView!
 
     override func awakeFromNib() {
+        super.awakeFromNib()
         self.hasAwakened = true
         if let text = self.textToSet? {
             self.textView.text = text
@@ -29,7 +30,8 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate, InputCell {
         let newHeight = self.calculateCellHeight()
         if self.currentHeight != newHeight {
             self.currentHeight = newHeight
-            if let delegate = self.delegate? {
+            
+            if let delegate = self.cellDelegate? {
                 delegate.editContentCell(self, hasChangedHeight: self.currentHeight)
             }
         }
@@ -46,7 +48,7 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate, InputCell {
         return Helpers.calculateTextViewHeight(self.textView, minVerticalPadding: self.minVerticalPadding, minTextHeight: self.minTextHeight)
     }
 
-    func setText(text: String) {
+    override func setText(text: String) {
         if self.hasAwakened {
             self.textView.text = text
         } else {
@@ -55,15 +57,15 @@ class TaskEditContentCell: BorderedCell, UITextViewDelegate, InputCell {
 
     }
 
-    func getText() -> String {
+    override func getText() -> String {
         return self.textView.text
     }
 
-    func closeKeyboard() {
+    override func closeKeyboard() {
         self.textView.resignFirstResponder()
     }
 
-    func openKeyboard() {
+    override func openKeyboard() {
         self.textView.becomeFirstResponder()
     }
 }

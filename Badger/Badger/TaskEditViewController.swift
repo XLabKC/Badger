@@ -411,6 +411,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         case .Content:
             let cell = (self.tableView.dequeueReusableCellWithIdentifier("TaskEditContentCell") as TaskEditContentCell)
             cell.delegate = self
+            cell.cellDelegate = self
             if let task = self.task {
                 cell.setText(task.content)
             }

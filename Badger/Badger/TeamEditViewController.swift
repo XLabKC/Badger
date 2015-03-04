@@ -12,7 +12,7 @@ class TeamEditViewController: UITableViewController {
 
     private var rightButton = UIBarButtonItem(title: "Delete", style: .Plain, target: nil, action: "deleteTeam")
     private var isConfirmingDelete = false
-    private var teamInfoCell: EditProfileInfoCell?
+    private var teamInfoCell: EditImagesCell?
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -36,8 +36,8 @@ class TeamEditViewController: UITableViewController {
         let loadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)
         self.tableView.registerNib(loadingCellNib, forCellReuseIdentifier: "LoadingCell")
 
-        let editProfileInfoCellNib = UINib(nibName: "EditProfileInfoCell", bundle: nil)
-        self.tableView.registerNib(editProfileInfoCellNib, forCellReuseIdentifier: "EditProfileInfoCell")
+        let editImagesCellNib = UINib(nibName: "EditImagesCell", bundle: nil)
+        self.tableView.registerNib(editImagesCellNib, forCellReuseIdentifier: "EditImagesCell")
 
         let headerCellNib = UINib(nibName: "HeaderCell", bundle: nil)
         self.tableView.registerNib(headerCellNib, forCellReuseIdentifier: "HeaderCell")
@@ -112,10 +112,8 @@ class TeamEditViewController: UITableViewController {
             if let cell = self.teamInfoCell? {
                 return cell
             }
-            self.teamInfoCell = tableView.dequeueReusableCellWithIdentifier("EditProfileInfoCell") as? EditProfileInfoCell
-            if let team = self.team? {
-                self.teamInfoCell!.name = team.name
-            }
+            self.teamInfoCell = tableView.dequeueReusableCellWithIdentifier("EditImagesCell") as? EditImagesCell
+            self.teamInfoCell!.logoLabel.text = "Team Logo"
             return self.teamInfoCell!
         }
 

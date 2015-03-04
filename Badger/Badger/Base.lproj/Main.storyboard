@@ -1217,6 +1217,9 @@
                                                 <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
                                             <connections>
                                                 <segue destination="bBM-Aq-pAl" kind="presentation" id="uUv-C7-VRY"/>
                                             </connections>
@@ -1845,8 +1848,8 @@
         <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ASy-Id-BnR"/>
-        <segue reference="sG0-Gn-9tP"/>
         <segue reference="dhT-2f-k0x"/>
+        <segue reference="sG0-Gn-9tP"/>
+        <segue reference="ASy-Id-BnR"/>
     </inferredMetricsTieBreakers>
 </document>

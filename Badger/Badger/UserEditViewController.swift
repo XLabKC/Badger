@@ -1,12 +1,23 @@
 import UIKit
 
-class UserEditViewController: UITableViewController {
-//    private let headerCellHeight: CGFloat = 225.0
-    private let headerCellHeight: CGFloat = 40
-    private let editInfoCellHeight: CGFloat = 226.0
-    private let editStatusCellHeight: CGFloat = 72.0
+private enum Rows: Int {
+    case ProfileHeader = 0
+    case FirstName = 1
+    case LastName = 2
+    case Email = 3
+    case Images = 4
+    case StatusHeader = 5
+    case FreeStatus = 6
+    case OccupiedStatus = 7
+    case UnavailableStatus = 8
+}
 
-    private var cells = [UITableViewCell?](count: 6, repeatedValue: nil)
+class UserEditViewController: UITableViewController, InputCellDelegate {
+    private let headerCellHeight: CGFloat = 40.0
+    private let editImagesCellHeight: CGFloat = 154.0
+    private let normalCellHeight: CGFloat = 72.0
+
+    private var cells = [UITableViewCell?](count: 9, repeatedValue: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +32,8 @@ class UserEditViewController: UITableViewController {
         let headerCellNib = UINib(nibName: "HeaderCell", bundle: nil)
         self.tableView.registerNib(headerCellNib, forCellReuseIdentifier: "HeaderCell")
 
-        let editProfileInfoCellNib = UINib(nibName: "EditProfileInfoCell", bundle: nil)
-        self.tableView.registerNib(editProfileInfoCellNib, forCellReuseIdentifier: "EditProfileInfoCell")
+        let editImagesCellNib = UINib(nibName: "EditImagesCell", bundle: nil)
+        self.tableView.registerNib(editImagesCellNib, forCellReuseIdentifier: "EditImagesCell")
 
         let textFieldCellNib = UINib(nibName: "TextFieldCell", bundle: nil)
         self.tableView.registerNib(textFieldCellNib, forCellReuseIdentifier: "TextFieldCell")
@@ -34,8 +45,8 @@ class UserEditViewController: UITableViewController {
     // TableViewController Overrides
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Header + Info + Header + Free + Occupied + Unavailable
-        return 6
+        // Header + First Name + Last Name + Email + Images + Header + Free + Occupied + Unavailable
+        return 9
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -43,13 +54,13 @@ class UserEditViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 || indexPath.row == 2 {
+        if indexPath.row == 0 || indexPath.row == 5 {
             return self.headerCellHeight
         }
-        if indexPath.row == 1 {
-            return self.editInfoCellHeight
+        if indexPath.row == 4 {
+            return self.editImagesCellHeight
         }
-        return self.editStatusCellHeight
+        return self.normalCellHeight
     }
 
     @IBAction func cancelClicked(sender: AnyObject) {
@@ -60,49 +71,92 @@ class UserEditViewController: UITableViewController {
 
     }
 
+    // InputCellDelegate: opens the next cell when the "next" key is pressed on the keyboard.
+    func shouldSelectNext(cell: InputCell) {
+        cell.closeKeyboard()
+    }
+
+    func cellDidBeginEditing(cell: InputCell) {
+        var indexPath = NSIndexPath(forRow: self.indexForCell(cell), inSection: 0)
+        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+    }
+
     private func cellForIndex(index: Int) -> UITableViewCell {
         if let cell = self.cells[index]? {
             return cell
         }
         let user = UserStore.sharedInstance().getAuthUser()
+        let borderColor = Color.colorize(0xE1E1E1, alpha: 1.0)
 
-        switch (index) {
-        case 0, 2:
+        let row = Rows(rawValue: index)!
+        switch (row) {
+        case .ProfileHeader, .StatusHeader:
             let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
             cell.title = index == 0 ? "MY PROFILE" : "STATUSES"
             cell.labelColor = Color.colorize(0x929292, alpha: 1.0)
+            self.cells[index] = cell
             return cell
-
-//            let cell = tableView.dequeueReusableCellWithIdentifier("UserProfileHeaderCell") as UserProfileHeaderCell
-//            cell.setUser(user)
-//            self.cells[index] = cell
-//            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier("EditProfileInfoCell") as EditProfileInfoCell
-            cell.nameLabel.text = "My Name"
+        case .FirstName:
+            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as TextFieldCell
+            cell.delegate = self
+            cell.label.text = "My First Name"
+            cell.textField.placeholder = "First Name"
+            cell.textField.text = user.firstName
+            cell.textField.returnKeyType = .Done
+            cell.borderColor = borderColor
+            cell.topBorderStyle = "full"
+            cell.bottomBorderStyle = "inset"
+            self.cells[index] = cell
+            return cell
+        case .LastName:
+            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as TextFieldCell
+            cell.delegate = self
+            cell.label.text = "My Last Name"
+            cell.textField.placeholder = "Last Name"
+            cell.textField.text = user.lastName
+            cell.textField.returnKeyType = .Done
+            cell.borderColor = borderColor
+            cell.bottomBorderStyle = "inset"
+            self.cells[index] = cell
+            return cell
+        case .Email:
+            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as TextFieldCell
+            cell.delegate = self
+            cell.label.text = "Email"
+            cell.textField.placeholder = "example@gmail.com"
+            cell.textField.text = user.email
+            cell.textField.returnKeyType = .Done
+            self.cells[index] = cell
+            return cell
+        case .Images:
+            let cell = tableView.dequeueReusableCellWithIdentifier("EditImagesCell") as EditImagesCell
             cell.logoLabel.text = "Profile Photo"
-            cell.name = user.fullName
-//            cell.showNameCellBackground = true
+            cell.logoImage.image = UIImage(named: user.profileImages[.Free]!)
+            cell.headerImage.image = UIImage(named: user.headerImage)
             self.cells[index] = cell
             return cell
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as TextFieldCell
             let statuses: [UserStatus] = [.Free, .Occupied, .Unavailable]
             let labels = ["Default Available Status", "Default Away Status", "Default Unavailable Status"]
-            let status = statuses[index - 3]
+            let statusIndex = index - Rows.FreeStatus.rawValue
+            let status = statuses[statusIndex]
 
+            cell.delegate = self
             cell.textField.placeholder = "Status"
             cell.textField.text = user.textStatuses[status]
             cell.textField.textColor = Helpers.statusToColor(status)
-            cell.label.text = labels[index - 3]
+            cell.textField.returnKeyType = .Done
+            cell.label.text = labels[statusIndex]
             cell.label.textColor = Color.colorize(0x929292, alpha: 1.0)
             cell.borderColor = Color.colorize(0xE1E1E1, alpha: 1.0)
 
-            if status == .Unavailable {
+
+            if row == .UnavailableStatus {
                 cell.bottomBorderStyle = "full"
             } else {
                 cell.bottomBorderStyle = "inset"
-                if status == .Free {
+                if row == .FreeStatus {
                     cell.topBorderStyle = "full"
                 }
             }
@@ -111,4 +165,17 @@ class UserEditViewController: UITableViewController {
             return cell
         }
     }
+
+    private func indexForCell(cell: UITableViewCell) -> Int {
+        let count = tableView.numberOfRowsInSection(0)
+
+        for var i = 0; i < count; i++ {
+            let cellToCheck = self.cellForIndex(i)
+            if cellToCheck == cell {
+                return i
+            }
+        }
+        return -1
+    }
+
 }

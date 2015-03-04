@@ -32,8 +32,8 @@
 		7B39B8821A91552B0080D462 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B39B8811A91552B0080D462 /* Firebase.framework */; };
 		7B39B8851A91AC2D0080D462 /* TeamEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B8841A91AC2D0080D462 /* TeamEditViewController.swift */; };
 		7B39B8891A9E5A290080D462 /* TeamEditMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B8881A9E5A290080D462 /* TeamEditMemberCell.swift */; };
-		7B39B88D1AA01F690080D462 /* EditProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B88C1AA01F690080D462 /* EditProfileInfoCell.swift */; };
-		7B39B88F1AA01FE50080D462 /* EditProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39B88E1AA01FE50080D462 /* EditProfileInfoCell.xib */; };
+		7B39B88D1AA01F690080D462 /* EditImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B88C1AA01F690080D462 /* EditImagesCell.swift */; };
+		7B39B88F1AA01FE50080D462 /* EditImagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39B88E1AA01FE50080D462 /* EditImagesCell.xib */; };
 		7B39B8911AA0CDDB0080D462 /* UserProfileHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39B8901AA0CDDB0080D462 /* UserProfileHeaderCell.xib */; };
 		7B39B8931AA0CDEF0080D462 /* UserProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B8921AA0CDEF0080D462 /* UserProfileHeaderCell.swift */; };
 		7B39B8961AA0E41A0080D462 /* UserEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39B8951AA0E41A0080D462 /* UserEditViewController.swift */; };
@@ -150,8 +150,8 @@
 		7B39B8811A91552B0080D462 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7B39B8841A91AC2D0080D462 /* TeamEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamEditViewController.swift; sourceTree = "<group>"; };
 		7B39B8881A9E5A290080D462 /* TeamEditMemberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamEditMemberCell.swift; sourceTree = "<group>"; };
-		7B39B88C1AA01F690080D462 /* EditProfileInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileInfoCell.swift; sourceTree = "<group>"; };
-		7B39B88E1AA01FE50080D462 /* EditProfileInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditProfileInfoCell.xib; sourceTree = "<group>"; };
+		7B39B88C1AA01F690080D462 /* EditImagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditImagesCell.swift; sourceTree = "<group>"; };
+		7B39B88E1AA01FE50080D462 /* EditImagesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditImagesCell.xib; sourceTree = "<group>"; };
 		7B39B8901AA0CDDB0080D462 /* UserProfileHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileHeaderCell.xib; sourceTree = "<group>"; };
 		7B39B8921AA0CDEF0080D462 /* UserProfileHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeaderCell.swift; sourceTree = "<group>"; };
 		7B39B8951AA0E41A0080D462 /* UserEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEditViewController.swift; sourceTree = "<group>"; };
@@ -560,8 +560,8 @@
 				7B15CCFD1A38D22F00519C8E /* UserCell.xib */,
 				7B15CD081A39080400519C8E /* TeamCell.swift */,
 				7B15CD0A1A39081600519C8E /* TeamCell.xib */,
-				7B39B88C1AA01F690080D462 /* EditProfileInfoCell.swift */,
-				7B39B88E1AA01FE50080D462 /* EditProfileInfoCell.xib */,
+				7B39B88C1AA01F690080D462 /* EditImagesCell.swift */,
+				7B39B88E1AA01FE50080D462 /* EditImagesCell.xib */,
 				7B39B8921AA0CDEF0080D462 /* UserProfileHeaderCell.swift */,
 				7B39B8901AA0CDDB0080D462 /* UserProfileHeaderCell.xib */,
 				7B295EAE1AA4D66900E259E1 /* TextFieldCell.swift */,
@@ -703,7 +703,7 @@
 				7B295EB11AA4D67900E259E1 /* TextFieldCell.xib in Resources */,
 				7B743A0419F87E4E0075690A /* Images.xcassets in Resources */,
 				7B39B8911AA0CDDB0080D462 /* UserProfileHeaderCell.xib in Resources */,
-				7B39B88F1AA01FE50080D462 /* EditProfileInfoCell.xib in Resources */,
+				7B39B88F1AA01FE50080D462 /* EditImagesCell.xib in Resources */,
 				7B15CCFE1A38D22F00519C8E /* UserCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -768,7 +768,7 @@
 				7B21D8C11A54C395006AFEC0 /* StatusCloseCell.swift in Sources */,
 				7B29F19A1A2643FC003920AD /* TeamHeaderCell.swift in Sources */,
 				7B42B2E11A5D8DB100854065 /* NotificationPopup.swift in Sources */,
-				7B39B88D1AA01F690080D462 /* EditProfileInfoCell.swift in Sources */,
+				7B39B88D1AA01F690080D462 /* EditImagesCell.swift in Sources */,
 				7B64F2BF1A41E68C001FA518 /* FirebaseUtil.swift in Sources */,
 				7B469C4C1A21B4AC0054019D /* MenuSettingsCell.swift in Sources */,
 				7B4733D01A1E551600D88C00 /* Team.swift in Sources */,
