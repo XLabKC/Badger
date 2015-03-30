@@ -12,12 +12,22 @@ private enum Rows: Int {
     case UnavailableStatus = 8
 }
 
-class UserEditViewController: UITableViewController, InputCellDelegate {
+class UserEditViewController: UITableViewController, InputCellDelegate, EditImagesCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private let headerCellHeight: CGFloat = 40.0
     private let editImagesCellHeight: CGFloat = 154.0
     private let normalCellHeight: CGFloat = 72.0
 
     private var cells = [UITableViewCell?](count: 9, repeatedValue: nil)
+    private let picker = UIImagePickerController()
+    private var pickerHandler: (UIImage? -> ())?
+
+    private var useDefaultProfile = true
+    private var useDefaultHeader = true
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.picker.delegate = self
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +47,10 @@ class UserEditViewController: UITableViewController, InputCellDelegate {
 
         let textFieldCellNib = UINib(nibName: "TextFieldCell", bundle: nil)
         self.tableView.registerNib(textFieldCellNib, forCellReuseIdentifier: "TextFieldCell")
+
+        let user = UserStore.sharedInstance().getAuthUser()
+        self.useDefaultHeader = user.headerImage == Global.DefaultBackgroundUrl
+        self.useDefaultProfile = user.profileImages[.Free]! == Global.DefaultUserProfileUrl
 
         // Set up navigation bar.
         self.navigationItem.titleView = Helpers.createTitleLabel("Edit Profile")
@@ -68,7 +82,39 @@ class UserEditViewController: UITableViewController, InputCellDelegate {
     }
 
     @IBAction func doneClicked(sender: AnyObject) {
+        var user = UserStore.sharedInstance().getAuthUser()
 
+        let imagesCell = self.cells[Rows.Images.rawValue] as EditImagesCell
+        if useDefaultHeader {
+            user.headerImage = Global.DefaultBackgroundUrl
+        } else {
+            // TODO: upload to Cloudinary.
+        }
+        if useDefaultProfile {
+            user.profileImages[.Free] = Global.DefaultUserProfileUrl
+        } else {
+            // TODO: upload to Cloudinary.
+        }
+
+        let firstNameCell = self.cells[Rows.FirstName.rawValue] as TextFieldCell
+        let lastNameCell = self.cells[Rows.LastName.rawValue] as TextFieldCell
+        let emailCell = self.cells[Rows.Email.rawValue] as TextFieldCell
+        let freeStatusCell = self.cells[Rows.FreeStatus.rawValue] as TextFieldCell
+        let occupiedStatusCell = self.cells[Rows.OccupiedStatus.rawValue] as TextFieldCell
+        let unavailableStatusCell = self.cells[Rows.UnavailableStatus.rawValue] as TextFieldCell
+
+        let updates = [
+            "first_name": firstNameCell.textField.text,
+            "last_name": lastNameCell.textField.text,
+            "email": emailCell.textField.text,
+            "free_text": freeStatusCell.textField.text,
+            "occupied_text": occupiedStatusCell.textField.text,
+            "unavailable_text": unavailableStatusCell.textField.text
+        ]
+
+        user.ref.updateChildValues(updates) { (error, ref) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 
     // InputCellDelegate: opens the next cell when the "next" key is pressed on the keyboard.
@@ -79,6 +125,30 @@ class UserEditViewController: UITableViewController, InputCellDelegate {
     func cellDidBeginEditing(cell: InputCell) {
         var indexPath = NSIndexPath(forRow: self.indexForCell(cell), inSection: 0)
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+    }
+
+    func editImagesCellLogoClicked(cell: EditImagesCell) {
+        self.getNewPhoto() { image in
+            if image == nil {
+                self.useDefaultProfile = true
+                cell.logoImage.image = UIImage(named: Global.DefaultUserProfileUrl)
+            } else {
+                self.useDefaultProfile = false
+                cell.logoImage.image = image
+            }
+        }
+    }
+
+    func editImagesCellHeaderBackgroundClicked(cell: EditImagesCell) {
+        self.getNewPhoto() { image in
+            if image == nil {
+                self.useDefaultHeader = true
+                cell.headerImage.image = UIImage(named: Global.DefaultBackgroundUrl)
+            } else {
+                self.useDefaultHeader = false
+                cell.headerImage.image = image
+            }
+        }
     }
 
     private func cellForIndex(index: Int) -> UITableViewCell {
@@ -133,6 +203,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate {
             cell.logoLabel.text = "Profile Photo"
             cell.logoImage.image = UIImage(named: user.profileImages[.Free]!)
             cell.headerImage.image = UIImage(named: user.headerImage)
+            cell.delegate = self
             self.cells[index] = cell
             return cell
         default:
@@ -150,7 +221,6 @@ class UserEditViewController: UITableViewController, InputCellDelegate {
             cell.label.text = labels[statusIndex]
             cell.label.textColor = Color.colorize(0x929292, alpha: 1.0)
             cell.borderColor = Color.colorize(0xE1E1E1, alpha: 1.0)
-
 
             if row == .UnavailableStatus {
                 cell.bottomBorderStyle = "full"
@@ -176,6 +246,49 @@ class UserEditViewController: UITableViewController, InputCellDelegate {
             }
         }
         return -1
+    }
+
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        if let handler = self.pickerHandler? {
+            if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+                handler(editedImage)
+            }
+            else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                handler(originalImage)
+            }
+            else if let imageUrl = info[UIImagePickerControllerMediaURL] as? String {
+                handler(UIImage(named: imageUrl))
+            } else {
+                handler(nil)
+            }
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    private func getNewPhoto(handler: (UIImage?) -> ()) {
+        self.pickerHandler = handler
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+
+        let cameraAction = UIAlertAction(title: "Take a Photo", style: .Default) { (action) in
+            self.picker.sourceType = .Camera
+            self.presentViewController(self.picker, animated: true, completion: nil)
+        }
+        alertController.addAction(cameraAction)
+
+        let galleryAction = UIAlertAction(title: "Photo Gallery", style: .Default) { (action) in
+            self.picker.sourceType = .SavedPhotosAlbum
+            self.presentViewController(self.picker, animated: true, completion: nil)
+        }
+        alertController.addAction(galleryAction)
+
+        let defaultAction = UIAlertAction(title: "Use Default", style: .Default) { (action) in
+            handler(nil)
+        }
+        alertController.addAction(defaultAction)
+
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
 }

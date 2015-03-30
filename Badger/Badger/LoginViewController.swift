@@ -2,8 +2,6 @@ import UIKit
 
 class LoginViewController: UIViewController, GPPSignInDelegate {
 
-    @IBOutlet weak var signInButton: GPPSignInButton!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         var signIn = GPPSignIn.sharedInstance()

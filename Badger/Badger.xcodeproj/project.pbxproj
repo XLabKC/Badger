@@ -382,13 +382,6 @@
 			name = "Internal Notification";
 			sourceTree = "<group>";
 		};
-		7B4733A01A1ACBC400D88C00 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Images;
-			sourceTree = "<group>";
-		};
 		7B4733B11A1BCE9800D88C00 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,7 +450,6 @@
 				7B743A3D19F943D30075690A /* Global.swift */,
 				7B7439FA19F87E4E0075690A /* Supporting Files */,
 				7B4733B11A1BCE9800D88C00 /* Fonts */,
-				7B4733A01A1ACBC400D88C00 /* Images */,
 				7B5FE4201A33D79F002F24EA /* ApiKeys.plist */,
 				7B5FE4221A357BD3002F24EA /* ApiKeys.swift */,
 			);

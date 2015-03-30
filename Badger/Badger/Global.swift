@@ -8,6 +8,10 @@ struct Global {
     static let FirebasePushStatusUpdatedUrl = "\(Global.FirebaseUrl)/push_status_updated"
     static let FirebaseActiveTasksUrl = "\(Global.FirebaseUrl)/active_tasks"
     static let FirebaseCompletedTasksUrl = "\(Global.FirebaseUrl)/completed_tasks"
+
+    static let DefaultUserProfileUrl = "DefaultUserProfile"
+    static let DefaultTeamLogoUrl = "DefaultTeamLogo"
+    static let DefaultBackgroundUrl = "DefaultBackground"
 }
 
 struct Colors {
