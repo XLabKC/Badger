@@ -24,7 +24,7 @@ class TaskDetailTitleCell: BorderedCell {
 
     private func updateView() {
         if self.hasAwakened {
-            if let task = self.task? {
+            if let task = self.task {
                 if task.active {
                     self.highLabel.hidden = false
                     self.mediumLabel.hidden = false

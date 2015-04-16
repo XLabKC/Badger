@@ -16,10 +16,10 @@ class TeamProfileViewController: RevealableTableViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
 
     deinit {
-        if let observer = self.teamObserver? {
+        if let observer = self.teamObserver {
             observer.dispose()
         }
-        if let observer = self.membersObserver? {
+        if let observer = self.membersObserver {
             observer.dispose()
         }
     }
@@ -50,7 +50,7 @@ class TeamProfileViewController: RevealableTableViewController {
         let teamRef = Team.createRef(id)
         self.teamObserver = FirebaseObserver<Team>(query: teamRef, withBlock: { team in
             self.team = team
-            if let membersObserver = self.membersObserver? {
+            if let membersObserver = self.membersObserver {
                 membersObserver.setKeys(team.memberIds.keys.array)
             }
 
@@ -128,24 +128,24 @@ class TeamProfileViewController: RevealableTableViewController {
         case 0:
             if indexPath.row == 0 {
                 if self.headerCell == nil {
-                    self.headerCell = (tableView.dequeueReusableCellWithIdentifier("TeamHeaderCell") as TeamHeaderCell)
-                    if let team = self.team? {
+                    self.headerCell = (tableView.dequeueReusableCellWithIdentifier("TeamHeaderCell") as! TeamHeaderCell)
+                    if let team = self.team {
                         self.headerCell!.setTeam(team)
                     }
                 }
                 return self.headerCell!
             }
             if self.controlCell == nil {
-                self.controlCell = (tableView.dequeueReusableCellWithIdentifier("TeamProfileControlCell") as TeamProfileControlCell)
+                self.controlCell = (tableView.dequeueReusableCellWithIdentifier("TeamProfileControlCell") as! TeamProfileControlCell)
             }
             return self.controlCell!
         default:
             if self.isLoadingMembers {
-                return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
+                return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as! UITableViewCell
             } else if self.members.count == 0 {
-                return tableView.dequeueReusableCellWithIdentifier("NoMembersCell") as UITableViewCell
+                return tableView.dequeueReusableCellWithIdentifier("NoMembersCell") as! UITableViewCell
             }
-            let cell = (tableView.dequeueReusableCellWithIdentifier("TeamMemberCell") as TeamMemberCell)
+            let cell = (tableView.dequeueReusableCellWithIdentifier("TeamMemberCell") as! TeamMemberCell)
             cell.setUser(self.members[indexPath.row])
             cell.backgroundColor = indexPath.row % 2 == 0 ? self.memberAltBackground : UIColor.whiteColor()
             return cell
@@ -158,12 +158,12 @@ class TeamProfileViewController: RevealableTableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "TeamProfileUser" {
-            let memberCell = sender as TeamMemberCell
-            let vc = segue.destinationViewController as ProfileViewController
+            let memberCell = sender as! TeamMemberCell
+            let vc = segue.destinationViewController as! ProfileViewController
             vc.setUid(memberCell.getUser()!.uid)
         } else if segue.identifier == "TeamProfileNewTask" {
-            let vc = segue.destinationViewController as TaskEditViewController
-            if let team = self.team? {
+            let vc = segue.destinationViewController as! TaskEditViewController
+            if let team = self.team {
                 vc.setTeam(team)
             }
         }

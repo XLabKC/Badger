@@ -9,7 +9,7 @@ class NotificationPopup: UIView {
 
     class func createFromNib() -> NotificationPopup {
         let nibs = UINib(nibName: "NotificationPopup", bundle: nil).instantiateWithOwner(nil, options: nil)
-        return nibs.first as NotificationPopup
+        return nibs.first as! NotificationPopup
     }
 
     private var notification: RemoteNotification?
@@ -31,7 +31,7 @@ class NotificationPopup: UIView {
             return
         }
         self.isDismissing = true
-        if let delegate = self.delegate? {
+        if let delegate = self.delegate {
             delegate.notificationPopupDismissed(self)
         }
     }
@@ -59,8 +59,6 @@ class NotificationPopup: UIView {
             return
         }
         self.isDismissing = true
-        if let delegate = self.delegate? {
-            delegate.notificationPopupSelected(self)
-        }
+        self.delegate?.notificationPopupSelected(self)
     }
 }

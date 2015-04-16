@@ -60,7 +60,7 @@ class FirebaseListObserver<T: DataEntity> {
 
     // Stop listening to the key.
     func disposeKey(key: String) {
-        if let observer = self.keys[key]? {
+        if let observer = self.keys[key] {
             observer.dispose()
             self.keys[key] = nil
         } else {

@@ -26,7 +26,7 @@ class UserProfileHeaderCell: UITableViewCell {
 
     private func updateView() {
         if self.hasAwakened {
-            if let user = self.user? {
+            if let user = self.user {
                 self.nameLabel.text = user.fullName
                 self.profileCircle.setUid(user.uid)
                 self.statusLabel.text = user.statusText

@@ -19,10 +19,10 @@ class MenuViewController: UITableViewController, HeaderCellDelegate {
     }
 
     deinit {
-        if let observer = self.teamsObserver? {
+        if let observer = self.teamsObserver {
             observer.dispose()
         }
-        if let observer = self.userObserver? {
+        if let observer = self.userObserver {
             observer.dispose()
         }
     }
@@ -47,9 +47,7 @@ class MenuViewController: UITableViewController, HeaderCellDelegate {
         let userRef = User.createRef(UserStore.sharedInstance().getAuthUid())
         self.userObserver = FirebaseObserver<User>(query: userRef, withBlock: { user in
             self.user = user
-            if let teamsObserver = self.teamsObserver? {
-                teamsObserver.setKeys(user.teamIds.keys.array)
-            }
+            self.teamsObserver?.setKeys(user.teamIds.keys.array)
 
             if self.isViewLoaded() {
                 // Update the profile view.
@@ -154,9 +152,9 @@ class MenuViewController: UITableViewController, HeaderCellDelegate {
         case 0:
             switch indexPath.row {
             case 0:
-                return tableView.dequeueReusableCellWithIdentifier("LogoCell") as UITableViewCell
+                return tableView.dequeueReusableCellWithIdentifier("LogoCell") as! UITableViewCell
             case 1, 3:
-                let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! HeaderCell
                 cell.labelColor = Color.colorize(0x929292, alpha: 1)
                 cell.title = indexPath.row == 1 ? "MY PROFILE" : "MY TEAMS"
                 if indexPath.row == 3 {
@@ -167,45 +165,45 @@ class MenuViewController: UITableViewController, HeaderCellDelegate {
                 }
                 return cell
             default:
-                let cell = tableView.dequeueReusableCellWithIdentifier("MyProfileCell") as MyProfileCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("MyProfileCell") as! MyProfileCell
                 cell.setUser(UserStore.sharedInstance().getAuthUser())
                 return cell
             }
         case 1:
             if self.teams.isEmpty {
-                return tableView.dequeueReusableCellWithIdentifier("MenuNoTeamsCell") as UITableViewCell
+                return tableView.dequeueReusableCellWithIdentifier("MenuNoTeamsCell") as! UITableViewCell
             }
-            let cell = tableView.dequeueReusableCellWithIdentifier("MenuTeamCell") as MenuTeamCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("MenuTeamCell") as! MenuTeamCell
             cell.setTeam(self.teams[indexPath.row])
             cell.setTopBorder(indexPath.row == 0 ? .Full : .None)
             return cell
         default:
             switch indexPath.row {
             case 0:
-                let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! HeaderCell
                 cell.labelColor = Color.colorize(0x929292, alpha: 1)
                 cell.title = "SETTINGS"
                 return cell
             case 1:
-                let cell = tableView.dequeueReusableCellWithIdentifier("MenuSettingsCell") as MenuSettingsCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("MenuSettingsCell") as! MenuSettingsCell
                 cell.setUser(UserStore.sharedInstance().getAuthUser())
                 return cell
             default:
-                return tableView.dequeueReusableCellWithIdentifier("MenuFooterCell") as UITableViewCell
+                return tableView.dequeueReusableCellWithIdentifier("MenuFooterCell") as! UITableViewCell
             }
         }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "MenuMyProfile" {
-            let nav = segue.destinationViewController as UINavigationController
-            let vc = nav.childViewControllers.first as ProfileViewController
+            let nav = segue.destinationViewController as! UINavigationController
+            let vc = nav.childViewControllers.first as! ProfileViewController
             vc.setUid(UserStore.sharedInstance().getAuthUid())
         } else if segue.identifier == "MenuTeamProfile" {
-            let teamCell = sender as MenuTeamCell
+            let teamCell = sender as! MenuTeamCell
             let team = teamCell.getTeam()!
-            let nav = segue.destinationViewController as UINavigationController
-            let vc = nav.topViewController as TeamProfileViewController
+            let nav = segue.destinationViewController as! UINavigationController
+            let vc = nav.topViewController as! TeamProfileViewController
             vc.setTeamId(team.id)
         }
     }

@@ -25,13 +25,13 @@ class EditImagesCell: BorderedCell {
     }
 
     @IBAction func logoClicked(sender: AnyObject) {
-        if let delegate = self.delegate? {
+        if let delegate = self.delegate {
             delegate.editImagesCellLogoClicked(self)
         }
     }
 
     @IBAction func headerClicked(sender: AnyObject) {
-        if let delegate = self.delegate? {
+        if let delegate = self.delegate {
             delegate.editImagesCellHeaderBackgroundClicked(self)
         }
     }

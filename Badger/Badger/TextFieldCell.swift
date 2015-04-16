@@ -9,11 +9,11 @@ class TextFieldCell: InputCell, UITextFieldDelegate  {
         self.textField.delegate = self
     }
 
-    override func getText() -> String {
+    override func getContent() -> String {
         return self.textField.text
     }
 
-    override func setText(text: String) {
+    override func setContent(text: String) {
         self.textField.text = text
     }
 
@@ -27,16 +27,12 @@ class TextFieldCell: InputCell, UITextFieldDelegate  {
 
     override func keyboardDidShow() {
         if self.textField.editing {
-            if let delegate = self.delegate? {
-                delegate.cellDidBeginEditing(self)
-            }
+            self.delegate?.cellDidBeginEditing(self)
         }
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if let delegate = self.delegate? {
-            delegate.shouldSelectNext(self)
-        }
+        self.delegate?.shouldSelectNext(self)
         return false
     }
 }

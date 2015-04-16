@@ -34,7 +34,7 @@ class FirebaseObserver<T: DataEntity> {
 
         let handle = self.query.observeEventType(.Value, withBlock: { snapshot in
             if snapshot.childrenCount > 0 {
-                withBlock(T.createFromSnapshot(snapshot) as T)
+                withBlock(T.createFromSnapshot(snapshot) as! T)
             } else {
                 println("No data at: \(snapshot.ref.description())")
             }
@@ -49,9 +49,9 @@ class FirebaseObserver<T: DataEntity> {
         }
         self.started = true
 
-        if let childAddedFunc = self.childAdded? {
+        if let childAddedFunc = self.childAdded {
             var handle = self.query.observeEventType(.ChildAdded, andPreviousSiblingKeyWithBlock: { (snapshot, id) in
-                var data = T.createFromSnapshot(snapshot) as T
+                var data = T.createFromSnapshot(snapshot) as! T
                 childAddedFunc(data, previousId: id, isInitial: !self.loadedInitial)
             })
             self.handles.append(handle)
@@ -63,7 +63,7 @@ class FirebaseObserver<T: DataEntity> {
         // After initial.
         self.query.observeSingleEventOfType(.Value, withBlock: { _ in
             self.loadedInitial = true
-            if let afterInitial = self.afterInitial? {
+            if let afterInitial = self.afterInitial {
                 afterInitial()
             }
         })
@@ -87,9 +87,9 @@ class FirebaseObserver<T: DataEntity> {
     }
 
     private func maybeAddObservingFunc(function: ((T, previousId: String?) -> ())?, type: FEventType) {
-        if let observer = function? {
+        if let observer = function {
             var handle = self.query.observeEventType(type, andPreviousSiblingKeyWithBlock: { (snapshot, id) in
-                observer(T.createFromSnapshot(snapshot) as T, previousId: id)
+                observer(T.createFromSnapshot(snapshot) as! T, previousId: id)
             })
             self.handles.append(handle)
         }

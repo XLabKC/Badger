@@ -19,7 +19,7 @@
         return self.active ? self.createdAtString : self.completedAtString
     }
     var createdAtString: String {
-        if let createdAt = self.internalCreatedAtString? {
+        if let createdAt = self.internalCreatedAtString {
             return createdAt
         }
         let dateFormatter = NSDateFormatter()
@@ -28,10 +28,10 @@
         return self.internalCreatedAtString!
     }
     var completedAtString: String {
-        if let timestamp = self.internalCompletedAtString? {
+        if let timestamp = self.internalCompletedAtString {
             return timestamp
         }
-        if let completedAt = self.completedAt? {
+        if let completedAt = self.completedAt {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "'Completed at' h:mm a 'on' M/d/yy"
             self.internalCompletedAtString = dateFormatter.stringFromDate(self.createdAt)
@@ -66,13 +66,13 @@
     init(id: String, owner: String, json: Dictionary<String, AnyObject>) {
         self.id = id
         self.owner = owner
-        self.team = json["team"] as String
-        self.author = json["author"] as String
-        self.title = json["title"] as String
-        self.content = json["content"] as String
-        self.active = json["active"] as Bool
-        self.createdAt = NSDate(fromJavascriptTimestamp: json["created_at"] as NSNumber)
-        var priority = TaskPriority(rawValue: json["priority"] as String)
+        self.team = json["team"] as! String
+        self.author = json["author"] as! String
+        self.title = json["title"] as! String
+        self.content = json["content"] as! String
+        self.active = json["active"] as! Bool
+        self.createdAt = NSDate(fromJavascriptTimestamp: json["created_at"] as! NSNumber)
+        var priority = TaskPriority(rawValue: json["priority"] as! String)
         if priority == nil {
             priority = .Unknown
         }
@@ -93,7 +93,7 @@
             "created_at": NSDate.javascriptTimestampFromDate(self.createdAt),
             "priority": self.priority.rawValue
         ]
-        if let completedAt = self.completedAt? {
+        if let completedAt = self.completedAt {
             json["completed_at"] = NSDate.javascriptTimestampFromDate(completedAt)
         }
         return json
@@ -106,7 +106,7 @@
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {
         let id = snapshot.key
         let owner = snapshot.ref.parent.key
-        return Task(id: id, owner: owner, json: snapshot.value as Dictionary<String, AnyObject>)
+        return Task(id: id, owner: owner, json: snapshot.value as! Dictionary<String, AnyObject>)
     }
 
     class func createRef(owner: String, id: String, active: Bool) -> Firebase {

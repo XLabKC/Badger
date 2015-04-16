@@ -7,8 +7,8 @@ class RevealableTableViewController: UITableViewController, RevealManagerDelegat
     private var statusButton: UIBarButtonItem?
 
     override func viewDidLoad() {
-        if let nav = self.navigationController? {
-            if let revealVC = RevealManager.sharedInstance().revealVC? {
+        if let nav = self.navigationController {
+            if let revealVC = RevealManager.sharedInstance().revealVC {
                 // Only add the menu button if there isn't already a back button.
                 if self.shouldAddMenuButton {
                     if nav.viewControllers.first as? RevealableTableViewController == self {
@@ -38,12 +38,12 @@ class RevealableTableViewController: UITableViewController, RevealManagerDelegat
     func revealManager(manager: RevealManager, willMoveToPosition position: FrontViewPosition) {
         if self.showingPurpleIcon && position != .LeftSide {
             self.showingPurpleIcon = false
-            if let button = self.statusButton? {
+            if let button = self.statusButton {
                 button.tintColor = Color.colorize(0x929292, alpha: 1.0)
             }
         } else if !self.showingPurpleIcon && position == .LeftSide {
             self.showingPurpleIcon = true
-            if let button = self.statusButton? {
+            if let button = self.statusButton {
                 button.tintColor = Color.colorize(0x8E82FF, alpha: 1.0)
             }
         }

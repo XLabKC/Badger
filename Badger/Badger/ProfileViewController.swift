@@ -29,29 +29,23 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
     }
 
     var isLoadingActiveTasks: Bool {
-        if let observer = self.activeObserver? {
+        if let observer = self.activeObserver {
             return !observer.hasLoadedInitial()
         }
         return true
     }
 
     var isLoadingCompletedTasks: Bool {
-        if let observer = self.completedObserver? {
+        if let observer = self.completedObserver {
             return !observer.hasLoadedInitial()
         }
         return false
     }
 
     deinit {
-        if let observer = self.userObserver? {
-            observer.dispose()
-        }
-        if let observer = self.activeObserver? {
-            observer.dispose()
-        }
-        if let observer = self.completedObserver? {
-            observer.dispose()
-        }
+        self.userObserver?.dispose()
+        self.activeObserver?.dispose()
+        self.completedObserver?.dispose()
     }
 
     override func viewDidLoad() {
@@ -82,15 +76,9 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
             self.user = user
 
             // Update table cells if they have already initialized.
-            if let profileHeader = self.profileHeaderCell? {
-                profileHeader.setUser(user)
-            }
-            if let statusSlider = self.statusSliderCell? {
-                statusSlider.setUser(user)
-            }
-            if let controlSlider = self.profileControlsCell? {
-                controlSlider.setUser(user)
-            }
+            self.profileHeaderCell?.setUser(user)
+            self.statusSliderCell?.setUser(user)
+            self.profileControlsCell?.setUser(user)
 
             if self.isViewLoaded() && !self.hasSetup {
                 self.loadUserProfile(uid)
@@ -192,8 +180,8 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
             // Header Cell
             if indexPath.row == 0 {
                 if self.profileHeaderCell == nil {
-                    self.profileHeaderCell = (tableView.dequeueReusableCellWithIdentifier("UserProfileHeaderCell") as UserProfileHeaderCell)
-                    if let user = self.user? {
+                    self.profileHeaderCell = (tableView.dequeueReusableCellWithIdentifier("UserProfileHeaderCell") as! UserProfileHeaderCell)
+                    if let user = self.user {
                         self.profileHeaderCell!.setUser(user)
                     }
                 }
@@ -202,49 +190,49 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
             // Control Cell
             if self.isAuthUser {
                 if self.statusSliderCell == nil {
-                    self.statusSliderCell = (tableView.dequeueReusableCellWithIdentifier("StatusSliderCell") as StatusSliderCell)
-                    if let user = self.user? {
+                    self.statusSliderCell = (tableView.dequeueReusableCellWithIdentifier("StatusSliderCell") as! StatusSliderCell)
+                    if let user = self.user {
                         self.statusSliderCell!.setUser(user)
                     }
                 }
                 return self.statusSliderCell!
             }
             if self.profileControlsCell == nil {
-                self.profileControlsCell = (tableView.dequeueReusableCellWithIdentifier("ProfileControlsCell") as ProfileControlsCell)
-                if let user = self.user? {
+                self.profileControlsCell = (tableView.dequeueReusableCellWithIdentifier("ProfileControlsCell") as! ProfileControlsCell)
+                if let user = self.user {
                     self.profileControlsCell!.setUser(user)
                 }
             }
             return self.profileControlsCell!
         case self.activeTaskSection:
             if self.isLoadingActiveTasks {
-                return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
+                return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as! UITableViewCell
             } else if self.activeTasks.array.isEmpty {
-                return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as UITableViewCell
+                return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as! UITableViewCell
             }
-            let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
+            let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as! TaskCell)
             cell.setTask(self.activeTasks.array[indexPath.row])
             return cell
         case self.newTaskSection:
-            return tableView.dequeueReusableCellWithIdentifier("NewTaskCell") as UITableViewCell
+            return tableView.dequeueReusableCellWithIdentifier("NewTaskCell") as! UITableViewCell
         case self.dividerSection:
-            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! HeaderCell
             cell.delegate = self
             cell.buttonText = self.isShowingCompletedTasks ? "HIDE" : "SHOW"
             cell.setBottomBorder(.Full)
-            cell.setBorderColor(Color.colorize(0xE0E0E0, alpha: 1.0))
-            if let user = self.user? {
+            cell.borderColor = Color.colorize(0xE0E0E0, alpha: 1.0)
+            if let user = self.user {
                 cell.title = "COMPLETED TASKS (\(user.completedTaskCount))"
                 cell.showButton = user.completedTaskCount > 0
             }
             return cell
         default:
             if self.isLoadingCompletedTasks {
-                return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as UITableViewCell
+                return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as! UITableViewCell
             } else if self.completedTasks.array.isEmpty {
-                return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as UITableViewCell
+                return tableView.dequeueReusableCellWithIdentifier("NoTasksCell") as! UITableViewCell
             }
-            let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as TaskCell)
+            let cell = (tableView.dequeueReusableCellWithIdentifier("TaskCell") as! TaskCell)
             cell.setTask(self.completedTasks.array[indexPath.row])
             return cell
         }
@@ -256,12 +244,12 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "UserProfileTaskDetail" {
-            let vc = segue.destinationViewController as TaskDetailViewController
-            let task = (sender as TaskCell).getTask()!
+            let vc = segue.destinationViewController as! TaskDetailViewController
+            let task = (sender as! TaskCell).getTask()!
             vc.setTask(task.owner, id: task.id, active: task.active)
         } else if segue.identifier == "UserProfileTaskEdit" {
-            let vc = segue.destinationViewController as TaskEditViewController
-            if let user = self.user? {
+            let vc = segue.destinationViewController as! TaskEditViewController
+            if let user = self.user {
                 vc.setOwner(user)
             }
         }
@@ -277,7 +265,7 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
 
             // Only start loading if we haven't already.
             if self.completedObserver == nil {
-                if let user = self.user? {
+                if let user = self.user {
                     // Create the completed tasks observer.
                     let ref = Firebase(url: Global.FirebaseCompletedTasksUrl).childByAppendingPath(user.uid)
                     self.completedObserver = FirebaseObserver<Task>(query: ref.queryOrderedByPriority())
@@ -402,7 +390,7 @@ class ProfileViewController: RevealableTableViewController, HeaderCellDelegate {
     }
 
     private func findNextIndex(listRef: ArrayRef<Task>, previousId: String?) -> Int {
-        if let id = previousId? {
+        if let id = previousId {
             var index = 0
             index = self.findIndexOfTask(listRef, id: id) + 1
             return index

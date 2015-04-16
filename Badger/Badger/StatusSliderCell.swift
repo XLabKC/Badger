@@ -23,12 +23,12 @@ class StatusSliderCell: BorderedCell, StatusSliderDelegate {
         self.currentStatus = newStatus
         var oldStatus = UserStatus.Free.rawValue
 
-        if let user = self.user? {
+        if let user = self.user {
             oldStatus = user.status.rawValue
             user.ref.childByAppendingPath("status").setValue(newStatus.rawValue as String!)
         }
-        if let timer = self.timer? {
-            oldStatus = timer.userInfo as String
+        if let timer = self.timer {
+            oldStatus = timer.userInfo as! String
             timer.invalidate()
         }
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: "setForPush:", userInfo: oldStatus, repeats: false)
@@ -36,7 +36,7 @@ class StatusSliderCell: BorderedCell, StatusSliderDelegate {
 
     func setForPush(timer: NSTimer) {
         self.timer = nil
-        let oldStatus = timer.userInfo as String
+        let oldStatus = timer.userInfo as! String
         if self.currentStatus.rawValue != oldStatus {
             let uid = UserStore.sharedInstance().getAuthUid()
             let ref = Firebase(url: Global.FirebasePushStatusUpdatedUrl).childByAppendingPath(uid)
@@ -46,7 +46,7 @@ class StatusSliderCell: BorderedCell, StatusSliderDelegate {
 
     private func updateView() {
         if self.hasAwakened {
-            if let user = self.user? {
+            if let user = self.user {
                 self.slider.setStatus(user.status, animated: false)
                 self.slider.delegate = self
             }

@@ -20,10 +20,10 @@ class InputCell: BorderedCell {
     func closeKeyboard() {
     }
 
-    func setText(text: String) {
+    func setContent(text: String) {
     }
 
-    func getText() -> String {
+    func getContent() -> String {
         return ""
     }
 

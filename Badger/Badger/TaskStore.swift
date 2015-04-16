@@ -19,12 +19,12 @@ class TaskStore {
         let firstRef = Task.createRef(owner, id: id, active: startWithActive)
         firstRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
             if snapshot.childrenCount > 0 {
-                return withBlock((Task.createFromSnapshot(snapshot) as Task))
+                return withBlock((Task.createFromSnapshot(snapshot) as! Task))
             }
             let secondRef = Task.createRef(owner, id: id, active: !startWithActive)
             secondRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
                 if snapshot.childrenCount > 0 {
-                    return withBlock((Task.createFromSnapshot(snapshot) as Task))
+                    return withBlock((Task.createFromSnapshot(snapshot) as! Task))
                 }
                 withBlock(nil)
             })

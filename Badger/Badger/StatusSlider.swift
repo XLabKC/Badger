@@ -148,7 +148,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
     // Sets the status and notifies the delegate.
     private func setStatusInternal(status: UserStatus, animated animate: Bool) {
         if self.status != status {
-            if let delegate = self.delegate? {
+            if let delegate = self.delegate {
                 delegate.sliderChangedStatus(self, newStatus: status)
             }
         }
@@ -225,7 +225,7 @@ class StatusSlider: UIView, UIGestureRecognizerDelegate {
 
     // Sets the color of the image on an image view.
     private func setIconTransparency(imageView: UIImageView, color: UIColor) {
-        if let image = imageView.image? {
+        if let image = imageView.image {
             imageView.image = Helpers.imageWithColor(image, color: color)
         }
     }

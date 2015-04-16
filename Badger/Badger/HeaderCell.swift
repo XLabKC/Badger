@@ -68,8 +68,6 @@ class HeaderCell : BorderedCell {
     }
 
     @IBAction func buttonPressed(sender: AnyObject) {
-        if let delegate = self.delegate? {
-            delegate.headerCellButtonPressed(self)
-        }
+        self.delegate?.headerCellButtonPressed(self)
     }
 }

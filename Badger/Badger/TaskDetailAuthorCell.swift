@@ -26,7 +26,7 @@ class TaskDetailAuthorCell: BorderedCell {
 
 
     func setTask(task: Task) {
-        if let oldTask = self.task? {
+        if let oldTask = self.task {
             if oldTask.id == task.id && self.authorObserver != nil && self.teamObserver != nil {
                 return self.updateView()
             } else {
@@ -54,14 +54,14 @@ class TaskDetailAuthorCell: BorderedCell {
 
     private func updateView() {
         if self.hasAwakened {
-            if let task = self.task? {
+            if let task = self.task {
                 self.metaLabel.text = task.createdAtString
                 self.profileCircle.setUid(task.author)
                 self.profileCircle.setTeamId(task.team)
-                if let author = self.author? {
+                if let author = self.author {
                     self.nameLabel.text = author.fullName
                 }
-                if let team = self.team? {
+                if let team = self.team {
                     self.teamLabel.text = team.name
                 }
             }
@@ -69,10 +69,10 @@ class TaskDetailAuthorCell: BorderedCell {
     }
 
     private func dispose() {
-        if let observer = self.authorObserver? {
+        if let observer = self.authorObserver {
             observer.dispose()
         }
-        if let observer = self.teamObserver? {
+        if let observer = self.teamObserver {
             observer.dispose()
         }
         self.authorObserver = nil

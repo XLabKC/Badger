@@ -12,7 +12,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
     private var isConfirmingDelete = false
 
     deinit {
-        if let observer = self.observer? {
+        if let observer = self.observer {
             observer.dispose()
         }
     }
@@ -29,7 +29,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
 
     func setTask(owner: String, id: String, active: Bool) {
         TaskStore.tryGetTask(owner, id: id, startWithActive: active, withBlock: { maybeTask in
-            if let task = maybeTask? {
+            if let task = maybeTask {
                 self.observer = FirebaseObserver<Task>(query: task.ref, withBlock: { task in
                     self.task = task
                     self.getContentCell().setTask(task)
@@ -49,7 +49,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
 
     private func setRightButton() {
         let authId = UserStore.sharedInstance().getAuthUid()
-        if let task = self.task? {
+        if let task = self.task {
             if task.author == authId {
                 // Auth user is author, add "Edit" button.
                 let button = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "editButtonPressed")
@@ -70,9 +70,9 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
 
     func deleteButtonPressed() {
         if self.isConfirmingDelete {
-            if let task = self.task? {
+            if let task = self.task {
                 TaskStore.deleteTask(task)
-                if let nav = self.navigationController? {
+                if let nav = self.navigationController {
                     nav.popViewControllerAnimated(true)
                 }
             }
@@ -91,7 +91,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
     // TableViewController Overrides
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let task = self.task? {
+        if let task = self.task {
             if UserStore.sharedInstance().isAuthUser(task.owner) {
                 // Header + User + Header + Title + Content + Complete Button
                 return 6
@@ -120,28 +120,28 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch (indexPath.row) {
         case 0, 2:
-            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! HeaderCell
             cell.labelColor = Color.colorize(0x929292, alpha: 1)
             cell.title = (indexPath.row == 0) ? "ASSIGNED BY" : "TASK INFO"
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskDetailAuthorCell") as TaskDetailAuthorCell
-            if let task = self.task? {
+            let cell = tableView.dequeueReusableCellWithIdentifier("TaskDetailAuthorCell") as! TaskDetailAuthorCell
+            if let task = self.task {
                 cell.setTask(task)
             }
             return cell
         case 3:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskDetailTitleCell") as TaskDetailTitleCell
-            if let task = self.task? {
+            let cell = tableView.dequeueReusableCellWithIdentifier("TaskDetailTitleCell") as! TaskDetailTitleCell
+            if let task = self.task {
                 cell.setTask(task)
             }
             return cell
         case 4:
             return getContentCell()
         default:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskDetailCompleteCell") as TaskDetailCompleteCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TaskDetailCompleteCell") as! TaskDetailCompleteCell
             cell.delegate = self
-            if let task = self.task? {
+            if let task = self.task {
                 cell.buttonTitle = task.active ? "Mark As Complete!" : "Mark As Incomplete"
             }
             return cell
@@ -149,7 +149,7 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
     }
 
     func detailCompleteCellPressed(cell: TaskDetailCompleteCell) {
-        if let task = self.task? {
+        if let task = self.task {
             // Stop listening so that we don't get the value changed event.
             self.observer?.dispose()
             self.observer = nil
@@ -195,18 +195,18 @@ class TaskDetailViewController: UITableViewController, TaskDetailCompleteCellDel
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "TaskDetailEditExisting" {
-            let vc = segue.destinationViewController as TaskEditViewController
-            if let task = self.task? {
+            let vc = segue.destinationViewController as! TaskEditViewController
+            if let task = self.task {
                 vc.setTask(task)
             }
         }
     }
 
     private func getContentCell() -> TaskDetailContentCell {
-        if let cell = self.contentCell? {
+        if let cell = self.contentCell {
             return cell
         }
-        self.contentCell = (self.tableView.dequeueReusableCellWithIdentifier("TaskDetailContentCell") as TaskDetailContentCell)
+        self.contentCell = (self.tableView.dequeueReusableCellWithIdentifier("TaskDetailContentCell") as! TaskDetailContentCell)
         return self.contentCell!
     }
 }

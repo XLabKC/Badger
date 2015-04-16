@@ -20,10 +20,10 @@
 
     init(id: String, json: Dictionary<String, AnyObject>) {
         self.id = id
-        self.name = json["name"] as String
-        self.activeTaskCount = json["active_task_count"] as Int
-        self.logo = json["logo"] as String
-        self.headerImage = json["header_image"] as String
+        self.name = json["name"] as! String
+        self.activeTaskCount = json["active_task_count"] as! Int
+        self.logo = json["logo"] as! String
+        self.headerImage = json["header_image"] as! String
 
         if let owners = json["owners"] as? Dictionary<String, Bool> {
             self.ownerIds = owners
@@ -66,7 +66,7 @@
     }
 
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {
-        return Team(id: snapshot.key, json: snapshot.value as Dictionary<String, AnyObject>)
+        return Team(id: snapshot.key, json: snapshot.value as! Dictionary<String, AnyObject>)
     }
 
     class func createRef(id: String) -> Firebase {

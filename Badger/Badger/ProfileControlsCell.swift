@@ -9,14 +9,14 @@ class ProfileControlsCell: BorderedCell {
     @IBOutlet weak var subscribeButton: ResizedImageButton!
 
     deinit {
-        if let observer = self.observer? {
+        if let observer = self.observer {
             observer.dispose()
         }
     }
 
     @IBAction func subscribedPressed(sender: AnyObject) {
-        if let user = self.user? {
-            if let authUser = self.authUser? {
+        if let user = self.user {
+            if let authUser = self.authUser {
                 if authUser.followingIds[user.uid] == nil {
                     // Start following user.
                     UserStore.followUser(authUser.uid, otherUid: user.uid)
@@ -44,8 +44,8 @@ class ProfileControlsCell: BorderedCell {
 
     private func updateView() {
         if self.hasAwakened {
-            if let user = self.user? {
-                if let authUser = self.authUser? {
+            if let user = self.user {
+                if let authUser = self.authUser {
                     self.subscribeButton.selected = authUser.followingIds[user.uid] != nil
                 }
             }

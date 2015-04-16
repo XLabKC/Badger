@@ -12,10 +12,11 @@ private enum Rows: Int {
     case UnavailableStatus = 8
 }
 
-class UserEditViewController: UITableViewController, InputCellDelegate, EditImagesCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class UserEditViewController: UITableViewController, InputCellDelegate, EditImagesCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLUploaderDelegate {
     private let headerCellHeight: CGFloat = 40.0
     private let editImagesCellHeight: CGFloat = 154.0
     private let normalCellHeight: CGFloat = 72.0
+    private let imageDimension = 260
 
     private var cells = [UITableViewCell?](count: 9, repeatedValue: nil)
     private let picker = UIImagePickerController()
@@ -23,6 +24,11 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
 
     private var useDefaultProfile = true
     private var useDefaultHeader = true
+
+    private var editedProfileImage = false
+    private var editedHeaderImage = false
+
+    private var saveFunctionsToRun: [() -> ()] = []
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -84,26 +90,14 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
     @IBAction func doneClicked(sender: AnyObject) {
         var user = UserStore.sharedInstance().getAuthUser()
 
-        let imagesCell = self.cells[Rows.Images.rawValue] as EditImagesCell
-        if useDefaultHeader {
-            user.headerImage = Global.DefaultBackgroundUrl
-        } else {
-            // TODO: upload to Cloudinary.
-        }
-        if useDefaultProfile {
-            user.profileImages[.Free] = Global.DefaultUserProfileUrl
-        } else {
-            // TODO: upload to Cloudinary.
-        }
+        let firstNameCell = self.cells[Rows.FirstName.rawValue] as! TextFieldCell
+        let lastNameCell = self.cells[Rows.LastName.rawValue] as! TextFieldCell
+        let emailCell = self.cells[Rows.Email.rawValue] as! TextFieldCell
+        let freeStatusCell = self.cells[Rows.FreeStatus.rawValue] as! TextFieldCell
+        let occupiedStatusCell = self.cells[Rows.OccupiedStatus.rawValue] as! TextFieldCell
+        let unavailableStatusCell = self.cells[Rows.UnavailableStatus.rawValue] as! TextFieldCell
 
-        let firstNameCell = self.cells[Rows.FirstName.rawValue] as TextFieldCell
-        let lastNameCell = self.cells[Rows.LastName.rawValue] as TextFieldCell
-        let emailCell = self.cells[Rows.Email.rawValue] as TextFieldCell
-        let freeStatusCell = self.cells[Rows.FreeStatus.rawValue] as TextFieldCell
-        let occupiedStatusCell = self.cells[Rows.OccupiedStatus.rawValue] as TextFieldCell
-        let unavailableStatusCell = self.cells[Rows.UnavailableStatus.rawValue] as TextFieldCell
-
-        let updates = [
+        var updates = [
             "first_name": firstNameCell.textField.text,
             "last_name": lastNameCell.textField.text,
             "email": emailCell.textField.text,
@@ -112,6 +106,38 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
             "unavailable_text": unavailableStatusCell.textField.text
         ]
 
+        let imagesCell = self.cells[Rows.Images.rawValue] as! EditImagesCell
+
+        // Update profile image.
+//        if self.editedProfileImage {
+//            if useDefaultProfile {
+//                updates["free_profile_image"] = Global.DefaultUserProfileUrl
+//                updates["occupied_profile_image"] = Global.DefaultUserProfileUrl
+//                updates["unavailable_profile_image"] = Global.DefaultUserProfileUrl
+//            } else {
+//                letuploadFn =
+//
+//                let uploader = CLUploader(ApiKeys.getCloudinaryInstance(), delegate: self)
+//                uploader.upload(imagesCell.logoImage.image,
+//                    options: nil,
+//                    withCompletion: { (successResult, errorResult, code, context) in
+//                        user.ref.updateChildValues(updates) { (error, ref) in
+//                            
+//                        }
+//                    }, andProgress: nil)
+//
+//                // TODO: upload to Cloudinary.
+//            }
+//        }
+
+        // Update header image.
+        if self.editedHeaderImage {
+            if useDefaultHeader {
+                updates["header_image"] = Global.DefaultUserProfileUrl
+            } else {
+                // TODO: upload to Cloudinary.
+            }
+        }
         user.ref.updateChildValues(updates) { (error, ref) in
             self.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -129,6 +155,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
 
     func editImagesCellLogoClicked(cell: EditImagesCell) {
         self.getNewPhoto() { image in
+            self.editedProfileImage = true
             if image == nil {
                 self.useDefaultProfile = true
                 cell.logoImage.image = UIImage(named: Global.DefaultUserProfileUrl)
@@ -141,6 +168,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
 
     func editImagesCellHeaderBackgroundClicked(cell: EditImagesCell) {
         self.getNewPhoto() { image in
+            self.editedHeaderImage = true
             if image == nil {
                 self.useDefaultHeader = true
                 cell.headerImage.image = UIImage(named: Global.DefaultBackgroundUrl)
@@ -152,7 +180,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
     }
 
     private func cellForIndex(index: Int) -> UITableViewCell {
-        if let cell = self.cells[index]? {
+        if let cell = self.cells[index] {
             return cell
         }
         let user = UserStore.sharedInstance().getAuthUser()
@@ -161,13 +189,13 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
         let row = Rows(rawValue: index)!
         switch (row) {
         case .ProfileHeader, .StatusHeader:
-            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! HeaderCell
             cell.title = index == 0 ? "MY PROFILE" : "STATUSES"
             cell.labelColor = Color.colorize(0x929292, alpha: 1.0)
             self.cells[index] = cell
             return cell
         case .FirstName:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as TextFieldCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as! TextFieldCell
             cell.delegate = self
             cell.label.text = "My First Name"
             cell.textField.placeholder = "First Name"
@@ -179,7 +207,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
             self.cells[index] = cell
             return cell
         case .LastName:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as TextFieldCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as! TextFieldCell
             cell.delegate = self
             cell.label.text = "My Last Name"
             cell.textField.placeholder = "Last Name"
@@ -190,7 +218,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
             self.cells[index] = cell
             return cell
         case .Email:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as TextFieldCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as! TextFieldCell
             cell.delegate = self
             cell.label.text = "Email"
             cell.textField.placeholder = "example@gmail.com"
@@ -199,7 +227,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
             self.cells[index] = cell
             return cell
         case .Images:
-            let cell = tableView.dequeueReusableCellWithIdentifier("EditImagesCell") as EditImagesCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("EditImagesCell") as! EditImagesCell
             cell.logoLabel.text = "Profile Photo"
             cell.logoImage.image = UIImage(named: user.profileImages[.Free]!)
             cell.headerImage.image = UIImage(named: user.headerImage)
@@ -207,7 +235,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
             self.cells[index] = cell
             return cell
         default:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as TextFieldCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as! TextFieldCell
             let statuses: [UserStatus] = [.Free, .Occupied, .Unavailable]
             let labels = ["Default Available Status", "Default Away Status", "Default Unavailable Status"]
             let statusIndex = index - Rows.FreeStatus.rawValue
@@ -249,7 +277,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
     }
 
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        if let handler = self.pickerHandler? {
+        if let handler = self.pickerHandler {
             if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
                 handler(editedImage)
             }
@@ -289,6 +317,12 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
         alertController.addAction(defaultAction)
 
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+
+    // Uploading delegates.
+    func uploaderSuccess(result: [NSObject : AnyObject]!, context: AnyObject!) {
+        let fn = self.saveFunctionsToRun.removeAtIndex(0)
+        fn()
     }
 
 }

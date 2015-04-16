@@ -25,7 +25,7 @@ class TaskDetailContentCell: BorderedCell {
 
     private func updateView() {
         if self.hasAwakened {
-            if let task = self.task? {
+            if let task = self.task {
                 self.contentTextView.text = task.content
             }
         }

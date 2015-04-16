@@ -31,7 +31,7 @@ class TeamMemberCell: BorderedCell {
 
     private func updateView() {
         if self.hasAwakened {
-            if let user = self.user? {
+            if let user = self.user {
                 self.profileCircle.setUid(user.uid)
                 self.statusLabel.text = user.statusText
                 self.statusLabel.textColor = Helpers.statusToColor(user.status)

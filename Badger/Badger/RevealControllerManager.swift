@@ -32,7 +32,7 @@ class RevealManager: NSObject, SWRevealViewControllerDelegate {
     // before the reveal view controller is created.
     func initialize() -> SWRevealViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let frontVC = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as UINavigationController
+        let frontVC = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as! UINavigationController
 
         // Set uid for profile.
         if let profileVC = frontVC.topViewController as? ProfileViewController {
@@ -44,14 +44,14 @@ class RevealManager: NSObject, SWRevealViewControllerDelegate {
 
     func initialize(vc: UIViewController) -> SWRevealViewController {
         // Return existing reveal view controller if we have already initialized.
-        if let existingVC = self.internalRevealVC? {
+        if let existingVC = self.internalRevealVC {
             existingVC.setFrontViewController(vc, animated: true)
             return existingVC
         }
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let menuVC = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as UITableViewController
-        let rightVC = storyboard.instantiateViewControllerWithIdentifier("StatusViewController") as UITableViewController
+        let menuVC = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! UITableViewController
+        let rightVC = storyboard.instantiateViewControllerWithIdentifier("StatusViewController") as! UITableViewController
         let revealVC = SWRevealViewController(rearViewController: menuVC, frontViewController: vc)
         revealVC.rightViewController = rightVC
         revealVC.draggableBorderWidth = 20

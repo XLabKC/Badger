@@ -34,7 +34,7 @@ class ProfileCircle: UIView {
     }
 
     func setUid(uid: String) {
-        if let old = self.user? {
+        if let old = self.user {
             if old.uid == uid {
                 // Already setup.
                 return
@@ -47,7 +47,7 @@ class ProfileCircle: UIView {
     }
 
     func setTeamId(id: String) {
-        if let old = self.team? {
+        if let old = self.team {
             if old.id == id {
                 // Already setup.
                 return
@@ -82,22 +82,22 @@ class ProfileCircle: UIView {
             self.circle.layer.borderWidth = 2.0
         }
 
-        if let teamCircle = self.teamCircle? {
+        if let teamCircle = self.teamCircle {
             teamCircle.frame = self.createTeamCircleFrame()
         }
     }
 
     private func dispose() {
-        if let observer = self.userObserver? {
+        if let observer = self.userObserver {
             observer.dispose()
         }
-        if let observer = self.teamObserver? {
+        if let observer = self.teamObserver {
             observer.dispose()
         }
     }
 
     private func getTeamCircle() -> TeamCircle {
-        if let teamCircle = self.teamCircle? {
+        if let teamCircle = self.teamCircle {
             return teamCircle
         }
         let circle = TeamCircle(frame: self.createTeamCircleFrame())

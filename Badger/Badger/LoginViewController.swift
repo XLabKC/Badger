@@ -2,6 +2,8 @@ import UIKit
 
 class LoginViewController: UIViewController, GPPSignInDelegate {
 
+    @IBOutlet weak var signInButton: GPPSignInButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         var signIn = GPPSignIn.sharedInstance()
@@ -42,7 +44,7 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
                 UIApplication.sharedApplication().registerForRemoteNotifications()
             } else {
                 // Register for push in iOS 7.
-                UIApplication.sharedApplication().registerForRemoteNotificationTypes(UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound | UIRemoteNotificationType.Alert)
+                UIApplication.sharedApplication().registerForRemoteNotificationTypes(.Badge | .Sound | .Alert)
             }
 
             // Transition to the home screen.
@@ -58,9 +60,9 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
             // Add the user if they don't exist.
             if snapshot.childrenCount == 0 {
                 if let profile = authData.providerData["cachedUserProfile"] as? [String: AnyObject] {
-                    user.firstName = profile["given_name"] as String
-                    user.lastName = profile["family_name"] as String
-                    user.email = profile["email"] as String
+                    user.firstName = profile["given_name"] as! String
+                    user.lastName = profile["family_name"] as! String
+                    user.email = profile["email"] as! String
                     // TODO: use the profile picture provided?
                     // profile["picture"]
                 }

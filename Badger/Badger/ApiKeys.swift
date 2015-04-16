@@ -13,8 +13,8 @@ class ApiKeys {
     let keys: [NSObject: AnyObject]
 
     init() {
-        if let path = NSBundle.mainBundle().pathForResource("ApiKeys", ofType: "plist")? {
-            self.keys = NSDictionary(contentsOfFile: path)!
+        if let path = NSBundle.mainBundle().pathForResource("ApiKeys", ofType: "plist") {
+            self.keys = NSDictionary(contentsOfFile: path)! as [NSObject : AnyObject]
         } else {
             println("Unable to locate: ApiKeys.plist")
             self.keys = [:]
@@ -24,6 +24,15 @@ class ApiKeys {
 
     class func getGoogleClientId() -> String {
         let apiKeys = ApiKeys.sharedInstance()
-        return apiKeys.keys["GoogleClientId"] as String
+        return apiKeys.keys["GoogleClientId"] as! String
+    }
+
+    class func getCloudinaryInstance() -> CLCloudinary {
+        let cloudinary = CLCloudinary()
+        let apiKeys = ApiKeys.sharedInstance()
+        cloudinary.config().setValue(apiKeys.keys["CloudinaryName"], forKey: "cloud_name")
+        cloudinary.config().setValue(apiKeys.keys["CloudinaryApiKey"], forKey: "api_key")
+        cloudinary.config().setValue(apiKeys.keys["CloudinaryApiSecret"], forKey: "api_secret")
+        return cloudinary
     }
 }

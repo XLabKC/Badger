@@ -17,15 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         attributes[NSFontAttributeName] = UIFont(name: "OpenSans", size: 17.0)
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: .Normal)
 
-        // Set up the user store.
-        UserStore.sharedInstance().initialize()
-        UserStore.sharedInstance().unauthorizedBlock = self.loggedOut
-
         var handle: UInt = 0
         let ref = Firebase(url: Global.FirebaseUrl)
         handle = ref.observeAuthEventWithBlock { authData in
+
             // Stop listening to auth events.
             ref.removeAuthEventObserverWithHandle(handle)
+
+            // Set up the user store.
+            UserStore.sharedInstance().initialize()
+            UserStore.sharedInstance().unauthorizedBlock = self.loggedOut
 
             // Navigate to the next logical view.
             if authData == nil {
@@ -63,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println("Failed to register for remote notifications")
     }
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         return GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation);
     }
 
@@ -95,8 +96,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.notificationManager.notify(userInfo)
         } else {
             // Application was in the background.
-            if let revealVC = RevealManager.sharedInstance().revealVC? {
-                if let vc = NotificationManager.createViewControllerFromNotification(userInfo)? {
+            if let revealVC = RevealManager.sharedInstance().revealVC {
+                if let vc = NotificationManager.createViewControllerFromNotification(userInfo) {
                     revealVC.setFrontViewController(vc, animated: true)
                 }
             }
@@ -105,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func loggedOut() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
         vc.view.alpha = 0
 
         RevealManager.sharedInstance().removeRevealVC()
@@ -118,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func navigateToLogin() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
         self.navigateToViewController(vc)
     }
 
@@ -129,9 +130,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.navigateToLogin()
         }
 
-        if let options = launchOptions? {
+        if let options = launchOptions {
             if let note = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject] {
-                if let vc = NotificationManager.createViewControllerFromNotification(note)? {
+                if let vc = NotificationManager.createViewControllerFromNotification(note) {
                     UserStore.sharedInstance().waitForUser({ _ in
                         let reveal = RevealManager.sharedInstance().initialize(vc)
                         self.navigateToViewController(reveal)
@@ -147,7 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func navigateToViewController(viewController: UIViewController) {
-        if let root = self.window?.rootViewController? {
+        if let root = self.window?.rootViewController {
             if root.isViewLoaded() {
                 root.presentViewController(viewController, animated: true, completion: nil)
                 return

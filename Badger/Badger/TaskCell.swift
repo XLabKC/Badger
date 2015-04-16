@@ -18,7 +18,7 @@ class TaskCell: BorderedCell {
     override func awakeFromNib() {
         self.hasAwakened = true
         self.setBottomBorder(.Full)
-        self.setBorderColor(Color.colorize(0xE0E0E0, alpha: 1))
+        self.borderColor = Color.colorize(0xE0E0E0, alpha: 1)
         self.updateView()
     }
 
@@ -33,7 +33,7 @@ class TaskCell: BorderedCell {
 
     func updateView() {
         if self.hasAwakened {
-            if let task = self.task? {
+            if let task = self.task {
                 if task.active {
                     self.priorityHighLabel.hidden = false
                     self.priorityMediumLabel.hidden = false

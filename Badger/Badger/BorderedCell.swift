@@ -20,7 +20,9 @@ class BorderedCell: SelectBackgroundCell {
             return self.lineColor
         }
         set(color) {
-            self.setBorderColor(color)
+            self.lineColor = color
+            self.setTopBorder(self.topBorder)
+            self.setBottomBorder(self.bottomBorder)
         }
     }
     @IBInspectable var topBorderStyle: String {
@@ -28,7 +30,7 @@ class BorderedCell: SelectBackgroundCell {
             return self.topBorder.rawValue
         }
         set(style) {
-            if let newStyle = BorderedCellStyle(rawValue: style)? {
+            if let newStyle = BorderedCellStyle(rawValue: style) {
                 self.setTopBorder(newStyle)
             }
         }
@@ -38,7 +40,7 @@ class BorderedCell: SelectBackgroundCell {
             return self.bottomBorder.rawValue
         }
         set(style) {
-            if let newStyle = BorderedCellStyle(rawValue: style)? {
+            if let newStyle = BorderedCellStyle(rawValue: style) {
                 self.setBottomBorder(newStyle)
             }
         }
@@ -59,12 +61,6 @@ class BorderedCell: SelectBackgroundCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.setTopBorder(self.topBorder)
-        self.setBottomBorder(self.bottomBorder)
-    }
-
-    func setBorderColor(color: UIColor) {
-        self.lineColor = color
         self.setTopBorder(self.topBorder)
         self.setBottomBorder(self.bottomBorder)
     }

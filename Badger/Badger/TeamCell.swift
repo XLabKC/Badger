@@ -20,7 +20,7 @@ class TeamCell: BorderedCell {
 
     private func updateView() {
         if self.hasAwakened {
-            if let team = self.team? {
+            if let team = self.team {
                 self.teamCircle.setTeam(team)
                 self.nameLabel.text = team.name
             }

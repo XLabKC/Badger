@@ -50,14 +50,14 @@
 
     init(uid: String, json: Dictionary<String, AnyObject>) {
         self.uid = uid
-        self.provider = json["provider"] as String
-        self.createdAt = NSDate(fromJavascriptTimestamp: json["created_at"] as NSNumber)
-        self.firstName = json["first_name"] as String
-        self.lastName = json["last_name"] as String
-        self.email = json["email"] as String
-        self.activeTaskCount = json["active_task_count"] as Int
-        self.completedTaskCount = json["completed_task_count"] as Int
-        var status = UserStatus(rawValue: json["status"] as String)
+        self.provider = json["provider"] as! String
+        self.createdAt = NSDate(fromJavascriptTimestamp: json["created_at"] as! NSNumber)
+        self.firstName = json["first_name"] as! String
+        self.lastName = json["last_name"] as! String
+        self.email = json["email"] as! String
+        self.activeTaskCount = json["active_task_count"] as! Int
+        self.completedTaskCount = json["completed_task_count"] as! Int
+        var status = UserStatus(rawValue: json["status"] as! String)
         if status == nil {
             status = .Unknown
         }
@@ -69,7 +69,7 @@
         self.textStatuses[.Unavailable] = json["unavailable_text"] as? String
         self.textStatuses[.Occupied] = json["occupied_text"] as? String
 
-        self.headerImage = json["header_image"] as String
+        self.headerImage = json["header_image"] as! String
 
         if let teams = json["teams"] as? Dictionary<String, Bool> {
             self.teamIds = teams
@@ -111,7 +111,7 @@
 
     class func createFromSnapshot(snapshot: FDataSnapshot) -> DataEntity {
         let uid = snapshot.key
-        return User(uid: uid, json: snapshot.value as Dictionary<String, AnyObject>)
+        return User(uid: uid, json: snapshot.value as! Dictionary<String, AnyObject>)
     }
 
     class func createRef(uid: String) -> Firebase {

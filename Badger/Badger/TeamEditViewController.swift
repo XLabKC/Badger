@@ -21,10 +21,10 @@ class TeamEditViewController: UITableViewController {
     }
 
     deinit {
-        if let observer = self.teamObserver? {
+        if let observer = self.teamObserver {
             observer.dispose()
         }
-        if let observer = self.membersObserver? {
+        if let observer = self.membersObserver {
             observer.dispose()
         }
     }
@@ -57,8 +57,8 @@ class TeamEditViewController: UITableViewController {
 
         let teamRef = Team.createRef(teamId)
         teamRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-            let team = Team.createFromSnapshot(snapshot) as Team
-            if let membersObserver = self.membersObserver? {
+            let team = Team.createFromSnapshot(snapshot) as! Team
+            if let membersObserver = self.membersObserver {
                 membersObserver.setKeys(self.team!.memberIds.keys.array)
             }
             self.team = team
@@ -109,7 +109,7 @@ class TeamEditViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            if let cell = self.teamInfoCell? {
+            if let cell = self.teamInfoCell {
                 return cell
             }
             self.teamInfoCell = tableView.dequeueReusableCellWithIdentifier("EditImagesCell") as? EditImagesCell
@@ -117,7 +117,7 @@ class TeamEditViewController: UITableViewController {
             return self.teamInfoCell!
         }
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("TeamEditMemberCell") as TeamEditMemberCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TeamEditMemberCell") as! TeamEditMemberCell
         return cell
     }
 
@@ -138,7 +138,7 @@ class TeamEditViewController: UITableViewController {
 
     func deleteTeam() {
         if self.isConfirmingDelete {
-            if let team = self.team? {
+            if let team = self.team {
                 TeamStore.deactivateTeam(team)
                 self.navigationController?.popViewControllerAnimated(true)
             }

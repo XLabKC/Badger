@@ -38,7 +38,7 @@ class TeamEditMemberCell: BorderedCell {
     }
 
     func setUid(uid: String) {
-        if let user = self.user? {
+        if let user = self.user {
             if user.uid == uid {
                 // Already setup.
                 return
@@ -54,21 +54,21 @@ class TeamEditMemberCell: BorderedCell {
     }
 
     @IBAction func deleteButtonClicked(sender: AnyObject) {
-        if let delegate = self.delegate? {
+        if let delegate = self.delegate {
             delegate.teamEditMemberCellDeletedClicked(self)
         }
     }
 
     @IBAction func adminButtonClicked(sender: AnyObject) {
         self.isAdmin = !self.isAdmin
-        if let delegate = self.delegate? {
+        if let delegate = self.delegate {
             delegate.teamEditMemberCell(self, isAdminChanged: self.isAdmin)
         }
     }
 
     private func updateView() {
         if self.hasAwakened {
-            if let user = self.user? {
+            if let user = self.user {
                 self.nameLabel.text = user.fullName
                 self.statusLabel.text = user.statusText
                 self.statusLabel.textColor = Helpers.statusToColor(user.status)
@@ -82,8 +82,6 @@ class TeamEditMemberCell: BorderedCell {
     }
 
     private func dispose() {
-        if let observer = self.observer? {
-            observer.dispose()
-        }
+        self.observer?.dispose()
     }
 }

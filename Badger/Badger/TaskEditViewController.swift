@@ -67,7 +67,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             if authUser.teamIds.count == 1 {
                 let ref = Team.createRef(authUser.teamIds.keys.array.first!)
                 ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
-                    self.setTeam(Team.createFromSnapshot(snapshot) as Team)
+                    self.setTeam(Team.createFromSnapshot(snapshot) as! Team)
                 })
             }
         }
@@ -83,10 +83,10 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         }
         // Load the team and owner.
         Team.createRef(task.team).observeSingleEventOfType(.Value, withBlock: { snapshot in
-            self.setTeam(Team.createFromSnapshot(snapshot) as Team)
+            self.setTeam(Team.createFromSnapshot(snapshot) as! Team)
         })
         User.createRef(task.owner).observeSingleEventOfType(.Value, withBlock: { snapshot in
-            self.setOwner(User.createFromSnapshot(snapshot) as User)
+            self.setOwner(User.createFromSnapshot(snapshot) as! User)
         })
 
         // Set the right button to be "Delete" instead of "Done".
@@ -160,7 +160,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == self.selectTeamSegue {
-            let vc = segue.destinationViewController as SelectTeamViewController
+            let vc = segue.destinationViewController as! SelectTeamViewController
             vc.delegate = self
             if let owner = self.owner {
                 vc.setUid(owner.uid)
@@ -168,7 +168,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
                 vc.setUid(UserStore.sharedInstance().getAuthUid())
             }
         } else if segue.identifier == self.selectUserSegue {
-            let vc = segue.destinationViewController as SelectUserViewController
+            let vc = segue.destinationViewController as! SelectUserViewController
             vc.delegate = self
             if let team = self.team {
                 vc.setTeamIds([team.id])
@@ -259,7 +259,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             // Keep the same timestamps and active state.
             isActive = task.active
             createdAt = NSDate.javascriptTimestampFromDate(task.createdAt)
-            if let date = task.completedAt? {
+            if let date = task.completedAt {
                 completedAt = NSDate.javascriptTimestampFromDate(date)
             }
         }
@@ -268,8 +268,8 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         var taskValues = [
             "author": UserStore.sharedInstance().getAuthUid(),
             "team": self.team!.id,
-            "title": self.getTitleCell().getText(),
-            "content": self.getContentCell().getText(),
+            "title": self.getTitleCell().getContent(),
+            "content": self.getContentCell().getContent(),
             "priority": self.getPriorityCell().getPriority().rawValue as String,
             "active": isActive,
             "created_at": createdAt,
@@ -280,7 +280,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
         var dateForPriority = createdAt
 
         // If there is a completion date, added it to values and change priority.
-        if let jsDate = completedAt? {
+        if let jsDate = completedAt {
             taskValues["completed_at"] = jsDate
             dateForPriority = jsDate
         }
@@ -316,7 +316,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
                 Firebase(url: Global.FirebasePushNewTaskUrl).childByAppendingPath(combinedKey).setValue(now)
             }
             self.isSaving = false
-            if let nav = self.navigationController? {
+            if let nav = self.navigationController {
                 nav.popViewControllerAnimated(true)
             }
         })
@@ -324,13 +324,13 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
 
     func deleteTask() {
         if self.isConfirmingDelete {
-            if let task = self.task? {
+            if let task = self.task {
                 TaskStore.deleteTask(task)
-                if let nav = self.navigationController? {
+                if let nav = self.navigationController {
                     let previousIndex = nav.viewControllers.count - 2
                     // Skip the detail vc and pop back to the vc before.
                     if nav.viewControllers[previousIndex] is TaskDetailViewController {
-                        let vc = nav.viewControllers[previousIndex - 1] as UIViewController
+                        let vc = nav.viewControllers[previousIndex - 1] as! UIViewController
                         nav.popToViewController(vc, animated: true)
                     } else {
                         nav.popViewControllerAnimated(true)
@@ -351,7 +351,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
 
     // InputCellDelegate: opens the next cell when the "next" key is pressed on the keyboard.
     func shouldSelectNext(cell: InputCell) {
-        let cell = self.cellForIndex(Rows.Content.rawValue) as TaskEditContentCell
+        let cell = self.cellForIndex(Rows.Content.rawValue) as! TaskEditContentCell
         cell.openKeyboard()
     }
 
@@ -366,14 +366,14 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
     }
 
     private func cellForIndex(index: Int) -> UITableViewCell {
-        if let cell = self.cells[index]? {
+        if let cell = self.cells[index] {
             return cell
         }
         // Create new table cells.
         let row = Rows(rawValue: index)!
         switch (row) {
         case .TeamHeader, .InfoHeader, .AssignToHeader:
-            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as HeaderCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! HeaderCell
             cell.labelColor = Color.colorize(0x929292, alpha: 1)
             switch (row) {
             case .TeamHeader:
@@ -386,8 +386,8 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             self.cells[index] = cell
             return cell
         case .SelectTeam:
-            if let team = self.team? {
-                let cell = tableView.dequeueReusableCellWithIdentifier("TeamCell") as TeamCell
+            if let team = self.team {
+                let cell = tableView.dequeueReusableCellWithIdentifier("TeamCell") as! TeamCell
                 cell.setTeam(team)
                 self.cells[index] = cell
             } else {
@@ -395,7 +395,7 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             }
             return self.cells[index]!
         case .Title:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as TextFieldCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell") as! TextFieldCell
             cell.delegate = self
             cell.label.text = "Title"
             cell.label.textColor = Color.colorize(0x929292, alpha: 1.0)
@@ -404,37 +404,37 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
             cell.topBorderStyle = "full"
             cell.bottomBorderStyle = "inset"
             if let task = self.task {
-                cell.setText(task.title)
+                cell.setContent(task.title)
             }
             self.cells[index] = cell
             return cell
         case .Content:
-            let cell = (self.tableView.dequeueReusableCellWithIdentifier("TaskEditContentCell") as TaskEditContentCell)
+            let cell = (self.tableView.dequeueReusableCellWithIdentifier("TaskEditContentCell") as! TaskEditContentCell)
             cell.delegate = self
             cell.cellDelegate = self
             if let task = self.task {
-                cell.setText(task.content)
+                cell.setContent(task.content)
             }
             self.cells[index] = cell
             return cell
         case .Priority:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditPriorityCell") as TaskEditPriorityCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditPriorityCell") as! TaskEditPriorityCell
             if let task = self.task {
                 cell.setTask(task)
             }
             self.cells[index] = cell
             return cell
         case .Assignee:
-            if let owner = self.owner? {
-                let cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as UserCell
+            if let owner = self.owner {
+                let cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as! UserCell
                 cell.setUid(owner.uid)
                 self.cells[index] = cell
                 return cell
             }
-            self.cells[index] = (tableView.dequeueReusableCellWithIdentifier("SelectUserCell") as UITableViewCell)
+            self.cells[index] = (tableView.dequeueReusableCellWithIdentifier("SelectUserCell") as! UITableViewCell)
             return self.cells[index]!
         default:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditSubmitCell") as TaskEditSubmitCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TaskEditSubmitCell") as! TaskEditSubmitCell
             cell.delegate = self
             self.cells[index] = cell
             return cell
@@ -443,14 +443,14 @@ class TaskEditViewController: UITableViewController, TaskEditContentCellDelegate
 
 
     private func getTitleCell() -> TextFieldCell {
-        return self.cellForIndex(Rows.Title.rawValue) as TextFieldCell
+        return self.cellForIndex(Rows.Title.rawValue) as! TextFieldCell
     }
 
     private func getContentCell() -> TaskEditContentCell {
-        return self.cellForIndex(Rows.Content.rawValue) as TaskEditContentCell
+        return self.cellForIndex(Rows.Content.rawValue) as! TaskEditContentCell
     }
 
     private func getPriorityCell() -> TaskEditPriorityCell {
-        return self.cellForIndex(Rows.Priority.rawValue) as TaskEditPriorityCell
+        return self.cellForIndex(Rows.Priority.rawValue) as! TaskEditPriorityCell
     }
 }

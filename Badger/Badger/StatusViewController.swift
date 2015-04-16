@@ -14,10 +14,10 @@ class StatusViewController: UITableViewController {
     }
 
     deinit {
-        if let observer = self.followingObserver? {
+        if let observer = self.followingObserver {
             observer.dispose()
         }
-        if let observer = self.userObserver? {
+        if let observer = self.userObserver {
             observer.dispose()
         }
     }
@@ -34,7 +34,7 @@ class StatusViewController: UITableViewController {
         let userRef = User.createRef(UserStore.sharedInstance().getAuthUid())
         self.userObserver = FirebaseObserver<User>(query: userRef, withBlock: { user in
             self.authUser = user
-            if let observer = self.followingObserver? {
+            if let observer = self.followingObserver {
                 observer.setKeys(user.followingIds.keys.array)
             }
         })
@@ -78,14 +78,14 @@ class StatusViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                return tableView.dequeueReusableCellWithIdentifier("StatusCloseCell") as UITableViewCell
+                return tableView.dequeueReusableCellWithIdentifier("StatusCloseCell") as! UITableViewCell
             } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("StatusCell") as StatusCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("StatusCell") as! StatusCell
                 cell.setUser(UserStore.sharedInstance().getAuthUser())
                 return cell
             }
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("StatusCell") as StatusCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("StatusCell") as! StatusCell
         cell.setUser(self.following[indexPath.row])
         return cell
     }

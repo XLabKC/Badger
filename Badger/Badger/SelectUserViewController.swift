@@ -43,7 +43,7 @@ class SelectUserViewController: UITableViewController {
     }
 
     private func teamsChanged(teams: [Team]) {
-        if let observer = self.usersObserver? {
+        if let observer = self.usersObserver {
             var uids = [String: Bool]()
             for team in teams {
                 for member in team.memberIds.keys {
@@ -96,9 +96,9 @@ class SelectUserViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (indexPath.row == 0 && self.users.isEmpty) {
-            return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as LoadingCell
+            return tableView.dequeueReusableCellWithIdentifier("LoadingCell") as! LoadingCell
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as UserCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as! UserCell
         cell.arrowImage.hidden = true
         cell.setTopBorder(indexPath.row == 0 ? .Full : .None)
         cell.setUid(self.users[indexPath.row].uid)
@@ -106,17 +106,17 @@ class SelectUserViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let delegate = self.delegate? {
+        if let delegate = self.delegate {
             delegate.selectedUser(self.users[indexPath.row])
         }
         self.navigationController?.popViewControllerAnimated(true)
     }
 
     private func dispose() {
-        if let observer = self.teamsObserver? {
+        if let observer = self.teamsObserver {
             observer.dispose()
         }
-        if let observer = self.usersObserver? {
+        if let observer = self.usersObserver {
             observer.dispose()
         }
     }

@@ -27,8 +27,8 @@ class NotificationManager: NotificationPopupDelegate {
         }
     }
 
-    func notificationPopupDismissed(popup: NotificationPopup) {
-        let delegate = UIApplication.sharedApplication().delegate as AppDelegate
+    @objc func notificationPopupDismissed(popup: NotificationPopup) {
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let window = delegate.window!
 
         UIView.animateWithDuration(self.AnimationDuration, animations: { _ in
@@ -44,10 +44,10 @@ class NotificationManager: NotificationPopupDelegate {
         })
     }
 
-    func notificationPopupSelected(popup: NotificationPopup) {
-        if let notification = popup.getNotification()? {
-            if let revealVC = RevealManager.sharedInstance().revealVC? {
-                if let vc = NotificationManager.createViewControllerFromNotification(notification.raw)? {
+    @objc func notificationPopupSelected(popup: NotificationPopup) {
+        if let notification = popup.getNotification() {
+            if let revealVC = RevealManager.sharedInstance().revealVC {
+                if let vc = NotificationManager.createViewControllerFromNotification(notification.raw) {
                     revealVC.setFrontViewController(vc, animated: true)
                 }
             }
@@ -56,7 +56,7 @@ class NotificationManager: NotificationPopupDelegate {
     }
 
     private func show(notification: RemoteNotification) {
-        let delegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let window = delegate.window!
         let popup = NotificationPopup.createFromNib()
         popup.delegate = self
@@ -85,13 +85,13 @@ class NotificationManager: NotificationPopupDelegate {
 
     private func createNewTaskNote(notification: [NSObject: AnyObject]) {
         let uid = UserStore.sharedInstance().getAuthUid()
-        let authorUid = notification["author"] as String
-        let taskId = notification["task"] as String
+        let authorUid = notification["author"] as! String
+        let taskId = notification["task"] as! String
         User.createRef(authorUid).observeSingleEventOfType(.Value, withBlock: { snapshot in
             if snapshot != nil {
-                let author = User.createFromSnapshot(snapshot) as User
+                let author = User.createFromSnapshot(snapshot) as! User
                 TaskStore.tryGetTask(uid, id: taskId, startWithActive: true, withBlock: { maybeTask in
-                    if let task = maybeTask? {
+                    if let task = maybeTask {
                         let content = "New Task: \(task.title)"
                         let note = RemoteNotification(type: "new_task", content: content, uid: authorUid, raw: notification)
                         self.enqueueNotification(note)
@@ -102,10 +102,10 @@ class NotificationManager: NotificationPopupDelegate {
     }
 
     private func createCompletedTaskNote(notification: [NSObject: AnyObject]) {
-        let owner = notification["owner"] as String
-        let taskId = notification["task"] as String
+        let owner = notification["owner"] as! String
+        let taskId = notification["task"] as! String
         TaskStore.tryGetTask(owner, id: taskId, startWithActive: false, withBlock: { maybeTask in
-            if let task = maybeTask? {
+            if let task = maybeTask {
                 let content = "Completed: \(task.title)"
                 let note = RemoteNotification(type: "completed_task", content: content, uid: owner, raw: notification)
                 self.enqueueNotification(note)
@@ -114,10 +114,10 @@ class NotificationManager: NotificationPopupDelegate {
     }
 
     private func createNewStatusNote(notification: [NSObject: AnyObject]) {
-        let uid = notification["uid"] as String
+        let uid = notification["uid"] as! String
         User.createRef(uid).observeSingleEventOfType(.Value, withBlock: { snapshot in
             if snapshot != nil {
-                let user = User.createFromSnapshot(snapshot) as User
+                let user = User.createFromSnapshot(snapshot) as! User
                 let content = "\(user.fullName) is now \(user.statusText.lowercaseString)."
                 let note = RemoteNotification(type: "new_status", content: content, uid: uid, raw: notification)
                 self.enqueueNotification(note)
@@ -127,7 +127,7 @@ class NotificationManager: NotificationPopupDelegate {
 
     class func createProfileViewController(uid: String) -> UINavigationController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let nav = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as UINavigationController
+        let nav = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationViewController") as! UINavigationController
         if let profileVC = nav.topViewController as? ProfileViewController {
             profileVC.setUid(uid)
         }
@@ -137,7 +137,7 @@ class NotificationManager: NotificationPopupDelegate {
     class func createTaskDetailViewController(owner: String, id: String, active: Bool) -> UIViewController? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nav = NotificationManager.createProfileViewController(owner)
-        let taskDetail = storyboard.instantiateViewControllerWithIdentifier("TaskDetailViewController") as TaskDetailViewController
+        let taskDetail = storyboard.instantiateViewControllerWithIdentifier("TaskDetailViewController") as! TaskDetailViewController
         taskDetail.setTask(owner, id: id, active: active)
         nav.pushViewController(taskDetail, animated: false)
         return nav

@@ -105,6 +105,7 @@
 		7B9A63541A2E8F9A00DF1143 /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A63531A2E8F9A00DF1143 /* TaskEditViewController.swift */; };
 		7B9A635B1A2E9CC800DF1143 /* TaskEditContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */; };
 		7B9A635D1A2E9CD400DF1143 /* TaskEditPriorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */; };
+		7BBAA5D41AC902170037D7B6 /* libCloudinary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBAA5D31AC902170037D7B6 /* libCloudinary.a */; };
 		7BCAA5EF1A00A7D4003B55C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA5EE1A00A7D4003B55C7 /* User.swift */; };
 		7BD0F9C81A3E442400BDF70D /* TaskDetailCompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD0F9C71A3E442400BDF70D /* TaskDetailCompleteCell.swift */; };
 		7BD0F9CA1A3F326600BDF70D /* FirebaseObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */; };
@@ -230,6 +231,12 @@
 		7B9A63531A2E8F9A00DF1143 /* TaskEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditViewController.swift; sourceTree = "<group>"; };
 		7B9A635A1A2E9CC800DF1143 /* TaskEditContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditContentCell.swift; sourceTree = "<group>"; };
 		7B9A635C1A2E9CD400DF1143 /* TaskEditPriorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditPriorityCell.swift; sourceTree = "<group>"; };
+		7BBAA5D31AC902170037D7B6 /* libCloudinary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCloudinary.a; sourceTree = "<group>"; };
+		7BBAA5D61AC902310037D7B6 /* CLCloudinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCloudinary.h; sourceTree = "<group>"; };
+		7BBAA5D71AC902310037D7B6 /* CLEagerTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLEagerTransformation.h; sourceTree = "<group>"; };
+		7BBAA5D81AC902310037D7B6 /* Cloudinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cloudinary.h; sourceTree = "<group>"; };
+		7BBAA5D91AC902310037D7B6 /* CLTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTransformation.h; sourceTree = "<group>"; };
+		7BBAA5DA1AC902310037D7B6 /* CLUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUploader.h; sourceTree = "<group>"; };
 		7BCAA5EE1A00A7D4003B55C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7BD0F9C71A3E442400BDF70D /* TaskDetailCompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailCompleteCell.swift; sourceTree = "<group>"; };
 		7BD0F9C91A3F326600BDF70D /* FirebaseObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseObserver.swift; sourceTree = "<group>"; };
@@ -247,6 +254,7 @@
 				7B743A5819F94A3D0075690A /* GooglePlus.framework in Frameworks */,
 				7B743A5219F94A0A0075690A /* UIKit.framework in Frameworks */,
 				7B743A2A19F8842E0075690A /* SystemConfiguration.framework in Frameworks */,
+				7BBAA5D41AC902170037D7B6 /* libCloudinary.a in Frameworks */,
 				7B743A2819F884240075690A /* Security.framework in Frameworks */,
 				7B743A5019F949F30075690A /* MediaPlayer.framework in Frameworks */,
 				7B743A4E19F949EB0075690A /* CoreText.framework in Frameworks */,
@@ -459,6 +467,7 @@
 		7B7439FA19F87E4E0075690A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7BBAA5D51AC902310037D7B6 /* Cloudinary */,
 				7B743A2C19F884AB0075690A /* Badger-Bridging-Header.h */,
 				7B743A2D19F884AC0075690A /* Temp.m */,
 				7B7439FB19F87E4E0075690A /* Info.plist */,
@@ -486,6 +495,7 @@
 		7B743A2B19F884840075690A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				7BBAA5D31AC902170037D7B6 /* libCloudinary.a */,
 				7B39B8811A91552B0080D462 /* Firebase.framework */,
 				7B743A5319F94A3D0075690A /* GoogleOpenSource.framework */,
 				7B743A5419F94A3D0075690A /* GooglePlus.bundle */,
@@ -571,6 +581,18 @@
 				7BEC9AB61A38077E00080DDB /* TaskEditSubmitCell.swift */,
 			);
 			name = "Task Edit";
+			sourceTree = "<group>";
+		};
+		7BBAA5D51AC902310037D7B6 /* Cloudinary */ = {
+			isa = PBXGroup;
+			children = (
+				7BBAA5D61AC902310037D7B6 /* CLCloudinary.h */,
+				7BBAA5D71AC902310037D7B6 /* CLEagerTransformation.h */,
+				7BBAA5D81AC902310037D7B6 /* Cloudinary.h */,
+				7BBAA5D91AC902310037D7B6 /* CLTransformation.h */,
+				7BBAA5DA1AC902310037D7B6 /* CLUploader.h */,
+			);
+			path = Cloudinary;
 			sourceTree = "<group>";
 		};
 		7BCAA5EB1A00A443003B55C7 /* Data */ = {
@@ -915,7 +937,12 @@
 					/Users/blakevanlandingham/Downloads,
 				);
 				INFOPLIST_FILE = Badger/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Badger-Bridging-Header.h";
@@ -935,7 +962,12 @@
 					/Users/blakevanlandingham/Downloads,
 				);
 				INFOPLIST_FILE = Badger/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Badger-Bridging-Header.h";

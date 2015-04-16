@@ -11,7 +11,7 @@ class MenuSettingsCell: BorderedCell {
         self.updateView()
         self.setTopBorder(.Full)
         self.setBottomBorder(.Full)
-        self.setBorderColor(Color.colorize(0x0C0C0C, alpha: 1))
+        self.borderColor = Color.colorize(0x0C0C0C, alpha: 1)
     }
 
     func setUser(user: User) {

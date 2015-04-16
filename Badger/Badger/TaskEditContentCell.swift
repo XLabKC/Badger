@@ -19,7 +19,7 @@ class TaskEditContentCell: InputCell, UITextViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.hasAwakened = true
-        if let text = self.textToSet? {
+        if let text = self.textToSet {
             self.textView.text = text
         }
         self.textView.delegate = self
@@ -30,25 +30,20 @@ class TaskEditContentCell: InputCell, UITextViewDelegate {
         let newHeight = self.calculateCellHeight()
         if self.currentHeight != newHeight {
             self.currentHeight = newHeight
-            
-            if let delegate = self.cellDelegate? {
-                delegate.editContentCell(self, hasChangedHeight: self.currentHeight)
-            }
+            self.cellDelegate?.editContentCell(self, hasChangedHeight: self.currentHeight)
         }
         self.textView.scrollRectToVisible(CGRectMake(0, 0, self.textView.frame.width, 1), animated: true)
     }
 
     func textViewDidBeginEditing(textView: UITextView) {
-        if let delegate = self.delegate? {
-            delegate.cellDidBeginEditing(self)
-        }
+        self.delegate?.cellDidBeginEditing(self)
     }
 
     func calculateCellHeight() -> CGFloat {
         return Helpers.calculateTextViewHeight(self.textView, minVerticalPadding: self.minVerticalPadding, minTextHeight: self.minTextHeight)
     }
 
-    override func setText(text: String) {
+    override func setContent(text: String) {
         if self.hasAwakened {
             self.textView.text = text
         } else {
@@ -57,7 +52,7 @@ class TaskEditContentCell: InputCell, UITextViewDelegate {
 
     }
 
-    override func getText() -> String {
+    override func getContent() -> String {
         return self.textView.text
     }
 

@@ -20,7 +20,7 @@ class UserCell: BorderedCell {
     }
 
     func setUid(uid: String) {
-        if let user = self.user? {
+        if let user = self.user {
             if user.uid == uid {
                 // Already setup.
                 return
@@ -37,7 +37,7 @@ class UserCell: BorderedCell {
 
     private func updateView() {
         if self.hasAwakened {
-            if let user = self.user? {
+            if let user = self.user {
                 self.nameLabel.text = user.fullName
                 self.statusLabel.text = user.statusText
                 self.statusLabel.textColor = Helpers.statusToColor(user.status)
@@ -50,7 +50,7 @@ class UserCell: BorderedCell {
     }
 
     private func dispose() {
-        if let observer = self.observer? {
+        if let observer = self.observer {
             observer.dispose()
         }
     }

@@ -5,7 +5,7 @@ class BaseTableViewController: UITableViewController {
     internal let sectionHeaderHeight: CGFloat = 40.0
 
     func fontForHeader() -> UIFont? {
-        return UIFont(name: "BrandonGrotesque-Medium", size: 14.0)?
+        return UIFont(name: "BrandonGrotesque-Medium", size: 14.0)
     }
 
     func textColorForHeader() -> UIColor {

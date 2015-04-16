@@ -7,3 +7,5 @@
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import "SWRevealViewController.h"
 #import "NSDate+JavascriptTimestamp.h"
+#import "CLCloudinary.h"
+#import "CLUploader.h"

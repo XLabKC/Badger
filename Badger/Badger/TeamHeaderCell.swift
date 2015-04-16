@@ -22,7 +22,7 @@ class TeamHeaderCell: UITableViewCell {
 
     private func updateView() {
         if self.hasAwakened {
-            if let team = self.team? {
+            if let team = self.team {
                 self.nameLabel.text = team.name
                 self.metaLabel.text = team.description()
                 self.teamCircle.setTeam(team)
