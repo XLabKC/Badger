@@ -1315,7 +1315,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultBackground" translatesAutoresizingMaskIntoConstraints="NO" id="DYl-Gz-v6N">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="225"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="225"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="gMr-Cr-ypj">
                                             <rect key="frame" x="8" y="160" width="304" height="33"/>
@@ -1361,6 +1361,7 @@
                                         <constraint firstItem="gMr-Cr-ypj" firstAttribute="bottom" secondItem="9MC-HP-Uds" secondAttribute="bottom" constant="-21" id="24x-aU-KSv"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Pns-KO-8cz" secondAttribute="trailing" constant="-8" id="6g2-Yn-2t6"/>
                                         <constraint firstItem="Pns-KO-8cz" firstAttribute="leading" secondItem="IHe-zc-VOw" secondAttribute="leadingMargin" constant="-8" id="8f2-2v-d1q"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="DYl-Gz-v6N" secondAttribute="trailing" constant="-16" id="De4-jQ-3R1"/>
                                         <constraint firstItem="DYl-Gz-v6N" firstAttribute="leading" secondItem="IHe-zc-VOw" secondAttribute="leading" id="Gfo-z4-JF5"/>
                                         <constraint firstItem="gMr-Cr-ypj" firstAttribute="top" secondItem="rf0-fm-Fd9" secondAttribute="bottom" constant="8" symbolic="YES" id="GiH-hv-7eg"/>
                                         <constraint firstItem="rf0-fm-Fd9" firstAttribute="top" secondItem="IHe-zc-VOw" secondAttribute="topMargin" constant="8" id="HKf-CX-X5M"/>
@@ -1380,6 +1381,7 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="OEi-QZ-yjv"/>
                                             <exclude reference="RjR-nS-Uwy"/>
                                             <exclude reference="U5G-dA-Nb3"/>
                                             <exclude reference="eog-GT-Uja"/>
@@ -1850,8 +1852,8 @@
         <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dhT-2f-k0x"/>
-        <segue reference="sG0-Gn-9tP"/>
         <segue reference="ASy-Id-BnR"/>
+        <segue reference="kUo-1a-Owt"/>
+        <segue reference="sG0-Gn-9tP"/>
     </inferredMetricsTieBreakers>
 </document>
