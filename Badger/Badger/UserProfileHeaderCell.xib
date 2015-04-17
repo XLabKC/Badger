@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="328" height="224"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMA-ao-jXv">
-                        <rect key="frame" x="0.0" y="-300" width="320" height="300"/>
+                        <rect key="frame" x="0.0" y="-300" width="328" height="300"/>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="300" id="lEq-Rv-3Ae"/>
@@ -66,7 +66,7 @@
                     <constraint firstItem="OdV-Nk-1MI" firstAttribute="top" secondItem="6YZ-Q9-leC" secondAttribute="bottom" id="3Zv-k5-TAu"/>
                     <constraint firstAttribute="centerX" secondItem="MPk-G0-knw" secondAttribute="centerX" id="8Jw-K3-ZmS"/>
                     <constraint firstItem="OdV-Nk-1MI" firstAttribute="top" secondItem="6YZ-Q9-leC" secondAttribute="bottom" id="8dd-Kq-Sel"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="FMA-ao-jXv" secondAttribute="trailing" constant="-8" id="Dgb-Pt-iIa"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="FMA-ao-jXv" secondAttribute="trailing" constant="-16" id="Dgb-Pt-iIa"/>
                     <constraint firstItem="FMA-ao-jXv" firstAttribute="leading" secondItem="fBc-Xh-thY" secondAttribute="leadingMargin" constant="-8" id="FnK-D1-LpW"/>
                     <constraint firstItem="FMA-ao-jXv" firstAttribute="top" secondItem="fBc-Xh-thY" secondAttribute="topMargin" constant="-308" id="J2L-t8-slq"/>
                     <constraint firstAttribute="trailingMargin" secondItem="bHv-fI-kGQ" secondAttribute="trailing" constant="-16" id="JKW-dY-iWY"/>

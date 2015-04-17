@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fuU-LW-MkP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fuU-LW-MkP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1340,7 +1340,7 @@
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pns-KO-8cz">
-                                            <rect key="frame" x="0.0" y="-300" width="320" height="300"/>
+                                            <rect key="frame" x="0.0" y="-300" width="328" height="300"/>
                                             <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="300" id="d6b-Ul-htf"/>
@@ -1359,7 +1359,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="gMr-Cr-ypj" firstAttribute="bottom" secondItem="9MC-HP-Uds" secondAttribute="bottom" constant="-21" id="24x-aU-KSv"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Pns-KO-8cz" secondAttribute="trailing" constant="-8" id="6g2-Yn-2t6"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Pns-KO-8cz" secondAttribute="trailing" constant="-16" id="6g2-Yn-2t6"/>
                                         <constraint firstItem="Pns-KO-8cz" firstAttribute="leading" secondItem="IHe-zc-VOw" secondAttribute="leadingMargin" constant="-8" id="8f2-2v-d1q"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="DYl-Gz-v6N" secondAttribute="trailing" constant="-16" id="De4-jQ-3R1"/>
                                         <constraint firstItem="DYl-Gz-v6N" firstAttribute="leading" secondItem="IHe-zc-VOw" secondAttribute="leading" id="Gfo-z4-JF5"/>
@@ -1579,7 +1579,7 @@
                                             <color key="backgroundColor" red="0.2627450980392157" green="0.27058823529411763" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCG-cQ-YkF">
-                                            <rect key="frame" x="259" y="7" width="48" height="48"/>
+                                            <rect key="frame" x="267" y="7" width="48" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="48" id="Ayl-nO-2AA"/>
                                                 <constraint firstAttribute="height" constant="48" id="ZdI-7c-5oP"/>
@@ -1596,10 +1596,16 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="78c-BU-w2B" secondAttribute="bottom" id="9K7-h8-Cs9"/>
                                         <constraint firstItem="78c-BU-w2B" firstAttribute="top" secondItem="zeS-Ht-Phy" secondAttribute="topMargin" constant="-300" id="AzC-kl-4lG"/>
                                         <constraint firstItem="78c-BU-w2B" firstAttribute="leading" secondItem="zeS-Ht-Phy" secondAttribute="leadingMargin" constant="-8" id="cYA-f3-OeB"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="yCG-cQ-YkF" secondAttribute="trailing" constant="5" id="kQw-TN-M1m"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="yCG-cQ-YkF" secondAttribute="trailing" constant="-3" id="jpL-Q9-u5W"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="yCG-cQ-YkF" secondAttribute="trailing" constant="13" id="kQw-TN-M1m"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="78c-BU-w2B" secondAttribute="trailing" constant="-8" id="mbR-xs-PAH"/>
                                         <constraint firstAttribute="centerY" secondItem="yCG-cQ-YkF" secondAttribute="centerY" id="pG1-08-LSg"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="kQw-TN-M1m"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.2627450980392157" green="0.27058823529411763" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
@@ -1615,7 +1621,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2r-pz-ohr" customClass="ProfileCircle" customModule="Badger" customModuleProvider="target">
-                                            <rect key="frame" x="256" y="8" width="56" height="56"/>
+                                            <rect key="frame" x="264" y="8" width="56" height="56"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="56" id="jHb-yo-Qzh"/>
@@ -1625,8 +1631,14 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="a2r-pz-ohr" firstAttribute="trailing" secondItem="wiK-gB-FW2" secondAttribute="trailingMargin" id="BUD-Lr-p7m"/>
+                                        <constraint firstItem="a2r-pz-ohr" firstAttribute="trailing" secondItem="wiK-gB-FW2" secondAttribute="trailingMargin" constant="8" id="JdM-Bq-7zS"/>
                                         <constraint firstAttribute="centerY" secondItem="a2r-pz-ohr" secondAttribute="centerY" id="Vsy-z4-AX5"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="BUD-Lr-p7m"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
@@ -1852,8 +1864,8 @@
         <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ASy-Id-BnR"/>
         <segue reference="kUo-1a-Owt"/>
         <segue reference="sG0-Gn-9tP"/>
+        <segue reference="G2U-IQ-PaM"/>
     </inferredMetricsTieBreakers>
 </document>
