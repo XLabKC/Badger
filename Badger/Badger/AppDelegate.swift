@@ -17,24 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         attributes[NSFontAttributeName] = UIFont(name: "OpenSans", size: 17.0)
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: .Normal)
 
-        var handle: UInt = 0
-        let ref = Firebase(url: Global.FirebaseUrl)
-        handle = ref.observeAuthEventWithBlock { authData in
-
-            // Stop listening to auth events.
-            ref.removeAuthEventObserverWithHandle(handle)
-
-            // Set up the user store.
-            UserStore.sharedInstance().initialize()
+        let setCallbacks: () -> () = {
             UserStore.sharedInstance().unauthorizedBlock = self.loggedOut
-
-            // Navigate to the next logical view.
-            if authData == nil {
-                self.navigateToLogin()
-            } else {
-                self.navigateToFirstView(launchOptions)
-            }
+            UserStore.sharedInstance().authorizedBlock = nil
         }
+
+        UserStore.sharedInstance().unauthorizedBlock = {
+            setCallbacks()
+            self.navigateToLogin()
+        }
+        UserStore.sharedInstance().authorizedBlock = {
+            setCallbacks()
+            self.navigateToFirstView(launchOptions)
+        }
+        UserStore.sharedInstance().initialize()
         return true
     }
 

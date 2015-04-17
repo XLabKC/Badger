@@ -19,6 +19,7 @@ class UserStore {
     private var hasLoadedUser = false
 
     var unauthorizedBlock: (() -> ())?
+    var authorizedBlock: (() -> ())?
 
     deinit {
         if let observer = self.observer {
@@ -31,6 +32,9 @@ class UserStore {
         self.ref.root.observeAuthEventWithBlock { authData in
             if (authData != nil && authData.uid != nil) {
                 self.startWatchingUser(authData.uid)
+                if let block = self.authorizedBlock {
+                    block()
+                }
             } else {
                 self.stopWatchingUser()
                 if let block = self.unauthorizedBlock {
@@ -88,9 +92,7 @@ class UserStore {
 
     // Stops watching the auth user.
     private func stopWatchingUser() {
-        if let observer = self.observer {
-            observer.dispose()
-        }
+        self.observer?.dispose()
         self.observer = nil
         self.hasLoadedUser = false
         self.authUser = User(uid: "unauthenticated", provider: "none")
