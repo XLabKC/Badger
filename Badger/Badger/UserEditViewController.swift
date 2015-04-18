@@ -29,6 +29,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
     private var editedHeaderImage = false
 
     private var saveFunctionsToRun: [() -> ()] = []
+    private var isSaving = false
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -84,10 +85,19 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
     }
 
     @IBAction func cancelClicked(sender: AnyObject) {
+        if self.isSaving {
+            return
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func doneClicked(sender: AnyObject) {
+        if self.isSaving {
+            return
+        }
+        self.isSaving = true
+
+        self.saveFunctionsToRun.removeAll(keepCapacity: true)
         var user = UserStore.sharedInstance().getAuthUser()
 
         let firstNameCell = self.cells[Rows.FirstName.rawValue] as! TextFieldCell
@@ -108,39 +118,73 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
 
         let imagesCell = self.cells[Rows.Images.rawValue] as! EditImagesCell
 
+        // Function to run next in series.
+        let startNext: () -> () = {
+            let fn = self.saveFunctionsToRun.removeAtIndex(0)
+            fn()
+        }
+
+        // Function to update profile image.
+        let uploadProfileFn: () -> () = {
+            let data = UIImageJPEGRepresentation(imagesCell.logoImage.image!, 1)
+            let uploader = CLUploader(ApiKeys.getCloudinaryInstance(), delegate: self)
+            let transformation = CLTransformation()
+            transformation.width = 500
+            transformation.height = 500
+            transformation.crop = "fill"
+            transformation.gravity = "face"
+
+            uploader.upload(data, options: ["transformation": transformation],
+                withCompletion: { (successResult, errorResult, code, context) in
+                    updates["free_profile_image"] = Global.DefaultUserProfileUrl
+                    updates["occupied_profile_image"] = Global.DefaultUserProfileUrl
+                    updates["unavailable_profile_image"] = Global.DefaultUserProfileUrl
+                    println(successResult)
+                    startNext()
+                }, andProgress: nil)
+        }
+
+        // Function to update header image.
+        let uploadHeaderFn: () -> () = {
+            let data = UIImageJPEGRepresentation(imagesCell.headerImage.image!, 1)
+            let uploader = CLUploader(ApiKeys.getCloudinaryInstance(), delegate: self)
+            uploader.upload(data, options: nil,
+                withCompletion: { (successResult, errorResult, code, context) in
+                    println(successResult)
+                    startNext()
+                }, andProgress: nil)
+        }
+
         // Update profile image.
-//        if self.editedProfileImage {
-//            if useDefaultProfile {
-//                updates["free_profile_image"] = Global.DefaultUserProfileUrl
-//                updates["occupied_profile_image"] = Global.DefaultUserProfileUrl
-//                updates["unavailable_profile_image"] = Global.DefaultUserProfileUrl
-//            } else {
-//                letuploadFn =
-//
-//                let uploader = CLUploader(ApiKeys.getCloudinaryInstance(), delegate: self)
-//                uploader.upload(imagesCell.logoImage.image,
-//                    options: nil,
-//                    withCompletion: { (successResult, errorResult, code, context) in
-//                        user.ref.updateChildValues(updates) { (error, ref) in
-//                            
-//                        }
-//                    }, andProgress: nil)
-//
-//                // TODO: upload to Cloudinary.
-//            }
-//        }
+        if self.editedProfileImage {
+            if useDefaultProfile {
+                updates["free_profile_image"] = Global.DefaultUserProfileUrl
+                updates["occupied_profile_image"] = Global.DefaultUserProfileUrl
+                updates["unavailable_profile_image"] = Global.DefaultUserProfileUrl
+            } else {
+                self.saveFunctionsToRun.append(uploadProfileFn)
+            }
+        }
 
         // Update header image.
         if self.editedHeaderImage {
             if useDefaultHeader {
                 updates["header_image"] = Global.DefaultUserProfileUrl
             } else {
-                // TODO: upload to Cloudinary.
+                self.saveFunctionsToRun.append(uploadHeaderFn)
             }
         }
-        user.ref.updateChildValues(updates) { (error, ref) in
-            self.dismissViewControllerAnimated(true, completion: nil)
+
+        // Final function to update the Firebase values.
+        let updateFn: () -> () = {
+            user.ref.updateChildValues(updates) { (error, ref) in
+                self.isSaving = false
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
         }
+
+        self.saveFunctionsToRun.append(updateFn)
+        startNext()
     }
 
     // InputCellDelegate: opens the next cell when the "next" key is pressed on the keyboard.
@@ -321,8 +365,8 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
 
     // Uploading delegates.
     func uploaderSuccess(result: [NSObject : AnyObject]!, context: AnyObject!) {
-        let fn = self.saveFunctionsToRun.removeAtIndex(0)
-        fn()
+//        let fn = self.saveFunctionsToRun.removeAtIndex(0)
+//        fn()
     }
 
 }

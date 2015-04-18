@@ -9,3 +9,5 @@
 #import "NSDate+JavascriptTimestamp.h"
 #import "CLCloudinary.h"
 #import "CLUploader.h"
+#import "CLTransformation.h"
+#import "CLEagerTransformation.h"

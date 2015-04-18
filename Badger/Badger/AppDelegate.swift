@@ -106,7 +106,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         vc.view.alpha = 0
 
         RevealManager.sharedInstance().removeRevealVC()
-        UIApplication.sharedApplication().keyWindow?.rootViewController = vc
+//        UIApplication.sharedApplication().keyWindow?.rootViewController = vc
+        self.window?.rootViewController = vc
 
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             vc.view.alpha = 1

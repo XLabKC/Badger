@@ -64,10 +64,16 @@ class RevealManager: NSObject, SWRevealViewControllerDelegate {
     }
 
     func removeRevealVC() {
+        self.internalRevealVC?.dismissViewControllerAnimated(false, completion: nil)
         self.internalRevealVC = nil
     }
 
     func revealController(revealController: SWRevealViewController!, willMoveToPosition position: FrontViewPosition) {
+        // Check that the reveal vc exists.
+        if self.internalRevealVC == nil {
+            return
+        }
+
         if let frontVC = self.internalRevealVC!.frontViewController as? RevealManagerDelegate {
             frontVC.revealManager(self, willMoveToPosition: position)
         } else if let navVC = self.internalRevealVC!.frontViewController as? UINavigationController {
@@ -78,6 +84,11 @@ class RevealManager: NSObject, SWRevealViewControllerDelegate {
     }
 
     func revealController(revealController: SWRevealViewController!, didMoveToPosition position: FrontViewPosition) {
+        // Check that the reveal vc exists.
+        if self.internalRevealVC == nil {
+            return
+        }
+
         self.internalFrontPosition = position
         if let frontVC = self.internalRevealVC!.frontViewController as? RevealManagerDelegate {
             frontVC.revealManager(self, didMoveToPosition: position)

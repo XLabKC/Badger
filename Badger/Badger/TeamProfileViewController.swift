@@ -16,12 +16,8 @@ class TeamProfileViewController: RevealableTableViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
 
     deinit {
-        if let observer = self.teamObserver {
-            observer.dispose()
-        }
-        if let observer = self.membersObserver {
-            observer.dispose()
-        }
+        self.teamObserver?.dispose()
+        self.membersObserver?.dispose()
     }
 
     override func viewDidLoad() {
@@ -34,8 +30,6 @@ class TeamProfileViewController: RevealableTableViewController {
         // Set up navigation bar.
         let label = Helpers.createTitleLabel("Team Profile")
         self.navigationItem.titleView = label
-
-        super.viewDidLoad()
     }
 
     func setTeamId(id: String) {

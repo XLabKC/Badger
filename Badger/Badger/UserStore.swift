@@ -22,9 +22,7 @@ class UserStore {
     var authorizedBlock: (() -> ())?
 
     deinit {
-        if let observer = self.observer {
-            observer.dispose()
-        }
+        self.observer?.dispose()
     }
 
     // Initializes the UserStore.
