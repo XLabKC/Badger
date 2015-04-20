@@ -64,7 +64,7 @@ class RevealManager: NSObject, SWRevealViewControllerDelegate {
     }
 
     func removeRevealVC() {
-        self.internalRevealVC?.dismissViewControllerAnimated(false, completion: nil)
+        self.internalRevealVC?.dismissViewControllerAnimated(true, completion: nil)
         self.internalRevealVC = nil
     }
 

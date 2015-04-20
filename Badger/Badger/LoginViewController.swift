@@ -4,32 +4,26 @@ class LoginViewController: UIViewController, GPPSignInDelegate {
 
     @IBOutlet weak var signInButton: GPPSignInButton!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         var signIn = GPPSignIn.sharedInstance()
-        signIn.shouldFetchGooglePlusUser = true
-        signIn.shouldFetchGoogleUserEmail = true
-        signIn.clientID = ApiKeys.getGoogleClientId()
-        signIn.scopes = []
-        signIn.attemptSSO = true
         signIn.delegate = self
-        signIn.trySilentAuthentication()
+//        signIn.trySilentAuthentication()
     }
 
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         if error != nil {
             println("Google auth error \(error) and auth object \(auth)")
-        } else {
-            // Take access token and auth with Firebase.
-            let ref = Firebase(url: Global.FirebaseUrl)
-            ref.authWithOAuthProvider("google", token: auth.accessToken,
-                withCompletionBlock: { error, authData in
-                    if error != nil {
-                        println("Firebase auth error \(error) and auth object \(authData)")
-                    } else {
-                        self.redirectToProfile(authData)
-                    }
-            })
+            return
+        }
+
+        let ref = Firebase(url: Global.FirebaseUrl)
+        ref.authWithOAuthProvider("google", token: auth.accessToken) { error, authData in
+            if error != nil {
+                println("Firebase auth error \(error) and auth object \(authData)")
+                return
+            }
+            self.redirectToProfile(authData)
         }
     }
 

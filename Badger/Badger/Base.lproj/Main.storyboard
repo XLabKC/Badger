@@ -1201,19 +1201,19 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="2Tu-Sz-Kc0">
-                                            <rect key="frame" x="15" y="13" width="89" height="19.5"/>
+                                            <rect key="frame" x="15" y="13" width="89" height="20"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="14"/>
                                             <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Push Notifications &amp; Alerts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="8fa-Un-TcC">
-                                            <rect key="frame" x="15" y="93" width="230" height="25"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push Notifications &amp; Alerts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="8fa-Un-TcC">
+                                            <rect key="frame" x="15" y="93" width="215" height="25"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
                                             <color key="textColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8TY-k1-AO3">
-                                            <rect key="frame" x="15" y="30.5" width="235" height="37"/>
+                                            <rect key="frame" x="15" y="31" width="235" height="37"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
                                             <state key="normal" title="example@gmail.com">
                                                 <color key="titleColor" red="0.5568627451" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1233,6 +1233,8 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="8TY-k1-AO3" secondAttribute="trailing" constant="62" id="PPj-B1-oBF"/>
                                         <constraint firstItem="8TY-k1-AO3" firstAttribute="leading" secondItem="Jk1-Et-Cla" secondAttribute="leadingMargin" constant="7" id="WmW-DV-Nrc"/>
                                         <constraint firstItem="2Tu-Sz-Kc0" firstAttribute="top" secondItem="Jk1-Et-Cla" secondAttribute="topMargin" constant="5" id="gyU-f4-x6I"/>
+                                        <constraint firstItem="8fa-Un-TcC" firstAttribute="leading" secondItem="Jk1-Et-Cla" secondAttribute="leadingMargin" constant="7" id="jpJ-37-2R0"/>
+                                        <constraint firstItem="8fa-Un-TcC" firstAttribute="top" secondItem="Jk1-Et-Cla" secondAttribute="topMargin" constant="85" id="pNW-dK-O6D"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.28627450980392155" green="0.29803921568627451" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1864,8 +1866,8 @@
         <image name="SelectArrow" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ASy-Id-BnR"/>
         <segue reference="kUo-1a-Owt"/>
         <segue reference="sG0-Gn-9tP"/>
-        <segue reference="G2U-IQ-PaM"/>
     </inferredMetricsTieBreakers>
 </document>

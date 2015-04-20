@@ -128,18 +128,22 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
         let uploadProfileFn: () -> () = {
             let data = UIImageJPEGRepresentation(imagesCell.logoImage.image!, 1)
             let uploader = CLUploader(ApiKeys.getCloudinaryInstance(), delegate: self)
+            /*
             let transformation = CLTransformation()
             transformation.width = 500
             transformation.height = 500
             transformation.crop = "fill"
             transformation.gravity = "face"
-
-            uploader.upload(data, options: ["transformation": transformation],
+            */
+            let activityView = self.createActivityView(imagesCell.logoImage)
+            
+            uploader.upload(data, options: nil /*["transformation": transformation]*/,
                 withCompletion: { (successResult, errorResult, code, context) in
-                    updates["free_profile_image"] = Global.DefaultUserProfileUrl
-                    updates["occupied_profile_image"] = Global.DefaultUserProfileUrl
-                    updates["unavailable_profile_image"] = Global.DefaultUserProfileUrl
+//                    updates["free_profile_image"] = Global.DefaultUserProfileUrl
+//                    updates["occupied_profile_image"] = Global.DefaultUserProfileUrl
+//                    updates["unavailable_profile_image"] = Global.DefaultUserProfileUrl
                     println(successResult)
+                    activityView.stopAnimating()
                     startNext()
                 }, andProgress: nil)
         }
@@ -148,6 +152,8 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
         let uploadHeaderFn: () -> () = {
             let data = UIImageJPEGRepresentation(imagesCell.headerImage.image!, 1)
             let uploader = CLUploader(ApiKeys.getCloudinaryInstance(), delegate: self)
+            let activityView = self.createActivityView(imagesCell.headerImage)
+
             uploader.upload(data, options: nil,
                 withCompletion: { (successResult, errorResult, code, context) in
                     println(successResult)
@@ -178,6 +184,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
         // Final function to update the Firebase values.
         let updateFn: () -> () = {
             user.ref.updateChildValues(updates) { (error, ref) in
+//                activityView.stopAnimating()
                 self.isSaving = false
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -363,10 +370,18 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 
-    // Uploading delegates.
+    // Not actually used by need to be here for protocol.
     func uploaderSuccess(result: [NSObject : AnyObject]!, context: AnyObject!) {
-//        let fn = self.saveFunctionsToRun.removeAtIndex(0)
-//        fn()
     }
 
+    private func createActivityView(view: UIView) -> UIActivityIndicatorView {
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+
+        activityView.center = CGPointMake(view.frame.width / 2.0, view.frame.height / 2.0)
+        activityView.autoresizingMask = .FlexibleLeftMargin | .FlexibleWidth | .FlexibleRightMargin | .FlexibleTopMargin | .FlexibleHeight | .FlexibleBottomMargin
+        activityView.startAnimating()
+        view.addSubview(activityView)
+
+        return activityView
+    }
 }

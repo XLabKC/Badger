@@ -1,7 +1,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GPPSignInDelegate {
     var window: UIWindow?
     var notificationManager = NotificationManager()
 
@@ -17,20 +17,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         attributes[NSFontAttributeName] = UIFont(name: "OpenSans", size: 17.0)
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: .Normal)
 
-        let setCallbacks: () -> () = {
-            UserStore.sharedInstance().unauthorizedBlock = self.loggedOut
-            UserStore.sharedInstance().authorizedBlock = nil
-        }
+        // Start listening for user store events.
+        UserStore.sharedInstance().unauthorizedBlock = self.loggedOut
+        UserStore.sharedInstance().initialize()
 
-        UserStore.sharedInstance().unauthorizedBlock = {
-            setCallbacks()
+        // Setup Google auth object.
+        var signIn = GPPSignIn.sharedInstance()
+        signIn.shouldFetchGooglePlusUser = true
+        signIn.shouldFetchGoogleUserEmail = true
+        signIn.clientID = ApiKeys.getGoogleClientId()
+        signIn.scopes = []
+        signIn.attemptSSO = true
+
+        if Firebase(url: Global.FirebaseUrl).authData == nil {
             self.navigateToLogin()
-        }
-        UserStore.sharedInstance().authorizedBlock = {
-            setCallbacks()
+        } else {
             self.navigateToFirstView(launchOptions)
         }
-        UserStore.sharedInstance().initialize()
+
         return true
     }
 
@@ -101,38 +105,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func loggedOut() {
+        var signIn = GPPSignIn.sharedInstance()
+        signIn.delegate = self
+        if signIn.trySilentAuthentication() {
+            // Google silent authentication is working so no need to redirect to login.
+            return
+        }
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
-        vc.view.alpha = 0
 
         RevealManager.sharedInstance().removeRevealVC()
-//        UIApplication.sharedApplication().keyWindow?.rootViewController = vc
-        self.window?.rootViewController = vc
+        self.window?.rootViewController?.presentViewController(vc, animated: true, completion: nil)
+    }
 
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            vc.view.alpha = 1
-        })
+    func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
+        if error != nil {
+            println("Google auth error when trying to reauthenticate.")
+            println("Google auth error \(error) and auth object \(auth)")
+        } else {
+            let ref = Firebase(url: Global.FirebaseUrl)
+            ref.authWithOAuthProvider("google", token: auth.accessToken) { error, authData in
+                if error != nil {
+                    println("Firebase auth error \(error) and auth object \(authData)")
+                }
+            }
+        }
     }
 
     private func navigateToLogin() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
-        self.navigateToViewController(vc)
+        self.navigateToViewController(vc, animated: true)
     }
 
     private func navigateToFirstView(launchOptions: [NSObject: AnyObject]?) {
-        // For some reason, it's possible to get to this point but for the UserStore to not actually
-        // have valid auth data. Make sure we catch these cases and redirect to login.
-        if !UserStore.sharedInstance().hasValidAuth() {
-            self.navigateToLogin()
-        }
-
         if let options = launchOptions {
             if let note = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject] {
                 if let vc = NotificationManager.createViewControllerFromNotification(note) {
                     UserStore.sharedInstance().waitForUser({ _ in
                         let reveal = RevealManager.sharedInstance().initialize(vc)
-                        self.navigateToViewController(reveal)
+                        self.navigateToViewController(reveal, animated: true)
                     })
                     return
                 }
@@ -140,14 +153,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         UserStore.sharedInstance().waitForUser({ _ in
             let vc = RevealManager.sharedInstance().initialize()
-            self.navigateToViewController(vc)
+            self.navigateToViewController(vc, animated: true)
         })
     }
 
-    private func navigateToViewController(viewController: UIViewController) {
+    private func navigateToViewController(viewController: UIViewController, animated: Bool) {
         if let root = self.window?.rootViewController {
             if root.isViewLoaded() {
-                root.presentViewController(viewController, animated: true, completion: nil)
+                var cur = root
+
+                while cur.presentedViewController != nil {
+                   cur = cur.presentedViewController!
+                }
+
+                cur.presentViewController(viewController, animated: animated, completion: nil)
                 return
             }
         }
