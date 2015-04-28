@@ -1,5 +1,5 @@
 import UIKit
-
+import Haneke
 
 class ProfileCircle: UIView {
     var status = UserStatus.Unknown
@@ -61,8 +61,19 @@ class ProfileCircle: UIView {
 
     func userUpdated(newUser: User) {
         self.user = newUser
-        if let imagePath = newUser.profileImages[newUser.status] {
-            self.circle.image = UIImage(named: imagePath)
+        let placeholder = UIImage(named: "DefaultUserProfile")
+        let imagePath = newUser.profileImages[newUser.status]
+
+        if imagePath != nil && imagePath != "" {
+            let transformation = CLTransformation()
+            transformation.width = 272
+            transformation.height = 272
+            transformation.crop = "fill"
+            transformation.gravity = "face"
+            let url = NSURL(string: ApiKeys.getCloudinaryInstance().url(imagePath))
+            self.circle.hnk_setImageFromURL(url!, placeholder: placeholder, format: nil, failure: nil, success: nil)
+        } else {
+            self.circle.image = placeholder
         }
         self.circle.layer.borderColor = Helpers.statusToColor(newUser.status).CGColor
     }

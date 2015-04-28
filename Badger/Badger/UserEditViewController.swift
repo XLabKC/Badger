@@ -56,8 +56,8 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
         self.tableView.registerNib(textFieldCellNib, forCellReuseIdentifier: "TextFieldCell")
 
         let user = UserStore.sharedInstance().getAuthUser()
-        self.useDefaultHeader = user.headerImage == Global.DefaultBackgroundUrl
-        self.useDefaultProfile = user.profileImages[.Free]! == Global.DefaultUserProfileUrl
+        self.useDefaultHeader = user.headerImage == ""
+        self.useDefaultProfile = user.profileImages[.Free] == nil || user.profileImages[.Free] == ""
 
         // Set up navigation bar.
         self.navigationItem.titleView = Helpers.createTitleLabel("Edit Profile")
@@ -126,23 +126,22 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
 
         // Function to update profile image.
         let uploadProfileFn: () -> () = {
-            let data = UIImageJPEGRepresentation(imagesCell.logoImage.image!, 1)
+            let data = UIImageJPEGRepresentation(imagesCell.logoImage.image!, 0.8)
             let uploader = CLUploader(ApiKeys.getCloudinaryInstance(), delegate: self)
-            /*
-            let transformation = CLTransformation()
-            transformation.width = 500
-            transformation.height = 500
-            transformation.crop = "fill"
-            transformation.gravity = "face"
-            */
             let activityView = self.createActivityView(imagesCell.logoImage)
             
-            uploader.upload(data, options: nil /*["transformation": transformation]*/,
+            uploader.upload(data, options: nil,
                 withCompletion: { (successResult, errorResult, code, context) in
-//                    updates["free_profile_image"] = Global.DefaultUserProfileUrl
-//                    updates["occupied_profile_image"] = Global.DefaultUserProfileUrl
-//                    updates["unavailable_profile_image"] = Global.DefaultUserProfileUrl
-                    println(successResult)
+                    if errorResult != nil {
+                        println(errorResult)
+                    } else {
+                        let publicId = successResult["public_id"] as! String
+                        let format = successResult["format"] as! String
+                        let url = "\(publicId).\(format)"
+                        updates["free_profile_image"] = url
+                        updates["occupied_profile_image"] = url
+                        updates["unavailable_profile_image"] = url
+                    }
                     activityView.stopAnimating()
                     startNext()
                 }, andProgress: nil)
@@ -150,13 +149,20 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
 
         // Function to update header image.
         let uploadHeaderFn: () -> () = {
-            let data = UIImageJPEGRepresentation(imagesCell.headerImage.image!, 1)
+            let data = UIImageJPEGRepresentation(imagesCell.headerImage.image!, 0.8)
             let uploader = CLUploader(ApiKeys.getCloudinaryInstance(), delegate: self)
             let activityView = self.createActivityView(imagesCell.headerImage)
 
             uploader.upload(data, options: nil,
                 withCompletion: { (successResult, errorResult, code, context) in
-                    println(successResult)
+                    if errorResult != nil {
+                        println(errorResult)
+                    } else {
+                        let publicId = successResult["public_id"] as! String
+                        let format = successResult["format"] as! String
+                        updates["header_image"] = "\(publicId).\(format)"
+                    }
+                    activityView.stopAnimating()
                     startNext()
                 }, andProgress: nil)
         }
@@ -164,9 +170,9 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
         // Update profile image.
         if self.editedProfileImage {
             if useDefaultProfile {
-                updates["free_profile_image"] = Global.DefaultUserProfileUrl
-                updates["occupied_profile_image"] = Global.DefaultUserProfileUrl
-                updates["unavailable_profile_image"] = Global.DefaultUserProfileUrl
+                updates["free_profile_image"] = ""
+                updates["occupied_profile_image"] = ""
+                updates["unavailable_profile_image"] = ""
             } else {
                 self.saveFunctionsToRun.append(uploadProfileFn)
             }
@@ -175,7 +181,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
         // Update header image.
         if self.editedHeaderImage {
             if useDefaultHeader {
-                updates["header_image"] = Global.DefaultUserProfileUrl
+                updates["header_image"] = ""
             } else {
                 self.saveFunctionsToRun.append(uploadHeaderFn)
             }
@@ -184,7 +190,6 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
         // Final function to update the Firebase values.
         let updateFn: () -> () = {
             user.ref.updateChildValues(updates) { (error, ref) in
-//                activityView.stopAnimating()
                 self.isSaving = false
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -209,7 +214,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
             self.editedProfileImage = true
             if image == nil {
                 self.useDefaultProfile = true
-                cell.logoImage.image = UIImage(named: Global.DefaultUserProfileUrl)
+                cell.logoImage.image = UIImage(named: "DefaultUserProfile")
             } else {
                 self.useDefaultProfile = false
                 cell.logoImage.image = image
@@ -222,7 +227,7 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
             self.editedHeaderImage = true
             if image == nil {
                 self.useDefaultHeader = true
-                cell.headerImage.image = UIImage(named: Global.DefaultBackgroundUrl)
+                cell.headerImage.image = UIImage(named: "DefaultBackground")
             } else {
                 self.useDefaultHeader = false
                 cell.headerImage.image = image

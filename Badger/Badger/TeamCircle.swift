@@ -1,5 +1,5 @@
 import UIKit
-
+import Haneke
 
 class TeamCircle: UIImageView {
     private var team: Team?
@@ -16,7 +16,18 @@ class TeamCircle: UIImageView {
 
     func setTeam(team: Team) {
         self.team = team
-        self.image = UIImage(named: team.logo)
+        let placeholder = UIImage(named: "DefaultTeamLogo")
+
+        if team.logo != "" {
+            let transformation = CLTransformation()
+            transformation.width = 272
+            transformation.height = 272
+            transformation.crop = "fill"
+            let url = NSURL(string: ApiKeys.getCloudinaryInstance().url(team.logo))
+            self.hnk_setImageFromURL(url!, placeholder: placeholder, format: nil, failure: nil, success: nil)
+        } else {
+            self.image = placeholder
+        }
     }
 
     override func layoutSubviews() {
