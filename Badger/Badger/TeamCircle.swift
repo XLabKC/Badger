@@ -19,12 +19,8 @@ class TeamCircle: UIImageView {
         let placeholder = UIImage(named: "DefaultTeamLogo")
 
         if team.logo != "" {
-            let transformation = CLTransformation()
-            transformation.width = 272
-            transformation.height = 272
-            transformation.crop = "fill"
-            let url = NSURL(string: ApiKeys.getCloudinaryInstance().url(team.logo))
-            self.hnk_setImageFromURL(url!, placeholder: placeholder, format: nil, failure: nil, success: nil)
+            let url = Helpers.getProfileImageUrl(team.logo)
+            self.hnk_setImageFromURL(url, placeholder: placeholder, format: nil, failure: nil, success: nil)
         } else {
             self.image = placeholder
         }

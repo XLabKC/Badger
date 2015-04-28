@@ -73,6 +73,23 @@ class Helpers {
         return label
     }
 
+    class func getProfileImageUrl(rootUrl: String) -> NSURL {
+        let transformation = CLTransformation()
+        transformation.width = 272
+        transformation.height = 272
+        transformation.crop = "fill"
+        transformation.gravity = "face"
+        return NSURL(string: ApiKeys.getCloudinaryInstance().url(rootUrl))!
+    }
+    
+    class func getHeaderImageUrl(rootUrl: String) -> NSURL {
+        let transformation = CLTransformation()
+        transformation.width = 656
+        transformation.height = 448
+        transformation.crop = "fill"
+        return NSURL(string: ApiKeys.getCloudinaryInstance().url(rootUrl))!
+    }
+
     class func diffArrays<T>(start: [T], end: [T], section: Int, compare: (T, T) -> Bool) -> (inserts: [NSIndexPath], deletes: [NSIndexPath]) {
         var inserts = [NSIndexPath]()
         var deletes = [NSIndexPath]()

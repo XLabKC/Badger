@@ -1,4 +1,5 @@
 import UIKit
+import Haneke
 
 class UserProfileHeaderCell: UITableViewCell {
 
@@ -26,11 +27,21 @@ class UserProfileHeaderCell: UITableViewCell {
 
     private func updateView() {
         if self.hasAwakened {
+            // 656x448
             if let user = self.user {
                 self.nameLabel.text = user.fullName
                 self.profileCircle.setUid(user.uid)
                 self.statusLabel.text = user.statusText
                 self.statusLabel.textColor = Helpers.statusToColor(user.status)
+
+                // Set the header background image.
+                let placeholder = UIImage(named: "DefaultBackground")
+                if user.headerImage != "" {
+                    let url = Helpers.getHeaderImageUrl(user.headerImage)
+                    self.backgroundImage.hnk_setImageFromURL(url, placeholder: placeholder, format: nil, failure: nil, success: nil)
+                } else {
+                    self.backgroundImage.image = placeholder
+                }
             }
         }
     }

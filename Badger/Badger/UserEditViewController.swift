@@ -1,4 +1,5 @@
 import UIKit
+import Haneke
 
 private enum Rows: Int {
     case ProfileHeader = 0
@@ -285,8 +286,24 @@ class UserEditViewController: UITableViewController, InputCellDelegate, EditImag
         case .Images:
             let cell = tableView.dequeueReusableCellWithIdentifier("EditImagesCell") as! EditImagesCell
             cell.logoLabel.text = "Profile Photo"
-            cell.logoImage.image = UIImage(named: user.profileImages[.Free]!)
-            cell.headerImage.image = UIImage(named: user.headerImage)
+
+            let logoPlaceholder = UIImage(named: "DefaultUserProfile")
+            let headerPlaceholder = UIImage(named: "DefaultBackground")
+
+            if user.profileImages[.Free] != nil && user.profileImages[.Free] != "" {
+                let url = Helpers.getProfileImageUrl(user.profileImages[.Free]!)
+                cell.logoImage.hnk_setImageFromURL(url, placeholder: logoPlaceholder, format: nil, failure: nil, success: nil)
+            } else {
+                cell.logoImage.image = logoPlaceholder
+            }
+
+            if user.headerImage != "" {
+                let url = Helpers.getHeaderImageUrl(user.headerImage)
+                cell.headerImage.hnk_setImageFromURL(url, placeholder: headerPlaceholder, format: nil, failure: nil, success: nil)
+            } else {
+                cell.headerImage.image = headerPlaceholder
+            }
+
             cell.delegate = self
             self.cells[index] = cell
             return cell

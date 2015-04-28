@@ -65,13 +65,8 @@ class ProfileCircle: UIView {
         let imagePath = newUser.profileImages[newUser.status]
 
         if imagePath != nil && imagePath != "" {
-            let transformation = CLTransformation()
-            transformation.width = 272
-            transformation.height = 272
-            transformation.crop = "fill"
-            transformation.gravity = "face"
-            let url = NSURL(string: ApiKeys.getCloudinaryInstance().url(imagePath))
-            self.circle.hnk_setImageFromURL(url!, placeholder: placeholder, format: nil, failure: nil, success: nil)
+            let url = Helpers.getProfileImageUrl(imagePath!)
+            self.circle.hnk_setImageFromURL(url, placeholder: placeholder, format: nil, failure: nil, success: nil)
         } else {
             self.circle.image = placeholder
         }
